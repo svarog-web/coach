@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="activity">CB Activity</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB Activity">
+				<option value="activity_onAfterCreateAction" translate="no">activity_onAfterCreateAction</option>
+				<option value="activity_onAfterCreateActivity" translate="no">activity_onAfterCreateActivity</option>
+				<option value="activity_onAfterCreateComment" translate="no">activity_onAfterCreateComment</option>
+				<option value="activity_onAfterCreateEmote" translate="no">activity_onAfterCreateEmote</option>
+				<option value="activity_onAfterCreateHidden" translate="no">activity_onAfterCreateHidden</option>
+				<option value="activity_onAfterCreateLocation" translate="no">activity_onAfterCreateLocation</option>
+				<option value="activity_onAfterCreateTag" translate="no">activity_onAfterCreateTag</option>
+				<option value="activity_onAfterDeleteAction" translate="no">activity_onAfterDeleteAction</option>
+				<option value="activity_onAfterDeleteActivity" translate="no">activity_onAfterDeleteActivity</option>
+				<option value="activity_onAfterDeleteComment" translate="no">activity_onAfterDeleteComment</option>
+				<option value="activity_onAfterDeleteEmote" translate="no">activity_onAfterDeleteEmote</option>
+				<option value="activity_onAfterDeleteHidden" translate="no">activity_onAfterDeleteHidden</option>
+				<option value="activity_onAfterDeleteLocation" translate="no">activity_onAfterDeleteLocation</option>
+				<option value="activity_onAfterDeleteTag" translate="no">activity_onAfterDeleteTag</option>
+				<option value="activity_onAfterDisplayActivity" translate="no">activity_onAfterDisplayActivity</option>
+				<option value="activity_onAfterDisplayComments" translate="no">activity_onAfterDisplayComments</option>
+				<option value="activity_onAfterDisplayTags" translate="no">activity_onAfterDisplayTags</option>
+				<option value="activity_onAfterUpdateAction" translate="no">activity_onAfterUpdateAction</option>
+				<option value="activity_onAfterUpdateActivity" translate="no">activity_onAfterUpdateActivity</option>
+				<option value="activity_onAfterUpdateComment" translate="no">activity_onAfterUpdateComment</option>
+				<option value="activity_onAfterUpdateEmote" translate="no">activity_onAfterUpdateEmote</option>
+				<option value="activity_onAfterUpdateHidden" translate="no">activity_onAfterUpdateHidden</option>
+				<option value="activity_onAfterUpdateLocation" translate="no">activity_onAfterUpdateLocation</option>
+				<option value="activity_onAfterUpdateTag" translate="no">activity_onAfterUpdateTag</option>
+				<option value="activity_onBeforeCreateAction" translate="no">activity_onBeforeCreateAction</option>
+				<option value="activity_onBeforeCreateActivity" translate="no">activity_onBeforeCreateActivity</option>
+				<option value="activity_onBeforeCreateComment" translate="no">activity_onBeforeCreateComment</option>
+				<option value="activity_onBeforeCreateEmote" translate="no">activity_onBeforeCreateEmote</option>
+				<option value="activity_onBeforeCreateHidden" translate="no">activity_onBeforeCreateHidden</option>
+				<option value="activity_onBeforeCreateLocation" translate="no">activity_onBeforeCreateLocation</option>
+				<option value="activity_onBeforeCreateTag" translate="no">activity_onBeforeCreateTag</option>
+				<option value="activity_onBeforeDeleteAction" translate="no">activity_onBeforeDeleteAction</option>
+				<option value="activity_onBeforeDeleteActivity" translate="no">activity_onBeforeDeleteActivity</option>
+				<option value="activity_onBeforeDeleteComment" translate="no">activity_onBeforeDeleteComment</option>
+				<option value="activity_onBeforeDeleteEmote" translate="no">activity_onBeforeDeleteEmote</option>
+				<option value="activity_onBeforeDeleteHidden" translate="no">activity_onBeforeDeleteHidden</option>
+				<option value="activity_onBeforeDeleteLocation" translate="no">activity_onBeforeDeleteLocation</option>
+				<option value="activity_onBeforeDeleteTag" translate="no">activity_onBeforeDeleteTag</option>
+				<option value="activity_onBeforeDisplayActivity" translate="no">activity_onBeforeDisplayActivity</option>
+				<option value="activity_onBeforeDisplayComments" translate="no">activity_onBeforeDisplayComments</option>
+				<option value="activity_onBeforeDisplayTags" translate="no">activity_onBeforeDisplayTags</option>
+				<option value="activity_onBeforeUpdateAction" translate="no">activity_onBeforeUpdateAction</option>
+				<option value="activity_onBeforeUpdateActivity" translate="no">activity_onBeforeUpdateActivity</option>
+				<option value="activity_onBeforeUpdateComment" translate="no">activity_onBeforeUpdateComment</option>
+				<option value="activity_onBeforeUpdateEmote" translate="no">activity_onBeforeUpdateEmote</option>
+				<option value="activity_onBeforeUpdateHidden" translate="no">activity_onBeforeUpdateHidden</option>
+				<option value="activity_onBeforeUpdateLocation" translate="no">activity_onBeforeUpdateLocation</option>
+				<option value="activity_onBeforeUpdateTag" translate="no">activity_onBeforeUpdateTag</option>
+				<option value="activity_onDisplayActivity" translate="no">activity_onDisplayActivity</option>
+				<option value="activity_onDisplayActivityAttachments" translate="no">activity_onDisplayActivityAttachments</option>
+				<option value="activity_onDisplayActivityCreate" translate="no">activity_onDisplayActivityCreate</option>
+				<option value="activity_onDisplayActivityEdit" translate="no">activity_onDisplayActivityEdit</option>
+				<option value="activity_onDisplayComment" translate="no">activity_onDisplayComment</option>
+				<option value="activity_onDisplayCommentCreate" translate="no">activity_onDisplayCommentCreate</option>
+				<option value="activity_onDisplayCommentEdit" translate="no">activity_onDisplayCommentEdit</option>
+				<option value="activity_onLoadActivity" translate="no">activity_onLoadActivity</option>
+				<option value="activity_onLoadComments" translate="no">activity_onLoadComments</option>
+				<option value="activity_onLoadTags" translate="no">activity_onLoadTags</option>
+				<option value="activity_onParse" translate="no">activity_onParse</option>
+				<option value="activity_onPushActivity" translate="no">activity_onPushActivity</option>
+				<option value="activity_onPushComments" translate="no">activity_onPushComments</option>
+				<option value="activity_onPushTags" translate="no">activity_onPushTags</option>
+				<option value="activity_onQueryActivity" translate="no">activity_onQueryActivity</option>
+				<option value="activity_onQueryComments" translate="no">activity_onQueryComments</option>
+				<option value="activity_onQueryTags" translate="no">activity_onQueryTags</option>
+				<option value="activity_onRemoveActivity" translate="no">activity_onRemoveActivity</option>
+				<option value="activity_onRemoveComments" translate="no">activity_onRemoveComments</option>
+				<option value="activity_onRemoveTags" translate="no">activity_onRemoveTags</option>
+			</optgroup>
+		</type>
+		<type name="activity_create_access" base="viewaccesslevel" valuetype="string">
+			<option value="-1">Disabled</option>
+		</type>
+		<type name="activity_source" base="list" valuetype="string">
+			<option value="0">Activity</option>
+			<option value="1">Object</option>
+		</type>
+		<type name="activity_yesno" base="list" valuetype="string">
+			<option value="">Same as Global</option>
+			<option value="1">Enable</option>
+			<option value="0">Disable</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_activity" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Creates customized activity." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionActivity" method="installed" />
+				</left>
+				<then>
+					<params name="activity" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="activity" translate-default="no" label="Mode" description="Select the activity action mode.">
+							<option value="activity">Activity</option>
+							<option value="comment">Comment</option>
+							<option value="tag">Tag</option>
+							<option value="hidden">Hidden</option>
+							<option value="stream">Stream</option>
+						</param>
+						<if name="mode" nametype="param:string" operator="in" value="activity|*|comment|*|tag|*|hidden" valuetype="const:string" type="showhide">
+							<param name="method" type="list" default="create" label="Method" blanktext="" description="Select the activity action method. Delete will load by owner, type, item, subtype and parent if supplied.">
+								<option value="create">Create</option>
+								<option value="delete">Delete</option>
+							</param>
+						</if>
+						<if name="mode" nametype="param:string" operator="=" value="stream" valuetype="const:string" type="showhide">
+							<param name="stream" type="list" default="activity" label="Stream" blanktext="" description="Select the type of stream to display.">
+								<option value="activity">Activity</option>
+								<option value="comments">Comment</option>
+							</param>
+							<param name="source" type="text" label="Source" size="25" description="Optionally input the substitution supported stream source (e.g. profile, recent, module)." />
+						</if>
+						<param name="type" type="text" label="Type" size="25" description="Optionally input the substitution supported type. Note this is required for all modes except Stream and Delete method." />
+						<if name="mode" nametype="param:string" operator="!=" value="hidden" valuetype="const:string" type="showhide">
+							<param name="subtype" type="text" label="Sub-Type" size="25" description="Optionally input the substitution supported subtype." />
+						</if>
+						<if name="mode" nametype="param:string" operator="=" value="activity" valuetype="const:string" type="showhide">
+							<if name="method" nametype="param:string" operator="!=" value="delete" valuetype="const:string" type="showhide">
+								<param name="title" type="text" label="Title" description="Optionally input substitution supported title." size="50" />
+							</if>
+						</if>
+						<if name="mode" nametype="param:string" operator="in" value="activity|*|comment" valuetype="const:string" type="showhide">
+							<if name="method" nametype="param:string" operator="!=" value="delete" valuetype="const:string" type="showhide">
+								<param name="message" type="textarea" rows="5" label="Message" description="Optionally input substitution supported message." cssclass="input-block" />
+							</if>
+						</if>
+						<param name="item" type="text" label="Item" size="15" description="Optionally input the substitution supported item id." />
+						<if name="mode" nametype="param:string" operator="!=" value="hidden" valuetype="const:string" type="showhide">
+							<param name="parent" type="text" label="Parent" size="15" description="Optionally input the parent id." />
+						</if>
+						<param name="owner" type="text" label="Owner" size="15" description="Input substitution supported owner as single integer user_id. Leave blank to use trigger user as the owner." />
+						<if name="mode" nametype="param:string" operator="=" value="activity" valuetype="const:string" type="showhide">
+							<if name="method" nametype="param:string" operator="!=" value="delete" valuetype="const:string" type="showhide">
+								<param name="date" type="text" label="Date" size="30" description="Optionally input the activity datetime. If left blank will be the datetime the action triggered." />
+								<fieldset name="actiondata" label="Action">
+									<params name="action" type="params">
+										<param name="id" type="list" label="Action" blanktext="- Select Action -" description="Optionally select an action.">
+											<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_activity_actions" key="id">
+												<rows>
+													<field name="id" as="value" />
+													<field name="value" as="text" />
+												</rows>
+												<orderby>
+													<field name="ordering" ordering="ASC" />
+												</orderby>
+											</data>
+										</param>
+										<if name="id" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+											<param name="message" type="text" label="Message" size="60" validate="required" description="Input a substitution supported message for this action." />
+											<param name="emote" type="list" label="Emote" blanktext="- Select Emote -" description="Optionally select the emote.">
+												<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_activity_emotes" key="id">
+													<rows>
+														<field name="id" as="value" />
+														<field name="value" as="text" />
+													</rows>
+													<orderby>
+														<field name="ordering" ordering="ASC" />
+													</orderby>
+												</data>
+											</param>
+										</if>
+									</params>
+								</fieldset>
+								<fieldset name="locationdata" label="Location">
+									<params name="location" type="params">
+										<param name="id" type="list" label="Location" blanktext="- Select Location -" description="Optionally select a location.">
+											<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_activity_locations" key="id">
+												<rows>
+													<field name="id" as="value" />
+													<field name="value" as="text" />
+												</rows>
+												<orderby>
+													<field name="ordering" ordering="ASC" />
+												</orderby>
+											</data>
+										</param>
+										<if name="id" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+											<param name="place" type="text" label="Place" size="60" validate="required" description="Input the substitution supported place for this location." />
+											<param name="address" type="text" label="Address" size="60" description="Optionally input the substitution supported address for this location." />
+										</if>
+									</params>
+								</fieldset>
+								<fieldset name="linksdata" label="Links">
+									<params name="links" type="params" repeat="true" repeatordering="false" label="" display="2lines">
+										<param name="type" type="text" label="Type" size="40" description="Input the substitution supported link type. Type determines how the link will display." />
+										<if name="type" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+											<param name="url" type="text" label="URL" size="60" validate="required" description="Input the substitution supported link URL for this link." />
+											<if name="url" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+												<param name="internal" type="yesno" default="0" label="Internal" description="Enable or disable internal link. Internal links will suppress the display of the URL." yes="Enable" no="Disable" />
+												<if name="internal" nametype="param:int" operator="!=" value="1" valuetype="const:int" type="showhide">
+													<param name="text" type="text" label="Text" size="60" description="Optionally input a substitution supported text for this link. This will be displayed instead of the URL." />
+												</if>
+												<param name="title" type="text" label="Title" size="60" description="Optionally input a substitution supported title for this link." />
+												<param name="description" type="textarea" label="Description" rows="3" cols="65" description="Optionally input a substitution supported description for this link." />
+												<if name="type" nametype="param:string" operator="=" value="url" valuetype="const:string" type="showhide">
+													<param name="thumbnail" type="yesno" default="1" label="Thumbnail" description="Enable or disable display of URL thumbnail." yes="Enable" no="Disable" />
+												</if>
+												<if name="type" nametype="param:string" operator="=" value="custom" valuetype="const:string" type="showhide">
+													<fieldset name="mediadata1" label="Media">
+														<params name="media" type="params">
+															<param name="custom" type="textarea" label="Custom" rows="3" cols="65" description="Optionally input a substitution supported custom media display." />
+														</params>
+													</fieldset>
+												</if>
+												<if name="type" nametype="param:string" operator="!=" value="custom" valuetype="const:string" type="showhide">
+													<fieldset name="mediadata2" label="Media">
+														<params name="media" type="params">
+															<param name="url" type="text" label="URL" size="60" description="Input the substitution supported media URL (e.g. URL to an image, video, or audio file)" />
+															<if name="url" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+																<param name="mimetype" type="text" label="MimeType" size="30" description="Input the substitution supported media mimetype (e.g. image/jpeg, video/youtube). This is necessary for video and audio media." />
+																<param name="extension" type="text" label="Extension" size="30" description="Input the substitution supported media extension (e.g. jpg)." />
+															</if>
+														</params>
+													</fieldset>
+												</if>
+											</if>
+										</if>
+									</params>
+								</fieldset>
+								<fieldset name="commentsdata" label="Comments">
+									<params name="comments" type="params">
+										<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of comments for this activity entry. Note a stream that has comments disabled will not display comments regardless of this setting." yes="Enable" no="Disable" />
+										<if name="display" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+											<param name="source" type="xml:activity_source" default="1" label="Source" blanktext="" description="Select the comments source. Source determines what the comments will be linked to. This allows comments to carry over from activity to activity or outside of activity it self. Object source can only be used if an Item is specified." />
+										</if>
+									</params>
+								</fieldset>
+								<fieldset name="tagsdata" label="Tags">
+									<params name="tags" type="params">
+										<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of tags for this activity entry. Note a stream that has tags disabled will not display tags regardless of this setting." yes="Enable" no="Disable" />
+										<if name="display" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+											<param name="source" type="xml:activity_source" default="1" label="Source" blanktext="" description="Select the tags source. Source determines what the tags will be linked to. This allows tags to carry over from activity to activity or outside of activity it self. Object source can only be used if an Item is specified." />
+										</if>
+									</params>
+								</fieldset>
+							</if>
+						</if>
+						<if name="mode" nametype="param:string" operator="=" value="comment" valuetype="const:string" type="showhide">
+							<if name="method" nametype="param:string" operator="!=" value="delete" valuetype="const:string" type="showhide">
+								<fieldset name="repliesdata" label="Replies">
+									<params name="replies" type="params">
+										<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of replies for this comment entry. Note a stream that has replies disabled will not display replies regardless of this setting." yes="Enable" no="Disable" />
+									</params>
+								</fieldset>
+							</if>
+						</if>
+						<if name="mode" nametype="param:string" operator="=" value="stream" valuetype="const:string" type="showhide">
+							<fieldset name="streamdata" label="Stream">
+								<param name="output" type="list" default="echo" label="Output" blanktext="" description="Select how to output the stream display.">
+									<option value="echo">Echo</option>
+									<option value="return">Return</option>
+								</param>
+								<if name="stream" nametype="param:string" operator="=" value="activity" valuetype="const:string" type="showhide">
+									<fieldset name="activitystreamdata" label="Activity">
+										<params name="activity_stream" type="params" label="" display="2lines">
+											<tabpane name="stream_activity">
+												<tabpanetab label="Activity">
+													<param name="activity_direction" type="list" default="0" label="Direction" blanktext="" description="Select the direction the stream displays.">
+														<option value="0">Down</option>
+														<option value="1">Up</option>
+													</param>
+													<param name="activity_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select status post create access. Access determines who can post status activity. Moderators are exempt from this configuration unless disabled." />
+													<param name="activity_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a status message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+													<param name="activity_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+													<param name="activity_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+												</tabpanetab>
+												<tabpanetab label="Actions">
+													<param name="activity_actions" type="xml:activity_yesno" default="" label="Actions" description="Enable or disable usage of activity status actions." />
+													<if name="activity_actions" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+														<param name="activity_actions_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a status action message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+													</if>
+												</tabpanetab>
+												<tabpanetab label="Locations">
+													<param name="activity_locations" type="xml:activity_yesno" default="" label="Locations" description="Enable or disable usage of activity status locations." />
+													<if name="activity_locations" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+														<param name="activity_locations_address_limit" type="text" default="" size="5" label="Address Limit" description="Input number of characters a status location address can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+													</if>
+												</tabpanetab>
+												<tabpanetab label="Links">
+													<param name="activity_links" type="xml:activity_yesno" default="" label="Links" description="Enable or disable usage of activity status links." />
+													<if name="activity_links" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+														<param name="activity_links_link_limit" type="text" default="" size="5" label="Link Limit" description="Input number of links a status message can have. If blank allow unlimited links. Moderators are exempt from this configuration. Leave empty for same as global." />
+													</if>
+												</tabpanetab>
+												<tabpanetab label="Tags">
+													<param name="activity_tags" type="xml:activity_yesno" default="" label="Tags" description="Enable or disable usage of activity status tags." />
+												</tabpanetab>
+												<tabpanetab label="Comments">
+													<tabpane name="activity_comments">
+														<tabpanetab label="Comments">
+															<param name="activity_comments" type="xml:activity_yesno" default="" label="Comments" description="Enable or disable usage of activity comments." />
+															<if name="activity_comments" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+																<param name="activity_comments_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+																<param name="activity_comments_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+																<param name="activity_comments_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+																<param name="activity_comments_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+															</if>
+														</tabpanetab>
+														<tabpanetab label="Replies">
+															<param name="activity_comments_replies" type="xml:activity_yesno" default="" label="Replies" description="Enable or disable usage of activity comments replies." />
+															<if name="activity_comments_replies" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+																<param name="activity_comments_replies_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+																<param name="activity_comments_replies_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+																<param name="activity_comments_replies_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+																<param name="activity_comments_replies_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+															</if>
+														</tabpanetab>
+													</tabpane>
+												</tabpanetab>
+											</tabpane>
+										</params>
+									</fieldset>
+								</if>
+								<if name="stream" nametype="param:string" operator="=" value="comments" valuetype="const:string" type="showhide">
+									<fieldset name="commentsstreamdata" label="Comments">
+										<params name="comments_stream" type="params" label="" display="2lines">
+											<tabpane name="stream_comments">
+												<tabpanetab label="Comments">
+													<param name="comments_direction" type="list" default="0" label="Direction" blanktext="" description="Select the direction the stream displays.">
+														<option value="0">Down</option>
+														<option value="1">Up</option>
+													</param>
+													<param name="comments_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+													<param name="comments_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+													<param name="comments_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+													<param name="comments_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+												</tabpanetab>
+												<tabpanetab label="Replies">
+													<param name="comments_replies" type="xml:activity_yesno" default="" label="Replies" description="Enable or disable usage of comments replies." yes="Enable" no="Disable" />
+													<if name="comments_replies" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+														<param name="comments_replies_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+														<param name="comments_replies_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+														<param name="comments_replies_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+														<param name="comments_replies_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+													</if>
+												</tabpanetab>
+											</tabpane>
+										</params>
+									</fieldset>
+								</if>
+							</fieldset>
+						</if>
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB Activity installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

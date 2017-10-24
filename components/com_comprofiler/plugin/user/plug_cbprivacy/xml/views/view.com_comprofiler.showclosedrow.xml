@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="viewclosed" type="params" ui="admin" label="Closed" icon="user" viewformatting="div">
+			<toolbarmenu>
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:closedrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="user_id" type="text" label="User ID" />
+			<param name="username" type="text" label="Username" />
+			<param name="name" type="text" label="Name" />
+			<param name="email" type="text" label="Email" />
+			<param name="type" type="xml:closed_type" label="Type" />
+			<param name="reason" type="text" label="Reason" />
+			<param name="date" type="datetime" label="Date" />
+		</view>
+	</views>
+</cbxml>

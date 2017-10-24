@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showgjcategories" type="params" ui="admin" label="Categories" icon="list" viewformatting="none">
+			<tablebrowser name="gjcategoriesbrowser" table="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/categoryid" label="Edit" />
+					<menu name="copy" action="linkAction" task="copy" link="cbo:copyrows" label="Copy" />
+					<menu name="publish" action="linkAction" task="publish" link="cbo:publish/published" label="Publish" />
+					<menu name="unpublish" action="linkAction" task="unpublish" link="cbo:unpublish/published" label="Unpublish" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Categories..." size="30">
+					<field name="name" />
+					<field name="description" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="access" valuetype="sql:int" type="viewaccesslevel" label="" blanktext="- Select Access -" managelevels="false" />
+					<filter name="published" valuetype="sql:int" type="xml:groupjive_published" label="" blanktext="- Select Published -" />
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="ordering_asc" label="Ordering ascending" default="true" translate-default="no">
+						<field name="ordering" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="ordering_desc" label="Ordering descending">
+						<field name="ordering" ordering="DESC" />
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="name" type="string" link="cbo:rowedit" parameters="categoryid" paramvalues="id" align="left" label="Category" allowordering="ascending,descending" />
+						<field name="types" type="xml:groupjive_type" multiple="true" width="15%" align="center" label="Types" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="access" type="viewaccesslevel" width="10%" align="center" label="Access" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="published" type="published" width="5%" align="center" label="Published" onclick="toggle" allowordering="ascending,descending" />
+						<field name="ordering" type="ordering" width="10%" align="center" label="Order" onclick="arrows,number" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+				<batchprocess>
+					<batch name="types" type="xml:groupjive_type" multiple="true" label="" blanktext="- Select Types -" />
+					<batch name="access" type="viewaccesslevel" label="" blanktext="- Select Access -" managelevels="false" />
+				</batchprocess>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

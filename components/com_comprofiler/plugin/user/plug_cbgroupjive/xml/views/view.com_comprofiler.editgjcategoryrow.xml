@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjcategory" type="params" ui="admin" label="Category" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="savecopy" action="custom" task="act=savecopy" label="Save as Copy" icon="save-copy" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjcategoryrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="" type="group" label="" display="2lines">
+				<param name="name" type="text" label="Name %s" description="Input category name. This is the name that will distinguish this category from others. Suggested to input something unique and intuitive." size="80" />
+			</param>
+			<tabpane name="editpane">
+				<tabpanetab name="category" label="Category" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="description" type="textarea" rows="5" label="Description" display="2lines" description="Input category description. Your category description should be short and to the point; describing what your category is all about." cssclass="input-block" />
+								<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+									<then>
+										<if name="canvas" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+											<then>
+												<param name="" type="private" method="canvas" label="Canvas" display="2lines" />
+												<param name="canvas_method" type="list" default="0" label="" display="2lines">
+													<option value="0">No Change</option>
+													<option value="1">Upload</option>
+													<option value="2">Delete</option>
+												</param>
+												<if name="canvas_method" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+													<param name="canvas" type="uploadfile" label="" display="2lines" description="Select category canvas. A canvas should represent the focus of your category; please be respectful and tasteful when selecting a canvas." />
+												</if>
+											</then>
+											<else>
+												<param name="canvas" type="uploadfile" label="Canvas" display="2lines" description="Select category canvas. A canvas should represent the focus of your category; please be respectful and tasteful when selecting a canvas." />
+											</else>
+										</if>
+									</then>
+									<else>
+										<param name="canvas" type="uploadfile" label="Canvas" display="2lines" description="Select category canvas. A canvas should represent the focus of your category; please be respectful and tasteful when selecting a canvas." />
+									</else>
+								</if>
+								<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+									<then>
+										<if name="logo" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+											<then>
+												<param name="" type="private" method="logo" label="Logo" display="2lines" />
+												<param name="logo_method" type="list" default="0" label="" display="2lines">
+													<option value="0">No Change</option>
+													<option value="1">Upload</option>
+													<option value="2">Delete</option>
+												</param>
+												<if name="logo_method" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+													<param name="logo" type="uploadfile" label="" display="2lines" description="Select category logo. A logo should represent the focus of your category; please be respectful and tasteful when selecting a logo." />
+												</if>
+											</then>
+											<else>
+												<param name="logo" type="uploadfile" label="Logo" display="2lines" description="Select category logo. A logo should represent the focus of your category; please be respectful and tasteful when selecting a logo." />
+											</else>
+										</if>
+									</then>
+									<else>
+										<param name="logo" type="uploadfile" label="Logo" display="2lines" description="Select category logo. A logo should represent the focus of your category; please be respectful and tasteful when selecting a logo." />
+									</else>
+								</if>
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="published" type="published" default="1" label="Publish" display="2lines" description="Select publish status of category. Unpublished categories will not be visible to the public as well as its groups." />
+								<param name="types" type="xml:groupjive_type" multiple="true" label="Types" default="1|*|2|*|3" blanktext="" validate="required" display="2lines" description="Select categories available group types. Types determine the way a groups is joined (e.g. Invite requires new users to be invited to join a group)." />
+								<param name="access" type="viewaccesslevel" label="Access" default="1" blanktext="" managelevels="false" display="2lines" description="Select category access. Access determines who can effectively see your category." />
+								<param name="create_access" type="xml:groupjive_create_access" label="Create Access" default="0" blanktext="Same as Global" managelevels="false" display="2lines" description="Select category group create access. Create Access determines who can create groups in this category." />
+								<param name="css" type="text" label="CSS Class" display="2lines" description="Optionally input custom css classes added to display containers for this category. Separate multiple classes with a space." />
+								<param name="ordering" type="ordering" value="name" label="Ordering" display="2lines" description="Select the ordering of this category." />
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="integrations" label="Integrations" description="">
+					<tabpane name="integrationtabs">
+						<showview name="params" view="gjcategoryintegrations" mandatory="false" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+						<showview name="params" path="views/view[@name=&quot;gjcategoryintegrations&quot;]" action="integration" type="plugins" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+					</tabpane>
+				</tabpanetab>
+			</tabpane>
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="action">Action</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_action" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Executes other actions." />
+			<params name="action" type="params" label="" display="2lines">
+				<param name="actions" type="list" multiple="true" size="10" default="" label="Actions" description="Select the actions to execute when this action is fired.">
+					<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_autoactions" key="id">
+						<rows>
+							<field name="id" as="value" />
+							<field name="title" as="text" />
+						</rows>
+						<orderby>
+							<field name="ordering" ordering="ASC" />
+						</orderby>
+						<groupby>
+							<field name="id" />
+						</groupby>
+					</data>
+				</param>
+			</params>
+		</view>
+	</views>
+</cbxml>

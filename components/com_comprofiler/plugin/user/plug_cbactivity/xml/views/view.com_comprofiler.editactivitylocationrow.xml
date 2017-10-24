@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editactivitylocation" type="params" ui="admin" label="Location" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:activitylocationrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="published" type="published" default="1" label="Publish" description="Select publish status of this location. Unpublished action will not display." />
+			<param name="value" type="text" label="Action" size="20" validate="required" description="Input the location. Location will determine the users location relationship (e.g. At, In, Going To, etc...)." />
+			<param name="title" type="text" label="Title" size="30" description="Optionally input the location title. The title is displayed as a prefix to the location (e.g. at, in, going to, arriving at, etc...)." />
+			<param name="ordering" type="ordering" value="value" label="Ordering" description="Select the ordering of this location. Ordering determines what order the location displays in the dropdown." />
+		</view>
+	</views>
+</cbxml>

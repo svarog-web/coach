@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjinvite" type="params" ui="admin" label="Invite" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjinviterows" label="Cancel" />
+			</toolbarmenu>
+			<if name="user" nametype="param:int" operator="=" value="0" valuetype="const:int" type="showhide">
+				<param name="email" type="text" label="Email Address" size="40" validate="required" description="Input the recipient email address." />
+			</if>
+			<if name="email" nametype="param:string" operator="=" value="" valuetype="const:string" type="showhide">
+				<param name="user" type="user" label="User" size="5" validate="required" description="Input the recipient user as single integer user_id." />
+			</if>
+			<param name="message" type="textarea" cols="40" rows="5" label="Message" description="Optionally input private message to include with the invite." />
+			<param name="group" type="list" label="Group" blanktext="" description="Select group the invite is for.">
+				<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+			</param>
+			<param name="code" type="text" label="Code" size="40" description="Input the invite code or leave blank to automatically generate." />
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input owner as single integer user_id." />
+		</view>
+	</views>
+</cbxml>

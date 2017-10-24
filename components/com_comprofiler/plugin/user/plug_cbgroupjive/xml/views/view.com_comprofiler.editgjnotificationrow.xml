@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjnotification" type="params" ui="admin" label="Notification" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjnotificationrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input owner of notification as single integer user_id." />
+			<param name="group" type="list" label="Group" blanktext="" description="Select group the notification is for.">
+				<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+			</param>
+			<params name="params" type="params">
+				<param name="user_join" type="yesno" default="0" label="Join of new User" description="" yes="Notify" no="Don't Notify" />
+				<param name="user_leave" type="yesno" default="0" label="Leave of existing User" description="" yes="Notify" no="Don't Notify" />
+				<param name="user_approve" type="yesno" default="0" label="New User requires approval" description="" yes="Notify" no="Don't Notify" />
+				<param name="user_cancel" type="yesno" default="0" label="New User join request cancelled" description="" yes="Notify" no="Don't Notify" />
+				<param name="invite_accept" type="yesno" default="0" label="My Group invite requests accepted" description="" yes="Notify" no="Don't Notify" />
+				<param name="invite_reject" type="yesno" default="0" label="My Group invite requests rejected" description="" yes="Notify" no="Don't Notify" />
+				<showview name="params" view="gjnotifications" mandatory="false" />
+				<showview name="params" path="views/view[@name=&quot;gjnotifications&quot;]" action="notification" type="plugins" />
+			</params>
+		</view>
+	</views>
+</cbxml>

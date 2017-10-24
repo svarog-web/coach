@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="fieldQueryParams" type="params" ui="admin">
+			<param name="qry_query" type="textarea" rows="10" default="" label="Query" description="Input substitution supported Query." cssclass="input-block">
+				<attributes>
+					<attribute name="mode">
+						<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+							<then>
+								<param name="" default="edit" translate-default="no" type="string" />
+							</then>
+							<else>
+								<param name="" default="show" translate-default="no" type="string" />
+							</else>
+						</if>
+					</attribute>
+				</attributes>
+			</param>
+			<param name="qry_mode" type="list" default="0" label="Mode" description="Select mode of query. The mode will determine what database the query is performed on." >
+				<option value="0">Internal</option>
+				<option value="1">External</option>
+			</param>
+			<if name="qry_mode" type="showhide" operator="=" value="1" valuetype="const:int">
+				<param name="qry_host" type="text" default="" label="Host" description="" />
+				<param name="qry_username" type="text" default="" label="Username" description="" />
+				<param name="qry_password" type="text" default="" label="Password" description="" />
+				<param name="qry_database" type="text" default="" label="Database" description="" />
+				<param name="qry_charset" type="text" default="" label="Charset" description="" />
+				<param name="qry_prefix" type="text" default="" label="Table Prefix" description="" />
+			</if>
+		</view>
+		<view name="fieldQueryOptionParams" type="params" ui="admin">
+			<param name="qry_col_value" type="text" default="" label="Value Column" description="Optionally input the column name to use as option value (e.g. id). If none then label column will be used." />
+			<param name="qry_col_label" type="text" default="" label="Label Column" description="Optionally input the column name to use as option label (e.g. username). If none then query result will be used." />
+			<if name="parent/type" operator="regexp" value="select|multiselect" valuetype="const:string" type="condition">
+				<param name="qry_col_optgrp" type="text" default="" label="Group Column" description="Optionally input the column name to use as option group label (e.g. type). This can allow grouping common options under a single label. Only the first occurence of a group will create an opt group option." />
+			</if>
+		</view>
+	</views>
+</cbxml>

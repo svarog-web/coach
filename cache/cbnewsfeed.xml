@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Joomla! - Open Source Content Management" -->
+<?xml-stylesheet href="/media/plg_jchoptimize/css/pro-jquery.lazyloadxt.fadein.css" type="text/css"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+	<channel>
+		<title>News</title>
+		<description><![CDATA[]]></description>
+		<link>https://www.joomlapolis.com/news</link>
+		<lastBuildDate>Tue, 24 Oct 2017 04:57:19 +0000</lastBuildDate>
+		<generator>Joomla! - Open Source Content Management</generator>
+		<atom:link rel="self" type="application/rss+xml" href="https://www.joomlapolis.com/news?format=feed&amp;type=rss"/>
+		<language>en-gb</language>
+		<item>
+			<title>CB Connect 7.1 with 5 new Social Networks</title>
+			<link>https://www.joomlapolis.com/news/18763-cb-connect-7-1-with-5-new-social-networks</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18763-cb-connect-7-1-with-5-new-social-networks</guid>
+			<description><![CDATA[<p> <img style="display: block; margin-left: auto; margin-right: auto;" src="https://www.joomlapolis.com/images/jpnewsletter/jpn201710/cbconnect71_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-connect">CB Connect 7.1</a> with <strong>16 new features</strong> and <strong>7 bug fixes</strong> is here!</p>
+<p> </p>
+<p>CB Connect now supports a total of <strong>25 Social Networks</strong> opening up your community website to <strong>millions of users</strong>!</p>
+<p>Here is the list - count them - of the <strong>now 25 supported</strong> networks:</p>
+<ol>
+<li>Facebook</li>
+<li>Twitter</li>
+<li>LinkedIn</li>
+<li>Windows Live</li>
+<li>Google</li>
+<li>Instagram</li>
+<li>Foursquare</li>
+<li>GitHub</li>
+<li>VKontakte</li>
+<li>Steam</li>
+<li>Reddit</li>
+<li>Twitch</li>
+<li>Stack Exchange</li>
+<li>Pinterest</li>
+<li>Amazon</li>
+<li>Yahoo</li>
+<li>PayPal</li>
+<li>Disqus</li>
+<li>WordPress</li>
+<li>Meetup</li>
+<li>LINE (<span style="color: #ff0000;">new</span>)</li>
+<li>Spotify (<span style="color: #ff0000;">new</span>)</li>
+<li>SoundClound (<span style="color: #ff0000;">new</span>)</li>
+<li>Flickr (<span style="color: #ff0000;">new</span>)</li>
+<li>Vimeo (<span style="color: #ff0000;">new</span>)</li>
+</ol>
+<p>Join the forum discussion to see full change log.</p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 17 Oct 2017 21:43:43 +0000</pubDate>
+		</item>
+		<item>
+			<title>Joomla 3.8.1 released!</title>
+			<link>https://www.joomlapolis.com/news/18761-joomla-3-8-1-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18761-joomla-3-8-1-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201710/joomla-381_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5715-joomla-3-8-1-release.html" target="_blank" rel="nofollow noopener noreferrer">Joomla 3.8.1 is here</a> - a bug fixes release!</p>
+<p> </p>
+<p>The Joomla project team has released version 3.8.1 that <strong>contains 29 bug fixes</strong> found since the Joomla 3.8 feature release.</p>
+<p><a href="https://www.joomlapolis.com/community-builder">Community Builder</a> 2.1.3 and all Joomlapolis add-ons work just fine with Joomla 3.8.1.</p>
+<p>This is a recommended upgrade for all Joomla 3.8 sites. <strong>As always</strong>, before any Joomla upgrade on your live website, <strong>take a backup</strong> just in case anything goes wrong.</p>
+<p>You can learn more about these bug fixes by <a href="https://www.joomla.org/announcements/release-news/5715-joomla-3-8-1-release.html" target="_blank" rel="nofollow noopener noreferrer">reading the Joomla 3.8.1 announcement.</a></p>]]></description>
+			<category>News</category>
+			<pubDate>Wed, 04 Oct 2017 23:35:33 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Antispam 3.1 released!</title>
+			<link>https://www.joomlapolis.com/news/18760-cb-antispam-3-1-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18760-cb-antispam-3-1-released</guid>
+			<description><![CDATA[<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://www.joomlapolis.com/images/stories/blogs/nant/newsletter/cbantispam31b_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-antispam">CB AntiSpam 3.1</a> is here with 7 new features!</p>
+<p> </p>
+<p>Protecting your website forms from spambots just got easier and more powerful.</p>
+<p>CB AntiSpam 3.1 has a total of 7 new features, but the 4 most noteworthy ones are:</p>
+<ul>
+<li><strong>New math mode</strong> that lets you define the complexity and range of the <strong>math challenge</strong>.</li>
+<li><strong>Honeypot mode</strong> lets you <strong>trick spambots</strong> into identifying themselves.</li>
+<li>Use <strong>Joomla mode</strong> to utilize <strong>existing Joomla captcha</strong> protection.</li>
+<li><strong>New Joomla plugin</strong> lets you <strong>use CB AntiSpam protection in Joomla and third party components</strong>.</li>
+</ul>
+<p>You can read <a href="https://www.joomlapolis.com/blog/kyle/18758-cb-antispam-3-1-0">Kyle's latest blog</a> to learn more about these new features.</p>
+<p>There are of course <strong>many great existing features</strong> that let you automatically block users based on failed attempts (e.g., number of failed logins) or the blocking can be manually imposed by a moderator.</p>
+<p><a href="http://demo.cbdemosites.com/addons/cb-antispam/captcha" target="_blank" rel="nofollow noopener noreferrer">See everything in action on our demo site</a>!</p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 26 Sep 2017 22:19:25 +0000</pubDate>
+		</item>
+		<item>
+			<title>Joomla 3.8 released!</title>
+			<link>https://www.joomlapolis.com/news/18759-joomla-3-8-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18759-joomla-3-8-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5713-joomla-3-8-0-release.html" target="_blank" rel="nofollow noopener noreferrer"><img src="https://www.joomlapolis.com/images/stories/blogs/nant/joomla-38_640.jpg" alt="" /></a></p>
+<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5713-joomla-3-8-0-release.html" target="_blank" rel="nofollow noopener noreferrer">Joomla 3.8 is here</a> with over 300 improvements!</p>
+<p> </p>
+<p>The Joomla project team has released version 3.8 with many improvements and some important security fixes.</p>
+<p>The highlighted new features include:</p>
+<ul>
+<li><strong>Improved Routing System</strong> provides cleaner, shorter and more friendly URLs (no more IDs) for Content, Contacts, Users, and Newsfeeds.</li>
+<li><strong>Joomla 4 compatibility layer</strong> has been added to pave the way for changes that are planned for Joomla 4.0.</li>
+<li><strong>Sample data is now always installable and multilingual</strong>. Up to now you could only include sample data during the initial installation of Joomla. This is no longer the case.</li>
+<li><strong>Encryption support for PHP 7.2</strong>. The core encryption library supports the new<strong> sodium extension</strong> which will be added to PHP 7.2.</li>
+</ul>
+<p>You can learn more about these key features and other Joomla 3.8 improvements by visiting the <a href="https://www.joomla.org/3/" target="_blank" rel="nofollow noopener noreferrer">What's new in Joomla 3.8</a> site.</p>
+<p>Joomla 3.8 also has 2 very important security fixes:</p>
+<ul>
+<li><strong>Inadequate escaping in the LDAP authentication plugin</strong> can result into a disclosure of username and password.<br />If you are using LDAP authentication on any Joomla site, you need to upgrade to Joomla 3.8.<br /><a href="https://developer.joomla.org/security-centre/711-20170902-core-ldap-information-disclosure" target="_blank" rel="nofollow noopener noreferrer">Discover more about this LDAP authentication bug</a>.</li>
+<li><strong>A logic bug in a SQL query could lead to the disclosure of article intro texts</strong> when these articles are in the archived state.<br /><a href="https://developer.joomla.org/security-centre/710-20170901-core-information-disclosure" target="_blank" rel="nofollow noopener noreferrer">Discover more about this SQL logic bug</a>.</li>
+</ul>
+<p><a href="https://www.joomlapolis.com/community-builder">Community Builder</a> 2.1.3 and all Joomlapolis add-ons work just fine with Joomla 3.8.</p>
+<p>However, there are reports of other components and templates having problems. So, <strong>as always</strong>, before rushing to do a one-click Joomla upgrade on your website, <strong>take a backup</strong> and do your research with all third-party products you have installed. And before upgrading on your live site, go through the process on a cloned backup site and <strong>test</strong> before you tackle your production environment.</p>
+<p> </p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Fri, 22 Sep 2017 00:04:38 +0000</pubDate>
+		</item>
+		<item>
+			<title>Stripe payment gateway support for CBSubs 4.1.1</title>
+			<link>https://www.joomlapolis.com/news/18757-stripe-payment-gateway-support-for-cbsubs-4-1-1</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18757-stripe-payment-gateway-support-for-cbsubs-4-1-1</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/stories/blogs/nant/Stripe_640.png" alt="" /></p>
+<p>Our <a href="https://www.joomlapolis.com/addons/cb-paid-subscriptions">CB Paid Subscriptions</a> (CBSubs) solution now supports the <a href="http://www.stripe.com" target="_blank" rel="nofollow noopener noreferrer">Stripe</a> payment method!</p>
+<p>This brings the total number of gateways supported by CBSubs to 18!</p>
+<p>All existing CBSubs subscribers can download and install the Stripe Payment Gateway and start collecting single payments.</p>
+<p>Stripe is becoming very popular and competitive and as they state on their website: "<em>We help power 100,000+ businesses in 100+ countries and across nearly every industry</em>".</p>
+<p>And CBSubs is <strong>extending this commitment</strong> to its users!</p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Sun, 17 Sep 2017 22:38:28 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Auto Actions 7.0 released with 29 new features!</title>
+			<link>https://www.joomlapolis.com/news/18756-cb-auto-actions-7-0-released-with-29-new-features</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18756-cb-auto-actions-7-0-released-with-29-new-features</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/stories/blogs/nant/newsletter/cbautoactions70_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-auto-actions">CB Auto Actions</a> 7.0 is here!</p>
+<p> </p>
+<p><strong>CB Auto Actions 7.0</strong> is a <strong>major feature rich release</strong> of the <strong>most powerful</strong> <em>making things happen without coding</em> <strong>tool available for Joomla</strong>.</p>
+<p>With 29 new features this swiss army tool lets you configure almost any action imaginable to help you automate your website workflows.</p>
+<p>Even with our great <a href="https://www.youtube.com/watch?v=v67ShgUtW0I&amp;list=PLp0puRITgC7McQcw0Sli1qfSUQGwmflzi" target="_blank" rel="nofollow noopener noreferrer">CB Auto Actions videos</a>, it is sometimes difficult to explain what exactly this tool is about and do it justice.</p>
+<p>In most cases it is the answer to questions like: "<em>I wish I could do ABC with Community Builder and Joomla, but I am not a developer</em>". Well, this is <strong>exactly</strong> where CB Auto Actions steps up to the task and lets you configure instead of code.</p>
+<p>With <strong>42 pick and use</strong> or <strong>pick and change</strong> built-in <strong>system actions</strong>, you can <strong>simple enable some cool things</strong> (automatic login after registration and pushing events to your activity stream) we have <strong>already thought about for you</strong>.</p>
+<p>Or you can configure your own actions by selecting one of the 26 action types and just filling in the gaps without any coding knowledge.</p>
+<p>CB Auto Actions 7.0 has 29 new features (see discussion thread for change log). Here is a shortlist of some of our favorites:</p>
+<ul>
+<li><strong>CB Privacy Actions</strong> for CB Gallery items and CB Activity streams<br />These built-in system actions will <strong>let your users select who can see specific items</strong> in their CB Gallery or on the CB Activity streams.<br />You can see these in action on <a href="http://demo.cbdemosites.com" target="_blank" rel="noopener noreferrer">our demo site</a> (just login and add a new activity post to see the new privacy drop down selector)<br />Note: CB Privacy and CB Activity need to be installed.</li>
+<li><strong>CB GroupJive Stream</strong> and <strong>CB GroupJive Gallery</strong><br />Just enable these new system actions and <strong>get activity streams and galleries in your GroupJive groups !</strong></li>
+<li><strong>Output tab for actions</strong><br />This is somewhat technical to explain. Basically this is very useful for CB Activity and coding actions in order to better format the output they produce.<br />Kyle elaborates on this in his latest blog.</li>
+<li><strong>Variable Loop</strong><br />Another very powerful technical features that basically lets you loop an action based on specific characteristics of the trigger event.<br />Once again Kyle explains this functionality in his blog.</li>
+<li><strong>Joomla Triggers</strong><br />CB Auto Actions can now be configured to work off of Joomla events!<br />30 Joomla triggers are now recognized in CB Auto Actions 7.0!</li>
+</ul>
+<p> We will be discussing these new features <strong>on the forums</strong> and in <strong>new video tutorials</strong> to help our community <strong>make new things happen</strong> with these great new features.</p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Sun, 10 Sep 2017 23:11:09 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Paid Subscriptions (CBSubs) 4.1.1 Released!</title>
+			<link>https://www.joomlapolis.com/news/18754-cb-paid-subscriptions-cbsubs-4-1-1-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18754-cb-paid-subscriptions-cbsubs-4-1-1-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201708/cbsubs411.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-paid-subscriptions" rel="alternate">CB Paid Subscriptions (CBSubs) 4.1.1 is here</a> with <strong>12 new features</strong> and <strong>27 bug fixes</strong>!</p>
+<p> </p>
+<p><a href="https://www.joomlapolis.com/addons/cb-paid-subscriptions" rel="alternate">CB Paid Subscriptions (CBSubs GPL) 4.1.1</a> is mainly a <strong>maintenance release,</strong> but there are <strong>12 new features</strong> that have been included.</p>
+<p>As per <a href="https://www.joomlapolis.com/blog/beat/18753-cbsubs-4-1-1-release-and-next-releases" rel="alternate">Beat's blog</a>, this release has been in the working and has gradually reached our user base through our <strong>continuous integration policy</strong> (aka <strong>nightly releases</strong>).</p>
+<p>All new features and bug fixes are listed in the changelog that is included in the forum thread discussing this article (just scroll to end of article to see changelog and forum discussion start).</p>
+<p>Of the 12 new features, we would like to focus on the following three key additions:</p>
+<ul>
+<li><strong>New mailer trigger</strong> added for changed payment basket.<br />This new features lets you <strong>automatically follow-up with email messages</strong> sent to your customers when something changes in the sales and payment process.</li>
+<li><strong>2Checkout gateway improvements</strong> to take advantage of the <strong>new 2Checkout recurring sales API allowing for promotions to be applied also on auto-recurring orders</strong>.</li>
+<li><strong>Generic Invoices Page</strong> can now be <strong>linked directly to Joomla menu</strong> and thus help users quickly see their past invoices.</li>
+</ul>
+<p> All 12 features and the 27 fixes are listed in the discussion thread below.</p>
+<p>Also make sure you <a href="https://www.joomlapolis.com/blog/beat/18753-cbsubs-4-1-1-release-and-next-releases" rel="alternate">subscribe to Beat's blog</a> to read what new features he has <strong>planned for version 4.2</strong>!</p>
+<p>CBSubs 4.1.1 is available in our <a href="https://www.joomlapolis.com//downloads/cb-paid-subscriptions">Downloads</a> section and simply requires an active subscription to <a href="https://www.joomlapolis.com//addons/cb-paid-subscriptions">CBSubs</a>.</p>]]></description>
+			<category>News</category>
+			<pubDate>Wed, 30 Aug 2017 00:04:39 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Gallery 2.1 released with 18 new features!</title>
+			<link>https://www.joomlapolis.com/news/18750-cb-gallery-2-1-released-with-18-new-features</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18750-cb-gallery-2-1-released-with-18-new-features</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201708/cbgallery210_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-gallery" rel="alternate">CB Gallery 2.1 is here</a> with <strong>18 awesome new features!</strong></p>
+<p> </p>
+<p><a href="https://www.joomlapolis.com/addons/cb-gallery" rel="alternate">CB Gallery 2.1</a> is a <strong>feature rich release</strong> that has <strong>fantastic integration</strong> with the latest <a href="https://www.joomlapolis.com/community-builder">Community Builder</a> release and with <a href="https://www.joomlapolis.com/addons/cb-activity">CB Activity</a>!</p>
+<p>Here is a short list of some of the (18!!!) awesome new features:</p>
+<ul>
+<li><strong>CB Activity integration</strong> lets you <strong>create and share new gallery albums directly in any activity stream</strong></li>
+<li><strong>Article galleries</strong> lets you use the CB Gallery Bot to <strong>embed a user gallery in a Joomla article</strong></li>
+<li><strong>Left/right swiping</strong> makes image gallery viewing as easy as ever on mobile devices</li>
+<li><strong>Set any gallery image</strong> as <strong>profile avatar</strong> or <strong>canvas image</strong></li>
+<li><strong>Client side resizing</strong> for new image uploads</li>
+<li><strong>MD5/SHA1 checksum</strong> for files</li>
+<li><strong>EXIF data for photos</strong> supported</li>
+</ul>
+<p>Join the forum discussion to see a full changelog and see the new features in action on <a href="http://demo.cbdemosites.com/" target="_blank" rel="alternate">our demo site</a>!</p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Mon, 14 Aug 2017 23:34:59 +0000</pubDate>
+		</item>
+		<item>
+			<title>Community Builder 2.1.3 with WEB Install Released!</title>
+			<link>https://www.joomlapolis.com/news/18746-community-builder-2-1-3-with-web-install-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18746-community-builder-2-1-3-with-web-install-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201707/cb213_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/community-builder" rel="alternate">Community Builder 2.1.3 is available for download</a></p>
+<p> </p>
+<p>Community Builder 2.1.3 is here!</p>
+<p>It is basically a <strong>maintenance release</strong>, but it does have <strong>5 new features / improvements</strong> and <strong>18 bug fixes</strong>.</p>
+<p>Its main new feature is the <strong>install from WEB</strong> functionality that <a href="https://www.joomlapolis.com/blog/kyle/18744-install-from-web" rel="alternate">Kyle has blogged</a> about.</p>
+<p>CB 2.1.3 is a recommended upgrade for everyone. As always take a precautionary backup before upgrading.</p>
+<p>Join the discussion below to view the CB 2.1.3 changelog.</p>
+<p> </p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Sat, 29 Jul 2017 02:06:45 +0000</pubDate>
+		</item>
+		<item>
+			<title>Joomla 3.7.3 Security &amp; Maintenance Release</title>
+			<link>https://www.joomlapolis.com/news/18743-joomla-3-7-3-security-bug-fixes-release</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18743-joomla-3-7-3-security-bug-fixes-release</guid>
+			<description><![CDATA[<p style="text-align: center;"> </p>
+<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201707/joomla-373_640.jpg" alt="" /></p>
+<p style="text-align: center;"><strong>Joomla 3.7.3 Security Release - All 3.x websites need to upgrade!</strong></p>
+<p style="text-align: center;"> </p>
+<p>The Joomla Team has released <a href="https://www.joomla.org/announcements/release-news/5709-joomla-3-7-3-release.html" target="_blank" rel="nofollow">Joomla 3.7.3</a> which contains <strong>3 security fixes</strong> that affect all Joomla 1.7.3 to Joomla 3.7.2 websites. One of the vulnerabilities also affects Joomla 1.5 websites.</p>
+<p>In addition to the security issues, Joomla 3.7.3 also fixes over 230 bugs.</p>
+<p>The Joomla Team <strong><a href="https://www.joomla.org/announcements/release-news/5709-joomla-3-7-3-release.html" target="_blank" rel="nofollow">strongly recommends</a></strong> that all websites <strong>upgrade to version 3.7.3</strong>.</p>
+<p><a href="https://www.joomlapolis.com/community-builder" rel="alternate">Community Builder 2.1.2</a> <strong>works just fine</strong> with this new Joomla release.</p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 04 Jul 2017 22:53:17 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Profile Update Logger 3.0 Released!</title>
+			<link>https://www.joomlapolis.com/news/18741-cb-profile-update-logger-3-0-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18741-cb-profile-update-logger-3-0-released</guid>
+			<description><![CDATA[<p> </p>
+<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201706/pul30_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-profile-update-logger">CB Profile Update Logger 3.0</a> now <a href="https://www.joomlapolis.com/downloads" rel="alternate">available for download</a> by all <a href="https://www.joomlapolis.com/memberships">Paid Members</a></p>
+<p> </p>
+<p>CB Profile Update Logger 3.0 is yet another rewrite that takes tracking field changes on your Community Builder profiles to the next level.</p>
+<p>Here are just some of the highlights that will rock you:</p>
+<ul>
+<li>Totally responsive - looks great on all viewing devices!</li>
+<li>Templatable - make your own viewing templates to blend in with your needs.</li>
+<li>Exclude logging updates for specific (configurable) users (list of user ids).</li>
+<li>Exclude specific fields or entire field types from logging.</li>
+<li>Backend administrative management lets you search, filter, sort or even remove items from your log</li>
+</ul>
+<p>Take it for a spin on our demo website!</p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 13 Jun 2017 23:36:03 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB ProfileBook 3.0 released</title>
+			<link>https://www.joomlapolis.com/news/18740-cb-profilebook-3-0-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18740-cb-profilebook-3-0-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201706/pb30_640b.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-profilebook">CB ProfileBook 3.0</a> available for download by all paid members!</p>
+<p> </p>
+<p>CB ProfileBook 3.0 is a complete redesign of the 3 built-in applications tabs (CB ProfileWall, CB ProfileBook and CB ProfileWall) and the module.</p>
+<p>The new design now supports templates and is even more mobile device friendly. There is also an administrative panel in the backend that gives admins more control to manage user entries.</p>
+<p>Our demo site has already been updated, so you can see it in action there and you can also learn more from <a href="https://www.joomlapolis.com/blog/kyle/18739-cb-profilebook-redesigned" rel="alternate">Kyle's blog</a>.</p>]]></description>
+			<category>News</category>
+			<pubDate>Wed, 07 Jun 2017 01:07:48 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Privacy 5.0 Released!</title>
+			<link>https://www.joomlapolis.com/news/18737-cb-privacy-5-0-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18737-cb-privacy-5-0-released</guid>
+			<description><![CDATA[<p> </p>
+<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/stories/blogs/krileon/cbprivacy500/privacy_selector_button.jpeg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-privacy">CB Privacy</a> is now available for download by all <a href="https://www.joomlapolis.com/memberships">paid members</a></p>
+<p>CB Privacy 5.0 is a complete rewrite that <a href="https://www.joomlapolis.com/blog/kyle/18736-taking-privacy-to-the-next-level" rel="alternate">takes privacy levels and controls to the next level</a>.</p>
+<p>The most important features at a glance:</p>
+<ul>
+<li>Ability to turn over privacy controls to users, letting them decide who can see a specific field, an entire tab, or even the entire user profile</li>
+<li>Create user only views for fields or tabs</li>
+<li>Let users request and delete their user profile and their Joomla account</li>
+<li>Users can also disable their account and enable it in the future without moderator intervention</li>
+<li>New space friendly icon control buttons in addition to the traditional icon/text combination</li>
+<li>Technical optimizations to improve performance and extend usage to other plugins</li>
+</ul>
+<p>You can experience this new release on our <a href="http://demo.cbdemosites.com/" target="_blank" rel="alternate">demo site</a>.</p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Mon, 22 May 2017 00:06:54 +0000</pubDate>
+		</item>
+		<item>
+			<title>Joomla 3.7.1 Security Release</title>
+			<link>https://www.joomlapolis.com/news/18735-joomla-3-7-1-security-release</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18735-joomla-3-7-1-security-release</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201705/joomla271_580.jpg" alt="" /></p>
+<p style="text-align: center;"><strong>Joomla 3.7.1 Security Release - All 3.x websites need to upgrade!</strong></p>
+<p style="text-align: left;"> </p>
+<p><strong>UPDATED: Joomla 3.7.1 has been released:</strong></p>
+
+<p><strong>If you are running on Joomla 3.7.0, <u style="font-size:150%">stop reading now and upgrade immediately all your Joomla 3.7.0 sites.</u></strong></p>
+
+<p>If you run Joomla 3.6.5 or below, you should still plan to update to Joomla 3.7.1, and keep your site up to date, but you have time to finish reading first.</p>
+
+<p>You can find more information in the <a hfref="https://www.joomla.org/announcements/release-news/5705-joomla-3-7-1-release.html" target="_blank">Joomla 3.7.1 announcement</a></p>
+
+<p style="text-align: left;"> </p>
+<hr />
+
+<p style="text-align: left;">The Joomla team has pre-announced that <strong>Joomla 3.7.1 is to be released</strong> on Wednesday, May 17th and it includes a very important <strong>security patch</strong>.</p>
+<p style="text-align: left;">According to the Joomla Security Strike Team (JSST), this is a very important security fix and all Joomla installations are strongly encouraged to prepare for upgrade.</p>
+<p style="text-align: left;"><a href="https://www.joomla.org/announcements/release-news/5704-important-security-announcement-pre-release-371.html" target="_blank" rel="nofollow">Read the JSST announcement here</a>.</p>
+<p style="text-align: left;">Latest Community Builder 2.1.2 and all our Add-ons, as well as all latest nightlies are compatible with Joomla 3.7.1 RC 2, and upgrade to 3.7.1 should stay compatible.<br /><br />We will update this article after Joomla 3.7.1 is released with more details once they become available.</p>
+<p style="text-align: left;"> </p>
+<p> </p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 16 May 2017 19:20:01 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Core Fields Ajax 4.0 released!</title>
+			<link>https://www.joomlapolis.com/news/18733-cb-core-fields-ajax-4-0-released</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18733-cb-core-fields-ajax-4-0-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn201705/cbcorefieldsajax40.png" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-core-fields-ajax">CB Core Fields Ajax 4.0</a> is available for download by all <a href="https://www.joomlapolis.com/memberships/professional">paid members</a></p>
+<p>CB Core Fields Ajax 4.0 is a total rewrite that provides cleaner frontend inline fields editing for all core CB fieldtypes.</p>
+<p>Just install, publish and configure any of your CB core fieldtype fields to allow them to be support inline editing on your user profile pages and your userlists.</p>
+<p>This new release gives you:</p>
+<ul>
+<li>more reliable and smooth inline editing</li>
+<li>new output modes and 2 built-in templates</li>
+<li>different edit templates configurable on a per fields basis</li>
+<li>ability to dynamically chain other fields to get updated when another field is inline edited</li>
+</ul>
+<p>You can see this new release in action on <a href="http://demo.cbdemosites.com/" rel="alternate">our demo site</a> and <strong>read more about the cool new features</strong> in <a href="https://www.joomlapolis.com/blog/kyle/18730-cb-core-fields-ajax-4-0-0" rel="alternate">Kyle's blog</a>.</p>]]></description>
+			<category>News</category>
+			<pubDate>Wed, 10 May 2017 00:14:23 +0000</pubDate>
+		</item>
+	</channel>
+</rss>

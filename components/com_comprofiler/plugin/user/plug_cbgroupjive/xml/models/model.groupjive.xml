@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="groupjive_published" base="published" valuetype="string">
+			<option value="0" title="Unpublish Item">Unpublished</option>
+			<option value="-1" title="Unapprove Item" iconclass="clock-o" textclass="warning" toggleable="false">Unapproved</option>
+			<option value="1" title="Publish Item">Published</option>
+		</type>
+		<type name="groupjive_type" base="list" valuetype="string">
+			<option value="1">Open</option>
+			<option value="2">Approval</option>
+			<option value="3">Invite</option>
+		</type>
+		<type name="groupjive_status" base="list" valuetype="string">
+			<option value="-1">Banned</option>
+			<option value="0">Pending</option>
+			<option value="1">Active</option>
+			<option value="2">Moderator</option>
+			<option value="3">Admin</option>
+			<option value="4">Owner</option>
+		</type>
+		<type name="groupjive_create_access" base="viewaccesslevel" valuetype="string">
+			<option value="-1">Disabled</option>
+		</type>
+		<type name="groupjive_category_orderby" base="list" valuetype="string">
+			<option value="1">Ordering ASC</option>
+			<option value="2">Ordering DESC</option>
+			<option value="3">Name ASC</option>
+			<option value="4">Name DESC</option>
+			<option value="5">Group Count ASC</option>
+			<option value="6">Group Count DESC</option>
+		</type>
+		<type name="groupjive_group_orderby" base="list" valuetype="string">
+			<option value="1">Ordering ASC</option>
+			<option value="2">Ordering DESC</option>
+			<option value="3">Date ASC</option>
+			<option value="4">Date DESC</option>
+			<option value="5">Name ASC</option>
+			<option value="6">Name DESC</option>
+			<option value="7">User Count ASC</option>
+			<option value="8">User Count DESC</option>
+		</type>
+		<type name="groupjive_aspect_ratio" base="list" valuetype="string">
+			<option value="1">Yes</option>
+			<option value="2">Yes, with Cropping</option>
+			<option value="0">No</option>
+		</type>
+		<type name="groupjive_enable_approval" base="list" valuetype="string">
+			<option value="0">Disable</option>
+			<option value="1">Enable</option>
+			<option value="2">Enable, with Approval</option>
+		</type>
+	</types>
+</cbxml>

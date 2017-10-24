@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="request">
+		<fieldset name="request" label="">
+			<field name="action" type="list" required="true" default="action" label="Function" description="">
+				<option value="general">Internal General</option>
+				<option value="users">Internal Users</option>
+				<option value="action">Internal Action</option>
+			</field>
+			<field name="actions" type="text" required="true" default="" label="Actions" description="Input comma seperated list of action ids. This determines what actions will fire." />
+			<field name="users" type="text" required="false" default="" label="Users" description="Optionally input comma separated list of user ids. This determines what users the actions will fire for." />
+		</fieldset>
+	</fields>
+</form>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="activityrows" request="view action" action="editPlugin showactivity">
+			<showview view="showactivity" mode="show" />
+		</action>
+
+		<action name="activitycommentrows" request="view action" action="editPlugin showactivitycomments">
+			<showview view="showactivitycomments" mode="show" />
+		</action>
+
+		<action name="hiddenactivityrows" request="view action" action="editPlugin showhiddenactivity">
+			<showview view="showhiddenactivity" mode="show" />
+		</action>
+
+		<action name="activitytagrows" request="view action" action="editPlugin showactivitytags">
+			<showview view="showactivitytags" mode="show" />
+		</action>
+
+		<action name="activityactionrows" request="view action" action="editPlugin showactivityactions">
+			<showview view="showactivityactions" mode="show" />
+		</action>
+
+		<action name="activitylocationrows" request="view action" action="editPlugin showactivitylocations">
+			<showview view="showactivitylocations" mode="show" />
+		</action>
+
+		<action name="activityemoterows" request="view action" action="editPlugin showactivityemotes">
+			<showview view="showactivityemotes" mode="show" />
+		</action>
+
+		<action name="activityrow" request="view table action" action="editPlugin activitybrowser editrow" requestparameters="activityid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.activity" mandatory="true" />
+			<showview view="editactivity" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity" class="\CB\Plugin\Activity\Table\ActivityTable" key="id" value="activityid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="activitycommentrow" request="view table action" action="editPlugin activitycommentsbrowser editrow" requestparameters="commentid">
+			<showview view="editactivitycomment" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity_comments" class="\CB\Plugin\Activity\Table\CommentTable" key="id" value="commentid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="hiddenactivityrow" request="view table action" action="editPlugin hiddenactivitybrowser editrow" requestparameters="hiddenid">
+			<showview view="edithiddenactivity" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity_hidden" class="\CB\Plugin\Activity\Table\HiddenTable" key="id" value="hiddenid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="activitytagrow" request="view table action" action="editPlugin activitytagsbrowser editrow" requestparameters="tagid">
+			<showview view="editactivitytag" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity_tags" class="\CB\Plugin\Activity\Table\TagTable" key="id" value="tagid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="activityactionrow" request="view table action" action="editPlugin activityactionsbrowser editrow" requestparameters="actionid">
+			<showview view="editactivityaction" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity_actions" class="\CB\Plugin\Activity\Table\ActionTable" key="id" value="actionid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="activitylocationrow" request="view table action" action="editPlugin activitylocationsbrowser editrow" requestparameters="locationid">
+			<showview view="editactivitylocation" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity_locations" class="\CB\Plugin\Activity\Table\LocationTable" key="id" value="locationid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="activityemoterow" request="view table action" action="editPlugin activityemotesbrowser editrow" requestparameters="emoteid">
+			<showview view="editactivityemote" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_activity_emotes" class="\CB\Plugin\Activity\Table\EmoteTable" key="id" value="emoteid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="plugin" request="view table" action="editrow pluginsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbactivity/xml/models/model.activity" mandatory="false" />
+		</action>
+
+		<action name="tab" request="view table" action="editrow tabsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbactivity/xml/models/model.activity" mandatory="false" />
+		</action>
+
+		<action name="field" request="view table" action="editrow fieldsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbactivity/xml/models/model.activity" mandatory="false" />
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="activity" type="button" default="Activity" buttonclass="default" buttonsize="xsmall" link="cb_action:activityrows" parameters="cid" paramvalues="id" label="" />
+			<param name="comments" type="button" default="Comments" buttonclass="default" buttonsize="xsmall" link="cb_action:activitycommentrows" parameters="cid" paramvalues="id" label="" />
+			<param name="hidden" type="button" default="Hidden" buttonclass="default" buttonsize="xsmall" link="cb_action:hiddenactivityrows" parameters="cid" paramvalues="id" label="" />
+			<param name="tags" type="button" default="Tags" buttonclass="default" buttonsize="xsmall" link="cb_action:activitytagrows" parameters="cid" paramvalues="id" label="" />
+			<param name="actions" type="button" default="Actions" buttonclass="default" buttonsize="xsmall" link="cb_action:activityactionrows" parameters="cid" paramvalues="id" label="" />
+			<param name="locations" type="button" default="Locations" buttonclass="default" buttonsize="xsmall" link="cb_action:activitylocationrows" parameters="cid" paramvalues="id" label="" />
+			<param name="emotes" type="button" default="Emotes" buttonclass="default" buttonsize="xsmall" link="cb_action:activityemoterows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

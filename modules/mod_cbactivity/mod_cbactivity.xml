@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="module" version="1.6.0" client="site" method="upgrade">
+	<name>CB Activity</name>
+	<author>Krileon</author>
+	<creationDate>2015-11-13</creationDate>
+	<copyright>(C) 2004-2015 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>3.0.1</version>
+	<description>Displays CB Activity as a module.</description>
+	<files>
+		<filename module="mod_cbactivity">mod_cbactivity.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="activity" label="Activity">
+				<!--ACTIVITY-->
+				<field name="activity_create_access" type="accesslevel" default="" label="Activity Create Access" description="Select status post create access. Access determines who can post status activity. Moderators are exempt from this configuration unless disabled.">
+					<option value="">Same as Global</option>
+					<option value="-1">Disabled</option>
+				</field>
+				<field name="activity_message_limit" type="text" default="" size="5" label="Activity Message Limit" description="Input number of characters a status message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+				<field name="activity_paging" type="list" default="" label="Activity Paging" description="Enable or disable usage of paging.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_limit" type="text" default="10" size="5" label="Activity Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+				<!--ACTIONS-->
+				<field name="activity_actions" type="list" default="" label="Actions" description="Enable or disable usage of activity status actions.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_actions_message_limit" type="text" default="" size="5" label="Actions Message Limit" description="Input number of characters a status action message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+				<!--LOCATIONS-->
+				<field name="activity_locations" type="list" default="" label="Locations" description="Enable or disable usage of activity status locations.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<!--LINKS-->
+				<field name="activity_links" type="list" default="" label="Links" description="Enable or disable usage of activity status links.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_links_link_limit" type="text" default="" size="5" label="Links Link Limit" description="Input number of links a status message can have. If blank allow unlimited links. Moderators are exempt from this configuration. Leave empty for same as global." />
+				<!--TAGS-->
+				<field name="activity_tags" type="list" default="" label="Tags" description="Enable or disable usage of activity status tags.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<!--COMMENTS-->
+				<field name="activity_comments" type="list" default="" label="Comments" description="Enable or disable usage of activity comments.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_comments_create_access" type="accesslevel" default="" label="Comments Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled.">
+					<option value="">Same as Global</option>
+					<option value="-1">Disabled</option>
+				</field>
+				<field name="activity_comments_message_limit" type="text" default="" size="5" label="Comments Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+				<field name="activity_comments_paging" type="list" default="" label="Comments Paging" description="Enable or disable usage of paging.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_comments_limit" type="text" default="" size="5" label="Comments Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+				<!--COMMENT REPLIES-->
+				<field name="activity_comments_replies" type="list" default="" label="Comment Replies" description="Enable or disable usage of activity comments replies.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_comments_replies_create_access" type="accesslevel" default="" label="Comment Replies Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled.">
+					<option value="">Same as Global</option>
+					<option value="-1">Disabled</option>
+				</field>
+				<field name="activity_comments_replies_message_limit" type="text" default="" size="5" label="Comment Replies Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+				<field name="activity_comments_replies_paging" type="list" default="" label="Comment Replies Paging" description="Enable or disable usage of paging.">
+					<option value="">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="activity_comments_replies_limit" type="text" default="" size="5" label="Comment Replies Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+			</fieldset>
+			<fieldset name="advanced" label="Advanced Options">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="cache" type="list" default="0" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

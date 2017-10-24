@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="addgjgroups" type="params" ui="admin" label="Add CB GroupJive Groups" icon="users" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:users" label="Close" />
+			</toolbarmenu>
+			<param name="groups" type="list" multiple="true" label="Groups" blanktext="" hideblanktext="always" validate="required" description="Select groups the specified users are to join.">
+				<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+			</param>
+			<params name="users" type="params" repeat="true" repeatordering="false" label="" display="2lines">
+				<param name="user_id" type="user" label="User" size="5" validate="required" description="Input user as single integer user_id to join the specified groups." />
+				<param name="status" type="xml:groupjive_status" default="1" blanktext="" label="Status" description="Select status of the user for the specified groups." />
+			</params>
+		</view>
+	</views>
+</cbxml>

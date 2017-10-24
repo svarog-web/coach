@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showprivacy" type="params" ui="admin" label="Privacy" icon="list" viewformatting="none">
+			<tablebrowser name="privacybrowser" table="#__comprofiler_plugin_privacy" class="cbprivacyPrivacyTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/privacyid" label="Edit" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Privacy..." size="30">
+					<field name="user">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</field>
+					<field name="type" />
+					<field name="subtype" />
+					<field name="item" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="type" valuetype="sql:string" type="data" label="" blanktext="- Select Type -">
+						<data name="type" type="sql:multiplerows" table="#__comprofiler_plugin_privacy" key="id">
+							<rows>
+								<field name="type" as="value" />
+								<field name="type" as="text" />
+							</rows>
+							<where>
+								<column name="type" operator="!=" value="" type="sql:field" valuetype="const:string" />
+							</where>
+							<orderby>
+								<field name="type" ordering="ASC" />
+							</orderby>
+						</data>
+					</filter>
+					<filter name="subtype" valuetype="sql:string" type="data" label="" blanktext="- Select Sub-Type -">
+						<data name="type" type="sql:multiplerows" table="#__comprofiler_plugin_privacy" key="id">
+							<rows>
+								<field name="subtype" as="value" />
+								<field name="subtype" as="text" />
+							</rows>
+							<where>
+								<column name="subtype" operator="!=" value="" type="sql:field" valuetype="const:string" />
+							</where>
+							<orderby>
+								<field name="subtype" ordering="ASC" />
+							</orderby>
+						</data>
+					</filter>
+					<filter name="item" valuetype="sql:string" type="string" label="" blanktext="Item" />
+					<filter name="rule" valuetype="sql:string" type="list" label="" blanktext="- Select Rule -">
+						<data name="" type="private" class="cbprivacyClass" method="getPrivacyOptions" />
+					</filter>
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="id_asc" label="ID ascending" default="true" translate-default="no">
+						<field name="id" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="id_desc" label="ID descending">
+						<field name="id" ordering="DESC" />
+					</ordergroup>
+					<ordergroup name="user_asc" label="User ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="user_desc" label="User descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="username" type="string" link="cbo:rowedit" parameters="privacyid" paramvalues="id" align="left" label="User" allowordering="ascending,descending">
+							<data name="user_id" type="sql:field" />
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+						<field name="type" type="string" width="15%" align="center" label="Type" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="subtype" type="string" width="15%" align="center" label="Sub-Type" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="item" type="string" width="15%" align="center" label="Item" allowordering="ascending,descending" />
+						<field name="rule" type="group" width="15%" align="center" label="Rule" responsivehiddenon="xsmall" allowordering="ascending,descending">
+							<param name="rule" type="list" multiple="true" label="">
+								<data name="" type="private" class="cbprivacyClass" method="getPrivacyOptions" />
+							</param>
+						</field>
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>CB Reconfirm Email</name>
+	<author>Krileon</author>
+	<creationDate>2016-09-27</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>This plugin will prevent user from changing their email address until they've clicked the confirmation link sent to their new email address.</description>
+	<version>2.0.15</version>
+	<release>4.0.3</release>
+	<files>
+		<filename plugin="cbreconfirmemail">cbreconfirmemail.php</filename>
+		<filename>index.html</filename>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+	</files>
+	<params>
+		<tabpane name="reconfirmemail">
+			<tabpanetab label="Changed">
+				<param name="reconfirm_changed" type="textarea" cols="50" rows="10" default="Your email address has changed and requires reconfirmation. Please check your new email address for your confirmation email." label="Message" description="Input substitution supported message displayed after changing email address. Leave blank to display no message." />
+			</tabpanetab>
+			<tabpanetab label="Notification">
+				<param name="reconfirm_from_name" type="text" default="" size="30" label="From Name" description="Input a substitution supported from name to be sent with all reconfirm emails (e.g. My Awesome CB Site!). If left blank will default to users name. If specified a replyto name will be added as the users name." />
+				<param name="reconfirm_from_address" type="text" default="" size="30" label="From Address" description="Input a substitution supported from address to send all reconfirm emails from (e.g. general@domain.com). If left blank will default to users email. If specified a replyto address will be added as the users email." />
+				<param name="reconfirm_subject" type="text" size="30" default="Your email address has changed" label="Subject" description="Input substitution supported reconfirm email subject." />
+				<param name="reconfirm_body" type="textarea" cols="50" rows="10" default="The email address attached to your account [username] has changed to [new_email] and requires confirmation.&lt;br&gt;&lt;br&gt;You can confirm your email address by clicking on the following link:&lt;br&gt;&lt;a href=&quot;[reconfirm]&quot;&gt;[reconfirm]&lt;/a&gt;&lt;br&gt;&lt;br&gt;If this was done in error please contact administration or cancel by &lt;a href=&quot;[cancel]&quot;&gt;clicking here&lt;/a&gt;." label="Body" description="Input html and substitution supported reconfirm email body. Supply [reconfirm] to display the confirmation link. Additionally [old_email] can be used to display the old email address or [new_email] to display the new email address." />
+				<param name="reconfirm_cc" type="text" default="" size="30" label="CC Address" description="Input a substitution supported CC address (e.g. [email]); multiple addresses supported with comma seperated list (e.g. email1@domain.com, email2@domain.com, email3@domain.com)." />
+				<param name="reconfirm_bcc" type="text" default="" size="30" label="BCC Address" description="Input a substitution supported BCC address (e.g. [email]); multiple addresses supported with comma seperated list (e.g. email1@domain.com, email2@domain.com, email3@domain.com)." />
+				<param name="reconfirm_attachments" type="text" default="" size="30" label="Attachment" description="Input a substitution supported Attachment address (e.g. [cb_myfile]); multiple addresses supported with comma seperated list (e.g. /home/username/public_html/images/file1.zip, http://www.domain.com/file3.zip)." />
+			</tabpanetab>
+			<tabpanetab label="Reconfirmed">
+				<param name="reconfirm_redirect" type="text" size="50" default="" label="Redirect" description="Input substitution supported URL to redirect to after successful reconfirm. If left blank no redirect will be performed." />
+				<param name="reconfirm_message" type="textarea" cols="50" rows="10" default="New email address confirmed successfully!" label="Message" description="Input substitution supported message displayed after successful reconfirm." />
+			</tabpanetab>
+			<tabpanetab label="Cancelled">
+				<param name="reconfirm_cancel_redirect" type="text" size="50" default="" label="Redirect" description="Input substitution supported URL to redirect to after successfully cancelling email change. If left blank no redirect will be performed." />
+				<param name="reconfirm_cancel_message" type="textarea" cols="50" rows="10" default="Email address change cancelled successfully!" label="Message" description="Input substitution supported message displayed after successfully cancelling email change." />
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__comprofiler_plugin_emails" class="cbreconfirmEmailTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="from" type="sql:varchar(255)" />
+				<column name="to" type="sql:varchar(255)" />
+				<column name="code" type="sql:varchar(255)" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="status" type="sql:varchar(255)" default="P" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id">
+					<column name="user_id" />
+				</index>
+				<index name="from">
+					<column name="from" />
+				</index>
+				<index name="to">
+					<column name="to" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+	</database>
+</cbinstall>

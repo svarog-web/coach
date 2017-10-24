@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="gallery_yesno" base="list" valuetype="string">
+			<option value="-1">Same as Global</option>
+			<option value="1">Enable</option>
+			<option value="0">Disable</option>
+		</type>
+		<type name="gallery_folder_state" base="published" valuetype="string">
+			<option value="0" title="Unpublish Folder">Unpublished</option>
+			<option value="-1" title="Unapprove Folder" iconclass="clock-o" textclass="warning" toggleable="false">Unapproved</option>
+			<option value="1" title="Publish Folder">Published</option>
+		</type>
+		<type name="gallery_folder_orderby" base="list" valuetype="string">
+			<option value="random">Random</option>
+			<option value="title_asc">Title ASC</option>
+			<option value="title_desc">Title DESC</option>
+			<option value="description_asc">Description ASC</option>
+			<option value="description_desc">Descriptin DESC</option>
+			<option value="date_asc">Date ASC</option>
+			<option value="date_desc">Date DESC</option>
+		</type>
+		<type name="gallery_item_state" base="published" valuetype="string">
+			<option value="0" title="Unpublish Item">Unpublished</option>
+			<option value="-1" title="Unapprove Item" iconclass="clock-o" textclass="warning" toggleable="false">Unapproved</option>
+			<option value="1" title="Publish Item">Published</option>
+		</type>
+		<type name="gallery_item_type" base="list" valuetype="string">
+			<option value="photos">Photo</option>
+			<option value="files">File</option>
+			<option value="videos">Video</option>
+			<option value="music">Music</option>
+		</type>
+		<type name="gallery_item_types" base="list" valuetype="string">
+			<option value="photos">Photos</option>
+			<option value="files">Files</option>
+			<option value="videos">Videos</option>
+			<option value="music">Music</option>
+		</type>
+		<type name="gallery_item_folder" base="list" valuetype="string">
+			<option value="0">None</option>
+		</type>
+		<type name="gallery_item_orderby" base="list" valuetype="string">
+			<option value="random">Random</option>
+			<option value="value_asc">Value ASC</option>
+			<option value="value_desc">Value DESC</option>
+			<option value="title_asc">Title ASC</option>
+			<option value="title_desc">Title DESC</option>
+			<option value="description_asc">Description ASC</option>
+			<option value="description_desc">Descriptin DESC</option>
+			<option value="date_asc">Date ASC</option>
+			<option value="date_desc">Date DESC</option>
+		</type>
+		<type name="gallery_item_aspectratio" base="list" valuetype="string">
+			<option value="1">Yes</option>
+			<option value="2">Yes, with Cropping</option>
+			<option value="0">No</option>
+		</type>
+	</types>
+</cbxml>

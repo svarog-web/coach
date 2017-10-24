@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="request">
+		<fieldset name="request">
+			<field name="action" type="hidden" default="invites" label="" description="" />
+			<field name="func" type="list" required="true" default="show" label="Function" description="">
+				<option value="new">New Invite</option>
+				<option value="edit">Edit Invite</option>
+			</field>
+			<field name="id" type="text" required="false" default="" label="ID" description="" />
+		</fieldset>
+	</fields>
+</form>

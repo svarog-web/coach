@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjnotifications" type="params" ui="admin">
+			<param name="event_new" type="yesno" default="0" label="Schedule of new event" description="" yes="Notify" no="Don't Notify" />
+			<param name="event_edit" type="yesno" default="0" label="Edit of existing event" description="" yes="Notify" no="Don't Notify" />
+			<param name="event_approve" type="yesno" default="0" label="New event requires approval" description="" yes="Notify" no="Don't Notify" />
+			<param name="event_attend" type="yesno" default="0" label="User attends my existing events" description="" yes="Notify" no="Don't Notify" />
+			<param name="event_unattend" type="yesno" default="0" label="User unattends my existing events" description="" yes="Notify" no="Don't Notify" />
+		</view>
+	</views>
+</cbxml>

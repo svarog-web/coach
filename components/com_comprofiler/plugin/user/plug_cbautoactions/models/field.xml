@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="field">Field</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_field" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Adjust user field values. Additional fields can be added or removed using the + and - signs. Fields can also be re-ordered using drag and drop." />
+			<params name="field" type="params" repeat="true" label="" display="2lines">
+				<param name="field" type="field" label="Field" blanktext="" description="Select field to alter." />
+				<param name="operator" type="list" default="set" translate-default="no" label="Operator" description="Select operator to apply to field value and value. Note Add, Subtract, Divide, and Multiply will only apply to integer (1, 2, 3) and float (1.5, 2.3, 4.6) values.">
+					<option value="set">Set (Field = Value)</option>
+					<option value="prefix">Prefix (ValueField)</option>
+					<option value="suffix">Suffix (FieldValue)</option>
+					<option value="add">Add (Field = Field + Value)</option>
+					<option value="subtract">Subtract (Field = Field - Value)</option>
+					<option value="divide">Divide (Field = Field / Value)</option>
+					<option value="multiply">Multiply (Field = Field * Value)</option>
+				</param>
+				<param name="value" type="text" label="Value" description="Optionally input substitution supported field value (e.g. [user_id])." size="50" />
+				<param name="translate" type="yesno" default="0" label="Translate Value" description="Optionally disable translations for the value." />
+			</params>
+		</view>
+	</views>
+</cbxml>

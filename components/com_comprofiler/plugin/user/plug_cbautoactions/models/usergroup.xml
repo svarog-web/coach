@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="usergroup">Usergroup</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_usergroup" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Create, replace, add, and remove usergroups for and to users." />
+			<params name="usergroup" type="params" repeat="true" label="" display="2lines">
+				<param name="mode" type="list" default="add" translate-default="no" label="Mode" description="Select usergroup mode. Mode determines what type of action is performed automatically.">
+					<option value="create">Create Usergroup</option>
+					<option value="add">Add Usergroups</option>
+					<option value="replace">Replace Usergroups</option>
+					<option value="remove">Remove Usergroups</option>
+				</param>
+				<if name="mode" nametype="param:string" operator="=" value="create" valuetype="const:string" type="showhide">
+					<param name="parent" type="usergroup" default="0" blanktext="" label="Parent" description="Optionally select parent usergroup." managegroups="false">
+						<option value="0">No Parent</option>
+					</param>
+					<param name="title" type="text" label="Title" description="Input substitution supported usergroup title." size="50" validate="required" />
+					<param name="add" type="yesno" default="1" label="Add" description="Optionally add user to new usergroup." />
+				</if>
+				<if name="mode" nametype="param:string" operator="!=" value="create" valuetype="const:string" type="showhide">
+					<param name="groups" type="usergroup" multiple="true" default="" blanktext="" size="10" label="Groups" description="Select groups to add or remove." validate="required" managegroups="false" />
+				</if>
+			</params>
+		</view>
+	</views>
+</cbxml>

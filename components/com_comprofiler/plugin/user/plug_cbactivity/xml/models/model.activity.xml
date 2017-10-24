@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="activity_create_access" base="viewaccesslevel" valuetype="string">
+			<option value="-1">Disabled</option>
+		</type>
+		<type name="activity_yesno" base="list" valuetype="string">
+			<option value="">Same as Global</option>
+			<option value="1">Enable</option>
+			<option value="0">Disable</option>
+		</type>
+		<type name="activity_source" base="list" valuetype="string">
+			<option value="0">Activity</option>
+			<option value="1">Object</option>
+		</type>
+		<type name="activity_link_type" base="list" valuetype="string">
+			<option value="image">Image</option>
+			<option value="video">Video</option>
+			<option value="audio">Audio</option>
+			<option value="url">URL</option>
+			<option value="custom">Custom</option>
+		</type>
+	</types>
+</cbxml>

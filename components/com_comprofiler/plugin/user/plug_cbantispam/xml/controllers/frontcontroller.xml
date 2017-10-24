@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="blockrows" request="view action" action="editPlugin showblocks">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.block" mandatory="true" />
+			<showview view="showblocks" mode="show" />
+		</action>
+
+		<action name="whitelistrows" request="view action" action="editPlugin showwhitelists">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.block" mandatory="true" />
+			<showview view="showwhitelists" mode="show" />
+		</action>
+
+		<action name="attemptrows" request="view action" action="editPlugin showattempts">
+			<showview view="showattempts" mode="show" />
+		</action>
+
+		<action name="logrows" request="view action" action="editPlugin showlogs">
+			<showview view="showlogs" mode="show" />
+		</action>
+
+		<action name="blockrow" request="view table action" action="editPlugin blockbrowser editrow" requestparameters="blockid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.block" mandatory="true" />
+			<showview view="editblock" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_antispam_block" class="cbantispamBlockTable" key="id" value="blockid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="whitelistrow" request="view table action" action="editPlugin whitelistbrowser editrow" requestparameters="whitelistid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.block" mandatory="true" />
+			<showview view="editwhitelist" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_antispam_whitelist" class="cbantispamWhitelistTable" key="id" value="whitelistid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="blocks" type="button" default="Blocks" buttonclass="default" buttonsize="xsmall" link="cb_action:blockrows" parameters="cid" paramvalues="id" label="" />
+			<param name="whitelists" type="button" default="Whitelists" buttonclass="default" buttonsize="xsmall" link="cb_action:whitelistrows" parameters="cid" paramvalues="id" label="" />
+			<param name="attempts" type="button" default="Attempts" buttonclass="default" buttonsize="xsmall" link="cb_action:attemptrows" parameters="cid" paramvalues="id" label="" />
+			<param name="logs" type="button" default="Logs" buttonclass="default" buttonsize="xsmall" link="cb_action:logrows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

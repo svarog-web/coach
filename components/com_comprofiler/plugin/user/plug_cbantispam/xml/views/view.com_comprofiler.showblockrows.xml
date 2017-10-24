@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showblocks" type="params" ui="admin" label="Blocks" icon="list" viewformatting="none">
+			<tablebrowser name="blockbrowser" table="#__comprofiler_plugin_antispam_block" class="cbantispamBlockTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/blockid" label="Edit" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Blocks..." size="30">
+					<field name="value" />
+					<field name="user">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="value" />
+					</field>
+					<field name="duration" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="type" valuetype="sql:string" type="xml:block_type" label="" blanktext="- Select Type -" />
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="id_asc" label="ID ascending" default="true" translate-default="no">
+						<field name="id" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="id_desc" label="ID descending">
+						<field name="id" ordering="DESC" />
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="value" type="group" link="cbo:rowedit" parameters="blockid" paramvalues="id" align="left" label="Value" allowordering="ascending,descending">
+							<if name="user" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+								<then>
+									<param name="user" type="string" label="" />
+								</then>
+								<else>
+									<param name="value" type="string" label="" />
+								</else>
+							</if>
+						</field>
+						<field name="type" type="xml:block_type" width="15%" align="center" label="Type" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="date" type="datetime" timezone="RAW" width="15%" align="center" label="Date" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="duration" type="string" width="15%" align="center" label="Duration" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="" type="group" width="15%" align="center" label="Expire" responsivehiddenon="xsmall">
+							<if name="" nametype="data:string" operator="=" value="0000-00-00 00:00:00" valuetype="const:string" type="condition">
+								<left>
+									<param name="" type="private" class="self" method="getExpired" />
+								</left>
+								<then>
+									<param name="" default="Never" type="string" />
+								</then>
+								<else>
+									<param name="" type="datetime" timezone="RAW" label="" display="2lines">
+										<attributes>
+											<attribute name="default">
+												<param name="" type="private" class="self" method="getExpire" />
+											</attribute>
+										</attributes>
+									</param>
+								</else>
+							</if>
+						</field>
+						<field name="" type="group" width="5%" align="center" label="Blocked">
+							<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+								<left>
+									<param name="" type="private" class="self" method="isBlocked" />
+								</left>
+								<then>
+									<param name="" default="1" type="checkmark" title="Blocked" />
+								</then>
+								<else>
+									<param name="" default="0" type="checkmark" title="Not Blocked" />
+								</else>
+							</if>
+						</field>
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+						<field name="user" type="hidden">
+							<data name="username" as="user" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="value" />
+						</field>
+					</rows>
+				</listfields>
+				<batchprocess>
+					<batch name="batch" view="batch" />
+					<view name="batch" type="params" viewformatting="div">
+						<param name="type" type="xml:block_type" label="Type" blanktext="- Select Type -" />
+						<param name="value" type="text" label="Value" size="40" />
+						<param name="date" type="datetime" label="Date" />
+						<param name="_custom_duration" type="xml:block_duration" label="Duration" blanktext="Custom" />
+						<if name="_custom_duration" nametype="param:string" operator="=" value="" valuetype="const:string" type="showhide">
+							<param name="duration" type="text" label="Custom Duration" size="40" />
+						</if>
+						<param name="reason" type="textarea" label="Reason" cols="40" rows="5" />
+					</view>
+				</batchprocess>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

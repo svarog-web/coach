@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Activity</name>
+	<author>Krileon</author>
+	<creationDate>2016-09-07</creationDate>
+	<copyright>(C) 2004-2015 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Displays various user activity on profile.</description>
+	<version>2.0.12</version>
+	<release>3.0.1+build.2016.09.07.23.53.08.d0a283acf</release>
+	<files>
+		<filename plugin="cbactivity">cbactivity.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbactivity.php</filename>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+		<foldername>js</foldername>
+		<foldername>library</foldername>
+	</files>
+	<delete>
+		<filename>admin.cbactivity.css</filename>
+		<filename>admin.cbactivity.html.php</filename>
+		<filename>admin.cbactivity.php</filename>
+		<filename>cbactivity.class.php</filename>
+		<filename>tab.cbactivity.php</filename>
+		<filename>plugin.cbactivity.php</filename>
+		<filename>toolbar.cbactivity.html.php</filename>
+		<filename>toolbar.cbactivity.php</filename>
+		<filename>templates/default/images/glyphicons-halflings-white.png</filename>
+		<filename>templates/default/images/glyphicons-halflings.png</filename>
+		<filename>templates/default/jquery.php</filename>
+		<filename>templates/default/module.php</filename>
+		<filename>templates/default/recent.php</filename>
+		<filename>templates/default/tab.php</filename>
+		<foldername>models</foldername>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/Activity">
+			<files folder="library">
+				<filename>Activity.php</filename>
+				<filename>ActivityInterface.php</filename>
+				<filename>CBActivity.php</filename>
+				<filename>Comments.php</filename>
+				<filename>CommentsInterface.php</filename>
+				<filename>Parser.php</filename>
+				<filename>Stream.php</filename>
+				<filename>StreamDirection.php</filename>
+				<filename>StreamDirectionInterface.php</filename>
+				<filename>StreamInterface.php</filename>
+				<filename>Tags.php</filename>
+				<filename>TagsInterface.php</filename>
+				<filename>index.html</filename>
+				<foldername>Table</foldername>
+			</files>
+		</library>
+	</libraries>
+	<fieldtypes>
+		<field type="activity" label="Activity" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<tabpane name="field_activity">
+							<tabpanetab label="Activity">
+								<param name="field_activity_direction" type="list" default="0" label="Direction" blanktext="" description="Select the direction the stream displays.">
+									<option value="0">Down</option>
+									<option value="1">Up</option>
+								</param>
+								<param name="field_activity_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select status post create access. Access determines who can post status activity. Moderators are exempt from this configuration unless disabled." />
+								<param name="field_activity_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a status message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+								<param name="field_activity_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+								<param name="field_activity_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+							</tabpanetab>
+							<tabpanetab label="Actions">
+								<param name="field_activity_actions" type="xml:activity_yesno" default="" label="Actions" description="Enable or disable usage of activity status actions." />
+								<if name="field_activity_actions" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+									<param name="field_activity_actions_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a status action message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+								</if>
+							</tabpanetab>
+							<tabpanetab label="Locations">
+								<param name="field_activity_locations" type="xml:activity_yesno" default="" label="Locations" description="Enable or disable usage of activity status locations." />
+								<if name="field_activity_locations" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+									<param name="field_activity_locations_address_limit" type="text" default="" size="5" label="Address Limit" description="Input number of characters a status location address can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+								</if>
+							</tabpanetab>
+							<tabpanetab label="Links">
+								<param name="field_activity_links" type="xml:activity_yesno" default="" label="Links" description="Enable or disable usage of activity status links." />
+								<if name="field_activity_links" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+									<param name="field_activity_links_link_limit" type="text" default="" size="5" label="Link Limit" description="Input number of links a status message can have. If 0 allow unlimited links. Moderators are exempt from this configuration. Leave empty for same as global." />
+								</if>
+							</tabpanetab>
+							<tabpanetab label="Tags">
+								<param name="field_activity_tags" type="xml:activity_yesno" default="" label="Tags" description="Enable or disable usage of activity status tags." />
+							</tabpanetab>
+							<tabpanetab label="Comments">
+								<tabpane name="field_activity_comments">
+									<tabpanetab label="Comments">
+										<param name="field_activity_comments" type="xml:activity_yesno" default="" label="Comments" description="Enable or disable usage of activity comments." />
+										<if name="field_activity_comments" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+											<param name="field_activity_comments_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+											<param name="field_activity_comments_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+											<param name="field_activity_comments_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+											<param name="field_activity_comments_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+										</if>
+									</tabpanetab>
+									<tabpanetab label="Replies">
+										<param name="field_activity_comments_replies" type="xml:activity_yesno" default="" label="Replies" description="Enable or disable usage of activity comments replies." />
+										<if name="field_activity_comments_replies" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+											<param name="field_activity_comments_replies_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+											<param name="field_activity_comments_replies_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+											<param name="field_activity_comments_replies_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+											<param name="field_activity_comments_replies_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+										</if>
+									</tabpanetab>
+								</tabpane>
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="comments" label="Comments" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<tabpane name="field_comments">
+							<tabpanetab label="Comments">
+								<param name="field_comments_direction" type="list" default="0" label="Direction" blanktext="" description="Select the direction the stream displays.">
+									<option value="0">Down</option>
+									<option value="1">Up</option>
+								</param>
+								<param name="field_comments_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+								<param name="field_comments_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+								<param name="field_comments_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+								<param name="field_comments_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+							</tabpanetab>
+							<tabpanetab label="Replies">
+								<param name="field_comments_replies" type="xml:activity_yesno" default="" label="Replies" description="Enable or disable usage of comments replies." yes="Enable" no="Disable" />
+								<if name="field_comments_replies" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+									<param name="field_comments_replies_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+									<param name="field_comments_replies_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+									<param name="field_comments_replies_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+									<param name="field_comments_replies_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+								</if>
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<tabs>
+		<tab name="Activity" description="" class="cbactivityTab" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<tabpane name="tab_activity">
+					<tabpanetab label="Activity">
+						<param name="tab_activity_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select status post create access. Access determines who can post status activity. Moderators are exempt from this configuration unless disabled." />
+						<param name="tab_activity_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a status message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+						<param name="tab_activity_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+						<param name="tab_activity_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+					</tabpanetab>
+					<tabpanetab label="Actions">
+						<param name="tab_activity_actions" type="xml:activity_yesno" default="" label="Actions" description="Enable or disable usage of activity status actions." />
+						<if name="tab_activity_actions" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+							<param name="tab_activity_actions_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a status action message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Locations">
+						<param name="tab_activity_locations" type="xml:activity_yesno" default="" label="Locations" description="Enable or disable usage of activity status locations." />
+						<if name="tab_activity_locations" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+							<param name="tab_activity_locations_address_limit" type="text" default="" size="5" label="Address Limit" description="Input number of characters a status location address can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Links">
+						<param name="tab_activity_links" type="xml:activity_yesno" default="" label="Links" description="Enable or disable usage of activity status links." />
+						<if name="tab_activity_links" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+							<param name="tab_activity_links_link_limit" type="text" default="" size="5" label="Link Limit" description="Input number of links a status message can have. If 0 allow unlimited links. Moderators are exempt from this configuration. Leave empty for same as global." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Tags">
+						<param name="tab_activity_tags" type="xml:activity_yesno" default="" label="Tags" description="Enable or disable usage of activity status tags." />
+					</tabpanetab>
+					<tabpanetab label="Comments">
+						<tabpane name="tab_activity_comments">
+							<tabpanetab label="Comments">
+								<param name="tab_activity_comments" type="xml:activity_yesno" default="" label="Comments" description="Enable or disable usage of activity comments." />
+								<if name="tab_activity_comments" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+									<param name="tab_activity_comments_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+									<param name="tab_activity_comments_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+									<param name="tab_activity_comments_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+									<param name="tab_activity_comments_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+								</if>
+							</tabpanetab>
+							<tabpanetab label="Replies">
+								<param name="tab_activity_comments_replies" type="xml:activity_yesno" default="" label="Replies" description="Enable or disable usage of activity comments replies." />
+								<if name="tab_activity_comments_replies" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+									<param name="tab_activity_comments_replies_create_access" type="xml:activity_create_access" default="" managelevels="false" blanktext="Same as Global" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+									<param name="tab_activity_comments_replies_message_limit" type="text" default="" size="5" label="Message Limit" description="Input number of characters a comment message can have. If 0 allow unlimited character limit. Moderators are exempt from this configuration. Leave empty for same as global." />
+									<param name="tab_activity_comments_replies_paging" type="xml:activity_yesno" default="" label="Paging" description="Enable or disable usage of paging." />
+									<param name="tab_activity_comments_replies_limit" type="text" default="" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed. Leave empty for same as global." />
+								</if>
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</tab>
+	</tabs>
+	<params>
+		<tabpane name="activity">
+			<tabpanetab label="General">
+				<param name="general_template" type="folderlist" default="default" label="Template" description="Select template to be used for all of CB Activity. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbactivity/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbactivity/templates/" />
+				<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB Activity." />
+				<param name="general_delete" type="yesno" default="1" label="Auto Delete" description="Enable or disable automatic deletion of activity when a user is deleted." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Activity">
+				<tabpane name="activity_global">
+					<tabpanetab label="Activity">
+						<param name="activity_create_access" type="xml:activity_create_access" default="2" managelevels="false" blanktext="" label="Create Access" description="Select status post create access. Access determines who can post status activity. Moderators are exempt from this configuration unless disabled." />
+						<param name="activity_message_limit" type="int" default="400" size="5" label="Message Limit" description="Input number of characters a status message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+						<param name="activity_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="activity_limit" type="int" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+					</tabpanetab>
+					<tabpanetab label="Actions">
+						<param name="activity_actions" type="yesno" default="1" label="Actions" description="Enable or disable usage of activity status actions." yes="Enable" no="Disable" />
+						<if name="activity_actions" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="activity_actions_message_limit" type="int" default="100" size="5" label="Message Limit" description="Input number of characters a status action message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Locations">
+						<param name="activity_locations" type="yesno" default="1" label="Locations" description="Enable or disable usage of activity status locations." yes="Enable" no="Disable" />
+						<if name="activity_locations" nametype="param:string" operator="!=" value="0" valuetype="const:string" type="showhide">
+							<param name="activity_locations_address_limit" type="text" default="200" size="5" label="Address Limit" description="Input number of characters a status location address can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Links">
+						<param name="activity_links" type="yesno" default="1" label="Links" description="Enable or disable usage of activity status links." yes="Enable" no="Disable" />
+						<if name="activity_links" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="activity_links_link_limit" type="int" default="5" size="5" label="Link Limit" description="Input number of links a status message can have. If blank allow unlimited links. Moderators are exempt from this configuration." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Tags">
+						<param name="activity_tags" type="yesno" default="1" label="Tags" description="Enable or disable usage of activity status tags." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Comments">
+						<tabpane name="activity_comments">
+							<tabpanetab label="Comments">
+								<param name="activity_comments" type="yesno" default="1" label="Comments" description="Enable or disable usage of activity comments." yes="Enable" no="Disable" />
+								<if name="activity_comments" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+									<param name="activity_comments_create_access" type="xml:activity_create_access" default="2" managelevels="false" blanktext="" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+									<param name="activity_comments_message_limit" type="int" default="400" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+									<param name="activity_comments_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+									<param name="activity_comments_limit" type="int" default="4" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+								</if>
+							</tabpanetab>
+							<tabpanetab label="Replies">
+								<param name="activity_comments_replies" type="yesno" default="0" label="Replies" description="Enable or disable usage of activity comments replies." yes="Enable" no="Disable" />
+								<if name="activity_comments_replies" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+									<param name="activity_comments_replies_create_access" type="xml:activity_create_access" default="2" managelevels="false" blanktext="" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+									<param name="activity_comments_replies_message_limit" type="int" default="400" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+									<param name="activity_comments_replies_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+									<param name="activity_comments_replies_limit" type="int" default="4" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+								</if>
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Comments">
+				<tabpane name="comments_global">
+					<tabpanetab label="Comments">
+						<param name="comments_create_access" type="xml:activity_create_access" default="2" managelevels="false" blanktext="" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+						<param name="comments_message_limit" type="int" default="400" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+						<param name="comments_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="comments_limit" type="int" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+					</tabpanetab>
+					<tabpanetab label="Replies">
+						<param name="comments_replies" type="yesno" default="0" label="Replies" description="Enable or disable usage of comments replies." yes="Enable" no="Disable" />
+						<if name="comments_replies" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="comments_replies_create_access" type="xml:activity_create_access" default="2" managelevels="false" blanktext="" label="Create Access" description="Select comment post create access. Access determines who can post a comment. Moderators are exempt from this configuration unless disabled." />
+							<param name="comments_replies_message_limit" type="int" default="400" size="5" label="Message Limit" description="Input number of characters a comment message can have. If blank allow unlimited character limit. Moderators are exempt from this configuration." />
+							<param name="comments_replies_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+							<param name="comments_replies_limit" type="int" default="4" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Cleanup">
+				<param name="cleanup_url" type="custom" class="\CB\Plugin\Activity\CBActivity" method="loadCleanUpURL" label="URL" description="Your site unique URL that can be used in CRON or directly accessed to cleanup old activity from the database." />
+				<param name="cleanup_duration" type="list" default="-1 YEAR" translate-default="no" label="Duration" description="Select how long to keep activity.">
+					<option value="-1 WEEK">1 Week</option>
+					<option value="-2 WEEKS">2 Weeks</option>
+					<option value="-3 WEEKS">3 Weeks</option>
+					<option value="-1 MONTH">1 Month</option>
+					<option value="-3 MONTHS">3 Months</option>
+					<option value="-6 MONTHS">6 Months</option>
+					<option value="-1 YEAR">1 Year</option>
+					<option value="-2 YEARS">2 Years</option>
+					<option value="-3 YEARS">3 Years</option>
+					<option value="-6 YEARS">6 Years</option>
+				</param>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__comprofiler_plugin_activity" class="\CB\Plugin\Activity\Table\ActivityTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="subtype" type="sql:varchar(255)" null="true" />
+				<column name="item" type="sql:varchar(255)" null="true" />
+				<column name="parent" type="sql:varchar(255)" null="true" />
+				<column name="title" type="sql:text" null="true" />
+				<column name="message" type="sql:text" null="true" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="type_item_date">
+					<column name="type" size="30" />
+					<column name="item" size="30" />
+					<column name="date" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_activity_comments" class="\CB\Plugin\Activity\Table\CommentTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="subtype" type="sql:varchar(255)" null="true" />
+				<column name="item" type="sql:varchar(255)" null="true" />
+				<column name="parent" type="sql:varchar(255)" null="true" />
+				<column name="message" type="sql:text" null="true" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="type_item_date">
+					<column name="type" size="30" />
+					<column name="item" size="30" />
+					<column name="date" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_activity_hidden" class="\CB\Plugin\Activity\Table\HiddenTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="item" type="sql:varchar(255)" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="type_item_user" type="unique">
+					<column name="type" size="30" />
+					<column name="item" size="30" />
+					<column name="user_id" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_activity_tags" class="\CB\Plugin\Activity\Table\TagTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="subtype" type="sql:varchar(255)" null="true" />
+				<column name="item" type="sql:varchar(255)" null="true" />
+				<column name="parent" type="sql:varchar(255)" null="true" />
+				<column name="user" type="sql:text" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="type_item_date">
+					<column name="type" size="30" />
+					<column name="item" size="30" />
+					<column name="date" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_activity_actions" class="\CB\Plugin\Activity\Table\ActionTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="500" strict="true" />
+				<column name="value" type="sql:varchar(255)" />
+				<column name="title" type="sql:varchar(255)" null="true" />
+				<column name="description" type="sql:varchar(255)" null="true" />
+				<column name="icon" type="sql:varchar(255)" null="true" />
+				<column name="class" type="sql:varchar(255)" null="true" />
+				<column name="published" type="sql:tinyint(1)" default="0" />
+				<column name="ordering" type="sql:int(11)" default="99999" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="value" type="unique">
+					<column name="value" size="30" />
+				</index>
+			</indexes>
+			<rows strict="false">
+				<row index="id" value="1" valuetype="const:int" strict="true">
+					<field name="id" value="1" valuetype="const:int" strict="true" />
+					<field name="value" value="Feeling" valuetype="const:string" />
+					<field name="title" value="feeling" valuetype="const:string" />
+					<field name="description" value="How are you feeling?" valuetype="const:string" />
+					<field name="class" value="fa fa-smile-o" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="1" valuetype="const:int" />
+				</row>
+				<row index="id" value="2" valuetype="const:int" strict="true">
+					<field name="id" value="2" valuetype="const:int" strict="true" />
+					<field name="value" value="Watching" valuetype="const:string" />
+					<field name="title" value="watching" valuetype="const:string" />
+					<field name="description" value="What are you watching?" valuetype="const:string" />
+					<field name="class" value="fa fa-ticket" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="2" valuetype="const:int" />
+				</row>
+				<row index="id" value="3" valuetype="const:int" strict="true">
+					<field name="id" value="3" valuetype="const:int" strict="true" />
+					<field name="value" value="Reading" valuetype="const:string" />
+					<field name="title" value="reading" valuetype="const:string" />
+					<field name="description" value="What are you reading?" valuetype="const:string" />
+					<field name="class" value="fa fa-book" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="3" valuetype="const:int" />
+				</row>
+				<row index="id" value="4" valuetype="const:int" strict="true">
+					<field name="id" value="4" valuetype="const:int" strict="true" />
+					<field name="value" value="Listening To" valuetype="const:string" />
+					<field name="title" value="listening to" valuetype="const:string" />
+					<field name="description" value="What are you listening to?" valuetype="const:string" />
+					<field name="class" value="fa fa-headphones" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="4" valuetype="const:int" />
+				</row>
+				<row index="id" value="5" valuetype="const:int" strict="true">
+					<field name="id" value="5" valuetype="const:int" strict="true" />
+					<field name="value" value="Drinking" valuetype="const:string" />
+					<field name="title" value="drinking" valuetype="const:string" />
+					<field name="description" value="What are you drinking?" valuetype="const:string" />
+					<field name="class" value="fa fa-coffee" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="5" valuetype="const:int" />
+				</row>
+				<row index="id" value="6" valuetype="const:int" strict="true">
+					<field name="id" value="6" valuetype="const:int" strict="true" />
+					<field name="value" value="Eating" valuetype="const:string" />
+					<field name="title" value="eating" valuetype="const:string" />
+					<field name="description" value="What are you eating?" valuetype="const:string" />
+					<field name="class" value="fa fa-cutlery" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="6" valuetype="const:int" />
+				</row>
+				<row index="id" value="7" valuetype="const:int" strict="true">
+					<field name="id" value="7" valuetype="const:int" strict="true" />
+					<field name="value" value="Playing" valuetype="const:string" />
+					<field name="title" value="playing" valuetype="const:string" />
+					<field name="description" value="What are you playing?" valuetype="const:string" />
+					<field name="class" value="fa fa-gamepad" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="7" valuetype="const:int" />
+				</row>
+				<row index="id" value="8" valuetype="const:int" strict="true">
+					<field name="id" value="8" valuetype="const:int" strict="true" />
+					<field name="value" value="Traveling To" valuetype="const:string" />
+					<field name="title" value="traveling to" valuetype="const:string" />
+					<field name="description" value="Where are you going?" valuetype="const:string" />
+					<field name="class" value="fa fa-plane" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="8" valuetype="const:int" />
+				</row>
+				<row index="id" value="9" valuetype="const:int" strict="true">
+					<field name="id" value="9" valuetype="const:int" strict="true" />
+					<field name="value" value="Looking For" valuetype="const:string" />
+					<field name="title" value="looking for" valuetype="const:string" />
+					<field name="description" value="What are you looking for?" valuetype="const:string" />
+					<field name="class" value="fa fa-search" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="9" valuetype="const:int" />
+				</row>
+				<row index="id" value="10" valuetype="const:int" strict="true">
+					<field name="id" value="10" valuetype="const:int" strict="true" />
+					<field name="value" value="Celebrating" valuetype="const:string" />
+					<field name="title" value="celebrating" valuetype="const:string" />
+					<field name="description" value="What are you celebrating?" valuetype="const:string" />
+					<field name="class" value="fa fa-birthday-cake" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="10" valuetype="const:int" />
+				</row>
+			</rows>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_activity_locations" class="\CB\Plugin\Activity\Table\LocationTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="500" strict="true" />
+				<column name="value" type="sql:varchar(255)" />
+				<column name="title" type="sql:varchar(255)" null="true" />
+				<column name="published" type="sql:tinyint(1)" default="0" />
+				<column name="ordering" type="sql:int(11)" default="99999" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="value" type="unique">
+					<column name="value" size="30" />
+				</index>
+			</indexes>
+			<rows strict="false">
+				<row index="id" value="1" valuetype="const:int" strict="true">
+					<field name="id" value="1" valuetype="const:int" strict="true" />
+					<field name="value" value="At" valuetype="const:string" />
+					<field name="title" value="at" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="1" valuetype="const:int" />
+				</row>
+				<row index="id" value="2" valuetype="const:int" strict="true">
+					<field name="id" value="2" valuetype="const:int" strict="true" />
+					<field name="value" value="In" valuetype="const:string" />
+					<field name="title" value="in" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="2" valuetype="const:int" />
+				</row>
+				<row index="id" value="3" valuetype="const:int" strict="true">
+					<field name="id" value="3" valuetype="const:int" strict="true" />
+					<field name="value" value="Near" valuetype="const:string" />
+					<field name="title" value="near" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="3" valuetype="const:int" />
+				</row>
+				<row index="id" value="4" valuetype="const:int" strict="true">
+					<field name="id" value="4" valuetype="const:int" strict="true" />
+					<field name="value" value="Going To" valuetype="const:string" />
+					<field name="title" value="going to" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="4" valuetype="const:int" />
+				</row>
+				<row index="id" value="5" valuetype="const:int" strict="true">
+					<field name="id" value="5" valuetype="const:int" strict="true" />
+					<field name="value" value="Leaving From" valuetype="const:string" />
+					<field name="title" value="leaving from" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="5" valuetype="const:int" />
+				</row>
+			</rows>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_activity_emotes" class="\CB\Plugin\Activity\Table\EmoteTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="500" strict="true" />
+				<column name="value" type="sql:varchar(255)" />
+				<column name="icon" type="sql:varchar(255)" null="true" />
+				<column name="class" type="sql:varchar(255)" null="true" />
+				<column name="published" type="sql:tinyint(1)" default="0" />
+				<column name="ordering" type="sql:int(11)" default="99999" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="value" type="unique">
+					<column name="value" size="30" />
+				</index>
+			</indexes>
+			<rows strict="false">
+				<row index="id" value="1" valuetype="const:int" strict="true">
+					<field name="id" value="1" valuetype="const:int" strict="true" />
+					<field name="value" value="smile" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f604" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="1" valuetype="const:int" />
+				</row>
+				<row index="id" value="2" valuetype="const:int" strict="true">
+					<field name="id" value="2" valuetype="const:int" strict="true" />
+					<field name="value" value="laughing" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f606" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="2" valuetype="const:int" />
+				</row>
+				<row index="id" value="3" valuetype="const:int" strict="true">
+					<field name="id" value="3" valuetype="const:int" strict="true" />
+					<field name="value" value="blush" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f60a" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="3" valuetype="const:int" />
+				</row>
+				<row index="id" value="4" valuetype="const:int" strict="true">
+					<field name="id" value="4" valuetype="const:int" strict="true" />
+					<field name="value" value="smiley" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f603" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="4" valuetype="const:int" />
+				</row>
+				<row index="id" value="5" valuetype="const:int" strict="true">
+					<field name="id" value="5" valuetype="const:int" strict="true" />
+					<field name="value" value="relaxed" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-263a" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="5" valuetype="const:int" />
+				</row>
+				<row index="id" value="6" valuetype="const:int" strict="true">
+					<field name="id" value="6" valuetype="const:int" strict="true" />
+					<field name="value" value="smirk" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f60f" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="6" valuetype="const:int" />
+				</row>
+				<row index="id" value="7" valuetype="const:int" strict="true">
+					<field name="id" value="7" valuetype="const:int" strict="true" />
+					<field name="value" value="heart_eyes" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f60d" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="7" valuetype="const:int" />
+				</row>
+				<row index="id" value="8" valuetype="const:int" strict="true">
+					<field name="id" value="8" valuetype="const:int" strict="true" />
+					<field name="value" value="kissing_heart" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f618" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="8" valuetype="const:int" />
+				</row>
+				<row index="id" value="9" valuetype="const:int" strict="true">
+					<field name="id" value="9" valuetype="const:int" strict="true" />
+					<field name="value" value="kissing_closed_eyes" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f61a" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="9" valuetype="const:int" />
+				</row>
+				<row index="id" value="10" valuetype="const:int" strict="true">
+					<field name="id" value="10" valuetype="const:int" strict="true" />
+					<field name="value" value="flushed" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f633" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="10" valuetype="const:int" />
+				</row>
+				<row index="id" value="11" valuetype="const:int" strict="true">
+					<field name="id" value="11" valuetype="const:int" strict="true" />
+					<field name="value" value="relieved" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f625" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="11" valuetype="const:int" />
+				</row>
+				<row index="id" value="12" valuetype="const:int" strict="true">
+					<field name="id" value="12" valuetype="const:int" strict="true" />
+					<field name="value" value="satisfied" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f60c" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="12" valuetype="const:int" />
+				</row>
+				<row index="id" value="13" valuetype="const:int" strict="true">
+					<field name="id" value="13" valuetype="const:int" strict="true" />
+					<field name="value" value="grin" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f601" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="13" valuetype="const:int" />
+				</row>
+				<row index="id" value="14" valuetype="const:int" strict="true">
+					<field name="id" value="14" valuetype="const:int" strict="true" />
+					<field name="value" value="wink" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f609" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="14" valuetype="const:int" />
+				</row>
+				<row index="id" value="15" valuetype="const:int" strict="true">
+					<field name="id" value="15" valuetype="const:int" strict="true" />
+					<field name="value" value="stuck_out_tongue_winking_eye" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f61c" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="15" valuetype="const:int" />
+				</row>
+				<row index="id" value="16" valuetype="const:int" strict="true">
+					<field name="id" value="16" valuetype="const:int" strict="true" />
+					<field name="value" value="stuck_out_tongue_closed_eyes" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f61d" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="16" valuetype="const:int" />
+				</row>
+				<row index="id" value="17" valuetype="const:int" strict="true">
+					<field name="id" value="17" valuetype="const:int" strict="true" />
+					<field name="value" value="grinning" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f600" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="17" valuetype="const:int" />
+				</row>
+				<row index="id" value="18" valuetype="const:int" strict="true">
+					<field name="id" value="18" valuetype="const:int" strict="true" />
+					<field name="value" value="kissing" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f617" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="18" valuetype="const:int" />
+				</row>
+				<row index="id" value="19" valuetype="const:int" strict="true">
+					<field name="id" value="19" valuetype="const:int" strict="true" />
+					<field name="value" value="kissing_smiling_eyes" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f619" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="19" valuetype="const:int" />
+				</row>
+				<row index="id" value="20" valuetype="const:int" strict="true">
+					<field name="id" value="20" valuetype="const:int" strict="true" />
+					<field name="value" value="stuck_out_tongue" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f61b" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="20" valuetype="const:int" />
+				</row>
+				<row index="id" value="21" valuetype="const:int" strict="true">
+					<field name="id" value="21" valuetype="const:int" strict="true" />
+					<field name="value" value="sleeping" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f634" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="21" valuetype="const:int" />
+				</row>
+				<row index="id" value="22" valuetype="const:int" strict="true">
+					<field name="id" value="22" valuetype="const:int" strict="true" />
+					<field name="value" value="worried" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f61f" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="22" valuetype="const:int" />
+				</row>
+				<row index="id" value="23" valuetype="const:int" strict="true">
+					<field name="id" value="23" valuetype="const:int" strict="true" />
+					<field name="value" value="frowning" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f626" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="23" valuetype="const:int" />
+				</row>
+				<row index="id" value="24" valuetype="const:int" strict="true">
+					<field name="id" value="24" valuetype="const:int" strict="true" />
+					<field name="value" value="anguished" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f627" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="24" valuetype="const:int" />
+				</row>
+				<row index="id" value="25" valuetype="const:int" strict="true">
+					<field name="id" value="25" valuetype="const:int" strict="true" />
+					<field name="value" value="open_mouth" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f62e" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="25" valuetype="const:int" />
+				</row>
+				<row index="id" value="26" valuetype="const:int" strict="true">
+					<field name="id" value="26" valuetype="const:int" strict="true" />
+					<field name="value" value="grimacing" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f62c" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="26" valuetype="const:int" />
+				</row>
+				<row index="id" value="27" valuetype="const:int" strict="true">
+					<field name="id" value="27" valuetype="const:int" strict="true" />
+					<field name="value" value="confused" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f615" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="27" valuetype="const:int" />
+				</row>
+				<row index="id" value="28" valuetype="const:int" strict="true">
+					<field name="id" value="28" valuetype="const:int" strict="true" />
+					<field name="value" value="hushed" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f62f" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="28" valuetype="const:int" />
+				</row>
+				<row index="id" value="29" valuetype="const:int" strict="true">
+					<field name="id" value="29" valuetype="const:int" strict="true" />
+					<field name="value" value="expressionless" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f611" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="29" valuetype="const:int" />
+				</row>
+				<row index="id" value="30" valuetype="const:int" strict="true">
+					<field name="id" value="30" valuetype="const:int" strict="true" />
+					<field name="value" value="unamused" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f612" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="30" valuetype="const:int" />
+				</row>
+				<row index="id" value="31" valuetype="const:int" strict="true">
+					<field name="id" value="31" valuetype="const:int" strict="true" />
+					<field name="value" value="sweat_smile" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f605" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="31" valuetype="const:int" />
+				</row>
+				<row index="id" value="32" valuetype="const:int" strict="true">
+					<field name="id" value="32" valuetype="const:int" strict="true" />
+					<field name="value" value="sweat" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f613" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="32" valuetype="const:int" />
+				</row>
+				<row index="id" value="33" valuetype="const:int" strict="true">
+					<field name="id" value="33" valuetype="const:int" strict="true" />
+					<field name="value" value="weary" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f629" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="33" valuetype="const:int" />
+				</row>
+				<row index="id" value="34" valuetype="const:int" strict="true">
+					<field name="id" value="34" valuetype="const:int" strict="true" />
+					<field name="value" value="pensive" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f614" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="34" valuetype="const:int" />
+				</row>
+				<row index="id" value="35" valuetype="const:int" strict="true">
+					<field name="id" value="35" valuetype="const:int" strict="true" />
+					<field name="value" value="disappointed" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f61e" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="35" valuetype="const:int" />
+				</row>
+				<row index="id" value="36" valuetype="const:int" strict="true">
+					<field name="id" value="36" valuetype="const:int" strict="true" />
+					<field name="value" value="confounded" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f616" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="36" valuetype="const:int" />
+				</row>
+				<row index="id" value="37" valuetype="const:int" strict="true">
+					<field name="id" value="37" valuetype="const:int" strict="true" />
+					<field name="value" value="fearful" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f628" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="37" valuetype="const:int" />
+				</row>
+				<row index="id" value="38" valuetype="const:int" strict="true">
+					<field name="id" value="38" valuetype="const:int" strict="true" />
+					<field name="value" value="cold_sweat" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f630" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="38" valuetype="const:int" />
+				</row>
+				<row index="id" value="39" valuetype="const:int" strict="true">
+					<field name="id" value="39" valuetype="const:int" strict="true" />
+					<field name="value" value="persevere" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f623" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="39" valuetype="const:int" />
+				</row>
+				<row index="id" value="40" valuetype="const:int" strict="true">
+					<field name="id" value="40" valuetype="const:int" strict="true" />
+					<field name="value" value="cry" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f622" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="40" valuetype="const:int" />
+				</row>
+				<row index="id" value="41" valuetype="const:int" strict="true">
+					<field name="id" value="41" valuetype="const:int" strict="true" />
+					<field name="value" value="sob" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f62d" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="41" valuetype="const:int" />
+				</row>
+				<row index="id" value="42" valuetype="const:int" strict="true">
+					<field name="id" value="42" valuetype="const:int" strict="true" />
+					<field name="value" value="joy" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f602" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="42" valuetype="const:int" />
+				</row>
+				<row index="id" value="43" valuetype="const:int" strict="true">
+					<field name="id" value="43" valuetype="const:int" strict="true" />
+					<field name="value" value="astonished" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f632" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="43" valuetype="const:int" />
+				</row>
+				<row index="id" value="44" valuetype="const:int" strict="true">
+					<field name="id" value="44" valuetype="const:int" strict="true" />
+					<field name="value" value="scream" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f631" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="44" valuetype="const:int" />
+				</row>
+				<row index="id" value="45" valuetype="const:int" strict="true">
+					<field name="id" value="45" valuetype="const:int" strict="true" />
+					<field name="value" value="tired_face" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f62b" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="45" valuetype="const:int" />
+				</row>
+				<row index="id" value="46" valuetype="const:int" strict="true">
+					<field name="id" value="46" valuetype="const:int" strict="true" />
+					<field name="value" value="angry" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f620" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="46" valuetype="const:int" />
+				</row>
+				<row index="id" value="47" valuetype="const:int" strict="true">
+					<field name="id" value="47" valuetype="const:int" strict="true" />
+					<field name="value" value="rage" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f621" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="47" valuetype="const:int" />
+				</row>
+				<row index="id" value="48" valuetype="const:int" strict="true">
+					<field name="id" value="48" valuetype="const:int" strict="true" />
+					<field name="value" value="triumph" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f624" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="48" valuetype="const:int" />
+				</row>
+				<row index="id" value="49" valuetype="const:int" strict="true">
+					<field name="id" value="49" valuetype="const:int" strict="true" />
+					<field name="value" value="sleepy" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f62a" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="49" valuetype="const:int" />
+				</row>
+				<row index="id" value="50" valuetype="const:int" strict="true">
+					<field name="id" value="50" valuetype="const:int" strict="true" />
+					<field name="value" value="yum" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f60b" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="50" valuetype="const:int" />
+				</row>
+				<row index="id" value="51" valuetype="const:int" strict="true">
+					<field name="id" value="51" valuetype="const:int" strict="true" />
+					<field name="value" value="mask" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f637" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="51" valuetype="const:int" />
+				</row>
+				<row index="id" value="52" valuetype="const:int" strict="true">
+					<field name="id" value="52" valuetype="const:int" strict="true" />
+					<field name="value" value="sunglasses" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f60e" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="52" valuetype="const:int" />
+				</row>
+				<row index="id" value="53" valuetype="const:int" strict="true">
+					<field name="id" value="53" valuetype="const:int" strict="true" />
+					<field name="value" value="dizzy_face" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f635" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="53" valuetype="const:int" />
+				</row>
+				<row index="id" value="54" valuetype="const:int" strict="true">
+					<field name="id" value="54" valuetype="const:int" strict="true" />
+					<field name="value" value="neutral_face" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f610" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="54" valuetype="const:int" />
+				</row>
+				<row index="id" value="55" valuetype="const:int" strict="true">
+					<field name="id" value="55" valuetype="const:int" strict="true" />
+					<field name="value" value="no_mouth" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f636" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="55" valuetype="const:int" />
+				</row>
+				<row index="id" value="56" valuetype="const:int" strict="true">
+					<field name="id" value="56" valuetype="const:int" strict="true" />
+					<field name="value" value="innocent" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f607" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="56" valuetype="const:int" />
+				</row>
+				<row index="id" value="57" valuetype="const:int" strict="true">
+					<field name="id" value="57" valuetype="const:int" strict="true" />
+					<field name="value" value="beer" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f37a" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="57" valuetype="const:int" />
+				</row>
+				<row index="id" value="58" valuetype="const:int" strict="true">
+					<field name="id" value="58" valuetype="const:int" strict="true" />
+					<field name="value" value="coffee" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-2615" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="58" valuetype="const:int" />
+				</row>
+				<row index="id" value="59" valuetype="const:int" strict="true">
+					<field name="id" value="59" valuetype="const:int" strict="true" />
+					<field name="value" value="tada" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f389" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="59" valuetype="const:int" />
+				</row>
+				<row index="id" value="60" valuetype="const:int" strict="true">
+					<field name="id" value="60" valuetype="const:int" strict="true" />
+					<field name="value" value="zzz" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f4a4" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="60" valuetype="const:int" />
+				</row>
+				<row index="id" value="61" valuetype="const:int" strict="true">
+					<field name="id" value="61" valuetype="const:int" strict="true" />
+					<field name="value" value="fork_and_knife" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f374" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="61" valuetype="const:int" />
+				</row>
+				<row index="id" value="62" valuetype="const:int" strict="true">
+					<field name="id" value="62" valuetype="const:int" strict="true" />
+					<field name="value" value="birthday" valuetype="const:string" />
+					<field name="class" value="twemoji twemoji-1f382" valuetype="const:string" />
+					<field name="published" value="1" valuetype="const:int" />
+					<field name="ordering" value="62" valuetype="const:int" />
+				</row>
+			</rows>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+	</database>
+</cbinstall>

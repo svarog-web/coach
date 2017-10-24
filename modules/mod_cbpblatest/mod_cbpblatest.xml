@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>CB PB Latest</name>
+	<author>CB Team</author>
+	<creationDate>2015-01-20</creationDate>
+	<copyright>(C) 2004-2015 and Trademark of Lightning MultiCom SA, Switzerland - www.joomlapolis.com - and its licensors, all rights reserved</copyright>
+	<license>GNU General Public License version 2 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</license>
+	<authorEmail>beat@joomlapolis.com</authorEmail>
+	<authorUrl>www.joomlapolis.com</authorUrl>
+	<version>2.0.2</version>
+	<description>CB ProfileBook (Latest Entries) Module</description>
+	<files>
+		<filename module="mod_cbpblatest">mod_cbpblatest.php</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="A suffix to be applied to the css class of the module, this allows individual module styling." />
+				<field name="pblatest_spacer_mode" type="spacer" hr="true" />
+				<field name="pblatest_mode" type="list" default="b" label="Mode" description="Mode used to display latest entries.">
+					<option value="g">Guestbook</option>
+					<option value="b">Blog</option>
+					<option value="w">Wall</option>
+					<option value="a">All</option>
+				</field>
+				<field name="pblatest_connections" type="list" default="0" label="Connections Only" description="Specify if only posts by or to users the user is connected to should display">
+					<option value="0">No</option>
+					<option value="1">Posts By Connections</option>
+					<option value="2">Posts To Connections</option>
+					<option value="3">Posts By and To Connections</option>
+				</field>
+				<field name="pblatest_limit" type="text" size="2" default="5" label="Limit" description="Number of entries to display" />
+				<field name="pblatest_spacer_users" type="spacer" hr="true" />
+				<field name="pblatest_include" type="text" size="15" default="" label="Include" description="Specify which users to display using a comma seperated list (e.g. 62,38,91). Leave blank to display all." />
+				<field name="pblatest_exclude" type="text" size="15" default="" label="Exclude" description="Specify which users NOT to display using a comma seperated list (e.g. 62,38,91). Leave blank to display all." />
+				<field name="pblatest_spacer_display" type="spacer" hr="true" />
+				<field name="pblatest_substitutions" type="spacer" default="" label="All display types support full subsitutions for the Poster, Recipient, and the Entry it self. To take full usage of each subsitution use the following formats: {p[FIELD]} for poster substitutions, {r[FIELD]} for recipient subsitutions, and {e[FIELD]} for entry subsitutions. Entries support the following substitutions only: date, title, post. Poster and recipient support the following additional substitutions: avatar_url, name_url, profile_url." description="" />
+				<field name="pblatest_guestbook_user" type="textarea" filter="raw" cols="50" rows="3" default="{p[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} added a new &lt;a href=&quot;{e[url]}&quot;&gt;guestbook entry&lt;/a&gt; to {r[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} - {e[date]}" label="Guestbook (User)" description="Configure display of Guestbook entries for other users. Leave blank for default: {p[username]} added a new guestbook entry to {r[username]}." />
+				<field name="pblatest_guestbook_self" type="textarea" filter="raw" cols="50" rows="3" default="{p[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} added a new &lt;a href=&quot;{e[url]}&quot;&gt;guestbook entry&lt;/a&gt; - {e[date]}" label="Guestbook (Self)" description="Configure display of Guestbook entries for current user. Leave blank for default: {p[username]} added a new guestbook entry." />
+				<field name="pblatest_blog_user" type="textarea" filter="raw" cols="50" rows="3" default="{p[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} wrote a new blog &quot;&lt;a href=&quot;{e[url]}&quot;&gt;{e[title]}&lt;/a&gt;&quot; to {r[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} - {e[date]}" label="Blog (User)" description="Configure display of Blog entries for other users. Leave blank for default." />
+				<field name="pblatest_blog_self" type="textarea" filter="raw" cols="50" rows="3" default="{p[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} wrote a new blog &quot;&lt;a href=&quot;{e[url]}&quot;&gt;{e[title]}&lt;/a&gt;&quot; - {e[date]}" label="Blog (Self)" description="Configure display of Blog entries for current user. Leave blank for default." />
+				<field name="pblatest_wall_user" type="textarea" filter="raw" cols="50" rows="3" default="{p[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} added a new &lt;a href=&quot;{e[url]}&quot;&gt;wall entry&lt;/a&gt; to {r[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} - {e[date]}" label="Wall (User)" description="Configure display of Wall entries for other users. Leave blank for default." />
+				<field name="pblatest_wall_self" type="textarea" filter="raw" cols="50" rows="3" default="{p[cb:userfield field=&quot;formatname&quot; reason=&quot;list&quot; /]} added a new &lt;a href=&quot;{e[url]}&quot;&gt;wall entry&lt;/a&gt; - {e[date]}" label="Wall (Self)" description="Configure display of Wall entries for current user. Leave blank for default." />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="request">Request</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_request" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Performs HTTP POST and GET requests." />
+			<params name="request" type="params" repeat="true" label="" display="2lines">
+				<param name="method" type="list" default="GET" translate-default="no" label="Method" description="Select URL request method.">
+					<option value="GET">Get</option>
+					<option value="POST">Post</option>
+				</param>
+				<param name="url" type="text" label="URL" description="Input substitution supported URL (e.g. http://www.example.com/reciever.php)." size="80" validate="required" />
+				<params name="request" type="params" repeat="true" label="Body">
+					<param name="key" type="text" label="Key" description="Optionally input key (e.g. id)." size="50" />
+					<param name="value" type="text" label="Value" description="Optionally input substitution supported key value (e.g. [user_id])." size="50" />
+					<param name="translate" type="yesno" default="0" label="Translate Value" description="Optionally disable translations for the value." />
+				</params>
+				<params name="header" type="params" repeat="true" label="Headers">
+					<param name="key" type="text" label="Key" description="Optionally input key (e.g. id)." size="50" />
+					<param name="value" type="text" label="Value" description="Optionally input substitution supported key value (e.g. [user_id])." size="50" />
+					<param name="translate" type="yesno" default="0" label="Translate Value" description="Optionally disable translations for the value." />
+				</params>
+				<param name="auth" type="list" default="none" translate-default="no" label="Authentication" description="Select the request authentication method.">
+					<option value="none">None</option>
+					<option value="basic">Basic</option>
+				</param>
+				<if name="auth" nametype="param:string" operator="=" value="basic" valuetype="const:string" type="showhide">
+					<param name="auth_username" type="text" label="Username" description="Input the substitution support authentication username (e.g. [username])." size="30" validate="required" />
+					<param name="auth_password" type="text" label="Password" description="Input the substitution support authentication password (e.g. [password])." size="30" validate="required" />
+				</if>
+				<param name="return" type="list" default="SILENT" translate-default="no" label="Return" description="Select how request response is displayed. If silent then request will execute, but will not display its response. Please note some triggers will not allow a display.">
+					<option value="SILENT">Silent</option>
+					<option value="RETURN">return</option>
+					<option value="ECHO">echo</option>
+					<option value="DUMP">var_dump</option>
+					<option value="PRINT">print</option>
+				</param>
+			</params>
+		</view>
+	</views>
+</cbxml>

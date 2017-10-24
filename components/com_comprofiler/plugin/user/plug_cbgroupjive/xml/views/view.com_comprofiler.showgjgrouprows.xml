@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showgjgroups" type="params" ui="admin" label="Groups" icon="list" viewformatting="none">
+			<tablebrowser name="gjgroupsbrowser" table="#__groupjive_groups" class="\CB\Plugin\GroupJive\Table\GroupTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/groupid" label="Edit" />
+					<menu name="copy" action="linkAction" task="copy" link="cbo:copyrows" label="Copy" />
+					<menu name="publish" action="linkAction" task="publish" link="cbo:publish/published" label="Publish" />
+					<menu name="unpublish" action="linkAction" task="unpublish" link="cbo:unpublish/published" label="Unpublish" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Groups..." size="30">
+					<field name="owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</field>
+					<field name="name" />
+					<field name="description" />
+					<field name="categoryname">
+						<data name="name" type="sql:field" table="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable">
+							<joinkeys type="left" dogroupby="false">
+								<column name="id" operator="=" value="category" type="sql:field" valuetype="sql:field" />
+							</joinkeys>
+						</data>
+					</field>
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="owner" value="username" valuetype="sql:string" type="string" label="" blanktext="Owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</filter>
+					<filter name="category" valuetype="sql:string" type="list" label="" blanktext="- Select Category -">
+						<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getCategoryOptions" />
+					</filter>
+					<filter name="type" valuetype="sql:int" type="xml:groupjive_type" label="" blanktext="- Select Type -" />
+					<filter name="published" valuetype="sql:int" type="xml:groupjive_published" label="" blanktext="- Select Published -" />
+					<filter name="datefrom" value="date" valuetype="sql:string" type="datetime" operator="&gt;=" view="datefromto" />
+					<filter name="dateto" value="date" valuetype="sql:string" type="datetime" operator="&lt;=" view="datefromto" />
+					<view name="datefromto" type="params">
+						<fieldset name="daterange" label="Date">
+							<param name="filter_datefrom" type="datetime" default="" label="From" />
+							<param name="filter_dateto" type="datetime" default="" label="To" />
+						</fieldset>
+					</view>
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="ordering_asc" label="Ordering ascending" default="true" translate-default="no">
+						<field name="category" ordering="ASC" />
+						<field name="ordering" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="ordering_desc" label="Ordering descending">
+						<field name="category" ordering="ASC" />
+						<field name="ordering" ordering="DESC" />
+					</ordergroup>
+					<ordergroup name="owner_asc" label="Owner ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="owner_desc" label="Owner descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="categoryname_asc" label="Category ascending">
+						<field name="category_comment" type="sql:string" ordering="ASC">
+							<data name="name" type="sql:field" table="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable">
+								<joinkeys type="left" dogroupby="false">
+									<column name="id" operator="=" value="category" type="sql:field" valuetype="sql:field" />
+								</joinkeys>
+							</data>
+						</field>
+					</ordergroup>
+					<ordergroup name="categoryname_desc" label="Category descending">
+						<field name="category_comment" type="sql:string" ordering="DESC">
+							<data name="name" type="sql:field" table="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable">
+								<joinkeys type="left" dogroupby="false">
+									<column name="id" operator="=" value="category" type="sql:field" valuetype="sql:field" />
+								</joinkeys>
+							</data>
+						</field>
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="name" type="string" link="cbo:rowedit" parameters="groupid" paramvalues="id" align="left" label="Group" allowordering="ascending,descending" />
+						<field name="categoryname" type="string" width="15%" align="center" label="Category" allowordering="ascending,descending">
+							<data name="category" type="sql:field" />
+							<data name="name" as="categoryname" select="true" type="sql:field" table="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable">
+								<joinkeys type="left" dogroupby="false">
+									<column name="id" operator="=" value="category" type="sql:field" valuetype="sql:field" />
+								</joinkeys>
+							</data>
+						</field>
+						<field name="owner" type="string" width="10%" align="center" label="Owner" allowordering="ascending,descending">
+							<data name="user_id" type="sql:field" />
+							<data name="username" as="owner" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+						<field name="type" type="xml:groupjive_type" width="5%" align="center" label="Type" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="published" type="xml:groupjive_published" width="5%" align="center" label="Published" onclick="toggle" allowordering="ascending,descending" />
+						<field name="date" type="datetime" timezone="RAW" width="15%" align="center" label="Date" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="ordering" type="ordering" width="10%" align="center" label="Order" onclick="arrows,number" responsivehiddenon="xsmall" allowordering="ascending,descending">
+							<orderinggroups>
+								<ordering name="category" type="int" />
+							</orderinggroups>
+						</field>
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+				<batchprocess>
+					<batch name="category" type="list" label="" blanktext="- Select Category -">
+						<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getCategoryOptions" />
+					</batch>
+					<batch name="type" type="xml:groupjive_type" label="" blanktext="- Select Type -" />
+					<batch name="user_id" type="text" label="" blanktext="Owner" />
+				</batchprocess>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

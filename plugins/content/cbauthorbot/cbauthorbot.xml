@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>Content - Community Builder Author</name>
+	<author>Krileon</author>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<copyright>Copyright (C) 2004-2015 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<creationDate>2015-11-17</creationDate>
+	<version>2.0.1</version>
+	<description>This plugin replaces the author with their Community Builder formatted name.</description>
+	<files>
+		<filename plugin="cbauthorbot">cbauthorbot.php</filename>
+		<filename>index.html</filename>
+	</files>
+</extension>

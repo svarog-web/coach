@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user/plug_cbgroupjive/plugins">
+	<name>CB GroupJive Photo</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-29</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Provides groups with a Photo Gallery to easily and quickly share photos between one another.</description>
+	<version>2.1.0</version>
+	<release>3.1.0</release>
+	<installfile>install.cbgroupjivephoto.php</installfile>
+	<files>
+		<filename plugin="cbgroupjivephoto">cbgroupjivephoto.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgroupjivephoto.php</filename>
+		<filename>install.cbgroupjivephoto.php</filename>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<libraries>
+		<library name="CB/Plugin/GroupJivePhoto">
+			<files folder="library">
+				<filename>CBGroupJivePhoto.php</filename>
+				<filename>index.html</filename>
+				<foldername>Table</foldername>
+				<foldername>Trigger</foldername>
+			</files>
+		</library>
+	</libraries>
+	<params>
+		<tabpane name="gjgroupsphoto">
+			<tabpanetab label="General">
+				<param name="groups_photo_create_limit" type="text" default="" size="5" label="Create Limit" description="Input number of photos each individual user is limited to creating per group. If blank allow unlimited photos. Moderators and group owners are exempt from this configuration." />
+				<param name="groups_photo_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on group photos. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Photos">
+				<param name="groups_photo_resample" type="yesno" default="1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+				<param name="groups_photo_image_height" type="text" default="640" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to." />
+				<param name="groups_photo_image_width" type="text" default="1280" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to." />
+				<param name="groups_photo_thumbnail_height" type="text" default="320" label="Maximum Thumbnail Height" description="Input the maximum thumbnail height in pixels that the image will be resized to." />
+				<param name="groups_photo_thumbnail_width" type="text" default="640" label="Maximum Thumbnail Width" description="Input the maximum thumbnail width in pixels that the image will be resized to." />
+				<param name="groups_photo_maintain_aspect_ratio" type="xml:groupjive_aspect_ratio" default="1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+				<param name="groups_photo_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum image file size in KBs." />
+				<param name="groups_photo_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum image file size in KBs. Set to 0 for no limit." />
+			</tabpanetab>
+			<tabpanetab label="Notifications">
+				<param name="notifications_default_photo_new" type="yesno" default="0" label="Upload of new photo" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_photo_approve" type="yesno" default="0" label="New photo requires approval" description="" yes="Notify" no="Don't Notify" />
+			</tabpanetab>
+			<tabpanetab label="Paging">
+				<param name="groups_photo_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+				<param name="groups_photo_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+				<param name="groups_photo_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+				<param name="groups_photo_orderby" type="list" default="2" label="Order By" description="Select the row ordering.">
+					<option value="1">Date ASC</option>
+					<option value="2">Date DESC</option>
+					<option value="3">Filename ASC</option>
+					<option value="4">Filename DESC</option>
+				</param>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__groupjive_plugin_photo" class="\CB\Plugin\GroupJivePhoto\Table\PhotoTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="title" type="sql:varchar(255)" null="true" />
+				<column name="image" type="sql:varchar(255)" />
+				<column name="filename" type="sql:varchar(255)" null="true" />
+				<column name="description" type="sql:text" null="true" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:int(11)" default="1" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="group_user_id_published">
+					<column name="group" />
+					<column name="user_id" />
+					<column name="published" />
+				</index>
+			</indexes>
+		</table>
+	</database>
+</cbinstall>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user/plug_cbgroupjive/plugins">
+	<name>CB GroupJive Wall</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-29</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Provides groups with a Wall to easily and quickly communicate between one another.</description>
+	<version>2.1.0</version>
+	<release>3.1.0</release>
+	<installfile>install.cbgroupjivewall.php</installfile>
+	<files>
+		<filename plugin="cbgroupjivewall">cbgroupjivewall.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgroupjivewall.php</filename>
+		<filename>install.cbgroupjivewall.php</filename>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<filename>cbgroupjivewall.css</filename>
+		<foldername>images</foldername>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/GroupJiveWall">
+			<files folder="library">
+				<filename>CBGroupJiveWall.php</filename>
+				<filename>index.html</filename>
+				<foldername>Table</foldername>
+				<foldername>Trigger</foldername>
+			</files>
+		</library>
+	</libraries>
+	<params>
+		<tabpane name="gjgroupswall">
+			<tabpanetab label="General">
+				<param name="groups_wall_character_limit" type="text" default="400" size="5" label="Character Limit" description="Input number of characters per wall post. If blank allow unlimited characters. This includes wall replies. Moderators and group owners are exempt from this configuration." />
+			</tabpanetab>
+			<tabpanetab label="Notifications">
+				<param name="notifications_default_wall_new" type="yesno" default="0" label="Create of new post" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_wall_approve" type="yesno" default="0" label="New post requires approval" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_wall_reply" type="yesno" default="0" label="User reply to my existing posts" description="" yes="Notify" no="Don't Notify" />
+			</tabpanetab>
+			<tabpanetab label="Replies">
+				<tabpane name="gjgroupswallreplies">
+					<tabpanetab label="General">
+						<param name="groups_wall_replies" type="yesno" default="1" label="Display" description="Enable or disable usage of wall replies." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<param name="groups_wall_replies_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="groups_wall_replies_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+						<param name="groups_wall_replies_orderby" type="list" default="2" label="Order By" description="Select the row ordering.">
+							<option value="1">Date ASC</option>
+							<option value="2">Date DESC</option>
+						</param>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Paging">
+				<param name="groups_wall_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+				<param name="groups_wall_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+				<param name="groups_wall_orderby" type="list" default="2" label="Order By" description="Select the row ordering.">
+					<option value="1">Date ASC</option>
+					<option value="2">Date DESC</option>
+					<option value="3">Replies ASC</option>
+					<option value="4">Replies DESC</option>
+				</param>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__groupjive_plugin_wall" class="\CB\Plugin\GroupJiveWall\Table\WallTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="reply" type="sql:int(11)" default="0" />
+				<column name="post" type="sql:text" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:int(11)" default="1" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="group_user_id_published">
+					<column name="group" />
+					<column name="user_id" />
+					<column name="published" />
+				</index>
+			</indexes>
+		</table>
+	</database>
+</cbinstall>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="menu">CB Menu</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_menu" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Add custom menu items to CB Menu. Note this only functions on the onPrepareMenus trigger." />
+			<params name="menu" type="params" repeat="true" label="" display="2lines">
+				<param name="title" type="text" label="Title" description="Input substitution supported menu item title." validate="required" />
+				<param name="type" type="text" label="Type" description="Input substitution supported menu type. Default types as follows: _UE_MENU_VIEW, _UE_MENU_EDIT, _UE_MENU_MESSAGES, _UE_MENU_CONNECTIONS, _UE_MENU_MODERATE. This acts as the parent menu item. If left blank a linkable parent menu item will be displayed instead of a dropdown." />
+				<param name="class" type="text" label="Class" description="Input substitution supported menu class (e.g. _UE_MENU_MYMENU). Class should be unique as is used for menu item identity. Multiple menu items with same class will overwrite one another." validate="required" />
+				<param name="position" type="list" default="menuBar" translate-default="no" label="Position" description="Select position for new menu item.">
+					<option value="menuBar">Menu Bar</option>
+					<option value="menuList">Menu List</option>
+				</param>
+				<param name="url" type="text" label="URL" description="Input substitution supported menu URL (e.g. index.php?option=com_comprofiler)." validate="required" size="50" />
+				<param name="target" type="text" label="URL Target" description="Optionally input menu URL target (e.g. _blank)." size="15" />
+				<param name="tooltip" type="textarea" rows="5" label="Tooltip" description="Optionally substitution supported menu tooltip (e.g. This is my menu item)." cssclass="input-block" />
+				<param name="image" type="text" label="Image URL" description="Optionally input menu image URL (e.g. http://www.example.com/images/icon.png)." size="50" />
+			</params>
+		</view>
+	</views>
+</cbxml>

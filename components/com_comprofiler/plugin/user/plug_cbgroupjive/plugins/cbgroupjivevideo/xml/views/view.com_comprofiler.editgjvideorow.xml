@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjvideo" type="params" ui="admin" label="Video" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjvideorows" label="Cancel" />
+			</toolbarmenu>
+			<param name="published" type="xml:groupjive_published" default="1" label="Publish" description="Select publish state of this video. Unpublished videos will not be visible to the public." />
+			<param name="title" type="text" label="Title" size="35" description="Optionally input a video title to display instead of url." />
+			<param name="group" type="list" label="Group" blanktext="" description="Select group the video is for.">
+				<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+			</param>
+			<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+				<field name="" type="private" method="name" label="" mode="show" target="_blank">
+					<attributes>
+						<attribute name="link">
+							<param name="url" type="string" label="" />
+						</attribute>
+					</attributes>
+				</field>
+			</if>
+			<param name="url" type="text" label="Video" size="45" validate="required" description="Input the URL to the video to publish." />
+			<param name="caption" type="textarea" label="Caption" cols="40" rows="5" description="Optionally input a video caption." />
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input the video owner id. Video owner determines the creator of the video specified as User ID." />
+		</view>
+	</views>
+</cbxml>

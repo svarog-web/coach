@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="gjfilerows" request="view action" action="editPlugin showgjfiles">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="showgjfiles" mode="show" />
+		</action>
+
+		<action name="gjfilerow" request="view table action" action="editPlugin gjfilesbrowser editrow" requestparameters="fileid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="editgjfile" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_plugin_file" class="\CB\Plugin\GroupJiveFile\Table\FileTable" key="id" value="fileid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjfiledownload" request="view table action format" action="editPlugin gjfilesbrowser downloadrow raw" requestparameters="fileid">
+			<showview view="downloadgjfile" mode="show">
+				<data name="" type="sql:row" table="#__groupjive_plugin_file" class="\CB\Plugin\GroupJiveFile\Table\FileTable" key="id" value="fileid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjfilepreview" request="view table action format" action="editPlugin gjfilesbrowser previewrow raw" requestparameters="fileid">
+			<showview view="previewgjfile" mode="show">
+				<data name="" type="sql:row" table="#__groupjive_plugin_file" class="\CB\Plugin\GroupJiveFile\Table\FileTable" key="id" value="fileid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="files" type="button" default="Files" buttonclass="default" buttonsize="xsmall" link="cb_action:gjfilerows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

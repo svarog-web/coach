@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="privacyrows" request="view action" action="editPlugin showprivacy">
+			<showview view="showprivacy" mode="show" />
+		</action>
+
+		<action name="privacyrow" request="view table action" action="editPlugin privacybrowser editrow" requestparameters="privacyid">
+			<showview view="editprivacy" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_privacy" class="cbprivacyPrivacyTable" key="id" value="privacyid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="closedrows" request="view action" action="editPlugin showclosed">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.closed" mandatory="true" />
+			<showview view="showclosed" mode="show" />
+		</action>
+
+		<action name="closedrow" request="view table action" action="editPlugin closedbrowser editrow" requestparameters="closedid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.closed" mandatory="true" />
+			<showview view="viewclosed" mode="show">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_privacy_closed" class="cbprivacyClosedTable" key="id" value="closedid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="privacy" type="button" default="Privacy" buttonclass="default" buttonsize="xsmall" link="cb_action:privacyrows" parameters="cid" paramvalues="id" label="" />
+			<param name="closed" type="button" default="Closed" buttonclass="default" buttonsize="xsmall" link="cb_action:closedrows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

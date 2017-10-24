@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="antispam">CB AntiSpam</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB AntiSpam">
+				<option value="antispam_onBeforeUpdateBlock" translate="no">antispam_onBeforeUpdateBlock</option>
+				<option value="antispam_onBeforeCreateBlock" translate="no">antispam_onBeforeCreateBlock</option>
+				<option value="antispam_onAfterUpdateBlock" translate="no">antispam_onAfterUpdateBlock</option>
+				<option value="antispam_onAfterCreateBlock" translate="no">antispam_onAfterCreateBlock</option>
+				<option value="antispam_onBeforeDeleteBlock" translate="no">antispam_onBeforeDeleteBlock</option>
+				<option value="antispam_onAfterDeleteBlock" translate="no">antispam_onAfterDeleteBlock</option>
+				<option value="antispam_onBeforeUpdateWhitelist" translate="no">antispam_onBeforeUpdateWhitelist</option>
+				<option value="antispam_onBeforeCreateWhitelist" translate="no">antispam_onBeforeCreateWhitelist</option>
+				<option value="antispam_onAfterUpdateWhitelist" translate="no">antispam_onAfterUpdateWhitelist</option>
+				<option value="antispam_onAfterCreateWhitelist" translate="no">antispam_onAfterCreateWhitelist</option>
+				<option value="antispam_onBeforeDeleteWhitelist" translate="no">antispam_onBeforeDeleteWhitelist</option>
+				<option value="antispam_onAfterDeleteWhitelist" translate="no">antispam_onAfterDeleteWhitelist</option>
+				<option value="antispam_onBeforeUpdateLog" translate="no">antispam_onBeforeUpdateLog</option>
+				<option value="antispam_onBeforeCreateLog" translate="no">antispam_onBeforeCreateLog</option>
+				<option value="antispam_onAfterUpdateLog" translate="no">antispam_onAfterUpdateLog</option>
+				<option value="antispam_onAfterCreateLog" translate="no">antispam_onAfterCreateLog</option>
+				<option value="antispam_onBeforeDeleteLog" translate="no">antispam_onBeforeDeleteLog</option>
+				<option value="antispam_onAfterDeleteLog" translate="no">antispam_onAfterDeleteLog</option>
+				<option value="antispam_onBeforeUpdateAttempts" translate="no">antispam_onBeforeUpdateAttempts</option>
+				<option value="antispam_onBeforeCreateAttempts" translate="no">antispam_onBeforeCreateAttempts</option>
+				<option value="antispam_onAfterUpdateAttempts" translate="no">antispam_onAfterUpdateAttempts</option>
+				<option value="antispam_onAfterCreateAttempts" translate="no">antispam_onAfterCreateAttempts</option>
+				<option value="antispam_onBeforeDeleteAttempts" translate="no">antispam_onBeforeDeleteAttempts</option>
+				<option value="antispam_onAfterDeleteAttempts" translate="no">antispam_onAfterDeleteAttempts</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_antispam" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Creates customized blocks and whitelists." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionAntiSpam" method="installed" />
+				</left>
+				<then>
+					<params name="antispam" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="block" translate-default="no" label="Mode" description="Select if to create a Block or a Whitelist entry.">
+							<option value="block">Block</option>
+							<option value="whitelist">Whitelist</option>
+						</param>
+						<param name="type" type="list" default="user" translate-default="no" label="Type" description="Select the type. Type determines what value should be supplied.">
+							<option value="user">User</option>
+							<option value="ip">IP Address</option>
+							<option value="email">Email Address</option>
+							<option value="domain">Email Domain</option>
+						</param>
+						<param name="value" type="text" label="Value" description="Input substitution supported value in relation to the type. User type use the users user_id (e.g. 42). IP Address type use a full valid IP Address (e.g. 192.168.0.1). Email type use a fill valid email address (e.g. invalid@cb.invalid). Email Domain type use a full email address domain after @ (e.g. example.com). Leave blank to use the trigger user as the value." />
+						<if name="mode" nametype="param:string" operator="=" value="block" valuetype="const:string" type="showhide">
+							<param name="duration" type="list" default="+1 MONTH" translate-default="no" label="Duration" description="Select the duration that will be added to the current datetime the action is fired.">
+								<option value="custom">Custom</option>
+								<option value="">Forever</option>
+								<option value="MIDNIGHT">Midnight</option>
+								<option value="NOON">Noon</option>
+								<option value="TOMORROW">Tomorrow</option>
+								<option value="NEXT WEEK">Next Week</option>
+								<option value="NEXT MONTH">Next Month</option>
+								<option value="NEXT YEAR">Next Year</option>
+								<option value="LAST DAY OF THIS MONTH">Last Day of This Month</option>
+								<option value="FIRST DAY OF NEXT MONTH">First Day of Next Month</option>
+								<option value="LAST DAY OF NEXT MONTH">Last Day of Next Month</option>
+								<option value="LAST DAY OF THIS YEAR">Last Day of This Year</option>
+								<option value="FIRST DAY OF NEXT YEAR">First Day of Next Year</option>
+								<option value="LAST DAY OF NEXT YEAR">Last Day of Next Year</option>
+								<option value="FIRST DAY OF JANUARY">First Day of January</option>
+								<option value="LAST DAY OF JANUARY">Last Day of January</option>
+								<option value="FIRST DAY OF FEBRUARY">First Day of February</option>
+								<option value="LAST DAY OF FEBRUARY">Last Day of February</option>
+								<option value="FIRST DAY OF MARCH">First Day of March</option>
+								<option value="LAST DAY OF MARCH">Last Day of March</option>
+								<option value="FIRST DAY OF APRIL">First Day of Apil</option>
+								<option value="LAST DAY OF APRIL">Last Day of Apil</option>
+								<option value="FIRST DAY OF MAY">First Day of May</option>
+								<option value="LAST DAY OF MAY">Last Day of May</option>
+								<option value="FIRST DAY OF JUNE">First Day of June</option>
+								<option value="LAST DAY OF JUNE">Last Day of June</option>
+								<option value="FIRST DAY OF JULY">First Day of July</option>
+								<option value="LAST DAY OF JULY">Last Day of July</option>
+								<option value="FIRST DAY OF AUGUST">First Day of August</option>
+								<option value="LAST DAY OF AUGUST">Last Day of August</option>
+								<option value="FIRST DAY OF SEPTEMBER">First Day of September</option>
+								<option value="LAST DAY OF SEPTEMBER">Last Day of September</option>
+								<option value="FIRST DAY OF OCTOBER">First Day of October</option>
+								<option value="LAST DAY OF OCTOBER">Last Day of October</option>
+								<option value="FIRST DAY OF NOVEMBER">First Day of November</option>
+								<option value="LAST DAY OF NOVEMBER">Last Day of November</option>
+								<option value="FIRST DAY OF DECEMBER">First Day of December</option>
+								<option value="LAST DAY OF DECEMBER">Last Day of December</option>
+								<option value="+30 MINUTES">30 Minutes</option>
+								<option value="+1 HOUR">1 Hour</option>
+								<option value="+3 HOURS">3 Hours</option>
+								<option value="+6 HOURS">6 Hours</option>
+								<option value="+12 HOURS">12 Hours</option>
+								<option value="+1 DAY">1 Day</option>
+								<option value="+3 DAYS">3 Days</option>
+								<option value="+6 DAYS">6 Days</option>
+								<option value="+12 DAYS">12 Days</option>
+								<option value="+1 WEEK">1 Week</option>
+								<option value="+2 WEEKS">2 Weeks</option>
+								<option value="+3 WEEKS">3 Weeks</option>
+								<option value="+1 MONTH">1 Month</option>
+								<option value="+3 MONTHS">3 Months</option>
+								<option value="+6 MONTHS">6 Months</option>
+								<option value="+1 YEAR">1 Year</option>
+							</param>
+							<if name="duration" nametype="param:string" operator="=" value="custom" valuetype="const:string" type="showhide">
+								<param name="custom_duration" type="text" label="Custom Duration" description="Optionally input the substitution supported strtotime relative date (e.g. +1 Day). This duration will be added to the current datetime the action is fired. Leave blank for forever." />
+							</if>
+						</if>
+						<param name="reason" type="textarea" rows="5" label="Reason" description="Optionally input substitution supported reason." class="input-block" />
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB AntiSpam installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjcategoryintegrations" type="params" ui="admin" label="Forums">
+			<param name="forums" type="yesno" default="1" label="Display" description="Optionally enable or disable usage of forums." yes="Enable" no="Disable" />
+			<if name="forums" nametype="param:int" operator="&gt;=" value="1" valuetype="const:int" type="showhide">
+				<param name="forum_id" type="list" default="" blanktext="New Category" label="Category" description="Select the forum category to associate with this category.">
+					<data name="" type="private" class="\CB\Plugin\GroupJiveForums\CBGroupJiveForums" method="getCategoryOptions" />
+				</param>
+			</if>
+		</view>
+		<view name="gjgroupintegrations" type="params" ui="admin" label="Forums">
+			<param name="forums" type="yesno" default="1" label="Display" description="Optionally enable or disable usage of forums." yes="Enable" no="Disable" />
+			<if name="forums" nametype="param:int" operator="&gt;=" value="1" valuetype="const:int" type="showhide">
+				<param name="forum_id" type="list" default="" blanktext="New Category" label="Category" description="Select the forum category to associate with this group.">
+					<data name="" type="private" class="\CB\Plugin\GroupJiveForums\CBGroupJiveForums" method="getCategoryOptions" />
+				</param>
+			</if>
+		</view>
+	</views>
+</cbxml>

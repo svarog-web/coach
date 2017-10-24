@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showusers" type="params" ui="admin" label="User Management" icon="users" viewformatting="none">
+			<tablebrowser name="usersbrowser" table="#__comprofiler" class="\CB\Database\Table\UserTable" permissionasset="com_users">
+				<toolbarmenu>
+					<menu insert-node-after="reconfirm" name="addgjgroups" action="linkAction" task="users" link="javascript:cbDoListTask(this, 'gjaddgroups','usersbrowser[subtask]','addgjgroups','cbusersbrowserid');" label="Add CB GroupJive Groups" />
+				</toolbarmenu>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

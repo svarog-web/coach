@@ -1,0 +1,4 @@
+.cb_template .cbPrivacyInput .select2-selection__choice__remove,
+.cb_template .cbPrivacyInput .select2-search {
+	display: none;
+}

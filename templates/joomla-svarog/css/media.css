@@ -1,0 +1,76 @@
+@media only screen and (max-width:4000px) { 
+
+}
+/*----------------------------------------------*/
+
+
+@media only screen and (max-width:1920px) { 
+
+}
+
+
+/*----------------------------------------------*/
+
+
+@media only screen and (max-width:1200px) { 
+
+}
+
+/*----------------------------------------------*/
+
+
+
+@media only screen and (max-width:990px) { 
+
+	/*-- Start block-menu --*/
+	.block-menu {height: 0; top: 10px; left: 0;}
+	.moduletable_menu {width: 220px; height: 150%; padding: 0px 0 0 0; position: fixed; top: 0; 
+						right: -220px; background: #27282a; box-shadow: 3px 3px 5px rgba(0,0,0,.7); z-index: 1000;}
+	.menu-icon, .mi-active {display: block; top: 15px; left: 15px;}
+
+	.bmi-width {transition: right 0.3s; –webkit-transition: right 0.3s;}
+	.bmi-active {right: 0; transition: right 0.3s; –webkit-transition: right 0.3s;}
+	.bmi-active .nav-child {margin: 0 0 0 0;}
+	.moduletable_menu ul {font-size: 14px; line-height: 38px;}
+	.moduletable_menu ul > li {display: block; float: none; border-bottom: 1px #575a61 solid;}
+	.moduletable_menu ul li > a, .moduletable_menu ul li > .separator, .moduletable_menu ul li > .nav-header {width: 100%; padding: 0 30px 0 15px; background: none; color: #fff;}
+
+	.moduletable_menu ul li:hover a, .moduletable_menu ul li:hover .separator, .moduletable_menu ul li:hover .nav-header {text-decoration: none;}
+
+	.moduletable_menu ul.nav-child {display: none; padding: 0; position: relative; left: 0; top: 0; opacity: 1; font-size: 12px; line-height: 32px; border: 0; border-radius: 0;}
+	.moduletable_menu ul.nav-child li {border-bottom: 1px #575a61 solid;}
+	.moduletable_menu ul.nav-child li:first-child {border-radius: 0;}
+	.moduletable_menu ul.nav-child li:last-child {border-radius: 0; border-bottom: 0;}
+
+	.moduletable_menu ul.nav-child li a, .moduletable_menu ul.nav-child li .separator, .moduletable_menu ul.nav-child li .nav-header {padding: 0 30px 0 25px; color: #333;}
+	.moduletable_menu ul.nav-child li:hover a, .moduletable_menu ul.nav-child li:hover .separator, .moduletable_menu ul.nav-child li:hover .nav-header {background: #a6f4a6;}
+	
+	.moduletable_menu ul li a:hover, .moduletable_menu ul li .separator:hover, .moduletable_menu ul li .nav-header:hover {background: #575a61;}
+	
+	.moduletable_menu ul li.parent > a:after, .moduletable_menu ul li.parent > .separator:after, .moduletable_menu ul li.parent > .nav-header:after {top: 17px; right: 15px;}
+	.btn:hover {background: inherit;}
+
+	.overflow {overflow: hidden;}
+	/*-- Stop block-menu --*/
+
+ 
+}
+
+
+
+
+/*----------------------------------------------*/
+@media only screen and (max-width:767px) { 
+
+ 
+}
+
+
+
+
+
+/*----------------------------------------------*/
+@media only screen and (max-width:479px) { 
+
+
+}

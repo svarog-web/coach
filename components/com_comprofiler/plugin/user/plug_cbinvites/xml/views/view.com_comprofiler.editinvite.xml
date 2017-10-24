@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editinvite" type="params" ui="admin" label="Invite" icon="envelope" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:invites" label="Cancel" />
+			</toolbarmenu>
+			<param name="to" type="text" label="To" size="80" validate="required" description="Input invite email to address." />
+			<param name="subject" type="text" label="Subject" size="80" description="Optionally input invite email subject; if left blank a subject will be applied." />
+			<param name="body" type="htmlarea" width="100%" height="400px" label="Body" description="Optionally input private message to include with invite email." />
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input owner of invite as single integer user_id. This is the user who sent the invite." />
+			<param name="user" type="user" label="User" size="5" description="Optionally input user of invite as single integer user_id. This is the user who accepted the invite." />
+		</view>
+	</views>
+</cbxml>

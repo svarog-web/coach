@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="cbsubs">CB Paid Subscriptions</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB Paid Subscriptions">
+				<option value="onCPayAfterPlanRenewalSelected" translate="no">onCPayAfterPlanRenewalSelected</option>
+				<option value="onCPayEditBasketIntegration" translate="no">onCPayEditBasketIntegration</option>
+				<option value="onCbSubsAfterPaymentBasket" translate="no">onCbSubsAfterPaymentBasket</option>
+				<option value="onCPayBeforeDrawSomething" translate="no">onCPayBeforeDrawSomething</option>
+				<option value="onCPayAfterDrawSomething" translate="no">onCPayAfterDrawSomething</option>
+				<option value="onCPayBeforeDrawPlan" translate="no">onCPayBeforeDrawPlan</option>
+				<option value="onCPayAfterDrawPlan" translate="no">onCPayAfterDrawPlan</option>
+				<option value="onCPayAfterPlanSelected" translate="no">onCPayAfterPlanSelected</option>
+				<option value="onCPayAfterPaymentStatusChange" translate="no">onCPayAfterPaymentStatusChange</option>
+				<option value="onCPayAfterPaymentStatusUpdateEvent" translate="no">onCPayAfterPaymentStatusUpdateEvent</option>
+				<option value="onCPayBeforeBackendPlanDisplay" translate="no">onCPayBeforeBackendPlanDisplay</option>
+				<option value="onCPayBeforeDisplayProductPeriodPrice" translate="no">onCPayBeforeDisplayProductPeriodPrice</option>
+				<option value="onCPayAfterDisplayProductPeriodPrice" translate="no">onCPayAfterDisplayProductPeriodPrice</option>
+				<option value="onCPayBeforeComputeTotalizersPaymentBasketUpdated" translate="no">onCPayBeforeComputeTotalizersPaymentBasketUpdated</option>
+				<option value="onCPayBeforeStorePaymentBasketUpdated" translate="no">onCPayBeforeStorePaymentBasketUpdated</option>
+				<option value="onCPayAfterPaymentBasketUpdated" translate="no">onCPayAfterPaymentBasketUpdated</option>
+				<option value="onCPayPaymentItemEvent" translate="no">onCPayPaymentItemEvent</option>
+				<option value="onCPayBeforeGetProductPrice" translate="no">onCPayBeforeGetProductPrice</option>
+				<option value="onCPayAfterGetProductPrice" translate="no">onCPayAfterGetProductPrice</option>
+				<option value="onCPayBeforeDisplaySubscriptionPeriodPrice" translate="no">onCPayBeforeDisplaySubscriptionPeriodPrice</option>
+				<option value="onCPayAfterDisplaySubscriptionPeriodPrice" translate="no">onCPayAfterDisplaySubscriptionPeriodPrice</option>
+				<option value="onCPayUserStateChange" translate="no">onCPayUserStateChange</option>
+				<option value="onCPayBeforeMailerEmailMessageSent" translate="no">onCPayBeforeMailerEmailMessageSent</option>
+				<option value="onCPayBeforeMailerPrivateMessageSent" translate="no">onCPayBeforeMailerPrivateMessageSent</option>
+				<option value="onCPayAfterMailerMessageSent" translate="no">onCPayAfterMailerMessageSent</option>
+				<option value="onCPayBeforeDrawSubscription" translate="no">onCPayBeforeDrawSubscription</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_cbsubs" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Subscribes, Unsubscribes, Renews, or Deletes user subscriptions on the users behalf." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionCBSubs" method="installed" />
+				</left>
+				<then>
+					<params name="cbsubs" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="1" label="Mode" description="Select mode of plans. Mode determines what the plans should do when action is triggered. Note only exsiting subscriptions can be renewed, unsubscribed, or deleted.">
+							<option value="1">Subscribe</option>
+							<option value="2">Renew</option>
+							<option value="3">Unsubscribe</option>
+							<option value="4">Delete</option>
+						</param>
+						<param name="plans" type="list" multiple="true" size="10" blanktext="" label="Plans" description="Select plans by plan alias." validate="required">
+							<data name="" type="private" class="cbautoactionsActionCBSubs" method="plans" />
+						</param>
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB Paid Subscriptions 3.x installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

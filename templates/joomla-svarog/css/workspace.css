@@ -1,0 +1,201 @@
+/* -- Блок стилей рабочей области (после окончания работ - удалить данный файл и отключить его в head) --*/
+/*----------------------*/
+.workspace {
+	width: 100%;
+	margin: 0px auto 0;
+	padding: 45px 0 0 0;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+}
+.workspace-line {
+	width: 100%;
+	margin: auto;
+	border-top: 2px #404040 dashed;
+}
+.scissors {
+	width: 100px;
+	height: 82px;
+	position: absolute;
+	top: 3px;
+	right: 0;
+	background: url(../img-workspace/scissors.png) no-repeat right 0;
+}
+.workspace h5 {
+	display: inline-block;
+	height: 55px;
+	margin: 20px auto;
+	font-family: Verdana;
+	font-size: 25px;
+	line-height: 50px;
+	color: #4e2828;
+	text-align: center;
+	cursor: pointer;
+}
+.workspace h5:before {
+	content: "\2193";
+	display: inline-block;
+	margin-left: 7px;
+	width: 12px;
+	height: 12px;
+	position: relative;
+	top: -2px;
+	float: right;
+}
+.pointer_bottom:before {
+	content: "\2191"!important;
+}
+.workspace-inside {
+	display: none;
+	width: 100%;
+	max-width: 1170px;
+	min-height: 250px;
+	margin: 0px auto 50px;
+	padding: 10px;
+	overflow: hidden;
+	text-align: left;
+	border: 1px #cbcbcb dotted;
+}
+.wi_block {display: block;}
+.block-workspace {
+	display: inline-block;
+	width: 330px;
+	min-height: 150px;
+	margin-bottom: 10px;
+	padding: 0 0px 10px 0px;
+	border: 1px #212124 solid;
+	vertical-align: top;
+	text-align: center;
+}
+.block-workspace h6 {
+	min-height: 30px;
+	margin: 0 auto 10px;
+	padding: 3px;
+	font-family: Verdana;
+	font-size: 20px;
+	line-height: 22px;
+	color: #000;
+	text-align: center;
+	background: #2EDCCD;
+}
+.workspace-description {
+	width: 70%;
+	margin: auto;
+	text-align: left;
+	font-family: Verdana;
+	font-size: 12px;
+	line-height: 16px;
+}
+.workspace-description i {
+	font-style: italic;
+}
+.workspace-description b {
+	font-weight: bold;
+}
+/*----------------------*/
+
+
+
+
+/*----- Start tabi -----*/
+.workspace .tabs {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+}
+.workspace .tabs label {
+	width: auto;
+	height: 30px;
+	margin: 0 10px 0 0;
+	padding: 0 14px;
+	color: #fff;
+	cursor: pointer;
+	float: left;
+	font-size: 12px;
+	line-height: 30px;
+	position: relative;
+	top: 0px;
+	text-align: center;
+}
+
+.workspace .tab_l1 {display: block!important;}
+
+.workspace .tabs input {position: absolute; left: -9999px;}
+
+.workspace #tab_l1 {background: #0af0f3;}
+.workspace #tab_l2 {background: #0af0f3;}
+.workspace #tab_l3 {background: #104370;}
+
+.workspace #tab_l1:hover, .workspace .tab_l1:hover, .workspace #tab_1:checked  ~ #tab_l1 {background: -moz-linear-gradient(#8ca945, #a0b751); background: -ms-linear-gradient(#8ca945, #a0b751); background: -o-linear-gradient(#8ca945, #a0b751); background: -webkit-linear-gradient(#8ca945, #a0b751);}
+.workspace #tab_l2:hover, .workspace #tab_2:checked  ~ #tab_l2 {background: -moz-linear-gradient(#188dc8, #219dd0); background: -ms-linear-gradient(#188dc8, #219dd0); background: -o-linear-gradient(#188dc8, #219dd0); background: -webkit-linear-gradient(#188dc8, #219dd0);}
+.workspace #tab_l3:hover, .workspace #tab_3:checked  ~ #tab_l3 {background: -moz-linear-gradient(#e7371e, #ef502b); background: -ms-linear-gradient(#e7371e, #ef502b); background: -o-linear-gradient(#e7371e, #ef502b); background: -webkit-linear-gradient(#e7371e, #ef502b);}
+
+.workspace .tab_l1 a {color: #fff; text-decoration: none;}
+/*---*/
+.workspace .tabs_cont {
+	min-height: 70px;
+	margin: 0px 0 0 0;
+	padding: 5px;
+	text-align: left;
+	position: relative;
+	z-index: 2;
+	border: 1px #404040 dotted;
+}
+
+.workspace .tabs_cont > div {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	opacity: 0;
+	-moz-transition: opacity .5s ease-in-out;
+	-webkit-transition: opacity .5s ease-in-out;
+	transition: opacity .5s ease-in-out;
+}
+.workspace #tab_1:checked ~ .tabs_cont #tab_c1,
+.workspace #tab_2:checked ~ .tabs_cont #tab_c2,
+.workspace #tab_3:checked ~ .tabs_cont #tab_c3 {
+	position: static;
+	left: 0;
+	opacity: 1;
+}
+
+/*----- Stop tabi -----*/
+
+
+/*----- Start form-validate-js -----*/
+.block-workspace form {
+	max-width: 80%;
+	margin: auto;
+}
+
+.block-workspace .modal-form input[type="submit"] {
+	margin: auto;
+}
+.block-workspace input.error {
+	border: 1px #f00 solid;
+}
+.block-workspace label.error {
+	display: block;
+	margin-bottom: 14px;
+	font-size: 12px;
+	color: #f00;
+}
+/*----- Stop form-validate-js -----*/
+
+
+/*----- Start animation -----*/
+#animationSandbox {
+	width: 250px;
+	height: 125px;
+	margin: 20px auto;
+	background: #fffdeb;
+	font-family: Verdana;
+	font-size: 22px;
+	line-height: 125px;
+	border: 2px #fb1108 solid;
+}
+
+/*----- Stop animation -----*/
+
+
+/* -- Конец блок стилей рабочей области (после окончания работ - удалить данный файл и отключить его в head) --*/

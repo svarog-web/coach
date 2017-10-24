@@ -1,0 +1,118 @@
+.cbAjaxContainer {
+	max-width: 100%;
+}
+
+.cbAjaxContainerInline {
+	display: inline-block;
+}
+
+.cbAjaxContainerDisplay {
+	position: relative;
+}
+
+.cbAjaxContainerDisplay .cbAjaxValue {
+	margin-left: -18px;
+	padding-left: 18px;
+	position: relative;
+	cursor: pointer;
+}
+
+.cbAjaxContainerDisplay .cbAjaxValue:before {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY( -50% );
+}
+
+.cbAjaxContainerDisplay .cbAjaxValue:hover:before {
+	display: inline-block;
+}
+
+.cbAjaxContainerDisplay[data-cbajaxfield-tooltip="true"] .cbSpinner {
+	position: absolute;
+	left: -18px;
+	top: 3px;
+}
+
+.cbAjaxContainerEdit {
+	position: absolute;
+	background: none;
+	z-index: 9999;
+}
+
+.cbAjaxContainerEdit .cbAjaxForm {
+	margin: 0;
+}
+
+.cbAjaxContainerEdit .cbAjaxInput .cb_field > .form-group {
+	margin-bottom: 0;
+}
+
+.cbAjaxContainerEdit .cbAjaxInput .cb_field > .form-group + .form-group {
+	margin-top: 15px;
+}
+
+.cbAjaxContainerEdit .cbAjaxButtons {
+	margin-bottom: 0;
+}
+
+.cbAjaxContainerNoFit {
+	width: auto !important;
+	background: white;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+.cbAjaxContainerNoFit .cbAjaxForm {
+	min-width: 400px;
+	max-width: 800px;
+}
+
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbAjaxContainer,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue {
+	height: 200px;
+	width: 100%;
+}
+
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbAjaxContainer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	max-height: 100%;
+	max-width: 100%;
+	margin: 0;
+}
+
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue {
+	padding: 0;
+	margin: 0;
+}
+
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue:before,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue:hover:before,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue:before,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbAjaxValue:hover:before {
+	display: none;
+}
+
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbAjaxContainer img {
+	position: relative;
+}
+
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbSpinner,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbAjaxContainerDisplay .cbSpinner {
+	top: 45%;
+	-webkit-transform: translateY(-45%);
+		-ms-transform: translateY(-45%);
+			transform: translateY(-45%);
+	left: 0;
+	z-index: 9;
+	text-align: center;
+	width: 100%;
+	color: #eeeeee !important;
+	text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+	font-size: 24px;
+}

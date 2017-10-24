@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="gjcategoryrows" request="view action" action="editPlugin showgjcategories">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="showgjcategories" mode="show" />
+		</action>
+
+		<action name="gjgrouprows" request="view action" action="editPlugin showgjgroups">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="showgjgroups" mode="show" />
+		</action>
+
+		<action name="gjuserrows" request="view action" action="editPlugin showgjusers">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="showgjusers" mode="show" />
+		</action>
+
+		<action name="gjinviterows" request="view action" action="editPlugin showgjinvites">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="showgjinvites" mode="show" />
+		</action>
+
+		<action name="gjnotificationrows" request="view action" action="editPlugin showgjnotifications">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="showgjnotifications" mode="show" />
+		</action>
+
+		<action name="gjcategoryrow" request="view table action" action="editPlugin gjcategoriesbrowser editrow" requestparameters="categoryid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="editgjcategory" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable" key="id" value="categoryid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjgrouprow" request="view table action" action="editPlugin gjgroupsbrowser editrow" requestparameters="groupid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="editgjgroup" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_groups" class="\CB\Plugin\GroupJive\Table\GroupTable" key="id" value="groupid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjuserrow" request="view table action" action="editPlugin gjusersbrowser editrow" requestparameters="userid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="editgjuser" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_users" class="\CB\Plugin\GroupJive\Table\UserTable" key="id" value="userid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjinviterow" request="view table action" action="editPlugin gjinvitesbrowser editrow" requestparameters="inviteid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="editgjinvite" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_invites" class="\CB\Plugin\GroupJive\Table\InviteTable" key="id" value="inviteid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjnotificationrow" request="view table action" action="editPlugin gjnotificationsbrowser editrow" requestparameters="notificationid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.groupjive" mandatory="true" />
+			<showview view="editgjnotification" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_notifications" class="\CB\Plugin\GroupJive\Table\NotificationTable" key="id" value="notificationid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjaddgroups" request="view" action="addgjgroups" requestparameters="ids">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="addgjgroups" mode="edit">
+				<data name="" type="class" class="\CB\Plugin\GroupJive\AddGroups" />
+			</showview>
+		</action>
+
+		<action name="plugin" request="view table" action="editrow pluginsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+		</action>
+
+		<action name="tab" request="view table" action="editrow tabsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="categories" type="button" default="Categories" buttonclass="default" buttonsize="xsmall" link="cb_action:gjcategoryrows" parameters="cid" paramvalues="id" label="" />
+			<param name="groups" type="button" default="Groups" buttonclass="default" buttonsize="xsmall" link="cb_action:gjgrouprows" parameters="cid" paramvalues="id" label="" />
+			<param name="users" type="button" default="GROUP_USERS" translated-default="Users" buttonclass="default" buttonsize="xsmall" link="cb_action:gjuserrows" parameters="cid" paramvalues="id" label="" />
+			<param name="invites" type="button" default="Invites" buttonclass="default" buttonsize="xsmall" link="cb_action:gjinviterows" parameters="cid" paramvalues="id" label="" />
+			<param name="notifications" type="button" default="Notifications" buttonclass="default" buttonsize="xsmall" link="cb_action:gjnotificationrows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

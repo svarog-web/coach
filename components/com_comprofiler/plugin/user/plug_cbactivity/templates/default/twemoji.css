@@ -1,0 +1,316 @@
+.twemoji {
+	display: inline-block;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-image: url('images/twemoji.png');
+}
+.twemoji-1f382 {
+	width: 18px;
+	height: 18px;
+	background-position: -2px -2px
+}
+.twemoji-1f389 {
+	width: 18px;
+	height: 18px;
+	background-position: -2px -22px
+}
+.twemoji-1f600 {
+	width: 18px;
+	height: 18px;
+	background-position: -2px -42px
+}
+.twemoji-1f601 {
+	width: 18px;
+	height: 18px;
+	background-position: -22px -2px
+}
+.twemoji-1f602 {
+	width: 18px;
+	height: 18px;
+	background-position: -22px -22px
+}
+.twemoji-1f603 {
+	width: 18px;
+	height: 18px;
+	background-position: -22px -42px
+}
+.twemoji-1f604 {
+	width: 18px;
+	height: 18px;
+	background-position: -42px -2px
+}
+.twemoji-1f605 {
+	width: 18px;
+	height: 18px;
+	background-position: -42px -22px
+}
+.twemoji-1f606 {
+	width: 18px;
+	height: 18px;
+	background-position: -42px -42px
+}
+.twemoji-1f607 {
+	width: 18px;
+	height: 18px;
+	background-position: -62px -2px
+}
+.twemoji-1f609 {
+	width: 18px;
+	height: 18px;
+	background-position: -62px -22px
+}
+.twemoji-1f60a {
+	width: 18px;
+	height: 18px;
+	background-position: -62px -42px
+}
+.twemoji-1f60b {
+	width: 18px;
+	height: 18px;
+	background-position: -82px -2px
+}
+.twemoji-1f60c {
+	width: 18px;
+	height: 18px;
+	background-position: -82px -22px
+}
+.twemoji-1f60d {
+	width: 18px;
+	height: 18px;
+	background-position: -82px -42px
+}
+.twemoji-1f60e {
+	width: 18px;
+	height: 18px;
+	background-position: -102px -2px
+}
+.twemoji-1f60f {
+	width: 18px;
+	height: 18px;
+	background-position: -102px -22px
+}
+.twemoji-1f610 {
+	width: 18px;
+	height: 18px;
+	background-position: -102px -42px
+}
+.twemoji-1f611 {
+	width: 18px;
+	height: 18px;
+	background-position: -122px -2px
+}
+.twemoji-1f612 {
+	width: 18px;
+	height: 18px;
+	background-position: -122px -22px
+}
+.twemoji-1f613 {
+	width: 18px;
+	height: 18px;
+	background-position: -122px -42px
+}
+.twemoji-1f614 {
+	width: 18px;
+	height: 18px;
+	background-position: -142px -2px
+}
+.twemoji-1f615 {
+	width: 18px;
+	height: 18px;
+	background-position: -142px -22px
+}
+.twemoji-1f616 {
+	width: 18px;
+	height: 18px;
+	background-position: -142px -42px
+}
+.twemoji-1f617 {
+	width: 18px;
+	height: 18px;
+	background-position: -162px -2px
+}
+.twemoji-1f618 {
+	width: 18px;
+	height: 18px;
+	background-position: -162px -22px
+}
+.twemoji-1f619 {
+	width: 18px;
+	height: 18px;
+	background-position: -162px -42px
+}
+.twemoji-1f61a {
+	width: 18px;
+	height: 18px;
+	background-position: -182px -2px
+}
+.twemoji-1f61b {
+	width: 18px;
+	height: 18px;
+	background-position: -182px -22px
+}
+.twemoji-1f61c {
+	width: 18px;
+	height: 18px;
+	background-position: -182px -42px
+}
+.twemoji-1f61d {
+	width: 18px;
+	height: 18px;
+	background-position: -202px -2px
+}
+.twemoji-1f61e {
+	width: 18px;
+	height: 18px;
+	background-position: -202px -22px
+}
+.twemoji-1f61f {
+	width: 18px;
+	height: 18px;
+	background-position: -202px -42px
+}
+.twemoji-1f620 {
+	width: 18px;
+	height: 18px;
+	background-position: -222px -2px
+}
+.twemoji-1f621 {
+	width: 18px;
+	height: 18px;
+	background-position: -222px -22px
+}
+.twemoji-1f622 {
+	width: 18px;
+	height: 18px;
+	background-position: -222px -42px
+}
+.twemoji-1f623 {
+	width: 18px;
+	height: 18px;
+	background-position: -242px -2px
+}
+.twemoji-1f624 {
+	width: 18px;
+	height: 18px;
+	background-position: -242px -22px
+}
+.twemoji-1f625 {
+	width: 18px;
+	height: 18px;
+	background-position: -242px -42px
+}
+.twemoji-1f626 {
+	width: 18px;
+	height: 18px;
+	background-position: -262px -2px
+}
+.twemoji-1f627 {
+	width: 18px;
+	height: 18px;
+	background-position: -262px -22px
+}
+.twemoji-1f628 {
+	width: 18px;
+	height: 18px;
+	background-position: -262px -42px
+}
+.twemoji-1f629 {
+	width: 18px;
+	height: 18px;
+	background-position: -282px -2px
+}
+.twemoji-1f62a {
+	width: 18px;
+	height: 18px;
+	background-position: -282px -22px
+}
+.twemoji-1f62b {
+	width: 18px;
+	height: 18px;
+	background-position: -282px -42px
+}
+.twemoji-1f62c {
+	width: 18px;
+	height: 18px;
+	background-position: -302px -2px
+}
+.twemoji-1f62d {
+	width: 18px;
+	height: 18px;
+	background-position: -302px -22px
+}
+.twemoji-1f62e {
+	width: 18px;
+	height: 18px;
+	background-position: -302px -42px
+}
+.twemoji-1f62f {
+	width: 18px;
+	height: 18px;
+	background-position: -322px -2px
+}
+.twemoji-1f630 {
+	width: 18px;
+	height: 18px;
+	background-position: -322px -22px
+}
+.twemoji-1f631 {
+	width: 18px;
+	height: 18px;
+	background-position: -322px -42px
+}
+.twemoji-1f632 {
+	width: 18px;
+	height: 18px;
+	background-position: -342px -2px
+}
+.twemoji-1f633 {
+	width: 18px;
+	height: 18px;
+	background-position: -342px -22px
+}
+.twemoji-1f634 {
+	width: 18px;
+	height: 18px;
+	background-position: -342px -42px
+}
+.twemoji-1f635 {
+	width: 18px;
+	height: 18px;
+	background-position: -362px -2px
+}
+.twemoji-1f636 {
+	width: 18px;
+	height: 18px;
+	background-position: -382px -2px
+}
+.twemoji-1f37a {
+	width: 17px;
+	height: 18px;
+	background-position: -402px -2px
+}
+.twemoji-1f637 {
+	width: 18px;
+	height: 18px;
+	background-position: -362px -22px
+}
+.twemoji-2615 {
+	width: 18px;
+	height: 18px;
+	background-position: -362px -42px
+}
+.twemoji-263a {
+	width: 18px;
+	height: 18px;
+	background-position: -382px -22px
+}
+.twemoji-1f374 {
+	width: 14px;
+	height: 18px;
+	background-position: -382px -42px
+}
+.twemoji-1f4a4 {
+	width: 18px;
+	height: 16px;
+	background-position: -398px -42px
+}

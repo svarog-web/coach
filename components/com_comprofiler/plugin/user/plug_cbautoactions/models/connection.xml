@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="connection">Connection</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_connection" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Create user connections." />
+			<params name="connection" type="params" repeat="true" label="" display="2lines">
+				<param name="users" type="text" label="Users" description="Input substitution supported comma separate list of user ids to connect user to." size="50" validate="required" />
+				<param name="message" type="textarea" rows="5" label="Message" description="Optionally input substitution supported message to include with connection request." cssclass="input-block" />
+				<param name="direction" type="list" default="0" label="Direction" description="Select direction of connection request. Direction determines who is receiving the connection request and who is sending the connection request.">
+					<option value="0">User to Users</option>
+					<option value="1">Users to User</option>
+				</param>
+				<param name="mutual" type="list" default="2" label="Mutual Consent" description="Optionally choose if both parties must agree to a connection request before a connection is established.">
+					<option value="0">Normal CB</option>
+					<option value="1">Yes (override CB)</option>
+					<option value="2">No (override CB)</option>
+				</param>
+				<param name="notify" type="list" default="0" label="Notification Method" description="Optionally choose how connection request noficiations should be sent.">
+					<option value="1">Normal CB</option>
+					<option value="0">None (override CB)</option>
+				</param>
+				<param name="cross" type="list" default="1" label="Cross Connections" description="Optionally choose if connections should be established between both parties or just the user sending the request.">
+					<option value="0">Normal CB</option>
+					<option value="1">Yes (override CB)</option>
+					<option value="2">No (override CB)</option>
+				</param>
+			</params>
+		</view>
+	</views>
+</cbxml>

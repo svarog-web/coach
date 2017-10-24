@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjevent" type="params" ui="admin" label="Event" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjeventrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="" type="group" label="" display="2lines">
+				<param name="title" type="text" label="Title %s" description="Input the event title. This is the title that will distinguish this event from others. Suggested to input something to uniquely identify your event." size="80" />
+			</param>
+			<tabpane name="editpane">
+				<tabpanetab name="event" label="Event" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="event" type="htmlarea" width="100%" height="400px" label="Description" display="2lines" description="Input a detailed description about this event." />
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="published" type="xml:groupjive_published" default="1" label="Publish" display="2lines" description="Select publish state of this event. Unpublished events will not be visible to the public." />
+								<param name="group" type="list" label="Group" blanktext="" display="2lines" description="Select group the event is for.">
+									<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+								</param>
+								<param name="user_id" type="user" label="Owner" size="5" validate="required" display="2lines" description="Input the event owner id. Event owner determines the creator of the event specified as User ID." />
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="details" label="Details" description="">
+					<param name="location" type="text" label="Location" validate="required" description="Input the location for this event (e.g. My House, The Park, Restaurant Name, etc..)." size="80" />
+					<param name="address" type="text" label="Address" description="Optionally input the address for this event or click the map button to attempt to find your current location." size="80" />
+					<param name="start" type="datetime" label="Start" validate="required" description="Select the date and time this event starts." />
+					<param name="end" type="datetime" label="End" description="Optionally select the end date and time for this event." />
+					<param name="limit" type="text" label="Limit" size="5" description="Optionally input a guest limit for this event." />
+				</tabpanetab>
+			</tabpane>
+		</view>
+	</views>
+</cbxml>

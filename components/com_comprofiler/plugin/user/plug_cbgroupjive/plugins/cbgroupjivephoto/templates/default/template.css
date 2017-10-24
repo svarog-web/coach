@@ -1,0 +1,150 @@
+.cb_template .gjGroupPhotoImageContainer {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.cb_template .gjGroupPhotoImageScrollLeft,
+.cb_template .gjGroupPhotoImageScrollRight {
+	opacity: 0;
+	transition: opacity 0.15s linear;
+		-webkit-transition: opacity 0.15s linear;
+}
+
+.cb_template .gjGroupPhotoImageScrollLeft table,
+.cb_template .gjGroupPhotoImageScrollLeft table > tr,
+.cb_template .gjGroupPhotoImageScrollLeft table > tr > td,
+.cb_template .gjGroupPhotoImageScrollRight table,
+.cb_template .gjGroupPhotoImageScrollRight table > tr,
+.cb_template .gjGroupPhotoImageScrollRight table > tr > td {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.cb_template .gjGroupPhotoImageScrollLeft table > tr > td,
+.cb_template .gjGroupPhotoImageScrollRight table > tr > td {
+	vertical-align: middle;
+}
+
+.cb_template .gjGroupPhotoImageScrollLeft {
+	position: absolute;
+	height: 100%;
+	left: 10px;
+	top: 0;
+}
+
+.cb_template .gjGroupPhotoImageScrollRight {
+	position: absolute;
+	height: 100%;
+	right: 10px;
+	top: 0;
+}
+
+.cb_template .gjGroupPhotoImageScrollLeftIcon,
+.cb_template .gjGroupPhotoImageScrollRightIcon {
+	font-size: 40px;
+	color: #ffffff;
+	text-shadow: 0 1px 0 #000000;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+
+.cb_template .gjGroupPhotoImageScrollLeftIcon:hover,
+.cb_template .gjGroupPhotoImageScrollRightIcon:hover {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: pointer;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+
+.cb_template .gjGroupPhotoImage {
+	height: 100%;
+	width: 100%;
+	font-size: 0;
+}
+
+.cb_template .gjGroupPhotoImage img {
+	max-height: 100%;
+	max-width: 100%;
+	border: 0;
+	border-radius: 0;
+	padding: 0;
+	background: none;
+	box-shadow: none;
+}
+
+.cb_template .gjGroupPhotoImageInfo {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.70);
+	padding: 6px;
+	opacity: 0;
+	transition: opacity 0.15s linear;
+		-webkit-transition: opacity 0.15s linear;
+}
+
+.cb_template .gjGroupPhotoImageInfo .gjGroupPhotoImageInfoTitle,
+.cb_template .gjGroupPhotoImageInfo .gjGroupPhotoImageInfoDescription {
+	word-break: break-all;
+	word-wrap: break-word;
+	max-height: 100px;
+	overflow: auto;
+}
+
+.qtip.gjGroupPhotoImageModal:hover .gjGroupPhotoImageScrollLeft,
+.qtip.gjGroupPhotoImageModal:hover .gjGroupPhotoImageScrollRight,
+.qtip.gjGroupPhotoImageModal:hover .gjGroupPhotoImageInfo {
+	opacity: 1;
+}
+
+.qtip.gjGroupPhotoImageModal {
+	border-radius: 0;
+	background: #000000;
+	color: #ffffff;
+}
+
+.qtip.gjGroupPhotoImageModal,
+.qtip.gjGroupPhotoImageModal > .qtip-content {
+	padding: 0;
+}
+
+.qtip.gjGroupPhotoImageModal > .qtip-close {
+	border: 0;
+}
+
+.qtip.gjGroupPhotoImageModal > .qtip-close > span {
+	font-size: 21px;
+	font-weight: bold;
+	line-height: 1;
+	color: #ffffff;
+	text-shadow: 0 1px 0 #000000;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+
+.qtip.gjGroupPhotoImageModal > .qtip-close > span:hover {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: pointer;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+
+@media ( max-width: 767px ) {
+	.qtip.gjGroupPhotoImageModal .gjGroupPhotoImageInfo {
+		opacity: 1;
+	}
+
+	.cb_template .gjGroupPhotoImageInfo .text-right {
+		text-align: left;
+	}
+}
+
+.cb_template .gjPhotoActivity {
+	padding: 10px;
+}

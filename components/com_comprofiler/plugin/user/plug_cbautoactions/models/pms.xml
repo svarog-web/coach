@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="pms">Private Message</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_pms" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Send customized private messages." />
+			<params name="pms" type="params" repeat="true" label="" display="2lines">
+				<param name="from" type="text" label="From" description="Input substitution supported from user_id (e.g. [user_id]). Leave blank to use trigger user as the from." size="10" />
+				<param name="to" type="text" label="To" description="Input substitution supported to user_id (e.g. [user_id])." size="10" validate="required" />
+				<param name="subject" type="text" label="Subject" description="Optionally input substitution supported subject (e.g. [name]). Please note not all PMS support subject usage." size="50" />
+				<param name="message" type="textarea" rows="10" label="Message" description="Input substitution supported message." cssclass="input-block" validate="required" />
+			</params>
+		</view>
+	</views>
+</cbxml>

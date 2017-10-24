@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="closed_type" base="list" valuetype="string">
+			<option value="disable">Disabled</option>
+			<option value="delete">Deleted</option>
+		</type>
+	</types>
+</cbxml>

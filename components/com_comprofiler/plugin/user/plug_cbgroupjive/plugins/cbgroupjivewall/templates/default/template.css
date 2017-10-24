@@ -1,0 +1,135 @@
+.cb_template .gjGroupWallRow {
+	position: relative;
+	display: block;
+	padding: 0;
+	margin: 10px 0 0 0;
+}
+
+.cb_template .gjGroupWallRow:first-child {
+	margin: 0;
+}
+
+.cb_template .gjGroupWallRow .media-left {
+	padding: 10px;
+	float: left;
+}
+
+.cb_template .gjGroupWallRow .media-left img {
+	width: 48px;
+	max-width: none;
+}
+
+.cb_template .gjGroupWallReplies .gjGroupWallRow .media-left img {
+	width: 32px;
+}
+
+.cb_template .gjGroupWallRow .media-body {
+	padding-right: 48px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+	width: auto;
+}
+
+.cb_template .gjGroupWallReplies .gjGroupWallRow .media-left {
+	padding-left: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.cb_template .gjGroupWallReplies .gjGroupWallRow .media-body {
+	padding-right: 40px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.cb_template .gjGroupWallRow .panel-heading {
+	position: relative;
+	min-height: 50px;
+	padding: 10px;
+	background: none;
+	border: 0;
+	word-wrap: break-word;
+}
+
+.cb_template .gjGroupWallRow .media.panel-heading {
+	min-height: 48px;
+	padding: 0;
+}
+
+.cb_template .gjGroupWallRow .panel-body {
+	padding: 10px;
+	word-wrap: break-word;
+}
+
+.cb_template .gjGroupWallRow .panel-heading + .panel-body {
+	padding: 0 10px 10px;
+}
+
+.cb_template .gjGroupWallRow .panel-footer {
+	padding: 10px;
+	word-wrap: break-word;
+}
+
+.cb_template .gjGroupWallNew .gjGroupWallNewFooter {
+	padding: 6px;
+}
+
+.cb_template .gjGroupWallNewReply .gjGroupWallNewReplyFooter {
+	padding-top: 6px;
+}
+
+.cb_template .gjGroupWallRow .panel {
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.cb_template .gjGroupWallRow img {
+	max-height: 100%;
+}
+
+.cb_template .gjGroupWallNew .gjGroupWallForm textarea {
+	border: 0;
+	margin: 0;
+	box-shadow: none;
+	overflow: hidden;
+}
+
+.cb_template .gjGroupWallNewReply .gjGroupWallForm textarea {
+	overflow: hidden;
+}
+
+.cb_template .gjGroupWallNew .cbValidationMessage,
+.cb_template .gjGroupWallNewReply .cbValidationMessage {
+	display: none !important;
+}
+
+.cb_template .gjGroupWallRow .gjGroupWallLimit {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	padding: 1px 3px;
+	background-color: rgba(0, 0, 0, 0.08);
+}
+
+.cb_template .gjGroupWallRow .gjGroupWallLimitCurrent,
+.cb_template .gjGroupWallRow .gjGroupWallLimitMax {
+	display: inline-block;
+}
+
+.cb_template .gjGroupWallRow .gjWallMenu {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.cb_template .gjGroupWallReplies .gjGroupWallRow .gjWallMenu {
+	right: 0;
+	top: 0;
+}
+
+.cb_template .gjGroupWallReplies .pagination {
+	margin: 0;
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="kunena">Kunena</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="Kunena">
+				<option value="forumSideProfile" translate="no">forumSideProfile</option>
+				<option value="kunenaIntegration" translate="no">kunenaIntegration</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_kunena" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Creates Kunena forum categories." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionKunena" method="installed" />
+				</left>
+				<then>
+					<params name="kunena" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="category" translate-default="no" label="Mode" description="Select what Kunena action to perform.">
+							<option value="category">Create Category</option>
+							<option value="topic">Create Topic</option>
+							<option value="reply">Create Reply</option>
+							<option value="sync">Synchronize</option>
+						</param>
+						<if name="mode" nametype="param:string" operator="=" value="category" valuetype="const:string" type="showhide">
+							<param name="published" type="yesno" default="1" label="Publish" description="Enable or disable published state of category." />
+							<param name="name" type="text" label="Name" description="Input substitution supported category name." size="50" validate="required" />
+							<param name="parent" type="list" default="0" hideblanktext="always" label="Parent" description="Select category parent.">
+								<option value="0">No Parent</option>
+								<data name="" type="private" class="cbautoactionsActionKunena" method="categories" />
+							</param>
+							<param name="access" type="viewaccesslevel" default="1" blanktext="" label="Access Level" managelevels="false" description="Select category view access level." />
+							<param name="description" type="textarea" rows="10" label="Description" description="Optionally input substitution supported category description." cssclass="input-block" />
+						</if>
+						<if name="mode" nametype="param:string" operator="in" value="topic|*|reply" valuetype="const:string" type="showhide">
+							<param name="subject" type="text" label="Subject" description="Input substitution supported topic subject." size="50" />
+							<if name="mode" nametype="param:string" operator="=" value="topic" valuetype="const:string" type="showhide">
+								<param name="category" type="list" default="0" hideblanktext="always" label="Category" description="Select topic category.">
+									<data name="" type="private" class="cbautoactionsActionKunena" method="categories" />
+								</param>
+							</if>
+							<if name="mode" nametype="param:string" operator="=" value="reply" valuetype="const:string" type="showhide">
+								<param name="topic" type="list" default="0" hideblanktext="always" label="Topic" description="Select topic to reply to.">
+									<data name="" type="private" class="cbautoactionsActionKunena" method="topics" />
+								</param>
+							</if>
+							<param name="message" type="textarea" rows="10" label="Message" description="Input substitution supported topic message." cssclass="input-block" validate="required" />
+						</if>
+						<if name="mode" nametype="param:string" operator="in" value="category|*|topic|*|reply" valuetype="const:string" type="showhide">
+							<param name="owner" type="text" label="Owner" description="Input substitution supported owner as single integer user_id. Leave blank to use trigger user as the owner." size="10" />
+						</if>
+						<if name="mode" nametype="param:string" operator="=" value="sync" valuetype="const:string" type="showhide">
+							<params name="fields" type="params" repeat="true" label="Fields">
+								<param name="field" type="list" blanktext="--- Select Field ---" label="Field" description="Select field to set a value for.">
+									<option value="ordering">Ordering</option>
+									<option value="viewtype">Viewtype</option>
+									<option value="signature">Signature</option>
+									<option value="personalText">Personal Text</option>
+									<option value="gender">Gender</option>
+									<option value="birthdate">Birthdate</option>
+									<option value="location">Location</option>
+									<option value="icq">ICQ</option>
+									<option value="aim">AIM</option>
+									<option value="yim">YIM</option>
+									<option value="msn">MSN</option>
+									<option value="skype">Skype</option>
+									<option value="twitter">Twitter</option>
+									<option value="facebook">Facebook</option>
+									<option value="gtalk">GTalk</option>
+									<option value="myspace">MySpace</option>
+									<option value="linkedin">LinkedIn</option>
+									<option value="delicious">Delicious</option>
+									<option value="friendfeed">FriendFeed</option>
+									<option value="digg">Digg</option>
+									<option value="blogspot">BlogSpot</option>
+									<option value="flickr">Flickr</option>
+									<option value="bebo">Bebo</option>
+									<option value="website">Website</option>
+									<option value="email">Hide Email</option>
+									<option value="online">Show Online</option>
+								</param>
+								<param name="value" type="text" label="Value" description="Optionally input substitution supported field value (e.g. [user_id])." size="50" />
+								<param name="translate" type="yesno" default="0" label="Translate Value" description="Optionally disable translations for the value." />
+							</params>
+						</if>
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="Kunena 2.x installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

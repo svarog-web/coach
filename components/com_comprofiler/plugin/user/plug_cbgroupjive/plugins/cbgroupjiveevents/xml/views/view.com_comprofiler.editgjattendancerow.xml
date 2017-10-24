@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjattendance" type="params" ui="admin" label="Attendance" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjattendancerows" label="Cancel" />
+			</toolbarmenu>
+			<param name="user_id" type="user" label="User" size="5" validate="required" description="Input user as single integer user_id to attend the specified event." />
+			<param name="event" type="list" label="Event" hideblanktext="always" description="Select event the specified user is to attend.">
+				<data name="event" type="sql:multiplerows" table="#__groupjive_plugin_events" key="id">
+					<rows>
+						<field name="id" as="value" />
+						<field name="title" as="text" />
+					</rows>
+					<orderby>
+						<field name="start" ordering="DESC" />
+					</orderby>
+				</data>
+			</param>
+		</view>
+	</views>
+</cbxml>

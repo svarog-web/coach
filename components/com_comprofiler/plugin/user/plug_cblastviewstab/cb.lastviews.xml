@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Last Views Tab</name>
+	<author>Krileon</author>
+	<creationDate>2016-04-07</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Adds profile tab to view last profile views.</description>
+	<version>2.0.13</version>
+	<release>3.0.4</release>
+	<files>
+		<filename plugin="cb.lastviews">cb.lastviews.php</filename>
+		<filename>index.html</filename>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+	</files>
+	<params>
+		<param name="general_template" type="folderlist" default="default" label="Template" description="Select template to be used for all of CB Last Views Tab. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cblastviewstab/templates/." directory="/components/com_comprofiler/plugin/user/plug_cblastviewstab/templates/" />
+		<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB Last Views Tab." />
+	</params>
+	<tabs>
+		<tab name="Last Visitors" description="" class="getLastViewsTab" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<param name="display_total_views" type="yesno" default="1" label="Total" description="Enable or disable display of total views count." yes="Enable" no="Disable" />
+				<param name="display_guest_views" type="yesno" default="1" label="Guests" description="Enable or disable display of guest view count." yes="Enable" no="Disable" />
+				<param name="display_exclude" type="text" default="42" size="10" label="Exclude" description="Optionally input comma separated list of user ids to exclude from display." />
+				<param name="display_limit" type="int" default="15" size="5" label="Display Limit" description="Input the maximum number of views to display." />
+			</params>
+		</tab>
+	</tabs>
+</cbinstall>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="invites" request="view action" action="editPlugin showinvites">
+			<showview view="showinvites" mode="show" />
+		</action>
+
+		<action name="invite" request="view table action" action="editPlugin invitesbrowser editrow" requestparameters="inviteid">
+			<showview view="editinvite" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_invites" class="cbinvitesInviteTable" key="id" value="inviteid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="invites" type="button" default="Invites" buttonclass="default" buttonsize="xsmall" link="cb_action:invites" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

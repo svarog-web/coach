@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user/plug_cbgroupjive/plugins">
+	<name>CB GroupJive Events</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-29</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Provides groups with Events to easily and quickly schedule between one another.</description>
+	<version>2.1.0</version>
+	<release>3.1.0</release>
+	<installfile>install.cbgroupjiveevents.php</installfile>
+	<files>
+		<filename plugin="cbgroupjiveevents">cbgroupjiveevents.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgroupjiveevents.php</filename>
+		<filename>install.cbgroupjiveevents.php</filename>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<foldername>js</foldername>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/GroupJiveEvents">
+			<files folder="library">
+				<filename>CBGroupJiveEvents.php</filename>
+				<filename>index.html</filename>
+				<foldername>Table</foldername>
+				<foldername>Trigger</foldername>
+			</files>
+		</library>
+	</libraries>
+	<params>
+		<tabpane name="gjgroupsevents">
+			<tabpanetab label="General">
+				<param name="groups_events_content_plugins" type="yesno" default="0" label="Content Plugins" description="Enable or disable usage of content plugins content.prepare on group events." yes="Enable" no="Disable" />
+				<param name="groups_events_create_limit" type="text" default="" size="5" label="Create Limit" description="Input number of events each individual user is limited to creating per group. If blank allow unlimited events. Moderators and group owners are exempt from this configuration." />
+				<param name="groups_events_address" type="yesno" default="1" label="Address" description="Enable or disable usage of location address. The address will automatically map to Google Maps." yes="Enable" no="Disable" />
+				<param name="groups_events_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on group events. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Notifications">
+				<param name="notifications_default_event_new" type="yesno" default="0" label="Schedule of new event" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_event_edit" type="yesno" default="0" label="Edit of existing event" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_event_approve" type="yesno" default="0" label="New event requires approval" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_event_attend" type="yesno" default="0" label="User attends my existing events" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_event_unattend" type="yesno" default="0" label="User unattends my existing events" description="" yes="Notify" no="Don't Notify" />
+			</tabpanetab>
+			<tabpanetab label="Message">
+				<param name="groups_events_message" type="yesno" default="0" label="Display" description="Enable or disable usage of event messages. Event message allows the event owner, group owner, group administrators to send a notification to all attending event guests. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+				<param name="groups_events_message_type" type="list" default="2" label="Type" description="Select how event messages should be sent.">
+					<option value="1">Email</option>
+					<option value="2">Private Message</option>
+				</param>
+				<param name="groups_events_message_subject" type="yesno" default="0" label="Subject" description="Enable or disable usage of event message subject. This allows customizing the message subject. Note this only works with email message type." yes="Enable" no="Disable" />
+				<param name="groups_events_message_html" type="yesno" default="0" label="HTML" description="Enable or disable support for HTML in event messages." yes="Enable" no="Disable" />
+				<param name="groups_events_message_delay" type="text" default="60" size="5" label="Delay" description="Input the number of seconds between event messages. Leave empty for no delay. Moderators are exempt from this configuration." />
+				<param name="groups_events_message_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on event message. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Attending">
+				<param name="groups_events_attending_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+				<param name="groups_events_attending_limit" type="text" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+				<param name="groups_events_attending_search" type="yesno" default="0" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Paging">
+				<param name="groups_events_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+				<param name="groups_events_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+				<param name="groups_events_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__groupjive_plugin_events" class="\CB\Plugin\GroupJiveEvents\Table\EventTable" strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+			<columns strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="title" type="sql:varchar(255)" />
+				<column name="event" type="sql:text" />
+				<column name="location" type="sql:varchar(255)" null="true" />
+				<column name="address" type="sql:varchar(255)" null="true" />
+				<column name="limit" type="sql:int(11)" default="0" />
+				<column name="start" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="end" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:int(11)" default="1" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="group_user_id_published">
+					<column name="group" />
+					<column name="user_id" />
+					<column name="published" />
+				</index>
+			</indexes>
+		</table>
+		<table name="#__groupjive_plugin_events_attendance" class="\CB\Plugin\GroupJiveEvents\Table\AttendanceTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="event" type="sql:int(11)" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id_event" type="unique">
+					<column name="user_id" />
+					<column name="event" />
+				</index>
+			</indexes>
+		</table>
+	</database>
+</cbinstall>

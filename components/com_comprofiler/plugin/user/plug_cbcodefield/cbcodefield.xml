@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>CB Code Field</name>
+	<author>Krileon</author>
+	<creationDate>2016-04-22</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>A cb fields plugin to add an Code, Code Multi-Checkbox, Code Select, Code Multi-Select, and Code Radio field type to available cb field types in addition to Code Validation for all fieldtypes.</description>
+	<version>2.0.13</version>
+	<release>1.0.4+build.2016.04.22.14.06.14.1d5a655a0</release>
+	<files>
+		<filename plugin="cbcodefield">cbcodefield.php</filename>
+		<filename>index.html</filename>
+		<foldername>js</foldername>
+		<foldername>language</foldername>
+		<foldername>templates</foldername>
+	</files>
+	<fieldsparams>
+		<field type="other_types" label="Field code validation preferences">
+			<params>
+				<param name="code_validate" type="list" default="0" label="Code Validation" description="Enable or disable code validation.">
+					<option value="0">Disabled</option>
+					<option value="1">Enabled</option>
+				</param>
+				<if name="code_validate" type="showhide" operator="=" value="1" valuetype="const:int">
+					<param name="code_validate_code" type="textarea" rows="10" default="" label="Code" description="Input substitution supported Code. Supply [value] substitution for user input field value. Your code should return true if valid or false if invalid. Variables $field, $user, $value can be used directly in the code." cssclass="input-block">
+						<attributes>
+							<attribute name="mode">
+								<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+									<then>
+										<param name="" default="edit" translate-default="no" type="string" />
+									</then>
+									<else>
+										<param name="" default="show" translate-default="no" type="string" />
+									</else>
+								</if>
+							</attribute>
+						</attributes>
+					</param>
+					<param name="code_validate_success" type="text" default="" label="Success Message" description="Input message to display on successful validation. Supports [value] and [title] substitutions only." />
+					<param name="code_validate_error" type="text" default="Not a valid input." label="Error Message" description="Input message to display on failed validation. Supports [value] and [title] substitutions only." />
+					<param name="code_validate_ajax" type="list" default="0" label="Ajax Validation" description="Enable or disable ajax code validation." >
+						<option value="0">Disabled</option>
+						<option value="1">Enabled</option>
+					</param>
+				</if>
+			</params>
+		</field>
+	</fieldsparams>
+	<fieldtypes>
+		<field type="code" label="Code" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Code">
+						<param name="code_template" type="folderlist" default="default" label="Template" description="Select template to be used for this code display. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbcodefield/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbcodefield/templates/" />
+						<param name="code" type="textarea" rows="10" default="" label="Code" description="Input substitution supported Code. The code should return the value to display. Variables $field and $user can be used directly in the code." cssclass="input-block">
+							<attributes>
+								<attribute name="mode">
+									<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+										<then>
+											<param name="" default="edit" translate-default="no" type="string" />
+										</then>
+										<else>
+											<param name="" default="show" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</param>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="codemulticheckbox" label="Code Check Box (Multiple)" unique="false">
+			<data name="" nametype="namesuffix" type="sql:mediumtext||sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Code">
+						<param name="code" type="textarea" rows="10" default="" label="Code" description="Input substitution supported Code. The code should return an array of key value pairs (e.g. array( &apos;Value&apos; =&gt; &apos;Label&apos; )). Array key will be used as the option value while the array value will be used as the label. A value array can be used for optgroup usage where the key in this case will be the optgroup label with the value array being the options (e.g. array( &apos;Group&apos; =&gt; array( &apos;Value&apos; =&gt; &apos;Label&apos; ) )). Variables $field and $user can be used directly in the code." cssclass="input-block">
+							<attributes>
+								<attribute name="mode">
+									<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+										<then>
+											<param name="" default="edit" translate-default="no" type="string" />
+										</then>
+										<else>
+											<param name="" default="show" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</param>
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="field_display_style" type="list" default="0" label="Display on profiles as" description="How to display the values of this multi-valued field">
+							<option value="0">Comma ","-separated line</option>
+							<option value="1">Unnumbered list "ul"</option>
+							<option value="2">Ordered list "ol"</option>
+						</param>
+						<if name="field_display_style" type="showhide" operator="&gt;" value="0" valuetype="const:int">
+							<param name="field_display_class" type="text" size="40" default="" label="CSS class of the list" description="Enter the name of the list class (optional) for OL or UL tag" />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="codemultiselect" label="Code Drop Down (Multi-select)" unique="false">
+			<data name="" nametype="namesuffix" type="sql:mediumtext||sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Code">
+						<param name="code" type="textarea" rows="10" default="" label="Code" description="Input substitution supported Code. The code should return an array of key value pairs (e.g. array( &apos;Value&apos; =&gt; &apos;Label&apos; )). Array key will be used as the option value while the array value will be used as the label. A value array can be used for optgroup usage where the key in this case will be the optgroup label with the value array being the options (e.g. array( &apos;Group&apos; =&gt; array( &apos;Value&apos; =&gt; &apos;Label&apos; ) )). Variables $field and $user can be used directly in the code." cssclass="input-block">
+							<attributes>
+								<attribute name="mode">
+									<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+										<then>
+											<param name="" default="edit" translate-default="no" type="string" />
+										</then>
+										<else>
+											<param name="" default="show" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</param>
+						<param name="code_update" type="field" multiple="true" size="10" default="" label="Update On" blanktext="- Select Fields -" description="Optionally select fields to trigger the options for this field to update." />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="field_display_style" type="list" default="0" label="Display on profiles as" description="How to display the values of this multi-valued field">
+							<option value="0">Comma ","-separated line</option>
+							<option value="1">Unnumbered list "ul"</option>
+							<option value="2">Ordered list "ol"</option>
+						</param>
+						<if name="field_display_style" type="showhide" operator="&gt;" value="0" valuetype="const:int">
+							<param name="field_display_class" type="text" size="40" default="" label="CSS class of the list" description="Enter the name of the list class (optional) for OL or UL tag" />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="codeselect" label="Code Drop Down (Single Select)" unique="false">
+			<data name="" nametype="namesuffix" type="sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Code">
+						<param name="code" type="textarea" rows="10" default="" label="Code" description="Input substitution supported Code. The code should return an array of key value pairs (e.g. array( &apos;Value&apos; =&gt; &apos;Label&apos; )). Array key will be used as the option value while the array value will be used as the label. A value array can be used for optgroup usage where the key in this case will be the optgroup label with the value array being the options (e.g. array( &apos;Group&apos; =&gt; array( &apos;Value&apos; =&gt; &apos;Label&apos; ) )). Variables $field and $user can be used directly in the code." cssclass="input-block">
+							<attributes>
+								<attribute name="mode">
+									<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+										<then>
+											<param name="" default="edit" translate-default="no" type="string" />
+										</then>
+										<else>
+											<param name="" default="show" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</param>
+						<param name="code_update" type="field" multiple="true" size="10" default="" label="Update On" blanktext="- Select Fields -" description="Optionally select fields to trigger the options for this field to update." />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="coderadio" label="Code Radio Buttons" unique="false">
+			<data name="" nametype="namesuffix" type="sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Code">
+						<param name="code" type="textarea" rows="10" default="" label="Code" description="Input substitution supported Code. The code should return an array of key value pairs (e.g. array( &apos;Value&apos; =&gt; &apos;Label&apos; )). Array key will be used as the option value while the array value will be used as the label. A value array can be used for optgroup usage where the key in this case will be the optgroup label with the value array being the options (e.g. array( &apos;Group&apos; =&gt; array( &apos;Value&apos; =&gt; &apos;Label&apos; ) )). Variables $field and $user can be used directly in the code." cssclass="input-block">
+							<attributes>
+								<attribute name="mode">
+									<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+										<then>
+											<param name="" default="edit" translate-default="no" type="string" />
+										</then>
+										<else>
+											<param name="" default="show" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</param>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<params>
+	</params>
+	<database>
+	</database>
+</cbinstall>

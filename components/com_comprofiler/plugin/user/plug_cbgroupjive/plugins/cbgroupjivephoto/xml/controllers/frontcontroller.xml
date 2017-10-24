@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="gjphotorows" request="view action" action="editPlugin showgjphotos">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="showgjphotos" mode="show" />
+		</action>
+
+		<action name="gjphotorow" request="view table action" action="editPlugin gjphotosbrowser editrow" requestparameters="photoid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="editgjphoto" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_plugin_photo" class="\CB\Plugin\GroupJivePhoto\Table\PhotoTable" key="id" value="photoid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjphotodownload" request="view table action format" action="editPlugin gjphotosbrowser downloadrow raw" requestparameters="photoid">
+			<showview view="downloadgjphoto" mode="show">
+				<data name="" type="sql:row" table="#__groupjive_plugin_photo" class="\CB\Plugin\GroupJivePhoto\Table\PhotoTable" key="id" value="photoid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjphotopreview" request="view table action format" action="editPlugin gjphotosbrowser previewrow raw" requestparameters="photoid">
+			<showview view="previewgjphoto" mode="show">
+				<data name="" type="sql:row" table="#__groupjive_plugin_photo" class="\CB\Plugin\GroupJivePhoto\Table\PhotoTable" key="id" value="photoid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="photos" type="button" default="Photos" buttonclass="default" buttonsize="xsmall" link="cb_action:gjphotorows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

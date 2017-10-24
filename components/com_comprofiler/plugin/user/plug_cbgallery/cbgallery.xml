@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Gallery</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-15</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Adds photo, file, video, and music user galleries.</description>
+	<version>2.0.15</version>
+	<release>2.0.0+build.2016.12.15.00.47.58.a60558548</release>
+	<installfile>install.cbgallery.php</installfile>
+	<files>
+		<filename plugin="cbgallery">cbgallery.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgallery.php</filename>
+		<filename>install.cbgallery.php</filename>
+		<foldername>js</foldername>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<filename>templates/default/files.php</filename>
+		<filename>templates/default/videos.php</filename>
+		<filename>templates/default/photos.php</filename>
+		<filename>templates/default/music.php</filename>
+		<filename>templates/default/tab.php</filename>
+		<filename>xml/models/model.folder.xml</filename>
+		<filename>xml/models/model.item.xml</filename>
+		<filename>xml/models/model.tab.xml</filename>
+		<filename>xml/views/view.com_comprofiler.edittab.xml</filename>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/Gallery">
+			<files folder="library">
+				<filename>CBGallery.php</filename>
+				<filename>Gallery.php</filename>
+				<filename>GalleryInterface.php</filename>
+				<filename>index.html</filename>
+				<foldername>Field</foldername>
+				<foldername>Table</foldername>
+				<foldername>Trigger</foldername>
+			</files>
+		</library>
+	</libraries>
+	<fieldtypes>
+		<field type="gallery" label="Gallery" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="gallery_asset" type="text" label="Asset" description="Input the asset for this gallery. Asset determines gallery location (e.g. global.cars, profile.[user_id], profile.%). Leave blank for profile field galley based off the displayed user (e.g. profile.[user_id].field.[field_id]). Additionally substitutions are supported (e.g. profile.[user_id].cars.[field_id]) in addition to custom [displayed_id] and [viwer_id]. The following custom assets can also be used: profile, connections, connectionsonly, self, self.connections, self.connectionsonly, user, user.connections, user.connectionsonly, displayed, displayed.connections, and displayed.connectionsonly." />
+						<showview view="galleryParams" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<tabs>
+		<tab name="Gallery" description="" class="cbgalleryTab" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<showview view="galleryParams" mode="edit" type="view" />
+			</params>
+		</tab>
+	</tabs>
+	<params>
+		<tabpane name="gallery">
+			<tabpanetab label="General">
+				<param name="general_template" type="folderlist" default="default" label="Template" description="Select template to be used for all of CB Gallery. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbgallery/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbgallery/templates/" />
+				<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB Gallery." />
+				<param name="general_delete" type="yesno" default="1" label="Auto Delete" description="Enable or disable automatic deletion of items when a user is deleted." yes="Enable" no="Disable" />
+				<param name="general_menu" type="yesno" default="1" label="Admin Menu" description="Enable or disable usage of backend administrator menu." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Albums">
+				<param name="folders" type="yesno" default="1" label="Albums" description="Enable or disable display of albums." yes="Enable" no="Disable" />
+				<tabpane name="gallery_albums">
+					<tabpanetab label="Display">
+						<param name="folders_width" type="int" default="200" size="5" label="Box Width" description="Input the item box width in pixels. Leave blank for 200 width. Note you can have a minimum box width of 100." />
+					</tabpanetab>
+					<tabpanetab label="Create">
+						<param name="folders_create" type="yesno" default="1" label="Create" description="Enable or disable creation of albums." yes="Enable" no="Disable" />
+						<param name="folders_create_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Access" description="Select album create access. Access determines who can create albums. Moderators are exempt from this configuration." />
+						<param name="folders_create_limit" type="field" key="name" default="custom" blanktext="Custom" label="Limit" description="Select the field to use for album create limit. Moderators are exempt from this configuration." />
+						<if name="folders_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+							<param name="folders_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of albums each individual user is limited to creating. If blank allow unlimited albums." />
+						</if>
+						<param name="folders_create_approval" type="yesno" default="0" label="Approval" description="Enable or disable approval of albums. Approval requires a moderator to publish a album before it is made visible. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+						<param name="folders_create_approval_notify" type="yesno" default="1" label="Notify" description="Enable or disable moderator notifications for albums needing approval." yes="Enable" no="Disable" />
+						<param name="folders_create_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on albums. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<param name="folders_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="folders_paging_limit" type="int" default="15" size="5" label="Limit" description="Input page limit. Page limit determines how many albums are displayed per page. If paging is disabled this can still be used to limit the number of albums displayed." />
+						<param name="folders_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on albums." yes="Enable" no="Disable" />
+						<param name="folders_orderby" type="xml:gallery_folder_orderby" default="date_desc" translate-default="no" label="Order By" description="Select how to order the albums." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Media">
+				<tabpane name="gallery_media">
+					<tabpanetab label="Display">
+						<param name="items_width" type="int" default="200" size="5" label="Box Width" description="Input the media box width in pixels. Leave blank for 200 width. Note you can have a minimum box width of 100." />
+					</tabpanetab>
+					<tabpanetab label="Create">
+						<param name="items_create" type="yesno" default="1" label="Create" description="Enable or disable creation of media." yes="Enable" no="Disable" />
+						<param name="items_create_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on media. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration. Note has no affect on multi-upload pages." yes="Enable" no="Disable" />
+						<param name="items_create_approval_notify" type="yesno" default="1" label="Notify" description="Enable or disable moderator notifications for media needing approval." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<param name="items_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="items_paging_limit" type="int" default="15" size="5" label="Limit" description="Input page limit. Page limit determines how many media are displayed per page. If paging is disabled this can still be used to limit the number of media displayed." />
+						<param name="items_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on media." yes="Enable" no="Disable" />
+						<param name="items_orderby" type="xml:gallery_item_orderby" default="date_desc" translate-default="no" label="Order By" description="Select how to order the media." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Photos">
+				<param name="photos" type="yesno" default="1" label="Photos" description="Enable or disable display of photos." yes="Enable" no="Disable" />
+				<tabpane name="gallery_photos">
+					<tabpanetab label="Display">
+						<param name="photos_download" type="yesno" default="1" label="Download" description="Enable or disable downloading of photos." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Create">
+						<param name="photos_create" type="yesno" default="1" label="Create" description="Enable or disable creation of photos." yes="Enable" no="Disable" />
+						<param name="photos_create_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Access" description="Select photo create access. Access determines who can create photos. Moderators are exempt from this configuration." />
+						<param name="photos_create_limit" type="field" key="name" default="custom" blanktext="Custom" label="Limit" description="Select the field to use for photo create limit. Moderators are exempt from this configuration." />
+						<if name="photos_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+							<param name="photos_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of photos each individual user is limited to creating. If blank allow unlimited photos." />
+						</if>
+						<param name="photos_upload" type="yesno" default="1" label="Upload" description="Enable or disable uploading of photos." yes="Enable" no="Disable" />
+						<param name="photos_link" type="yesno" default="0" label="Link" description="Enable or disable linking of photos. Linking allows photos to be displayed in the gallery from external sources." yes="Enable" no="Disable" />
+						<param name="photos_create_approval" type="yesno" default="0" label="Approval" description="Enable or disable approval of photos. Approval requires a moderator to publish a photo before it is made visible. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Validation">
+						<param name="photos_resample" type="yesno" default="1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+						<param name="photos_image_height" type="text" default="640" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to." />
+						<param name="photos_image_width" type="text" default="1280" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to." />
+						<param name="photos_thumbnail_height" type="text" default="320" label="Maximum Thumbnail Height" description="Input the maximum thumbnail height in pixels that the image will be resized to." />
+						<param name="photos_thumbnail_width" type="text" default="640" label="Maximum Thumbnail Width" description="Input the maximum thumbnail width in pixels that the image will be resized to." />
+						<param name="photos_maintain_aspect_ratio" type="xml:gallery_item_aspectratio" default="1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+						<param name="photos_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs." />
+						<param name="photos_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Videos">
+				<param name="videos" type="yesno" default="1" label="Videos" description="Enable or disable display of videos." yes="Enable" no="Disable" />
+				<tabpane name="gallery_videos">
+					<tabpanetab label="Display">
+						<param name="videos_download" type="yesno" default="0" label="Download" description="Enable or disable downloading of videos." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Create">
+						<param name="videos_create" type="yesno" default="1" label="Create" description="Enable or disable creation of videos." yes="Enable" no="Disable" />
+						<param name="videos_create_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Access" description="Select video create access. Access determines who can create videos. Moderators are exempt from this configuration." />
+						<param name="videos_create_limit" type="field" key="name" default="custom" blanktext="Custom" label="Limit" description="Select the field to use for video create limit. Moderators are exempt from this configuration." />
+						<if name="videos_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+							<param name="videos_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of videos each individual user is limited to creating. If blank allow unlimited videos." />
+						</if>
+						<param name="videos_upload" type="yesno" default="1" label="Upload" description="Enable or disable uploading of videos." yes="Enable" no="Disable" />
+						<param name="videos_link" type="yesno" default="0" label="Link" description="Enable or disable linking of videos. Linking allows videos to be displayed in the gallery from external sources." yes="Enable" no="Disable" />
+						<param name="videos_create_approval" type="yesno" default="0" label="Approval" description="Enable or disable approval of videos. Approval requires a moderator to publish a video before it is made visible. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Validation">
+						<param name="videos_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs." />
+						<param name="videos_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Files">
+				<param name="files" type="yesno" default="1" label="Files" description="Enable or disable display of files." yes="Enable" no="Disable" />
+				<tabpane name="gallery_files">
+					<tabpanetab label="Create">
+						<param name="files_create" type="yesno" default="1" label="Create" description="Enable or disable creation of files." yes="Enable" no="Disable" />
+						<param name="files_create_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Access" description="Select file create access. Access determines who can create files. Moderators are exempt from this configuration." />
+						<param name="files_create_limit" type="field" key="name" default="custom" blanktext="Custom" label="Limit" description="Select the field to use for file create limit. Moderators are exempt from this configuration." />
+						<if name="files_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+							<param name="files_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of files each individual user is limited to creating. If blank allow unlimited files." />
+						</if>
+						<param name="files_upload" type="yesno" default="1" label="Upload" description="Enable or disable uploading of files." yes="Enable" no="Disable" />
+						<param name="files_link" type="yesno" default="0" label="Link" description="Enable or disable linking of files. Linking allows files to be displayed in the gallery from external sources." yes="Enable" no="Disable" />
+						<param name="files_create_approval" type="yesno" default="0" label="Approval" description="Enable or disable approval of files. Approval requires a moderator to publish a file before it is made visible. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Validation">
+						<param name="files_extensions" type="text" default="zip,rar,doc,pdf,txt,xls" translate-default="no" size="40" label="File Extensions" description="Input the allowed file extensions as a comma separated list." />
+						<param name="files_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs." />
+						<param name="files_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Music">
+				<param name="music" type="yesno" default="1" label="Music" description="Enable or disable display of music." yes="Enable" no="Disable" />
+				<tabpane name="gallery_music">
+					<tabpanetab label="Display">
+						<param name="music_download" type="yesno" default="0" label="Download" description="Enable or disable downloading of music." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Create">
+						<param name="music_create" type="yesno" default="1" label="Create" description="Enable or disable creation of music." yes="Enable" no="Disable" />
+						<param name="music_create_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Access" description="Select music create access. Access determines who can create music. Moderators are exempt from this configuration." />
+						<param name="music_create_limit" type="field" key="name" default="custom" blanktext="Custom" label="Limit" description="Select the field to use for music create limit. Moderators are exempt from this configuration." />
+						<if name="music_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+							<param name="music_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of music each individual user is limited to creating. If blank allow unlimited music." />
+						</if>
+						<param name="music_upload" type="yesno" default="1" label="Upload" description="Enable or disable uploading of music." yes="Enable" no="Disable" />
+						<param name="music_link" type="yesno" default="0" label="Link" description="Enable or disable linking of music. Linking allows music to be displayed in the gallery from external sources." yes="Enable" no="Disable" />
+						<param name="music_create_approval" type="yesno" default="0" label="Approval" description="Enable or disable approval of music. Approval requires a moderator to publish a music before it is made visible. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Validation">
+						<param name="music_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs." />
+						<param name="music_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Thumbnails">
+				<param name="thumbnails" type="yesno" default="1" label="Thumbnails" description="Enable or disable display of custom thumbnails for videos, music, and files media." yes="Enable" no="Disable" />
+				<tabpane name="gallery_thumbnails">
+					<tabpanetab label="Create">
+						<param name="thumbnails_upload" type="yesno" default="1" label="Upload" description="Enable or disable uploading of thumbnails." yes="Enable" no="Disable" />
+						<param name="thumbnails_link" type="yesno" default="0" label="Link" description="Enable or disable linking of thumbnails. Linking allows thumbnails to be displayed in the gallery from external sources." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Validation">
+						<param name="thumbnails_resample" type="yesno" default="1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+						<param name="thumbnails_image_height" type="text" default="320" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to." />
+						<param name="thumbnails_image_width" type="text" default="640" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to." />
+						<param name="thumbnails_maintain_aspect_ratio" type="xml:gallery_item_aspectratio" default="1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+						<param name="thumbnails_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs." />
+						<param name="thumbnails_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__comprofiler_plugin_gallery_items" class="\CB\Plugin\Gallery\Table\ItemTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="asset" type="sql:text" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="value" type="sql:text" />
+				<column name="file" type="sql:text" null="true" />
+				<column name="folder" type="sql:int(11)" default="0" />
+				<column name="title" type="sql:varchar(255)" null="true" />
+				<column name="description" type="sql:text" null="true" />
+				<column name="thumbnail" type="sql:varchar(255)" null="true" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:tinyint(1)" default="0" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="asset_folder_date_published">
+					<column name="asset" size="30" />
+					<column name="folder" />
+					<column name="date" />
+					<column name="published" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_gallery_folders" class="\CB\Plugin\Gallery\Table\FolderTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="asset" type="sql:text" />
+				<column name="title" type="sql:varchar(255)" null="true" />
+				<column name="description" type="sql:text" null="true" />
+				<column name="thumbnail" type="sql:int(11)" default="0" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:tinyint(1)" default="0" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="asset_date_published">
+					<column name="asset" size="30" />
+					<column name="date" />
+					<column name="published" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+	</database>
+</cbinstall>

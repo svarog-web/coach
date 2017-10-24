@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjfile" type="params" ui="admin" label="File" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjfilerows" label="Cancel" />
+			</toolbarmenu>
+			<param name="published" type="xml:groupjive_published" default="1" label="Publish" description="Select publish state of this file. Unpublished files will not be visible to the public." />
+			<param name="title" type="text" label="Title" size="35" description="Optionally input a file title to display instead of filename." />
+			<param name="group" type="list" label="Group" blanktext="" description="Select group the file is for.">
+				<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+			</param>
+			<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+				<field name="filename" type="private" method="name" label="" mode="show" link="cb_action:gjfiledownload" parameters="fileid" paramvalues="id" target="_blank" />
+			</if>
+			<param name="file" type="uploadfile" label="File" description="Select the file to upload.">
+				<attributes>
+					<attribute name="validate">
+						<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+							<then>
+								<param name="" type="string" default="" label="" />
+							</then>
+							<else>
+								<param name="" type="string" default="required" translate-default="no" label="" />
+							</else>
+						</if>
+					</attribute>
+				</attributes>
+			</param>
+			<param name="description" type="textarea" label="Description" cols="40" rows="5" description="Optionally input a file description." />
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input the file owner id. File owner determines the creator of the file specified as User ID." />
+		</view>
+	</views>
+</cbxml>

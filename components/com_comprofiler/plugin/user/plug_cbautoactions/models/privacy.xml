@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="privacy">CB Privacy</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB Privacy">
+				<option value="privacy_onBeforeValidatePrivacy" translate="no">privacy_onBeforeValidatePrivacy</option>
+				<option value="privacy_onAfterValidatePrivacy" translate="no">privacy_onAfterValidatePrivacy</option>
+				<option value="privacy_onBeforePrivacyOptions" translate="no">privacy_onBeforePrivacyOptions</option>
+				<option value="privacy_onAfterPrivacyOptions" translate="no">privacy_onAfterPrivacyOptions</option>
+				<option value="privacy_onBeforeUpdatePrivacy" translate="no">privacy_onBeforeUpdatePrivacy</option>
+				<option value="privacy_onBeforeCreatePrivacy" translate="no">privacy_onBeforeCreatePrivacy</option>
+				<option value="privacy_onAfterUpdatePrivacy" translate="no">privacy_onAfterUpdatePrivacy</option>
+				<option value="privacy_onAfterCreatePrivacy" translate="no">privacy_onAfterCreatePrivacy</option>
+				<option value="privacy_onBeforeDeletePrivacy" translate="no">privacy_onBeforeDeletePrivacy</option>
+				<option value="privacy_onAfterDeletePrivacy" translate="no">privacy_onAfterDeletePrivacy</option>
+				<option value="privacy_onBeforeIsAuthorized" translate="no">privacy_onBeforeIsAuthorized</option>
+				<option value="privacy_onAfterIsAuthorized" translate="no">privacy_onAfterIsAuthorized</option>
+				<option value="privacy_onBeforeUpdateClosed" translate="no">privacy_onBeforeUpdateClosed</option>
+				<option value="privacy_onBeforeCreateClosed" translate="no">privacy_onBeforeCreateClosed</option>
+				<option value="privacy_onAfterUpdateClosed" translate="no">privacy_onAfterUpdateClosed</option>
+				<option value="privacy_onAfterCreateClosed" translate="no">privacy_onAfterCreateClosed</option>
+				<option value="privacy_onBeforeDeleteClosed" translate="no">privacy_onBeforeDeleteClosed</option>
+				<option value="privacy_onAfterDeleteClosed" translate="no">privacy_onAfterDeleteClosed</option>
+				<option value="privacy_onBeforeAccountDisable" translate="no">privacy_onBeforeAccountDisable</option>
+				<option value="privacy_onAfterAccountDisable" translate="no">privacy_onAfterAccountDisable</option>
+				<option value="privacy_onBeforeAccountDelete" translate="no">privacy_onBeforeAccountDelete</option>
+				<option value="privacy_onAfterAccountDelete" translate="no">privacy_onAfterAccountDelete</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_privacy" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Creates blogs on a users behalf." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionPrivacy" method="installed" />
+				</left>
+				<then>
+					<params name="privacy" type="params" repeat="true" label="" display="2lines">
+						<param name="type" type="text" label="Type" description="Input substitution supported privacy entry type (e.g. profile)." validate="required" />
+						<if name="type" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+							<param name="subtype" type="text" label="Sub-Type" description="Optionally input substitution supported privacy entry sub-type (e.g. field)." />
+							<param name="item" type="text" label="Item" description="Optionally input substitution supported privacy entry item id." size="10" />
+							<param name="rule" type="list" hideblanktext="always" label="Rule" description="Select privacy rule." validate="required">
+								<data name="" type="private" class="cbautoactionsActionPrivacy" method="privacyList" />
+							</param>
+							<param name="owner" type="text" label="Owner" description="Input substitution supported target user of privacy rule as single integer user_id. Leave blank to use trigger user as the owner." size="10" />
+							<if name="item" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+								<param name="load" type="yesno" default="1" label="Load" description="Enable or disable loading. This attempts to load by owner, type, and item if possible. Additional subtype will be used if supplied. This allows existing privacy to be updated instead of created." yes="Enable" no="Disable" />
+							</if>
+						</if>
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB Privacy installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

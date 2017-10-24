@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="module" client="site" method="upgrade">
+	<name>CB Content</name>
+	<creationDate>2016-03-07</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>2.0.1</version>
+	<description>Allows to display user profile content.</description>
+	<files>
+		<filename module="mod_cbcontent">mod_cbcontent.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="maintext" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="Text" description="Input substitution supported Text or HTML that is displayed in this module. E.g. [cb:usertab tab=&quot;17&quot; user=&quot;#displayed&quot; /]" />
+				<field name="maincss" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="CSS" description="Optionally input substitution supported CSS to be added to page header (e.g. body { background-color: red; })." />
+				<field name="mainjs" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="Javascript" description="Optionally input substitution supported Javascript to be added to page header (e.g. alert( 'Hello World!' );)" />
+				<field name="mainjquery" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="jQuery" description="Optionally input substitution supported jQuery to be added to page header (e.g. $( 'body' ).prepend( '&lt;div&gt;Hello World!&lt;/div&gt;' );)." />
+				<field name="mainjquery_plgs" type="text" size="40" default="" label="jQuery Plugins" description="Optionally input comma seperated list of CB jQuery plugins to load in header with jQuery (e.g. ui-all,validate)." />
+				<field name="prepare_content" type="radio" default="0" class="btn-group btn-group-yesno" label="Prepare using Content Plugins" description="Select Yes if you need CMS Content plugins content.prepare to be triggered on the text, css, js, and jquery. Select No if you do not need CMS Content plugins content.prepare to be triggered.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="maincbtpl" type="radio" default="0" class="btn-group btn-group-yesno" label="Load Template" description="Enable or disable loading of CB template on content. This will load in CSS to allow styling to properly occur for CB substitutions.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="maincbjs" type="radio" default="0" class="btn-group btn-group-yesno" label="Load JavaScript" description="Enable or disable loading of CB javascript on content.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_tooltip" type="radio" default="0" class="btn-group btn-group-yesno" label="Load Tooltips" description="Enable or disable loading of CB tooltip javascript on content.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_lang" type="radio" default="1" class="btn-group btn-group-yesno" label="Load Language" description="Enable or disable loading of CB language on content. This will allow proper translation of substitutions.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_plgs" type="radio" default="0" class="btn-group btn-group-yesno" label="Load Plugins" description="Enable or disable loading of CB plugins on content.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="cache" type="list" default="1" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field name="cache_time" type="text" default="900" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field name="cachemode" type="hidden" default="static">
+					<option value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

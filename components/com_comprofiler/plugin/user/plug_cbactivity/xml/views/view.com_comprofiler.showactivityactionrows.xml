@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showactivityactions" type="params" ui="admin" label="Actions" icon="list" viewformatting="none">
+			<tablebrowser name="activityactionsbrowser" table="#__comprofiler_plugin_activity_actions" class="\CB\Plugin\Activity\Table\ActionTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/actionid" label="Edit" />
+					<menu name="publish" action="linkAction" task="publish" link="cbo:publish/published" label="Publish" />
+					<menu name="unpublish" action="linkAction" task="unpublish" link="cbo:unpublish/published" label="Unpublish" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Actions..." size="30">
+					<field name="value" />
+					<field name="title" />
+					<field name="description" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="ordering_asc" label="Ordering ascending" default="true" translate-default="no">
+						<field name="ordering" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="ordering_desc" label="Ordering descending">
+						<field name="ordering" ordering="DESC" />
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="" type="private" method="icon" key="id" width="5%" align="center" label="Icon" />
+						<field name="value" type="string" width="15%" link="cbo:rowedit" parameters="actionid" paramvalues="id" align="left" label="Action" allowordering="ascending,descending" />
+						<field name="title" type="string" width="20%" align="left" label="Title" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="description" type="string" align="left" label="Description" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="published" type="published" width="5%" align="center" label="Published" onclick="toggle" allowordering="ascending,descending" />
+						<field name="ordering" type="ordering" width="10%" align="center" label="Order" onclick="arrows,number" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

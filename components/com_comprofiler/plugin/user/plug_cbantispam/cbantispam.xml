@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB AntiSpam</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-30</creationDate>
+	<copyright>(C) 2004-2015 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Adds Captcha support and various other AntiSpam measures.</description>
+	<version>2.0.4</version>
+	<release>2.0.0+build.2016.12.30.01.41.44.878e01ca2</release>
+	<files>
+		<filename plugin="cbantispam">cbantispam.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbantispam.php</filename>
+		<foldername>fonts</foldername>
+		<foldername>audio</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+	</files>
+	<delete>
+		<filename>templates/default/template.css</filename>
+		<filename>admin.cbantispam.css</filename>
+		<filename>admin.cbantispam.html.php</filename>
+		<filename>admin.cbantispam.php</filename>
+		<filename>toolbar.cbantispam.html.php</filename>
+		<filename>toolbar.cbantispam.php</filename>
+		<filename>cbantispam.class.php</filename>
+		<filename>tab.cbantispam.php</filename>
+		<filename>field.cbantispam.php</filename>
+		<filename>plugin.cbantispam.php</filename>
+		<foldername>js</foldername>
+		<foldername>images</foldername>
+		<foldername>templates/default/images</foldername>
+	</delete>
+	<fieldtypes>
+		<field type="antispam_ipaddress" label="IP Address" unique="true">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="cbantispam_ipaddress_display" type="yesno" default="1" label="Moderator Only" description="Enable or disable IP Address display to CB moderators only." yes="Enable" no="Disable" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="antispam_captcha" label="Captcha" unique="true">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Captcha">
+						<param name="cbantispam_captcha_mode" type="xml:captcha_mode" default="" blanktext="Default" label="Mode" description="Optionally override captcha mode." />
+						<param name="cbantispam_captcha_ajax_valid" type="yesno" default="0" label="Ajax Validation" description="Enable or disable ajax validation of captcha codes. Note only functional for internal modes." yes="Enable" no="Disable" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<tabs>
+		<tab name="Blocks" description="" class="cbantispamTabBlocks" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<tabpane name="tab">
+					<tabpanetab label="Blocks">
+						<param name="tab_block" type="yesno" default="1" label="Display" description="Enable or disable display of blocks tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabBlocks" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Whitelists">
+						<param name="tab_whitelist" type="yesno" default="0" label="Display" description="Enable or disable display of whitelists tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabWhitelists" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Attempts">
+						<param name="tab_attempts" type="yesno" default="0" label="Display" description="Enable or disable display of attempts tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Logs">
+						<param name="tab_logs" type="yesno" default="0" label="Display" description="Enable or disable display of logs tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<showview view="cbAntiSpamTabPaging" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</tab>
+		<tab name="Whitelists" description="" class="cbantispamTabWhitelists" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<tabpane name="tab">
+					<tabpanetab label="Blocks">
+						<param name="tab_block" type="yesno" default="0" label="Display" description="Enable or disable display of blocks tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabBlocks" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Whitelists">
+						<param name="tab_whitelist" type="yesno" default="1" label="Display" description="Enable or disable display of whitelists tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabWhitelists" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Attempts">
+						<param name="tab_attempts" type="yesno" default="0" label="Display" description="Enable or disable display of attempts tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Logs">
+						<param name="tab_logs" type="yesno" default="0" label="Display" description="Enable or disable display of logs tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<showview view="cbAntiSpamTabPaging" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</tab>
+		<tab name="Attempts" description="" class="cbantispamTabAttempts" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<tabpane name="tab">
+					<tabpanetab label="Blocks">
+						<param name="tab_block" type="yesno" default="0" label="Display" description="Enable or disable display of blocks tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabBlocks" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Whitelists">
+						<param name="tab_whitelist" type="yesno" default="0" label="Display" description="Enable or disable display of whitelists tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabWhitelists" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Attempts">
+						<param name="tab_attempts" type="yesno" default="1" label="Display" description="Enable or disable display of attempts tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Logs">
+						<param name="tab_logs" type="yesno" default="0" label="Display" description="Enable or disable display of logs tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<showview view="cbAntiSpamTabPaging" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</tab>
+		<tab name="Log" description="" class="cbantispamTabLog" fields="0" position="canvas_main_middle" displaytype="menunested" ordering_register="1">
+			<params>
+				<tabpane name="tab">
+					<tabpanetab label="Blocks">
+						<param name="tab_block" type="yesno" default="0" label="Display" description="Enable or disable display of blocks tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabBlocks" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Whitelists">
+						<param name="tab_whitelist" type="yesno" default="0" label="Display" description="Enable or disable display of whitelists tab." yes="Enable" no="Disable" />
+						<showview view="cbAntiSpamTabWhitelists" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Attempts">
+						<param name="tab_attempts" type="yesno" default="0" label="Display" description="Enable or disable display of attempts tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Logs">
+						<param name="tab_logs" type="yesno" default="1" label="Display" description="Enable or disable display of logs tab." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<showview view="cbAntiSpamTabPaging" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</tab>
+		<tab type="existingSytemTab" class="getContactTab">
+			<fields>
+				<field type="antispam_ipaddress" title="IP Address" name="antispam_ipaddress" description="" registration="0" edit="0" readonly="0" profile="1" />
+				<field type="antispam_captcha" title="Captcha" name="antispam_captcha" description="" required="1" registration="1" edit="0" readonly="0" profile="0" />
+			</fields>
+		</tab>
+	</tabs>
+	<params>
+		<tabpane name="antispam">
+			<tabpanetab label="General">
+				<param name="general_template" type="folderlist" default="default" translate-default="no" label="Template" description="Select template to be used for all of CB AntiSpam. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbantispam/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbantispam/templates/" />
+				<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB AntiSpam." />
+				<param name="general_block" type="yesno" default="1" label="Block" description="Enable or disable usage of Blocking. Disabling will prevent all queries and checks from functioning to free up system resources if needed." yes="Enable" no="Disable" />
+				<param name="general_whitelist" type="yesno" default="1" label="Whitelist" description="Enable or disable usage of Whitelisting. Disabling will prevent all queries and checks from functioning to free up system resources if needed." yes="Enable" no="Disable" />
+				<param name="general_attempts" type="yesno" default="1" label="Attempts" description="Enable or disable usage of Attempts. Disabling will prevent all queries and checks from functioning to free up system resources if needed. Note disabling this will also disable auto blocking." yes="Enable" no="Disable" />
+				<param name="general_log" type="yesno" default="1" label="Log" description="Enable or disable usage of IP Log. Disabling will prevent all queries and checks from functioning to free up system resources if needed. Note disabling this will also disable the IP Address field." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Menu">
+				<param name="menu_block_user" type="yesno" default="1" label="Block User" description="Enable or disable moderator CB Menu item to quick block a User. Moderators can not be blocked." yes="Enable" no="Disable" />
+				<param name="menu_block_ip" type="yesno" default="1" label="Block IP Address" description="Enable or disable moderator CB Menu item to quick block a users IP Address. Moderators can not be blocked." yes="Enable" no="Disable" />
+				<param name="menu_block_email" type="yesno" default="0" label="Block Email Address" description="Enable or disable moderator CB Menu item to quick block a users Email Address. Moderators can not be blocked." yes="Enable" no="Disable" />
+				<param name="menu_block_domain" type="yesno" default="0" label="Block Email Domain" description="Enable or disable moderator CB Menu item to quick block a users Email Domain. Moderators can not be blocked." yes="Enable" no="Disable" />
+				<param name="menu_whitelist_user" type="yesno" default="1" label="Whitelist User" description="Enable or disable moderator CB Menu item to quick whitelist a User." yes="Enable" no="Disable" />
+				<param name="menu_whitelist_ip" type="yesno" default="1" label="Whitelist IP Address" description="Enable or disable moderator CB Menu item to quick whitelist a users IP Address." yes="Enable" no="Disable" />
+				<param name="menu_whitelist_email" type="yesno" default="0" label="Whitelist Email Address" description="Enable or disable moderator CB Menu item to quick whitelist a users Email Address." yes="Enable" no="Disable" />
+				<param name="menu_whitelist_domain" type="yesno" default="0" label="Whitelist Email Domain" description="Enable or disable moderator CB Menu item to quick whitelist a users Email Domain." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Login">
+				<tabpane name="antispam_login">
+					<tabpanetab label="Blocked">
+						<param name="login_block_redirect" type="text" default="" size="30" label="Redirect URL" description="Input a URL to redirect the user to if login is blocked. If left blank by default will redirect to index.php." />
+						<param name="login_block_redirect_msg" type="textarea" default="Your login attempt has been blocked. Reason: [reason]" cols="40" rows="5" label="Redirect Message" description="Optionally input a message to include with the redirect." />
+						<if name="login_block_redirect_msg" operator="!=" value="" valuetype="const:string" type="showhide">
+							<param name="login_block_redirect_type" type="text" default="error" size="10" label="Redirect Type" description="Optionally input redirect message type (e.g. message, error, warning, alert, etc..). Only used if Redirect Message is used. Determines the style of the Redirect Message." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Duplicates">
+						<param name="login_duplicate" type="yesno" default="0" label="Block" description="Enable or disable blocking of duplicate logins. This checks if the number of active sessions for an account surpass a specified limit." yes="Enable" no="Disable" />
+						<if name="login_duplicate" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="login_duplicate_count" type="text" default="1" size="10" label="Active Logins" description="Input maximum allowed active logins for an account. If left blank will default to 1." />
+							<param name="login_duplicate_method" type="xml:login_block_method" default="1" label="Block Method" description="Select how blocking of duplicate logins should be handled. Logging out the current session will ensure an account can only be logged in by 1 user at any given time causing the duplicate attempt to login while logging out any previous sessions. Blocking IP Address will block the IP Address attempting the duplicate login. Blocking User will block the entire users account regardless of IP Address. Deny Login will block the login, but not block the IP Address or the User." />
+							<param name="login_duplicate_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="login_duplicate_reason" type="textarea" default="Already logged in." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Sharing">
+						<param name="login_share" type="yesno" default="0" label="Block" description="Enable or disable blocking of shared logins. This checks the number of unique IP Addresses that have been used to access an account surpass a specified limit." yes="Enable" no="Disable" />
+						<if name="login_share" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="login_share_count" type="text" default="10" size="10" label="Share Limit" description="Input maximum allowed unique IP Addresses used to access an account. If left blank will default to 10." />
+							<param name="login_share_timeframe" type="text" default="-1 MONTH" translate-default="no" label="Share Timeframe" size="40" description="Optionally input timeframe to check for unique IP Addresses. If outside of timeframe will not be counted for share limit. Leave blank for all IP Addresses. For example if 1 Month is used it will count uniqe IP Addresses 1 month backwards from the current datetime." />
+							<param name="login_share_method" type="xml:login_block_method" default="0" label="Block Method" description="Select how blocking of shared logins should be handled. Blocking IP Address will block the IP Address attempting the shared login. Blocking User will block the entire users account regardless of IP Address. Deny Login will block the login, but not block the IP Address or the User." />
+							<param name="login_share_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="login_share_reason" type="textarea" default="Login sharing." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Auto Block">
+						<param name="login_autoblock" type="yesno" default="0" label="Block" description="Enable or disable blocking of IP Address after a number of failed login attempts." yes="Enable" no="Disable" />
+						<if name="login_autoblock" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="login_autoblock_count" type="text" default="5" size="10" label="Attempts Limit" description="Input number of failed login attempts before blocking the IP Address. If left blank will default to 5." />
+							<param name="login_autoblock_timeframe" type="text" default="-1 MONTH" translate-default="no" label="Attempts Timeframe" size="40" description="Optionally input timeframe to check for failed login attempts. If outside of timeframe will not be counted for attempts limit. Leave blank for all attempts. For example if 1 Month is used it will count attempts 1 month backwards from the current datetime." />
+							<param name="login_autoblock_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="login_autoblock_reason" type="textarea" default="Too many failed login attempts." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Forgot Login">
+				<tabpane name="antispam_forgotlogin">
+					<tabpanetab label="Blocked">
+						<param name="forgot_block_redirect" type="text" default="" size="30" label="Redirect URL" description="Input a URL to redirect the user to if forgot login is blocked. If left blank by default will redirect to index.php." />
+						<param name="forgot_block_redirect_msg" type="textarea" default="Your forgot login attempt has been blocked. Reason: [reason]" cols="40" rows="5" label="Redirect Message" description="Optionally input a message to include with the redirect." />
+						<if name="forgot_block_redirect_msg" operator="!=" value="" valuetype="const:string" type="showhide">
+							<param name="forgot_block_redirect_type" type="text" default="error" size="10" label="Redirect Type" description="Optionally input redirect message type (e.g. message, error, warning, alert, etc..). Only used if Redirect Message is used. Determines the style of the Redirect Message." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Auto Block">
+						<param name="forgot_autoblock" type="yesno" default="0" label="Block" description="Enable or disable blocking after a number of forgot login attempts. Blocked users will have all forgot login attempts force failed." yes="Enable" no="Disable" />
+						<if name="forgot_autoblock" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="forgot_autoblock_count" type="text" default="5" size="10" label="Attempts Limit" description="Input number of forgot login attempts before blocking. If left blank will default to 5." />
+							<param name="forgot_autoblock_timeframe" type="text" default="-1 MONTH" translate-default="no" label="Attempts Timeframe" size="40" description="Optionally input timeframe to check for forgot login attempts. If outside of timeframe will not be counted for attempts limit. Leave blank for all attempts. For example if 1 Month is used it will count attempts 1 month backwards from the current datetime." />
+							<param name="forgot_autoblock_method" type="xml:forgot_block_method" default="0" label="Block Method" description="Select how blocking of forgot login attempts should be handled. Blocking IP Address will block the IP Address attempting the forgot login. Deny Forgot Login will block the forgot login attempt, but not block the IP Address." />
+							<param name="forgot_autoblock_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="forgot_autoblock_reason" type="textarea" default="Too many forgot login attempts." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Registration">
+				<tabpane name="antispam_registration">
+					<tabpanetab label="Blocked">
+						<param name="reg_block_redirect" type="text" default="" size="30" label="Redirect URL" description="Input a URL to redirect the user to if registration is blocked. If left blank by default will redirect to index.php." />
+						<param name="reg_block_redirect_msg" type="textarea" default="Your registration attempt has been blocked. Reason: [reason]" cols="40" rows="5" label="Redirect Message" description="Optionally input a message to include with the redirect." />
+						<if name="reg_block_redirect_msg" operator="!=" value="" valuetype="const:string" type="showhide">
+							<param name="reg_block_redirect_type" type="text" default="error" size="10" label="Redirect Type" description="Optionally input redirect message type (e.g. message, error, warning, alert, etc..). Only used if Redirect Message is used. Determines the style of the Redirect Message." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Duplicates">
+						<param name="reg_duplicate" type="yesno" default="0" label="Block" description="Enable or disable blocking of duplicate registrations. This checks if the number of accounts for the IP Address surpass a specified limit." yes="Enable" no="Disable" />
+						<if name="reg_duplicate" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="reg_duplicate_count" type="text" default="1" size="10" label="Account Limit" description="Input maximum allowed accounts for an IP Address. If left blank will default to 1." />
+							<param name="reg_duplicate_timeframe" type="text" default="-1 YEAR" translate-default="no" label="Duplicates Timeframe" size="40" description="Optionally input timeframe to check for duplicate registrations. If outside of timeframe will not be counted as a registration. Leave blank for all registrations. For example if 1 Month is used it will count registrations 1 month backwards from the current datetime." />
+							<param name="reg_duplicate_method" type="xml:registration_block_method" default="0" label="Block Method" description="Select how blocking of duplicate registrations should be handled. Blocking IP Address will block the IP Address attempting the duplicate registration. Deny Registration will block the registration, but not block the IP Address." />
+							<param name="reg_duplicate_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="reg_duplicate_reason" type="textarea" default="Already registered." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Auto Block">
+						<param name="reg_autoblock" type="yesno" default="0" label="Block" description="Enable or disable blocking of IP Address after a number of failed registration attempts." yes="Enable" no="Disable" />
+						<if name="reg_autoblock" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="reg_autoblock_count" type="text" default="5" size="10" label="Attempts Limit" description="Input number of failed registration attempts before blocking the IP Address. If left blank will default to 5." />
+							<param name="reg_autoblock_timeframe" type="text" default="-1 MONTH" translate-default="no" label="Attempts Timeframe" size="40" description="Optionally input timeframe to check for failed registration attempts. If outside of timeframe will not be counted for attempts limit. Leave blank for all attempts. For example if 1 Month is used it will count attempts 1 month backwards from the current datetime." />
+							<param name="reg_autoblock_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="reg_autoblock_reason" type="textarea" default="Too many failed registration attempts." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Captcha">
+				<tabpane name="antispam_captcha">
+					<tabpanetab label="General">
+						<param name="captcha_mode" type="xml:captcha_mode" default="internal" translate-default="no" label="Mode" description="Select the type of captcha to use." />
+						<param name="" type="private" class="cbantispamCaptcha" method="preview" label="Preview" description="Expected captcha image output. Note audio is not supported in preview for Internal modes." />
+						<param name="captcha_honeypot" type="yesno" default="1" label="Honeypot" description="Enable or disable usage of hidden honeypot input. This input is not displayed, but if completed will fail validation. This is useful to stop spam bots auto-filling forms." yes="Enable" no="Disable" />
+						<if name="captcha_honeypot" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="captcha_honeypot_name" type="text" default="full_address" translate-default="no" size="30" label="Honeypot Name" description="Optionally input honeypot input name. Only change if conflits with an input used in your forms." />
+				 		</if>
+					</tabpanetab>
+					<tabpanetab label="Legacy">
+						<param name="captcha_legacy_forgot" type="yesno" default="0" label="Forgot Login" description="Enable or disable captcha on Forgot Login page." yes="Enable" no="Disable" />
+						<if name="captcha_legacy_forgot" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="captcha_legacy_forgot_mode" type="xml:captcha_mode" default="" blanktext="Default" label="Forgot Login Mode" description="Optionally override General captcha mode for Forgot Login page." />
+						</if>
+						<param name="captcha_legacy_email" type="yesno" default="0" label="Email Form" description="Enable or disable captcha on Email Form page." yes="Enable" no="Disable" />
+						<if name="captcha_legacy_email" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="captcha_legacy_email_mode" type="xml:captcha_mode" default="" blanktext="Default" label="Email Form Mode" description="Optionally override General captcha mode for Email Form page." />
+						</if>
+						<param name="captcha_legacy_login" type="yesno" default="0" label="Login" description="Enable or disable captcha on Login modules." yes="Enable" no="Disable" />
+						<if name="captcha_legacy_login" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="captcha_legacy_login_mode" type="xml:captcha_mode" default="" blanktext="Default" label="Login Mode" description="Optionally override General captcha mode on Login modules." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Modes">
+						<tabpane name="antispam_captcha_modes">
+							<tabpanetab label="Internal">
+								<tabpane name="antispam_captcha_mode_internal">
+									<tabpanetab label="General">
+										<param name="captcha_internal_format" type="xml:captcha_format" default="jpeg" translate-default="no" label="Format" description="Select the output format of the captcha image. Some formats may provide better clarity." />
+										<param name="captcha_internal_audio" type="yesno" default="1" label="Audio" description="Enable or disable usage of audio button. Note question mode does not support audio and forces disabled." yes="Enable" no="Disable" />
+										<param name="captcha_internal_refresh" type="yesno" default="1" label="Refresh" description="Enable or disable usage of refresh button." yes="Enable" no="Disable" />
+										<param name="captcha_internal_height" type="text" default="40" size="10" label="Image Height" description="Input captcha image height. If left blank will default to 40. Width and Font Size will scale based off height." />
+										<param name="captcha_internal_color_range" type="text" default="2" size="10" label="Image Color Range" description="Input captcha image color range for all colors. This will add a negative and positive range to all color values to provide further randomization. If left blank will default to 2. Set to 0 for no range." />
+										<param name="captcha_internal_bg_color" type="text" default="255,255,255" translate-default="no" size="25" label="Image Background Color" description="Input captcha image comma separated background color. If left blank will default to 255,255,255. Colors must be RGB comma separated format (e.g. R,G,B)." />
+										<param name="captcha_internal_txt_color" type="text" default="20,40,100" translate-default="no" size="25" label="Image Text Color" description="Input captcha image comma separated text color. If left blank will default to 20,40,100. Colors must be RGB comma separated format (e.g. R,G,B)." />
+										<param name="captcha_internal_bg_noise" type="yesno" default="1" label="Image Background Noise" description="Enable or disable usage of random background noise on captcha images." yes="Enable" no="Disable" />
+										<if name="captcha_internal_bg_noise" operator="=" value="1" valuetype="const:int" type="showhide">
+											<param name="captcha_internal_bg_noise_color" type="text" default="100,120,180" translate-default="no" size="25" label="Image Background Noise Color" description="Input captcha image comma separated background noise color. If left blank will default to 100,120,180. Colors must be RGB comma separated format (e.g. R,G,B)." />
+										</if>
+										<param name="captcha_internal_fg_noise" type="yesno" default="1" label="Image Foreground Noise" description="Enable or disable usage of random foreground noise on captcha images." yes="Enable" no="Disable" />
+										<if name="captcha_internal_fg_noise" operator="=" value="1" valuetype="const:int" type="showhide">
+											<param name="captcha_internal_fg_noise_color" type="text" default="100,120,180" translate-default="no" size="25" label="Image Foreground Noise Color" description="Input captcha image comma separated foreground noise color. If left blank will default to 100,120,180. Colors must be RGB comma separated format (e.g. R,G,B)." />
+										</if>
+										<param name="captcha_internal_font" type="filelist" default="monofont.ttf" translate-default="no" label="Image Font Type" description="Select captcha image font type. Font files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbantispam/fonts/." directory="/components/com_comprofiler/plugin/user/plug_cbantispam/fonts/" filter="\.ttf$" />
+										<param name="captcha_internal_rotation" type="text" default="13" size="10" label="Character Rotation" description="Input captcha image character rotation range. This will add a negative and positive rotation range per character. Set to 0 for no ration." />
+										<param name="captcha_internal_offset" type="text" default="3" size="10" label="Character Offset" description="Input captcha image character offset range. This will add a negative and positive offset range per character. Set to 0 for no offset." />
+										<param name="captcha_internal_size" type="text" default="20" size="10" label="Input Size" description="Input captcha input size. If left blank will default to 20." />
+									</tabpanetab>
+									<tabpanetab label="Code">
+										<param name="captcha_internal_length" type="text" default="6" size="10" label="Length" description="Input captcha code length. If left blank will default to 6." />
+										<param name="captcha_internal_characters" type="textarea" default="abcdefhijklmnopqrstuvwxyz" translate-default="no" cols="40" rows="5" label="Characters" description="Input captcha code characters. If left blank will default to abcdefhijklmnopqrstuvwxyz." />
+									</tabpanetab>
+									<tabpanetab label="Question">
+										<param name="captcha_internal_questions" type="textarea" default="What is 2 plus 2?=4&#13;&#10;What is 1 times 6?=6&#13;&#10;What is 9 divide 3?=3&#13;&#10;Are you a Human?=Yes&#13;&#10;Are you a Bot?=No&#13;&#10;How many words is this?=5&#13;&#10;How many fingers on a hand?=5&#13;&#10;How many toes on a foot?=5&#13;&#10;What is 10 add 10?=20&#13;&#10;What is 0 multiply 100?=0&#13;&#10;What is 5 minus 1?=4&#13;&#10;What is 2 add 2?=4&#13;&#10;4th letter of Test is?=t&#13;&#10;20, 81, 3; which is smallest?=3&#13;&#10;12, 31, 9; which is greatest?=31&#13;&#10;Purple, car, dog; which is a color?=Purple&#13;&#10;Cat, plane, rock; which is an animal?=Cat&#13;&#10;If tomorrow is Monday; what day is today?=Sunday&#13;&#10;Tim, cat, dog; which is human?=Tim" translate-default="no" cols="60" rows="15" label="Questions" description="Input captcha questions separated by a linebreak and separated from its answer by an equal sign (e.g. What is 2+2?=4). Note answers are not case sensitive. Question and answer translations supported." />
+									</tabpanetab>
+								</tabpane>
+							</tabpanetab>
+							<tabpanetab label="reCaptcha">
+								<param name="captcha_recaptcha_site_key" type="text" default="" size="30" label="Site Key" description="Input your reCaptcha site key." />
+								<param name="captcha_recaptcha_secret_key" type="text" default="" size="30" label="Secret Key" description="Input your reCaptcha secret key." />
+								<param name="captcha_recaptcha_theme" type="xml:recaptcha_theme" default="light" translate-default="no" label="Theme" description="Select the reCaptcha theme to use." />
+								<param name="captcha_recaptcha_size" type="xml:recaptcha_size" default="normal" translate-default="no" label="Size" description="Select the reCaptcha size." />
+								<param name="captcha_recaptcha_lang" type="xml:recaptcha_language" default="en" translate-default="no" blanktext="Automatic" label="Language" description="Select the reCaptcha language to use." />
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+					<tabpanetab label="Auto Block">
+						<param name="captcha_autoblock" type="yesno" default="0" label="Block" description="Enable or disable blocking after a number of failed captcha attempts. Blocked users will have all captcha attempts force failed." yes="Enable" no="Disable" />
+						<if name="captcha_autoblock" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="captcha_autoblock_count" type="text" default="20" size="10" label="Attempts Limit" description="Input number of failed captcha attempts before blocking. If left blank will default to 20." />
+							<param name="captcha_autoblock_timeframe" type="text" default="-1 DAY" translate-default="no" label="Attempts Timeframe" size="40" description="Optionally input timeframe to check for failed captcha attempts. If outside of timeframe will not be counted for attempts limit. Leave blank for all attempts. For example if 1 Month is used it will count attempts 1 month backwards from the current datetime." />
+							<param name="captcha_autoblock_method" type="xml:captcha_block_method" default="0" label="Block Method" description="Select how blocking of failed captcha attempts should be handled. Blocking IP Address will block the IP Address attempting the captcha. Deny Captcha will block the captcha attempt, but not block the IP Address." />
+							<param name="captcha_autoblock_dur" type="text" default="+1 HOUR" translate-default="no" label="Block Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day) block duration. This duration will be added to the current datetime. Leave blank for a forever duration." />
+							<param name="captcha_autoblock_msg" type="textarea" default="Your captcha attempt has been blocked. Reason: [reason]" label="Block Message" cols="40" rows="5" description="Optionally input message for block. If left blank no message will display." />
+							<param name="captcha_autoblock_reason" type="textarea" default="Too many failed captcha attempts." label="Block Reason" cols="40" rows="5" description="Optionally input reason for block. If left blank will default to spam." />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Cleanup">
+				<param name="cleanup_all" type="custom" class="cbantispamClass" method="loadCleanUpURL" label="Prune All" description="Your site unique URL that can be used in CRON or directly accessed to prune expired blocks, old log entries, and old attempts entries." />
+				<param name="cleanup_block" type="custom" class="cbantispamClass" method="loadCleanUpURL" label="Block Prune" description="Your site unique URL that can be used in CRON or directly accessed to prune expired blocks." />
+				<param name="cleanup_log" type="custom" class="cbantispamClass" method="loadCleanUpURL" label="Log Prune" description="Your site unique URL that can be used in CRON or directly accessed to prune old log entries." />
+				<param name="cleanup_log_dur" type="xml:prune_duration" default="-1 YEAR" translate-default="no" label="Log Prune Duration" description="Select how long to keep log entries." />
+				<param name="cleanup_attempts" type="custom" class="cbantispamClass" method="loadCleanUpURL" label="Attempts Prune" description="Your site unique URL that can be used in CRON or directly accessed to prune old attempts entries." />
+				<param name="cleanup_attempts_dur" type="xml:prune_duration" default="-1 YEAR" translate-default="no" label="Attempts Prune Duration" description="Select how long to keep attempts entries. Attempts for an IP Address are removed when the IP Address successfully logs in or registers." />
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__comprofiler_plugin_antispam_block" class="cbantispamBlockTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="value" type="sql:text" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="duration" type="sql:varchar(255)" null="true" />
+				<column name="reason" type="sql:text" null="true" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_antispam_whitelist" class="cbantispamWhitelistTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="type" type="sql:varchar(255)" />
+				<column name="value" type="sql:text" />
+				<column name="reason" type="sql:text" null="true" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_antispam_attempts" class="cbantispamLogTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="ip_address" type="sql:varchar(255)" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="count" type="sql:int(11)" default="0" />
+				<column name="type" type="sql:varchar(255)" null="true" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="ip_address">
+					<column name="ip_address" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_antispam_log" class="cbantispamAttemptsTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="ip_address" type="sql:varchar(255)" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="count" type="sql:int(11)" default="0" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id">
+					<column name="user_id" />
+				</index>
+				<index name="ip_address">
+					<column name="ip_address" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+	</database>
+</cbinstall>

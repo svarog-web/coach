@@ -1,0 +1,11 @@
+.cb_template .gjGroupVideoRow {
+	width: 325px;
+}
+
+.cb_template .gjVideoActivity {
+	padding: 10px;
+}
+
+.cb_template .gjVideoActivity .gjGroupVideoRow {
+	width: 100%;
+}

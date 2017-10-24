@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>CB Core Fields Ajax</name>
+	<author>Krileon</author>
+	<creationDate>2017-01-13</creationDate>
+	<copyright>(C) 2004-2015 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>A cb fields plugin to allow ajax inline editing for the available cb core field types.</description>
+	<version>2.0.12</version>
+	<release>3.0.0+build.2017.01.13.00.27.02.0b8ede88b</release>
+	<files>
+		<filename plugin="cbcorefieldsajax">cbcorefieldsajax.php</filename>
+		<filename>index.html</filename>
+		<foldername>js</foldername>
+		<foldername>language</foldername>
+		<foldername>templates</foldername>
+	</files>
+	<delete>
+		<filename>cbcorefieldsajax.js</filename>
+		<filename>cbcorefieldsajax.min.js</filename>
+		<filename>cbcorefieldsajax.css</filename>
+		<foldername>images</foldername>
+	</delete>
+	<fieldsparams>
+		<field type="other_types" label="Field ajax preferences">
+			<params>
+				<param name="ajax_template" type="folderlist" default="default" label="Template" description="Select template to be used for this ajax display. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbcorefieldsajax/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbcorefieldsajax/templates/" />
+				<param name="ajax_profile" type="list" default="0" label="Profile View" description="Enable or disable ajax usage for this field on profile view.">
+					<option value="0">Disabled</option>
+					<option value="1">Enabled</option>
+				</param>
+				<if name="ajax_profile" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+					<param name="ajax_profile_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Profile View Access" description="Select view access level for ajax usage on profile view. Note access is still subject to profile edit permissions." />
+					<param name="ajax_profile_output" type="list" default="1" label="Profile View Output" description="Select how the ajax edit should display. Inline will attempt to fit within the space the value is in. Tooltip will overlay the value with a tooltip window that is not limited to the space the value is in.">
+						<option value="1">Inline</option>
+						<option value="2">Tooltip</option>
+					</param>
+				</if>
+				<param name="ajax_list" type="list" default="0" label="Userlists View" description="Enable or disable ajax usage for this field on userlists view.">
+					<option value="0">Disabled</option>
+					<option value="1">Enabled</option>
+				</param>
+				<if name="ajax_list" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+					<param name="ajax_list_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Userlists View Access" description="Select view access level for ajax usage on userlists view. Note access is still subject to profile edit permissions." />
+					<param name="ajax_list_output" type="list" default="1" label="Userlists View Output" description="Select how the ajax edit should display. Inline will attempt to fit within the space the value is in. Tooltip will overlay the value with a tooltip window that is not limited to the space the value is in.">
+						<option value="1">Inline</option>
+						<option value="2">Tooltip</option>
+					</param>
+				</if>
+				<param name="ajax_placeholder" type="text" size="30" default="" label="Placeholder" description="Optionally input substitution supported text to display for empty values." />
+			</params>
+		</field>
+	</fieldsparams>
+</cbinstall>

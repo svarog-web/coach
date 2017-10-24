@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjnotifications" type="params" ui="admin">
+			<param name="file_new" type="yesno" default="0" label="Upload of new file" description="" yes="Notify" no="Don't Notify" />
+			<param name="file_approve" type="yesno" default="0" label="New file requires approval" description="" yes="Notify" no="Don't Notify" />
+		</view>
+	</views>
+</cbxml>

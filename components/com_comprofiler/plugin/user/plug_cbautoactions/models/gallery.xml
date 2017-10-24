@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="gallery">CB Gallery</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB Gallery">
+				<option value="gallery_onAfterActivity" translate="no">gallery_onAfterActivity</option>
+				<option value="gallery_onAfterCreateFolder" translate="no">gallery_onAfterCreateFolder</option>
+				<option value="gallery_onAfterCreateItem" translate="no">gallery_onAfterCreateItem</option>
+				<option value="gallery_onAfterDeleteFolder" translate="no">gallery_onAfterDeleteFolder</option>
+				<option value="gallery_onAfterDeleteItem" translate="no">gallery_onAfterDeleteItem</option>
+				<option value="gallery_onAfterDisplayFolder" translate="no">gallery_onAfterDisplayFolder</option>
+				<option value="gallery_onAfterDisplayGallery" translate="no">gallery_onAfterDisplayGallery</option>
+				<option value="gallery_onAfterFolderEdit" translate="no">gallery_onAfterFolderEdit</option>
+				<option value="gallery_onAfterItemEdit" translate="no">gallery_onAfterItemEdit</option>
+				<option value="gallery_onAfterItemEditMini" translate="no">gallery_onAfterItemEditMini</option>
+				<option value="gallery_onAfterItemsNew" translate="no">gallery_onAfterItemsNew</option>
+				<option value="gallery_onAfterUpdateFolder" translate="no">gallery_onAfterUpdateFolder</option>
+				<option value="gallery_onAfterUpdateItem" translate="no">gallery_onAfterUpdateItem</option>
+				<option value="gallery_onBeforeCreateFolder" translate="no">gallery_onBeforeCreateFolder</option>
+				<option value="gallery_onBeforeCreateItem" translate="no">gallery_onBeforeCreateItem</option>
+				<option value="gallery_onBeforeDeleteFolder" translate="no">gallery_onBeforeDeleteFolder</option>
+				<option value="gallery_onBeforeDeleteItem" translate="no">gallery_onBeforeDeleteItem</option>
+				<option value="gallery_onBeforeDisplayFolder" translate="no">gallery_onBeforeDisplayFolder</option>
+				<option value="gallery_onBeforeDisplayGallery" translate="no">gallery_onBeforeDisplayGallery</option>
+				<option value="gallery_onBeforeFolderEdit" translate="no">gallery_onBeforeFolderEdit</option>
+				<option value="gallery_onBeforeItemEdit" translate="no">gallery_onBeforeItemEdit</option>
+				<option value="gallery_onBeforeItemEditMini" translate="no">gallery_onBeforeItemEditMini</option>
+				<option value="gallery_onBeforeItemsNew" translate="no">gallery_onBeforeItemsNew</option>
+				<option value="gallery_onBeforeUpdateFolder" translate="no">gallery_onBeforeUpdateFolder</option>
+				<option value="gallery_onBeforeUpdateItem" translate="no">gallery_onBeforeUpdateItem</option>
+				<option value="gallery_onDisplayFolder" translate="no">gallery_onDisplayFolder</option>
+				<option value="gallery_onDisplayItem" translate="no">gallery_onDisplayItem</option>
+				<option value="gallery_onDisplayModal" translate="no">gallery_onDisplayModal</option>
+				<option value="gallery_onGallery" translate="no">gallery_onGallery</option>
+				<option value="gallery_onGalleryFoldersCreateAccess" translate="no">gallery_onGalleryFoldersCreateAccess</option>
+				<option value="gallery_onGalleryItemsCreateAccess" translate="no">gallery_onGalleryItemsCreateAccess</option>
+				<option value="gallery_onGalleryModerateAccess" translate="no">gallery_onGalleryModerateAccess</option>
+				<option value="gallery_onLoadFolders" translate="no">gallery_onLoadFolders</option>
+				<option value="gallery_onLoadItems" translate="no">gallery_onLoadItems</option>
+				<option value="gallery_onQueryFolderItems" translate="no">gallery_onQueryFolderItems</option>
+				<option value="gallery_onQueryFolders" translate="no">gallery_onQueryFolders</option>
+				<option value="gallery_onQueryItems" translate="no">gallery_onQueryItems</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_gallery" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Creates gallery linked items and folders." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionGallery" method="installed" />
+				</left>
+				<then>
+					<params name="gallery" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="item" translate-default="no" label="Mode" description="Select the gallery action mode.">
+							<option value="item">Item</option>
+							<option value="folder">Folder</option>
+						</param>
+						<param name="type" type="list" default="photo" label="Type" blanktext="" description="Select the gallery type.">
+							<option value="photos">Photo</option>
+							<option value="videos">Video</option>
+							<option value="music">Music</option>
+							<option value="files">File</option>
+						</param>
+						<if name="mode" nametype="param:string" operator="=" value="item" valuetype="const:string" type="showhide">
+							<param name="value" type="text" label="File" description="Input substitution supported item file link." size="50" validate="required" />
+						</if>
+						<param name="title" type="text" label="Title" description="Optionally input substitution supported title." size="50" />
+						<param name="description" type="textarea" rows="5" label="Description" description="Optionally input substitution supported description." cssclass="input-block" />
+						<param name="owner" type="text" label="Owner" size="5" description="Input substitution supported owner as single integer user_id. Leave blank to use trigger user as the owner." />
+						<param name="asset" type="text" label="Asset" size="20" description="Input substitution supported asset path. Asset helps determine the location of the item or folder. Leave blank to automatically set to profile.user_id." />
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB Gallery installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

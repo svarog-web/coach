@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view>
+		<options>
+			<default name="User Profile Edit" msg="This is an optional menu item for accessing Community Builder User profile edit. Normally not needed, as Community Builder has its own menu system on the user profile for this action." />
+		</options>
+		<fields name="request">
+			<fieldset name="request">
+				<field name="tab" type="text" extension="com_comprofiler" default="" required="false" label="Tab" description="Optionally supply a tab id or name to display it by default. Leave blank to display first tab available." />
+				<field name="uid" type="text" extension="com_comprofiler" default="" required="false" label="User" description="Optionally supply a user id to display that users profile. Leave blank to display viewing users profile." />
+			</fieldset>
+		</fields>
+	</view>
+	<state>
+		<name>Community Builder User Profile Edit</name>
+		<description>This is an optional menu item for accessing Community Builder User profile edit. Normally not needed, as Community Builder has its own menu system on the user profile for this action.</description>
+		<url addpath="/administrator/components/com_comprofiler">
+			<param name="tab" type="text" default="" label="Tab" description="Optionally supply a tab id or name to display it by default. Leave blank to display first tab available." />
+			<param name="uid" type="text" default="" label="User" description="Optionally supply a user id to display that users profile. Leave blank to display viewing users profile." />
+		</url>
+	</state>
+</metadata>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.3" type="plugin" group="user">
+    <name>CB Profile Update Logger</name>
+    <author>Nicholas G. Antimisiaris (aka nant)</author>
+    <creationDate>2016-10-15</creationDate>
+    <copyright>(C) 2011-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+    <license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+    <authorEmail>nant@joomlapolis.com</authorEmail>
+    <authorUrl>www.joomlapolis.com</authorUrl>
+    <version>2.0.15</version>
+	<release>2.1.3</release>
+    <description>
+        This is a CB plugin used to log profile update changes.
+        The plugin creates a new table and stores frontend profile update events for each user profile.
+        The events can be sent to moderators, superadmins or specific users and can be viewed in a special tab
+		that will appear when moderators view user profiles and can also be configured to appear for profile
+		owners also.
+    </description>
+    <files>
+        <filename plugin="cb.pulog">cb.pulog.php</filename>
+        <filename>index.html</filename>
+		<foldername>language</foldername>
+    </files>
+    <params>
+		<param name="pulBackEndLogging"
+			   type="yesno"
+			   default="1"
+			   label="Backend Logging"
+			   description="Specify if backend profile changes should be logged or not (default: Yes)">
+		</param>
+
+		<param name="pulEnableNotifications"
+            type="yesno"
+            default="1" 
+            label="Update notifications" 
+            description="Specify if email notifications should be sent when profile modifications occur (default: Yes)">
+	    </param>
+        
+        <if name="pulEnableNotifications" type="showhide" operator="=" value="1" valuetype="const:int">
+            
+            <param name="pulNotificationList"
+                type="list"
+                label="Notification Recipients"
+                default="0"
+                description="Select recipient list for notification messages (default: All CB Moderators)">
+                    <option value="0">All CB Moderators</option>
+                    <option value="1">ACL View</option>
+                    <option value="2">List of user ids</option>
+            </param>
+        
+        	<if name="pulNotificationList" type="showhide" operator="=" value="1" valuetype="const:int">
+
+				<param name="pulNotificationAclList"
+					   type="viewaccesslevel"
+					   default="6"
+					   managelevels="false"
+					   blanktext=""
+					   label="ACL Notifications View"
+					   description="Select the ACL View that determine which users will get profile update notifications (default: Super Admin)." />
+			</if>
+
+            <if name="pulNotificationList" type="showhide" operator="=" value="2" valuetype="const:int">
+        
+                <param name="pulNotificationRecipientList" 
+                    type="text" 
+                    default="" 
+                    label="User id list" 
+                    description="Comma separated list of userids that should get profile update notification messages (default: empty)." />
+            </if>
+        
+        </if>
+		<param name="@spacer"
+			   type="spacer"
+			   label="More settings:"
+			   default="See Tab Management: Update Log: parameters"
+			   description="" />
+
+    </params>
+    <tabs>
+        <tab name="Update Log" 
+            description="This tab contains a log of profile updates made by user or moderators" 
+            class="getcbpuloggerTab" 
+            fields="0" 
+            position="cb_tabmain" 
+            displaytype="tab">
+            <params>
+
+                <param name="pulEnableTabUserView"
+                       type="yesno"
+                       default="0"
+                       label="Frontend tab viewing"
+                       description="Specify if the Update tab should be seen by profile owners or just moderators (default: No)">
+                </param>
+
+                <param name="pulEnablePagingFE" 
+                    type="yesno"
+                    default="1" 
+                    label="Frontend paging" 
+                    description="Specify if paging should be used in frontend presentation of logged entries (default: Yes)">
+		        </param>
+
+                <if name="pulEnablePagingFE" type="showhide" operator="=" value="1" valuetype="const:int">
+    
+                    <param name="pulEntriesPerPageFE" 
+                        type="text" 
+                        default="20"
+						size="5"
+                        label="Entries per page (FE)" 
+                        description="Number of entries per page to show in frontend presentation of logged events if paging is enabled (default: 20). If frontend paging is disabled then this value will be used to limit results." />
+
+                    <param name="pulEntriesPerPageBE" 
+                        type="text" 
+                        default="50"
+						size="5"
+                        label="Entries per page (BE)" 
+                        description="Number of entries to show in backend presentation of logged events (default: 50). Backend paging is not supported so only last X entries will be shown." />
+   
+                </if>
+                
+                <param name="pulTableCSSMode"
+                    type="list"
+                    label="Table CSS Mode"
+                    default="cssintpl" translate-default="no"
+                    description="Select css mode to be used in table formatting (only for frontend viewing)">
+                        <option value="cssintpl">Use css already loaded from templates</option>
+                	    <option value="csspush">Push CSS code (next parameter) to page header</option>
+                </param>
+
+                <if name="pulTableCSSMode" type="showhide" operator="=" value="csspush" valuetype="const:string">
+    
+                    <param name="pulTableCSS" 
+                        type="textarea" 
+                        cols="80"
+                        rows="20" 
+                        default=
+"#pul-tbl&#10;{&#10;&#9;font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, Sans-Serif;&#10;
+&#9;font-size: 10px;&#10;
+&#9;background: #fff;&#10;
+&#9;margin: 5px;&#10;
+&#9;width: 99%;&#10;
+&#9;border-collapse: collapse;&#10;
+&#9;text-align: left;&#10;
+}&#10;
+#pul-tbl th&#10;
+{&#10;
+&#9;font-size: 10px;&#10;
+&#9;font-weight: normal;&#10;
+&#9;color: #039;&#10;
+&#9;padding: 10px 8px;&#10;
+&#9;border-bottom: 2px solid #6678b1;&#10;
+}&#10;
+#pul-tbl td&#10;
+{&#10;
+&#9;border-bottom: 1px solid #ccc;&#10;
+&#9;color: #669;&#10;
+&#9;padding: 6px 8px;&#10;
+}&#10;
+#pul-tbl tbody tr:hover td&#10;
+{&#10;
+&#9;color: #009;&#10;
+}&#10;"
+                        label="CSS code for table formatting"
+                        description="This text area parameter contains css styling that needs to be loaded for table display (only for frontend viewing)"/>
+    
+                </if>
+				<param name="@spacer"
+					   type="spacer"
+					   label="More settings"
+					   default="See Plugin Management: Profile Logger: parameters"
+					   description="" />
+
+				</params>
+            <fields>
+            </fields>
+        </tab>
+    </tabs>
+    <database version="1">
+        <table name="#__comprofiler_plug_pulogger" class="" strict="true" drop="never">
+            <columns strict="true" drop="never">
+                <column name="id" type="sql:int(10)" unsigned="true" auto_increment="1" strict="true" />
+                <column name="changedate" type="sql:datetime" null="true" strict="true" />
+                <column name="profileid" type="sql:int(10)" null="true" strict="true" />
+                <column name="editedbyip" type="sql:varchar(255)" strict="true" />
+                <column name="editedbyid" type="sql:int(10)" unsigned="true" strict="true" />
+                <column name="mode" type="sql:char(1)" null="false" default="-" strict="true" />
+                <column name="fieldname" type="sql:varchar(50)" strict="true" />
+                <column name="oldvalue" type="sql:text" strict="true" />
+                <column name="newvalue" type="sql:text" strict="true" />
+            </columns>
+            <indexes strict="true" drop="never">
+                <index name="PRIMARY" type="primary">
+                    <column name="id" />
+                </index>
+                <index name="profile_change_date">
+                    <column name="profileid" />
+                    <column name="changedate" />
+                </index>
+                <index name="moderator_change_date">
+                    <column name="editedbyid" />
+                    <column name="changedate" />
+                </index>
+            </indexes>
+        </table>
+    </database>
+    <install>
+        <queries>
+        </queries>
+    </install>    
+    <uninstall>
+        <queries>
+        </queries>
+    </uninstall>
+</cbinstall>

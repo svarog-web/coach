@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>Content - CB Gallery</name>
+	<creationDate>2016-08-31</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>2.0.0</version>
+	<description>This plugin allows CB Gallery galleries to be displayed within content items using Community Builder substitutions. Format: [cbgallery:gallery /]. Additional formation options include asset=&quot;ASSET&quot;, folders=&quot;TRUE_OR_FALSE&quot;, folders_width=&quot;#&quot;, folders_create=&quot;TRUE_OR_FALSE&quot;, folders_create_access=&quot;VIEWACCESSLEVEL&quot;, folders_create_limit=&quot;FIELD_NAME_OR_CUSTOM&quot;, folders_create_limit_custom=&quot;#&quot;, folders_create_approval=&quot;TRUE_OR_FALSE&quot;, folders_create_approval_notify=&quot;TRUE_OR_FALSE&quot;, folders_create_captcha=&quot;TRUE_OR_FALSE&quot;, folders_paging=&quot;TRUE_OR_FALSE&quot;, folders_paging_limit=&quot;#&quot;, folders_search=&quot;TRUE_OR_FALSE&quot;, folders_orderby=&quot;COLUMN_DESC_OR_ASC&quot;, items_width=&quot;#&quot;, items_create=&quot;TRUE_OR_FALSE&quot;, items_create_captcha=&quot;TRUE_OR_FALSE&quot;, items_create_approval_notify=&quot;TRUE_OR_FALSE&quot;, items_paging=&quot;TRUE_OR_FALSE&quot;, items_paging_limit=&quot;#&quot;, items_search=&quot;TRUE_OR_FALSE&quot;, items_orderby=&quot;COLUMN_DESC_OR_ASC&quot;, photos=&quot;TRUE_OR_FALSE&quot;, photos_download=&quot;TRUE_OR_FALSE&quot;, photos_create=&quot;TRUE_OR_FALSE&quot;, photos_create_access=&quot;VIEWACCESSLEVEL&quot;, photos_create_limit=&quot;FIELD_NAME_OR_CUSTOM&quot;, photos_create_limit_custom=&quot;#&quot;, photos_upload=&quot;TRUE_OR_FALSE&quot;, photos_link=&quot;TRUE_OR_FALSE&quot;, photos_create_approval=&quot;TRUE_OR_FALSE&quot;, photos_resample=&quot;TRUE_OR_FALSE&quot;, photos_image_height=&quot;#&quot;, photos_image_width=&quot;#&quot;, photos_thumbnail_height=&quot;#&quot;, photos_thumbnail_width=&quot;#&quot;, photos_maintain_aspect_ratio=&quot;#&quot;, photos_min_size=&quot;#&quot;, photos_max_size=&quot;#&quot;, videos=&quot;TRUE_OR_FALSE&quot;, videos_download=&quot;TRUE_OR_FALSE&quot;, videos_create=&quot;TRUE_OR_FALSE&quot;, videos_create_access=&quot;VIEWACCESSLEVEL&quot;, videos_create_limit=&quot;FIELD_NAME_OR_CUSTOM&quot;, videos_create_limit_custom=&quot;#&quot;, videos_upload=&quot;TRUE_OR_FALSE&quot;, videos_link=&quot;TRUE_OR_FALSE&quot;, videos_create_approval=&quot;TRUE_OR_FALSE&quot;, videos_min_size=&quot;#&quot;, videos_max_size=&quot;#&quot;, files=&quot;TRUE_OR_FALSE&quot;, files_create=&quot;TRUE_OR_FALSE&quot;, files_create_access=&quot;VIEWACCESSLEVEL&quot;, files_create_limit=&quot;FIELD_NAME_OR_CUSTOM&quot;, files_create_limit_custom=&quot;#&quot;, files_upload=&quot;TRUE_OR_FALSE&quot;, files_link=&quot;TRUE_OR_FALSE&quot;, files_create_approval=&quot;TRUE_OR_FALSE&quot;, files_extensions=&quot;EXTENSIONS&quot;, files_min_size=&quot;#&quot;, files_max_size=&quot;#&quot;, music=&quot;TRUE_OR_FALSE&quot;, music_download=&quot;TRUE_OR_FALSE&quot;, music_create=&quot;TRUE_OR_FALSE&quot;, music_create_access=&quot;VIEWACCESSLEVEL&quot;, music_create_limit=&quot;FIELD_NAME_OR_CUSTOM&quot;, music_create_limit_custom=&quot;#&quot;, music_upload=&quot;TRUE_OR_FALSE&quot;, music_link=&quot;TRUE_OR_FALSE&quot;, music_create_approval=&quot;TRUE_OR_FALSE&quot;, music_min_size=&quot;#&quot;, music_max_size=&quot;#&quot;, thumbnails=&quot;TRUE_OR_FALSE&quot;, thumbnails_upload=&quot;TRUE_OR_FALSE&quot;, thumbnails_link=&quot;TRUE_OR_FALSE&quot;, thumbnails_resample=&quot;TRUE_OR_FALSE&quot;, thumbnails_image_height=&quot;#&quot;, thumbnails_image_width=&quot;#&quot;, thumbnails_maintain_aspect_ratio=&quot;#&quot;, thumbnails_min_size=&quot;#&quot;, and thumbnails_max_size=&quot;#&quot;.</description>
+	<files>
+		<filename plugin="cbgallerybot">cbgallerybot.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="ignore_context" type="text" size="60" default="" label="Ignore Context" description="Optionally specify a comma separated list of contexts to ignore (e.g. com_content)." />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

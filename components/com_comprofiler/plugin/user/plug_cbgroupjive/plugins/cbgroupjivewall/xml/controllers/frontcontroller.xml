@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="gjwallrows" request="view action" action="editPlugin showgjwall">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="showgjwall" mode="show" />
+		</action>
+
+		<action name="gjwallrow" request="view table action" action="editPlugin gjwallbrowser editrow" requestparameters="wallid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="editgjwall" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_plugin_wall" class="\CB\Plugin\GroupJiveWall\Table\WallTable" key="id" value="wallid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="wall" type="button" default="Posts" buttonclass="default" buttonsize="xsmall" link="cb_action:gjwallrows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

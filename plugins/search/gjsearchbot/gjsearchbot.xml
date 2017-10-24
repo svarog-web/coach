@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="search" method="upgrade">
+	<name>Search - CB GroupJive</name>
+	<creationDate>2016-12-29</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>3.1.0</version>
+	<description>This plugin allows searching for CB GroupJive with Joomla search.</description>
+	<files>
+		<filename plugin="gjsearchbot">gjsearchbot.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params" addfieldpath="/components/com_comprofiler/plugin/user/plug_cbgroupjive/fields">
+			<fieldset name="category_search" label="Categories">
+				<field name="search_category_enable" type="radio" default="0" class="btn-group btn-group-yesno" label="Enable" description="Enable or disable searching of GroupJive categories.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="search_category_area" type="text" size="20" default="Categories" label="Area" description="Input GroupJive category search area. Area lets users check a checkbox to search only that location." />
+				<field name="search_category_exclude" type="gjcategories" multiple="multiple" size="8" default="" label="Exclude" description="Select the categories to exclude from searching. Note this includes all groups in the selected categories from searching." />
+			</fieldset>
+			<fieldset name="category_results" label="Category Results" description="Supported Substitutions: [id], [name], [description], [logo], [canvas], [url].">
+				<field name="results_category_title" type="text" size="40" default="[name]" label="Title" description="Input substitution supported result title." />
+				<field name="results_category_link" type="list" default="0" label="Title Link" description="Select how title links open.">
+					<option value="0">Same window</option>
+					<option value="1">New window</option>
+				</field>
+				<field name="results_category_text" type="textarea" filter="raw" cols="45" rows="8" default="[description]" label="Text" description="Input substitution supported result text." />
+				<field name="results_category_limit" type="text" size="5" default="50" label="Limit" description="Input results limit to reduce query size. If left blank no limit is applied." />
+			</fieldset>
+			<fieldset name="group_search" label="Groups">
+				<field name="search_group_enable" type="radio" default="1" class="btn-group btn-group-yesno" label="Enable" description="Enable or disable searching of GroupJive groups.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="search_group_area" type="text" size="20" default="Groups" label="Area" description="Input GroupJive group search area. Area lets users check a checkbox to search only that location." />
+				<field name="search_group_exclude" type="gjgroups" multiple="multiple" size="8" default="" label="Exclude" description="Select the groups to exclude from searching." />
+			</fieldset>
+			<fieldset name="group_results" label="Group Results" description="Supported Substitutions: [id], [name], [description], [logo], [canvas], [url], [date], [category_id], [category_name], [category_description], [category_logo], [category_canvas], [category_url].">
+				<field name="results_group_title" type="text" size="40" default="[name]" label="Title" description="Input substitution supported result title." />
+				<field name="results_group_link" type="list" default="0" label="Title Link" description="Select how title links open.">
+					<option value="0">Same window</option>
+					<option value="1">New window</option>
+				</field>
+				<field name="results_group_text" type="textarea" filter="raw" cols="45" rows="8" default="[description]" label="Text" description="Input substitution supported result text." />
+				<field name="results_group_limit" type="text" size="5" default="50" label="Limit" description="Input results limit to reduce query size. If left blank no limit is applied." />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

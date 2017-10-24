@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showlanguagefinder" type="params" ui="admin" label="" icon="search" formformatting="none" viewformatting="none">
+			<param name="" type="custom" class="\CBLib\Language\Finder" method="find">
+				<attributes>
+					<attribute name="name">
+						<param name="language" type="get_default" />
+					</attribute>
+					<attribute name="default">
+						<param name="search" type="get_default" />
+					</attribute>
+				</attributes>
+			</param>
+		</view>
+	</views>
+</cbxml>

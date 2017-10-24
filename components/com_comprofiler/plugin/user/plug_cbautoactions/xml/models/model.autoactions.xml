@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="list" valuetype="string" />
+		<type name="autoaction_published" base="published" valuetype="string">
+			<option value="0" title="Unpublish Item">Unpublished</option>
+			<option value="1" title="Publish Item">Published</option>
+		</type>
+		<type name="autoaction_access" base="usergroup" valuetype="string">
+			<optgroup label="Custom ACL">
+				<option value="-1">Everybody</option>
+				<option value="-2">All Non-Registered Users</option>
+				<option value="-3">All Registered Users</option>
+				<option value="-4">All Non-Moderators</option>
+				<option value="-5">All Moderators</option>
+				<option value="-6">Non-Self</option>
+				<option value="-7">Self Only</option>
+			</optgroup>
+			<optgroup label="CMS ACL" />
+		</type>
+		<type name="autoaction_triggers" base="tag" valuetype="string">
+			<option value="">None</option>
+			<optgroup label="Internal">
+				<option value="internalGeneral">General</option>
+				<option value="internalUsers">Users</option>
+			</optgroup>
+			<optgroup label="Community Builder">
+				<option value="onAfterAcceptConnection" translate="no">onAfterAcceptConnection</option>
+				<option value="onAfterAddConnection" translate="no">onAfterAddConnection</option>
+				<option value="onAfterAuthorizeAction" translate="no">onAfterAuthorizeAction</option>
+				<option value="onAfterAuthorizeView" translate="no">onAfterAuthorizeView</option>
+				<option value="onAfterBackendUsersList" translate="no">onAfterBackendUsersList</option>
+				<option value="onAfterCheckCbDb" translate="no">onAfterCheckCbDb</option>
+				<option value="onAfterCheckCbFieldsDb" translate="no">onAfterCheckCbFieldsDb</option>
+				<option value="onAfterCreateMailer" translate="no">onAfterCreateMailer</option>
+				<option value="onAfterDeleteUser" translate="no">onAfterDeleteUser</option>
+				<option value="onAfterDenyConnection" translate="no">onAfterDenyConnection</option>
+				<option value="onAfterEditATab" translate="no">onAfterEditATab</option>
+				<option value="onAfterEmailUserForm" translate="no">onAfterEmailUserForm</option>
+				<option value="onAfterFieldsFetch" translate="no">onAfterFieldsFetch</option>
+				<option value="onAfterFirstLogin" translate="no">onAfterFirstLogin</option>
+				<option value="onAfterFixDb" translate="no">onAfterFixDb</option>
+				<option value="onAfterLogin" translate="no">onAfterLogin</option>
+				<option value="onAfterLoginForm" translate="no">onAfterLoginForm</option>
+				<option value="onAfterLogout" translate="no">onAfterLogout</option>
+				<option value="onAfterLogoutForm" translate="no">onAfterLogoutForm</option>
+				<option value="onAfterModeratorModule" translate="no">onAfterModeratorModule</option>
+				<option value="onAfterNewUser" translate="no">onAfterNewUser</option>
+				<option value="onAfterOnlineModule" translate="no">onAfterOnlineModule</option>
+				<option value="onAfterPasswordReminder" translate="no">onAfterPasswordReminder</option>
+				<option value="onAfterPrepareViewTabs" translate="no">onAfterPrepareViewTabs</option>
+				<option value="onAfterRegisterFormDisplay" translate="no">onAfterRegisterFormDisplay</option>
+				<option value="onAfterRemoveConnection" translate="no">onAfterRemoveConnection</option>
+				<option value="onAfterSaveReportUser" translate="no">onAfterSaveReportUser</option>
+				<option value="onAfterSaveUserRegistration" translate="no">onAfterSaveUserRegistration</option>
+				<option value="onAfterSendEmailMSG" translate="no">onAfterSendEmailMSG</option>
+				<option value="onAfterSendMail" translate="no">onAfterSendMail</option>
+				<option value="onAfterSyncUser" translate="no">onAfterSyncUser</option>
+				<option value="onAfterTabsFetch" translate="no">onAfterTabsFetch</option>
+				<option value="onAfterToolbar" translate="no">onAfterToolbar</option>
+				<option value="onAfterUpdateUser" translate="no">onAfterUpdateUser</option>
+				<option value="onAfterUserApproval" translate="no">onAfterUserApproval</option>
+				<option value="onAfterUserAudioUpdate" translate="no">onAfterUserAudioUpdate</option>
+				<option value="onAfterUserAvatarUpdate" translate="no">onAfterUserAvatarUpdate</option>
+				<option value="onAfterUserBan" translate="no">onAfterUserBan</option>
+				<option value="onAfterUserBlocking" translate="no">onAfterUserBlocking</option>
+				<option value="onAfterUserConfirm" translate="no">onAfterUserConfirm</option>
+				<option value="onAfterUserConfirmation" translate="no">onAfterUserConfirmation</option>
+				<option value="onAfterUserFileUpdate" translate="no">onAfterUserFileUpdate</option>
+				<option value="onAfterUserLoginFailed" translate="no">onAfterUserLoginFailed</option>
+				<option value="onAfterUserLoginSuccess" translate="no">onAfterUserLoginSuccess</option>
+				<option value="onAfterUserLogoutFailed" translate="no">onAfterUserLogoutFailed</option>
+				<option value="onAfterUserLogoutSuccess" translate="no">onAfterUserLogoutSuccess</option>
+				<option value="onAfterUserProfileDisplay" translate="no">onAfterUserProfileDisplay</option>
+				<option value="onAfterUserProfileEditCancel" translate="no">onAfterUserProfileEditCancel</option>
+				<option value="onAfterUserProfileEditDisplay" translate="no">onAfterUserProfileEditDisplay</option>
+				<option value="onAfterUserProfileSaveFailed" translate="no">onAfterUserProfileSaveFailed</option>
+				<option value="onAfterUserProfileSaved" translate="no">onAfterUserProfileSaved</option>
+				<option value="onAfterUserRegistration" translate="no">onAfterUserRegistration</option>
+				<option value="onAfterUserRegistrationMailsSent" translate="no">onAfterUserRegistrationMailsSent</option>
+				<option value="onAfterUserRegistrationSaveFailed" translate="no">onAfterUserRegistrationSaveFailed</option>
+				<option value="onAfterUserUpdate" translate="no">onAfterUserUpdate</option>
+				<option value="onAfterUserVideoUpdate" translate="no">onAfterUserVideoUpdate</option>
+				<option value="onAfterUsernameReminder" translate="no">onAfterUsernameReminder</option>
+				<option value="onAfterUsersListFieldsSql" translate="no">onAfterUsersListFieldsSql</option>
+				<option value="onAfterWritePagesLinks" translate="no">onAfterWritePagesLinks</option>
+				<option value="onAfterbindSearchCriteria" translate="no">onAfterbindSearchCriteria</option>
+				<option value="onAftercommitFieldDataSave" translate="no">onAftercommitFieldDataSave</option>
+				<option value="onAfterfieldClass" translate="no">onAfterfieldClass</option>
+				<option value="onAftergetFieldRow" translate="no">onAftergetFieldRow</option>
+				<option value="onAftergetFieldTitle" translate="no">onAftergetFieldTitle</option>
+				<option value="onAfterinitFieldToDefault" translate="no">onAfterinitFieldToDefault</option>
+				<option value="onAfterprepareFieldDataNotSaved" translate="no">onAfterprepareFieldDataNotSaved</option>
+				<option value="onAfterprepareFieldDataSave" translate="no">onAfterprepareFieldDataSave</option>
+				<option value="onAfterrenderFieldHtml" translate="no">onAfterrenderFieldHtml</option>
+				<option value="onAfterrollbackFieldDataSave" translate="no">onAfterrollbackFieldDataSave</option>
+				<option value="onBeforeAcceptConnection" translate="no">onBeforeAcceptConnection</option>
+				<option value="onBeforeAcceptConnectionRequest" translate="no">onBeforeAcceptConnectionRequest</option>
+				<option value="onBeforeAddConnection" translate="no">onBeforeAddConnection</option>
+				<option value="onBeforeAddConnectionRequest" translate="no">onBeforeAddConnectionRequest</option>
+				<option value="onBeforeBackendUserEmail" translate="no">onBeforeBackendUserEmail</option>
+				<option value="onBeforeBackendUsersEmailForm" translate="no">onBeforeBackendUsersEmailForm</option>
+				<option value="onBeforeBackendUsersEmailStart" translate="no">onBeforeBackendUsersEmailStart</option>
+				<option value="onBeforeBackendUsersListBuildQuery" translate="no">onBeforeBackendUsersListBuildQuery</option>
+				<option value="onBeforeBanUserForm" translate="no">onBeforeBanUserForm</option>
+				<option value="onBeforeBanUserFormDisplay" translate="no">onBeforeBanUserFormDisplay</option>
+				<option value="onBeforeBanUserRequest" translate="no">onBeforeBanUserRequest</option>
+				<option value="onBeforeCreateMailer" translate="no">onBeforeCreateMailer</option>
+				<option value="onBeforeDeleteUser" translate="no">onBeforeDeleteUser</option>
+				<option value="onBeforeDenyConnection" translate="no">onBeforeDenyConnection</option>
+				<option value="onBeforeDisplayUsersList" translate="no">onBeforeDisplayUsersList</option>
+				<option value="onBeforeEditATab" translate="no">onBeforeEditATab</option>
+				<option value="onBeforeEmailUser" translate="no">onBeforeEmailUser</option>
+				<option value="onBeforeEmailUserForm" translate="no">onBeforeEmailUserForm</option>
+				<option value="onBeforeFirstLogin" translate="no">onBeforeFirstLogin</option>
+				<option value="onBeforeFixDb" translate="no">onBeforeFixDb</option>
+				<option value="onBeforeFixFieldsDb" translate="no">onBeforeFixFieldsDb</option>
+				<option value="onBeforeLogin" translate="no">onBeforeLogin</option>
+				<option value="onBeforeLoginFormDisplay" translate="no">onBeforeLoginFormDisplay</option>
+				<option value="onBeforeLogout" translate="no">onBeforeLogout</option>
+				<option value="onBeforeManageConnectionsFormDisplay" translate="no">onBeforeManageConnectionsFormDisplay</option>
+				<option value="onBeforeManageConnectionsRequest" translate="no">onBeforeManageConnectionsRequest</option>
+				<option value="onBeforeModerateBansFormDisplay" translate="no">onBeforeModerateBansFormDisplay</option>
+				<option value="onBeforeModerateImagesFormDisplay" translate="no">onBeforeModerateImagesFormDisplay</option>
+				<option value="onBeforeModerateReportsFormDisplay" translate="no">onBeforeModerateReportsFormDisplay</option>
+				<option value="onBeforeNewPassword" translate="no">onBeforeNewPassword</option>
+				<option value="onBeforeNewUser" translate="no">onBeforeNewUser</option>
+				<option value="onBeforePendingApprovalUsersFormDisplay" translate="no">onBeforePendingApprovalUsersFormDisplay</option>
+				<option value="onBeforeProcessConnectionsRequest" translate="no">onBeforeProcessConnectionsRequest</option>
+				<option value="onBeforeRegisterForm" translate="no">onBeforeRegisterForm</option>
+				<option value="onBeforeRegisterFormDisplay" translate="no">onBeforeRegisterFormDisplay</option>
+				<option value="onBeforeRegisterFormRequest" translate="no">onBeforeRegisterFormRequest</option>
+				<option value="onBeforeRemoveConnection" translate="no">onBeforeRemoveConnection</option>
+				<option value="onBeforeRemoveConnectionRequest" translate="no">onBeforeRemoveConnectionRequest</option>
+				<option value="onBeforeReportUserForm" translate="no">onBeforeReportUserForm</option>
+				<option value="onBeforeReportUserFormDisplay" translate="no">onBeforeReportUserFormDisplay</option>
+				<option value="onBeforeReportUserRequest" translate="no">onBeforeReportUserRequest</option>
+				<option value="onBeforeSaveConnectionsRequest" translate="no">onBeforeSaveConnectionsRequest</option>
+				<option value="onBeforeSaveReportUser" translate="no">onBeforeSaveReportUser</option>
+				<option value="onBeforeSaveUserRegistrationRequest" translate="no">onBeforeSaveUserRegistrationRequest</option>
+				<option value="onBeforeSendEmailMSG" translate="no">onBeforeSendEmailMSG</option>
+				<option value="onBeforeSendMail" translate="no">onBeforeSendMail</option>
+				<option value="onBeforeSyncUser" translate="no">onBeforeSyncUser</option>
+				<option value="onBeforeToolbar" translate="no">onBeforeToolbar</option>
+				<option value="onBeforeUpdateUser" translate="no">onBeforeUpdateUser</option>
+				<option value="onBeforeUserActive" translate="no">onBeforeUserActive</option>
+				<option value="onBeforeUserApproval" translate="no">onBeforeUserApproval</option>
+				<option value="onBeforeUserAudioUpdate" translate="no">onBeforeUserAudioUpdate</option>
+				<option value="onBeforeUserAvatarUpdate" translate="no">onBeforeUserAvatarUpdate</option>
+				<option value="onBeforeUserBan" translate="no">onBeforeUserBan</option>
+				<option value="onBeforeUserBlocking" translate="no">onBeforeUserBlocking</option>
+				<option value="onBeforeUserConfirm" translate="no">onBeforeUserConfirm</option>
+				<option value="onBeforeUserConfirmationRequest" translate="no">onBeforeUserConfirmationRequest</option>
+				<option value="onBeforeUserFileUpdate" translate="no">onBeforeUserFileUpdate</option>
+				<option value="onBeforeUserProfileAccess" translate="no">onBeforeUserProfileAccess</option>
+				<option value="onBeforeUserProfileDisplay" translate="no">onBeforeUserProfileDisplay</option>
+				<option value="onBeforeUserProfileEditDisplay" translate="no">onBeforeUserProfileEditDisplay</option>
+				<option value="onBeforeUserProfileEditRequest" translate="no">onBeforeUserProfileEditRequest</option>
+				<option value="onBeforeUserProfileRequest" translate="no">onBeforeUserProfileRequest</option>
+				<option value="onBeforeUserProfileSaveRequest" translate="no">onBeforeUserProfileSaveRequest</option>
+				<option value="onBeforeUserRegistration" translate="no">onBeforeUserRegistration</option>
+				<option value="onBeforeUserUpdate" translate="no">onBeforeUserUpdate</option>
+				<option value="onBeforeUserVideoUpdate" translate="no">onBeforeUserVideoUpdate</option>
+				<option value="onBeforeUsernameReminder" translate="no">onBeforeUsernameReminder</option>
+				<option value="onBeforeUsersListBuildQuery" translate="no">onBeforeUsersListBuildQuery</option>
+				<option value="onBeforeUsersListQuery" translate="no">onBeforeUsersListQuery</option>
+				<option value="onBeforeViewReportsFormDisplay" translate="no">onBeforeViewReportsFormDisplay</option>
+				<option value="onBeforeWritePagesLinks" translate="no">onBeforeWritePagesLinks</option>
+				<option value="onBeforebindSearchCriteria" translate="no">onBeforebindSearchCriteria</option>
+				<option value="onBeforecommitFieldDataSave" translate="no">onBeforecommitFieldDataSave</option>
+				<option value="onBeforefieldClass" translate="no">onBeforefieldClass</option>
+				<option value="onBeforegetFieldRow" translate="no">onBeforegetFieldRow</option>
+				<option value="onBeforegetFieldTitle" translate="no">onBeforegetFieldTitle</option>
+				<option value="onBeforeinitFieldToDefault" translate="no">onBeforeinitFieldToDefault</option>
+				<option value="onBeforeprepareFieldDataNotSaved" translate="no">onBeforeprepareFieldDataNotSaved</option>
+				<option value="onBeforeprepareFieldDataSave" translate="no">onBeforeprepareFieldDataSave</option>
+				<option value="onBeforerenderFieldHtml" translate="no">onBeforerenderFieldHtml</option>
+				<option value="onBeforerollbackFieldDataSave" translate="no">onBeforerollbackFieldDataSave</option>
+				<option value="onCheckCaptchaHtmlElements" translate="no">onCheckCaptchaHtmlElements</option>
+				<option value="onDoLoginNow" translate="no">onDoLoginNow</option>
+				<option value="onDoLogoutNow" translate="no">onDoLogoutNow</option>
+				<option value="onDuringLogin" translate="no">onDuringLogin</option>
+				<option value="onFieldIcons" translate="no">onFieldIcons</option>
+				<option value="onGetCaptchaHtmlElements" translate="no">onGetCaptchaHtmlElements</option>
+				<option value="onInputFieldHtmlRender" translate="no">onInputFieldHtmlRender</option>
+				<option value="onLogChange" translate="no">onLogChange</option>
+				<option value="onLoginAuthentication" translate="no">onLoginAuthentication</option>
+				<option value="onLoginFailed" translate="no">onLoginFailed</option>
+				<option value="onLostPassForm" translate="no">onLostPassForm</option>
+				<option value="onNewPassword" translate="no">onNewPassword</option>
+				<option value="onPrepareMenus" translate="no">onPrepareMenus</option>
+				<option value="onSaveUserError" translate="no">onSaveUserError</option>
+				<option value="onStartNewPassword" translate="no">onStartNewPassword</option>
+				<option value="onStartSaveReportUser" translate="no">onStartSaveReportUser</option>
+				<option value="onStartSaveUserRegistration" translate="no">onStartSaveUserRegistration</option>
+				<option value="onStartUsersList" translate="no">onStartUsersList</option>
+				<option value="onUserActive" translate="no">onUserActive</option>
+				<option value="onUserLogin" translate="no">onUserLogin</option>
+				<option value="onUserModerator" translate="no">onUserModerator</option>
+				<option value="onUserPermissionTask" translate="no">onUserPermissionTask</option>
+				<option value="onUsersPermission" translate="no">onUsersPermission</option>
+			</optgroup>
+			<optgroup label="CB Auto Actions">
+				<option value="autoactions_onAction">autoactions_onAction</option>
+			</optgroup>
+		</type>
+		<type name="autoaction_object" base="list" valuetype="string">
+			<option value="0">Automatic</option>
+			<option value="1">Manually</option>
+			<option value="2">User</option>
+			<option value="3">Specific</option>
+		</type>
+		<type name="autoaction_variables" base="list" valuetype="string">
+			<option value="1">Variable 1</option>
+			<option value="2">Variable 2</option>
+			<option value="3">Variable 3</option>
+			<option value="4">Variable 4</option>
+			<option value="5">Variable 5</option>
+			<option value="6">Variable 6</option>
+			<option value="7">Variable 7</option>
+			<option value="8">Variable 8</option>
+			<option value="9">Variable 9</option>
+			<option value="10">Variable 10</option>
+		</type>
+	</types>
+</cbxml>

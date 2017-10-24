@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showreconfirmemails" type="params" ui="admin" label="Emails" icon="list" viewformatting="none">
+			<tablebrowser name="reconfirmemailsbrowser" table="#__comprofiler_plugin_emails" class="cbreconfirmEmailTable">
+				<toolbarmenu>
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Emails..." size="30">
+					<field name="to" />
+					<field name="from" />
+					<field name="username" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="status" type="xml:reconfirmemails_status" valuetype="const:string" base="string" label="" blanktext="- Select Status -" />
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="date_asc" label="Date ascending">
+						<field name="date" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="date_desc" label="Date descending" default="true" translate-default="no">
+						<field name="date" ordering="DESC" />
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="to" type="string" align="left" label="To" allowordering="ascending,descending" />
+						<field name="from" type="string" width="15%" align="left" label="From" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="username" type="string" width="15%" align="left" label="User" responsivehiddenon="xsmall" allowordering="ascending,descending">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+						<field name="code" type="string" width="15%" align="center" label="Code" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="date" type="datetime" width="15%" align="center" label="Date" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="status" type="xml:reconfirmemails_status" width="5%" align="center" label="Status" allowordering="ascending,descending" />
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="block_type" base="list" valuetype="string">
+			<option value="user">User</option>
+			<option value="ip">IP Address</option>
+			<option value="email">Email Address</option>
+			<option value="domain">Email Domain</option>
+		</type>
+		<type name="block_duration" base="list" valuetype="string">
+			<option value="MIDNIGHT">Midnight</option>
+			<option value="NOON">Noon</option>
+			<option value="TOMORROW">Tomorrow</option>
+			<option value="NEXT WEEK">Next Week</option>
+			<option value="NEXT MONTH">Next Month</option>
+			<option value="NEXT YEAR">Next Year</option>
+			<option value="LAST DAY OF THIS MONTH">Last Day of This Month</option>
+			<option value="FIRST DAY OF NEXT MONTH">First Day of Next Month</option>
+			<option value="LAST DAY OF NEXT MONTH">Last Day of Next Month</option>
+			<option value="LAST DAY OF THIS YEAR">Last Day of This Year</option>
+			<option value="FIRST DAY OF NEXT YEAR">First Day of Next Year</option>
+			<option value="LAST DAY OF NEXT YEAR">Last Day of Next Year</option>
+			<option value="FIRST DAY OF JANUARY">First Day of January</option>
+			<option value="LAST DAY OF JANUARY">Last Day of January</option>
+			<option value="FIRST DAY OF FEBRUARY">First Day of February</option>
+			<option value="LAST DAY OF FEBRUARY">Last Day of February</option>
+			<option value="FIRST DAY OF MARCH">First Day of March</option>
+			<option value="LAST DAY OF MARCH">Last Day of March</option>
+			<option value="FIRST DAY OF APRIL">First Day of Apil</option>
+			<option value="LAST DAY OF APRIL">Last Day of Apil</option>
+			<option value="FIRST DAY OF MAY">First Day of May</option>
+			<option value="LAST DAY OF MAY">Last Day of May</option>
+			<option value="FIRST DAY OF JUNE">First Day of June</option>
+			<option value="LAST DAY OF JUNE">Last Day of June</option>
+			<option value="FIRST DAY OF JULY">First Day of July</option>
+			<option value="LAST DAY OF JULY">Last Day of July</option>
+			<option value="FIRST DAY OF AUGUST">First Day of August</option>
+			<option value="LAST DAY OF AUGUST">Last Day of August</option>
+			<option value="FIRST DAY OF SEPTEMBER">First Day of September</option>
+			<option value="LAST DAY OF SEPTEMBER">Last Day of September</option>
+			<option value="FIRST DAY OF OCTOBER">First Day of October</option>
+			<option value="LAST DAY OF OCTOBER">Last Day of October</option>
+			<option value="FIRST DAY OF NOVEMBER">First Day of November</option>
+			<option value="LAST DAY OF NOVEMBER">Last Day of November</option>
+			<option value="FIRST DAY OF DECEMBER">First Day of December</option>
+			<option value="LAST DAY OF DECEMBER">Last Day of December</option>
+			<option value="+30 MINUTES">30 Minutes</option>
+			<option value="+1 HOUR">1 Hour</option>
+			<option value="+3 HOURS">3 Hours</option>
+			<option value="+6 HOURS">6 Hours</option>
+			<option value="+12 HOURS">12 Hours</option>
+			<option value="+1 DAY">1 Day</option>
+			<option value="+3 DAYS">3 Days</option>
+			<option value="+6 DAYS">6 Days</option>
+			<option value="+12 DAYS">12 Days</option>
+			<option value="+1 WEEK">1 Week</option>
+			<option value="+2 WEEKS">2 Weeks</option>
+			<option value="+3 WEEKS">3 Weeks</option>
+			<option value="+1 MONTH">1 Month</option>
+			<option value="+3 MONTHS">3 Months</option>
+			<option value="+6 MONTHS">6 Months</option>
+			<option value="+1 YEAR">1 Year</option>
+		</type>
+	</types>
+</cbxml>

@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Conditional</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-19</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Enables conditional show/hide of fields and show/hide of tabs based off fields value.</description>
+	<version>2.0.13</version>
+	<release>4.0.7+build.2016.12.19.16.43.36.f90e58272</release>
+	<files>
+		<filename plugin="cbconditional">cbconditional.php</filename>
+		<filename>index.html</filename>
+		<foldername>js</foldername>
+		<foldername>language</foldername>
+	</files>
+	<delete>
+		<filename>admin.cbconditional.css</filename>
+		<filename>admin.cbconditional.html.php</filename>
+		<filename>admin.cbconditional.php</filename>
+		<filename>cbconditional.class.php</filename>
+		<filename>field.cbconditional.php</filename>
+		<filename>plugin.cbconditional.php</filename>
+		<filename>tab.cbconditional.php</filename>
+		<filename>toolbar.cbconditional.html.php</filename>
+		<filename>toolbar.cbconditional.php</filename>
+		<filename>js/cbconditional.js</filename>
+		<filename>js/cbconditional.min.js</filename>
+		<foldername>images</foldername>
+	</delete>
+	<tabsparams>
+		<tab type="other_types" label="Tab condition preferences">
+			<params>
+				<tabpane name="cbconditional_tabs">
+					<tabpanetab name="cbconditional_tab1" label="1">
+						<param name="cbconditional_display" type="list" default="0" label="Display" description="Select conditional display for this tab.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Tab conditional</option>
+						</param>
+						<if name="cbconditional_display" type="showhide" operator="=" value="1" valuetype="const:int">
+							<fieldset name="if" label="If...">
+								<param name="cbconditional_field" type="field" key="name" default="" label="Field" description="Select field to match value against in determining this tabs display.">
+									<optgroup label="Custom">
+										<option value="customvalue">Value</option>
+										<option value="customviewaccesslevels">View Access Levels</option>
+										<option value="customusergroups">Usergroups</option>
+									</optgroup>
+									<optgroup label="Fields" />
+								</param>
+							</fieldset>
+							<if name="cbconditional_field" type="showhide" operator="!=" value="" valuetype="const:string">
+								<if name="cbconditional_field" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value" label="Value...">
+										<param name="cbconditional_customvalue" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has" label="Has...">
+										<if name="cbconditional_field" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+								<if name="cbconditional_field" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="is" label="Is...">
+										<param name="cbconditional_operator" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+											<option value="0">Equal To</option>
+											<option value="1">Not Equal To</option>
+											<option value="2">Greater Than</option>
+											<option value="3">Less Than</option>
+											<option value="4">Greater Than or Equal To</option>
+											<option value="5">Less Than or Equal To</option>
+											<option value="6">Empty</option>
+											<option value="7">Not Empty</option>
+											<option value="8">Does Contain</option>
+											<option value="9">Does Not Contain</option>
+											<option value="10">Is REGEX</option>
+											<option value="11">Is Not REGEX</option>
+										</param>
+									</fieldset>
+									<if name="cbconditional_operator" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+										<fieldset name="to" label="To...">
+											<param name="cbconditional_value" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+											<param name="cbconditional_value_translate" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+										</fieldset>
+									</if>
+								</if>
+								<fieldset name="then" label="Then...">
+									<param name="cbconditional_mode" type="list" default="0" label="Mode" description="Select how to handle this tabs display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</fieldset>
+								<fieldset name="for" label="For...">
+									<param name="cbconditional_target_reg" type="list" default="0" label="Registration" description="Enable or disable conditional usage on registration.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_edit" type="list" default="0" label="Profile Edit" description="Enable or disable conditional usage on profile edit.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_view" type="list" default="1" label="Profile View" description="Enable or disable conditional usage on profile view.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+								</fieldset>
+							</if>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab2" label="2">
+						<param name="cbconditional_display2" type="list" default="0" label="Display" description="Select conditional display for this tab.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Tab conditional</option>
+						</param>
+						<if name="cbconditional_display2" type="showhide" operator="=" value="1" valuetype="const:int">
+							<fieldset name="if2" label="If...">
+								<param name="cbconditional_field2" type="field" key="name" default="" label="Field" description="Select field to match value against in determining this tabs display.">
+									<optgroup label="Custom">
+										<option value="customvalue">Value</option>
+										<option value="customviewaccesslevels">View Access Levels</option>
+										<option value="customusergroups">Usergroups</option>
+									</optgroup>
+									<optgroup label="Fields" />
+								</param>
+							</fieldset>
+							<if name="cbconditional_field2" type="showhide" operator="!=" value="" valuetype="const:string">
+								<if name="cbconditional_field2" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value2" label="Value...">
+										<param name="cbconditional_customvalue2" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate2" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field2" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has2" label="Has...">
+										<if name="cbconditional_field2" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels2" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field2" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups2" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+								<if name="cbconditional_field2" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="is2" label="Is...">
+										<param name="cbconditional_operator2" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+											<option value="0">Equal To</option>
+											<option value="1">Not Equal To</option>
+											<option value="2">Greater Than</option>
+											<option value="3">Less Than</option>
+											<option value="4">Greater Than or Equal To</option>
+											<option value="5">Less Than or Equal To</option>
+											<option value="6">Empty</option>
+											<option value="7">Not Empty</option>
+											<option value="8">Does Contain</option>
+											<option value="9">Does Not Contain</option>
+											<option value="10">Is REGEX</option>
+											<option value="11">Is Not REGEX</option>
+										</param>
+									</fieldset>
+									<if name="cbconditional_operator2" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+										<fieldset name="to2" label="To...">
+											<param name="cbconditional_value2" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+											<param name="cbconditional_value_translate2" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+										</fieldset>
+									</if>
+								</if>
+								<fieldset name="then2" label="Then...">
+									<param name="cbconditional_mode2" type="list" default="0" label="Mode" description="Select how to handle this tabs display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</fieldset>
+								<fieldset name="for2" label="For...">
+									<param name="cbconditional_target_reg2" type="list" default="0" label="Registration" description="Enable or disable conditional usage on registration.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_edit2" type="list" default="0" label="Profile Edit" description="Enable or disable conditional usage on profile edit.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_view2" type="list" default="1" label="Profile View" description="Enable or disable conditional usage on profile view.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+								</fieldset>
+							</if>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab3" label="3">
+						<param name="cbconditional_display3" type="list" default="0" label="Display" description="Select conditional display for this tab.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Tab conditional</option>
+						</param>
+						<if name="cbconditional_display3" type="showhide" operator="=" value="1" valuetype="const:int">
+							<fieldset name="if3" label="If...">
+								<param name="cbconditional_field3" type="field" key="name" default="" label="Field" description="Select field to match value against in determining this tabs display.">
+									<optgroup label="Custom">
+										<option value="customvalue">Value</option>
+										<option value="customviewaccesslevels">View Access Levels</option>
+										<option value="customusergroups">Usergroups</option>
+									</optgroup>
+									<optgroup label="Fields" />
+								</param>
+							</fieldset>
+							<if name="cbconditional_field3" type="showhide" operator="!=" value="" valuetype="const:string">
+								<if name="cbconditional_field3" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value3" label="Value...">
+										<param name="cbconditional_customvalue3" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate3" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field3" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has3" label="Has...">
+										<if name="cbconditional_field3" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels3" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field3" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups3" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+								<if name="cbconditional_field3" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="is3" label="Is...">
+										<param name="cbconditional_operator3" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+											<option value="0">Equal To</option>
+											<option value="1">Not Equal To</option>
+											<option value="2">Greater Than</option>
+											<option value="3">Less Than</option>
+											<option value="4">Greater Than or Equal To</option>
+											<option value="5">Less Than or Equal To</option>
+											<option value="6">Empty</option>
+											<option value="7">Not Empty</option>
+											<option value="8">Does Contain</option>
+											<option value="9">Does Not Contain</option>
+											<option value="10">Is REGEX</option>
+											<option value="11">Is Not REGEX</option>
+										</param>
+									</fieldset>
+									<if name="cbconditional_operator3" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+										<fieldset name="to3" label="To...">
+											<param name="cbconditional_value3" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+											<param name="cbconditional_value_translate3" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+										</fieldset>
+									</if>
+								</if>
+								<fieldset name="then3" label="Then...">
+									<param name="cbconditional_mode3" type="list" default="0" label="Mode" description="Select how to handle this tabs display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</fieldset>
+								<fieldset name="for3" label="For...">
+									<param name="cbconditional_target_reg3" type="list" default="0" label="Registration" description="Enable or disable conditional usage on registration.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_edit3" type="list" default="0" label="Profile Edit" description="Enable or disable conditional usage on profile edit.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_view3" type="list" default="1" label="Profile View" description="Enable or disable conditional usage on profile view.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+								</fieldset>
+							</if>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab4" label="4">
+						<param name="cbconditional_display4" type="list" default="0" label="Display" description="Select conditional display for this tab.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Tab conditional</option>
+						</param>
+						<if name="cbconditional_display4" type="showhide" operator="=" value="1" valuetype="const:int">
+							<fieldset name="if4" label="If...">
+								<param name="cbconditional_field4" type="field" key="name" default="" label="Field" description="Select field to match value against in determining this tabs display.">
+									<optgroup label="Custom">
+										<option value="customvalue">Value</option>
+										<option value="customviewaccesslevels">View Access Levels</option>
+										<option value="customusergroups">Usergroups</option>
+									</optgroup>
+									<optgroup label="Fields" />
+								</param>
+							</fieldset>
+							<if name="cbconditional_field4" type="showhide" operator="!=" value="" valuetype="const:string">
+								<if name="cbconditional_field4" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value4" label="Value...">
+										<param name="cbconditional_customvalue4" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate4" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field4" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has4" label="Has...">
+										<if name="cbconditional_field4" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels4" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field4" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups4" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+								<if name="cbconditional_field4" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="is4" label="Is...">
+										<param name="cbconditional_operator4" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+											<option value="0">Equal To</option>
+											<option value="1">Not Equal To</option>
+											<option value="2">Greater Than</option>
+											<option value="3">Less Than</option>
+											<option value="4">Greater Than or Equal To</option>
+											<option value="5">Less Than or Equal To</option>
+											<option value="6">Empty</option>
+											<option value="7">Not Empty</option>
+											<option value="8">Does Contain</option>
+											<option value="9">Does Not Contain</option>
+											<option value="10">Is REGEX</option>
+											<option value="11">Is Not REGEX</option>
+										</param>
+									</fieldset>
+									<if name="cbconditional_operator4" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+										<fieldset name="to4" label="To...">
+											<param name="cbconditional_value4" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+											<param name="cbconditional_value_translate4" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+										</fieldset>
+									</if>
+								</if>
+								<fieldset name="then4" label="Then...">
+									<param name="cbconditional_mode4" type="list" default="0" label="Mode" description="Select how to handle this tabs display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</fieldset>
+								<fieldset name="for4" label="For...">
+									<param name="cbconditional_target_reg4" type="list" default="0" label="Registration" description="Enable or disable conditional usage on registration.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_edit4" type="list" default="0" label="Profile Edit" description="Enable or disable conditional usage on profile edit.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_view4" type="list" default="1" label="Profile View" description="Enable or disable conditional usage on profile view.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+								</fieldset>
+							</if>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab5" label="5">
+						<param name="cbconditional_display5" type="list" default="0" label="Display" description="Select conditional display for this tab.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Tab conditional</option>
+						</param>
+						<if name="cbconditional_display5" type="showhide" operator="=" value="1" valuetype="const:int">
+							<fieldset name="if5" label="If...">
+								<param name="cbconditional_field5" type="field" key="name" default="" label="Field" description="Select field to match value against in determining this tabs display.">
+									<optgroup label="Custom">
+										<option value="customvalue">Value</option>
+										<option value="customviewaccesslevels">View Access Levels</option>
+										<option value="customusergroups">Usergroups</option>
+									</optgroup>
+									<optgroup label="Fields" />
+								</param>
+							</fieldset>
+							<if name="cbconditional_field5" type="showhide" operator="!=" value="" valuetype="const:string">
+								<if name="cbconditional_field5" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value5" label="Value...">
+										<param name="cbconditional_customvalue5" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate5" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field5" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has5" label="Has...">
+										<if name="cbconditional_field5" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels5" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field5" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups5" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+								<if name="cbconditional_field5" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="is5" label="Is...">
+										<param name="cbconditional_operator5" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+											<option value="0">Equal To</option>
+											<option value="1">Not Equal To</option>
+											<option value="2">Greater Than</option>
+											<option value="3">Less Than</option>
+											<option value="4">Greater Than or Equal To</option>
+											<option value="5">Less Than or Equal To</option>
+											<option value="6">Empty</option>
+											<option value="7">Not Empty</option>
+											<option value="8">Does Contain</option>
+											<option value="9">Does Not Contain</option>
+											<option value="10">Is REGEX</option>
+											<option value="11">Is Not REGEX</option>
+										</param>
+									</fieldset>
+									<if name="cbconditional_operator5" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+										<fieldset name="to5" label="To...">
+											<param name="cbconditional_value5" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+											<param name="cbconditional_value_translate5" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+										</fieldset>
+									</if>
+								</if>
+								<fieldset name="then5" label="Then...">
+									<param name="cbconditional_mode5" type="list" default="0" label="Mode" description="Select how to handle this tabs display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</fieldset>
+								<fieldset name="for5" label="For...">
+									<param name="cbconditional_target_reg5" type="list" default="0" label="Registration" description="Enable or disable conditional usage on registration.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_edit5" type="list" default="0" label="Profile Edit" description="Enable or disable conditional usage on profile edit.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+									<param name="cbconditional_target_view5" type="list" default="1" label="Profile View" description="Enable or disable conditional usage on profile view.">
+										<option value="0">Disabled</option>
+										<option value="1">Enabled</option>
+									</param>
+								</fieldset>
+							</if>
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</tab>
+	</tabsparams>
+	<fieldsparams>
+		<field type="other_types" label="Field condition preferences">
+			<params>
+				<tabpane name="cbconditional_tabs">
+					<tabpanetab name="cbconditional_tab1" label="1">
+						<param name="cbconditional_display" type="list" default="0" label="Display" description="Select conditional display for this field.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Field conditional others</option>
+							<option value="2">Field conditional self</option>
+						</param>
+						<if name="cbconditional_display" type="showhide" operator="!=" value="0" valuetype="const:int">
+							<if name="cbconditional_display" type="showhide" operator="=" value="2" valuetype="const:int">
+								<fieldset name="if" label="If...">
+									<param name="cbconditional_field" type="list" default="" label="Field" blanktext="--- Select Field ---" description="Select field to match value against in determining this fields display.">
+										<optgroup label="Custom">
+											<option value="customvalue">Value</option>
+											<option value="customviewaccesslevels">View Access Levels</option>
+											<option value="customusergroups">Usergroups</option>
+										</optgroup>
+										<optgroup label="Fields">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFields" />
+										</optgroup>
+									</param>
+								</fieldset>
+								<if name="cbconditional_field" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value" label="Value...">
+										<param name="cbconditional_customvalue" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has" label="Has...">
+										<if name="cbconditional_field" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+							</if>
+							<if name="cbconditional_field" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+								<fieldset name="is" label="Is...">
+									<param name="cbconditional_operator" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+										<option value="0">Equal To</option>
+										<option value="1">Not Equal To</option>
+										<option value="2">Greater Than</option>
+										<option value="3">Less Than</option>
+										<option value="4">Greater Than or Equal To</option>
+										<option value="5">Less Than or Equal To</option>
+										<option value="6">Empty</option>
+										<option value="7">Not Empty</option>
+										<option value="8">Does Contain</option>
+										<option value="9">Does Not Contain</option>
+										<option value="10">Is REGEX</option>
+										<option value="11">Is Not REGEX</option>
+									</param>
+								</fieldset>
+								<if name="cbconditional_operator" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+									<fieldset name="to" label="To...">
+										<param name="cbconditional_value" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_value_translate" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+							</if>
+							<fieldset name="then" label="Then...">
+								<if name="cbconditional_display" type="showhide" operator="=" value="1" valuetype="const:int">
+									<fieldset name="then_fields" label="Fields">
+										<param name="cbconditional_show" type="field" multiple="true" size="10" default="" label="Show" blanktext="--- Select Fields ---" description="Select fields to show if value is matched." />
+										<param name="cbconditional_hide" type="field" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Fields ---" description="Select fields to hide if value is matched." />
+									</fieldset>
+									<fieldset name="then_options" label="Field Options">
+										<param name="cbconditional_options_show" type="list" multiple="true" size="10" default="" label="Show" blanktext="--- Select Field Options ---" description="Select field options to show if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+										<param name="cbconditional_options_hide" type="list" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Field Options ---" description="Select field options to hide if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+									</fieldset>
+								</if>
+								<if name="cbconditional_display" type="showhide" operator="=" value="2" valuetype="const:int">
+									<param name="cbconditional_mode" type="list" default="0" label="Mode" description="Select how to handle this fields display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</if>
+							</fieldset>
+							<fieldset name="for" label="For...">
+								<param name="cbconditional_target_reg" type="yesno" default="1" label="Registration" description="Enable or disable conditional usage on registration." />
+								<param name="cbconditional_target_edit" type="yesno" default="1" label="Profile Edit" description="Enable or disable conditional usage on profile edit." />
+								<param name="cbconditional_target_view" type="yesno" default="1" label="Profile View" description="Enable or disable conditional usage on profile view." />
+								<param name="cbconditional_target_search" type="yesno" default="0" label="Userlists Search" description="Enable or disable conditional usage on userlists searching." />
+								<param name="cbconditional_target_list" type="yesno" default="1" label="Userlists View" description="Enable or disable conditional usage on userlists view." />
+							</fieldset>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab2" label="2">
+						<param name="cbconditional_display2" type="list" default="0" label="Display" description="Select conditional display for this field.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Field conditional others</option>
+							<option value="2">Field conditional self</option>
+						</param>
+						<if name="cbconditional_display2" type="showhide" operator="!=" value="0" valuetype="const:int">
+							<if name="cbconditional_display2" type="showhide" operator="=" value="2" valuetype="const:int">
+								<fieldset name="if2" label="If...">
+									<param name="cbconditional_field2" type="list" default="" label="Field" blanktext="--- Select Field ---" description="Select field to match value against in determining this fields display.">
+										<optgroup label="Custom">
+											<option value="customvalue">Value</option>
+											<option value="customviewaccesslevels">View Access Levels</option>
+											<option value="customusergroups">Usergroups</option>
+										</optgroup>
+										<optgroup label="Fields">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFields" />
+										</optgroup>
+									</param>
+								</fieldset>
+								<if name="cbconditional_field2" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value2" label="Value...">
+										<param name="cbconditional_customvalue2" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate2" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field2" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has2" label="Has...">
+										<if name="cbconditional_field2" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels2" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field2" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups2" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+							</if>
+							<if name="cbconditional_field2" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+								<fieldset name="is2" label="Is...">
+									<param name="cbconditional_operator2" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+										<option value="0">Equal To</option>
+										<option value="1">Not Equal To</option>
+										<option value="2">Greater Than</option>
+										<option value="3">Less Than</option>
+										<option value="4">Greater Than or Equal To</option>
+										<option value="5">Less Than or Equal To</option>
+										<option value="6">Empty</option>
+										<option value="7">Not Empty</option>
+										<option value="8">Does Contain</option>
+										<option value="9">Does Not Contain</option>
+										<option value="10">Is REGEX</option>
+										<option value="11">Is Not REGEX</option>
+									</param>
+								</fieldset>
+								<if name="cbconditional_operator2" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+									<fieldset name="to2" label="To...">
+										<param name="cbconditional_value2" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_value_translate2" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+							</if>
+							<fieldset name="then2" label="Then...">
+								<if name="cbconditional_display2" type="showhide" operator="=" value="1" valuetype="const:int">
+									<fieldset name="then_fields2" label="Fields">
+										<param name="cbconditional_show2" type="field" multiple="true" size="10" default="" label="Show" blanktext="--- Select Fields ---" description="Select fields to show if value is matched." />
+										<param name="cbconditional_hide2" type="field" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Fields ---" description="Select fields to hide if value is matched." />
+									</fieldset>
+									<fieldset name="then_options2" label="Field Options">
+										<param name="cbconditional_options_show2" type="list" multiple="true" size="10" default="" label="Show" blanktext="--- Select Field Options ---" description="Select field options to show if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+										<param name="cbconditional_options_hide2" type="list" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Field Options ---" description="Select field options to hide if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+									</fieldset>
+								</if>
+								<if name="cbconditional_display2" type="showhide" operator="=" value="2" valuetype="const:int">
+									<param name="cbconditional_mode2" type="list" default="0" label="Mode" description="Select how to handle this fields display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</if>
+							</fieldset>
+							<fieldset name="for2" label="For...">
+								<param name="cbconditional_target_reg2" type="yesno" default="1" label="Registration" description="Enable or disable conditional usage on registration." />
+								<param name="cbconditional_target_edit2" type="yesno" default="1" label="Profile Edit" description="Enable or disable conditional usage on profile edit." />
+								<param name="cbconditional_target_view2" type="yesno" default="1" label="Profile View" description="Enable or disable conditional usage on profile view." />
+								<param name="cbconditional_target_search2" type="yesno" default="0" label="Userlists Search" description="Enable or disable conditional usage on userlists searching." />
+								<param name="cbconditional_target_list2" type="yesno" default="1" label="Userlists View" description="Enable or disable conditional usage on userlists view." />
+							</fieldset>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab3" label="3">
+						<param name="cbconditional_display3" type="list" default="0" label="Display" description="Select conditional display for this field.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Field conditional others</option>
+							<option value="2">Field conditional self</option>
+						</param>
+						<if name="cbconditional_display3" type="showhide" operator="!=" value="0" valuetype="const:int">
+							<if name="cbconditional_display3" type="showhide" operator="=" value="2" valuetype="const:int">
+								<fieldset name="if3" label="If...">
+									<param name="cbconditional_field3" type="list" default="" label="Field" blanktext="--- Select Field ---" description="Select field to match value against in determining this fields display.">
+										<optgroup label="Custom">
+											<option value="customvalue">Value</option>
+											<option value="customviewaccesslevels">View Access Levels</option>
+											<option value="customusergroups">Usergroups</option>
+										</optgroup>
+										<optgroup label="Fields">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFields" />
+										</optgroup>
+									</param>
+								</fieldset>
+								<if name="cbconditional_field3" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value3" label="Value...">
+										<param name="cbconditional_customvalue3" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate3" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field3" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has3" label="Has...">
+										<if name="cbconditional_field3" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels3" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field3" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups3" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+							</if>
+							<if name="cbconditional_field3" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+								<fieldset name="is3" label="Is...">
+									<param name="cbconditional_operator3" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+										<option value="0">Equal To</option>
+										<option value="1">Not Equal To</option>
+										<option value="2">Greater Than</option>
+										<option value="3">Less Than</option>
+										<option value="4">Greater Than or Equal To</option>
+										<option value="5">Less Than or Equal To</option>
+										<option value="6">Empty</option>
+										<option value="7">Not Empty</option>
+										<option value="8">Does Contain</option>
+										<option value="9">Does Not Contain</option>
+										<option value="10">Is REGEX</option>
+										<option value="11">Is Not REGEX</option>
+									</param>
+								</fieldset>
+								<if name="cbconditional_operator3" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+									<fieldset name="to3" label="To...">
+										<param name="cbconditional_value3" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_value_translate3" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+							</if>
+							<fieldset name="then3" label="Then...">
+								<if name="cbconditional_display3" type="showhide" operator="=" value="1" valuetype="const:int">
+									<fieldset name="then_fields3" label="Fields">
+										<param name="cbconditional_show3" type="field" multiple="true" size="10" default="" label="Show" blanktext="--- Select Fields ---" description="Select fields to show if value is matched." />
+										<param name="cbconditional_hide3" type="field" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Fields ---" description="Select fields to hide if value is matched." />
+									</fieldset>
+									<fieldset name="then_options3" label="Field Options">
+										<param name="cbconditional_options_show3" type="list" multiple="true" size="10" default="" label="Show" blanktext="--- Select Field Options ---" description="Select field options to show if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+										<param name="cbconditional_options_hide3" type="list" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Field Options ---" description="Select field options to hide if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+									</fieldset>
+								</if>
+								<if name="cbconditional_display3" type="showhide" operator="=" value="2" valuetype="const:int">
+									<param name="cbconditional_mode3" type="list" default="0" label="Mode" description="Select how to handle this fields display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</if>
+							</fieldset>
+							<fieldset name="for3" label="For...">
+								<param name="cbconditional_target_reg3" type="yesno" default="1" label="Registration" description="Enable or disable conditional usage on registration." />
+								<param name="cbconditional_target_edit3" type="yesno" default="1" label="Profile Edit" description="Enable or disable conditional usage on profile edit." />
+								<param name="cbconditional_target_view3" type="yesno" default="1" label="Profile View" description="Enable or disable conditional usage on profile view." />
+								<param name="cbconditional_target_search3" type="yesno" default="0" label="Userlists Search" description="Enable or disable conditional usage on userlists searching." />
+								<param name="cbconditional_target_list3" type="yesno" default="1" label="Userlists View" description="Enable or disable conditional usage on userlists view." />
+							</fieldset>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab4" label="4">
+						<param name="cbconditional_display4" type="list" default="0" label="Display" description="Select conditional display for this field.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Field conditional others</option>
+							<option value="2">Field conditional self</option>
+						</param>
+						<if name="cbconditional_display4" type="showhide" operator="!=" value="0" valuetype="const:int">
+							<if name="cbconditional_display4" type="showhide" operator="=" value="2" valuetype="const:int">
+								<fieldset name="if4" label="If...">
+									<param name="cbconditional_field4" type="list" default="" label="Field" blanktext="--- Select Field ---" description="Select field to match value against in determining this fields display.">
+										<optgroup label="Custom">
+											<option value="customvalue">Value</option>
+											<option value="customviewaccesslevels">View Access Levels</option>
+											<option value="customusergroups">Usergroups</option>
+										</optgroup>
+										<optgroup label="Fields">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFields" />
+										</optgroup>
+									</param>
+								</fieldset>
+								<if name="cbconditional_field4" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value4" label="Value...">
+										<param name="cbconditional_customvalue4" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate4" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field4" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has4" label="Has...">
+										<if name="cbconditional_field4" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels4" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field4" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups4" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+							</if>
+							<if name="cbconditional_field4" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+								<fieldset name="is4" label="Is...">
+									<param name="cbconditional_operator4" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+										<option value="0">Equal To</option>
+										<option value="1">Not Equal To</option>
+										<option value="2">Greater Than</option>
+										<option value="3">Less Than</option>
+										<option value="4">Greater Than or Equal To</option>
+										<option value="5">Less Than or Equal To</option>
+										<option value="6">Empty</option>
+										<option value="7">Not Empty</option>
+										<option value="8">Does Contain</option>
+										<option value="9">Does Not Contain</option>
+										<option value="10">Is REGEX</option>
+										<option value="11">Is Not REGEX</option>
+									</param>
+								</fieldset>
+								<if name="cbconditional_operator4" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+									<fieldset name="to4" label="To...">
+										<param name="cbconditional_value4" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_value_translate4" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+							</if>
+							<fieldset name="then4" label="Then...">
+								<if name="cbconditional_display4" type="showhide" operator="=" value="1" valuetype="const:int">
+									<fieldset name="then_fields4" label="Fields">
+										<param name="cbconditional_show4" type="field" multiple="true" size="10" default="" label="Show" blanktext="--- Select Fields ---" description="Select fields to show if value is matched." />
+										<param name="cbconditional_hide4" type="field" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Fields ---" description="Select fields to hide if value is matched." />
+									</fieldset>
+									<fieldset name="then_options4" label="Field Options">
+										<param name="cbconditional_options_show4" type="list" multiple="true" size="10" default="" label="Show" blanktext="--- Select Field Options ---" description="Select field options to show if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+										<param name="cbconditional_options_hide4" type="list" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Field Options ---" description="Select field options to hide if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+									</fieldset>
+								</if>
+								<if name="cbconditional_display4" type="showhide" operator="=" value="2" valuetype="const:int">
+									<param name="cbconditional_mode4" type="list" default="0" label="Mode" description="Select how to handle this fields display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</if>
+							</fieldset>
+							<fieldset name="for4" label="For...">
+								<param name="cbconditional_target_reg4" type="yesno" default="1" label="Registration" description="Enable or disable conditional usage on registration." />
+								<param name="cbconditional_target_edit4" type="yesno" default="1" label="Profile Edit" description="Enable or disable conditional usage on profile edit." />
+								<param name="cbconditional_target_view4" type="yesno" default="1" label="Profile View" description="Enable or disable conditional usage on profile view." />
+								<param name="cbconditional_target_search4" type="yesno" default="0" label="Userlists Search" description="Enable or disable conditional usage on userlists searching." />
+								<param name="cbconditional_target_list4" type="yesno" default="1" label="Userlists View" description="Enable or disable conditional usage on userlists view." />
+							</fieldset>
+						</if>
+					</tabpanetab>
+					<tabpanetab name="cbconditional_tab5" label="5">
+						<param name="cbconditional_display5" type="list" default="0" label="Display" description="Select conditional display for this field.">
+							<option value="0">Normal CB settings</option>
+							<option value="1">Field conditional others</option>
+							<option value="2">Field conditional self</option>
+						</param>
+						<if name="cbconditional_display5" type="showhide" operator="!=" value="0" valuetype="const:int">
+							<if name="cbconditional_display5" type="showhide" operator="=" value="2" valuetype="const:int">
+								<fieldset name="if5" label="If...">
+									<param name="cbconditional_field5" type="list" default="" label="Field" blanktext="--- Select Field ---" description="Select field to match value against in determining this fields display.">
+										<optgroup label="Custom">
+											<option value="customvalue">Value</option>
+											<option value="customviewaccesslevels">View Access Levels</option>
+											<option value="customusergroups">Usergroups</option>
+										</optgroup>
+										<optgroup label="Fields">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFields" />
+										</optgroup>
+									</param>
+								</fieldset>
+								<if name="cbconditional_field5" type="showhide" operator="=" value="customvalue" valuetype="const:string">
+									<fieldset name="value5" label="Value...">
+										<param name="cbconditional_customvalue5" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_customvalue_translate5" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+								<if name="cbconditional_field5" type="showhide" operator="regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+									<fieldset name="has5" label="Has...">
+										<if name="cbconditional_field5" type="showhide" operator="=" value="customviewaccesslevels" valuetype="const:string">
+											<param name="cbconditional_customviewaccesslevels5" type="viewaccesslevel" multiple="true" size="10" default="" managelevels="false" label="View Access Levels" description="Select the view access levels to match against the user. The user only needs to have one of the selected view access levels to match." />
+										</if>
+										<if name="cbconditional_field5" type="showhide" operator="=" value="customusergroups" valuetype="const:string">
+											<param name="cbconditional_customusergroups5" type="usergroup" multiple="true" size="10" default="" managegroups="false" label="Usergroups" description="Select the usergroups to match against the user. The user only needs to have one of the selected usergroups to match." />
+										</if>
+									</fieldset>
+								</if>
+							</if>
+							<if name="cbconditional_field5" type="showhide" operator="!regexp" value="customviewaccesslevels|customusergroups" valuetype="const:string">
+								<fieldset name="is5" label="Is...">
+									<param name="cbconditional_operator5" type="list" default="0" label="Operator" description="Select operator to compare field value against input value.">
+										<option value="0">Equal To</option>
+										<option value="1">Not Equal To</option>
+										<option value="2">Greater Than</option>
+										<option value="3">Less Than</option>
+										<option value="4">Greater Than or Equal To</option>
+										<option value="5">Less Than or Equal To</option>
+										<option value="6">Empty</option>
+										<option value="7">Not Empty</option>
+										<option value="8">Does Contain</option>
+										<option value="9">Does Not Contain</option>
+										<option value="10">Is REGEX</option>
+										<option value="11">Is Not REGEX</option>
+									</param>
+								</fieldset>
+								<if name="cbconditional_operator5" type="showhide" operator="!regexp" value="6|7" valuetype="const:string">
+									<fieldset name="to5" label="To...">
+										<param name="cbconditional_value5" type="text" size="30" default="" label="Value" description="Input substitution supported value to match against field value. In addition to user substitutions you can access $_REQUEST, $_GET, and $_POST substitutions as [request_VARIABLE],[post_VARIABLE], and [get_VARIABLE] (e.g. [get_task])." />
+										<param name="cbconditional_value_translate5" type="yesno" default="1" label="Translate Value" description="Enable or disable translation of language strings in value." />
+									</fieldset>
+								</if>
+							</if>
+							<fieldset name="then5" label="Then...">
+								<if name="cbconditional_display5" type="showhide" operator="=" value="1" valuetype="const:int">
+									<fieldset name="then_fields5" label="Fields">
+										<param name="cbconditional_show5" type="field" multiple="true" size="10" default="" label="Show" blanktext="--- Select Fields ---" description="Select fields to show if value is matched." />
+										<param name="cbconditional_hide5" type="field" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Fields ---" description="Select fields to hide if value is matched." />
+									</fieldset>
+									<fieldset name="then_options5" label="Field Options">
+										<param name="cbconditional_options_show5" type="list" multiple="true" size="10" default="" label="Show" blanktext="--- Select Field Options ---" description="Select field options to show if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+										<param name="cbconditional_options_hide5" type="list" multiple="true" size="10" default="" label="Hide" blanktext="--- Select Field Options ---" description="Select field options to hide if value is matched.">
+											<data name="" type="custom" class="cbconditionalPlugin" method="loadFieldOptions" />
+										</param>
+									</fieldset>
+								</if>
+								<if name="cbconditional_display5" type="showhide" operator="=" value="2" valuetype="const:int">
+									<param name="cbconditional_mode5" type="list" default="0" label="Mode" description="Select how to handle this fields display based on field value match.">
+										<option value="0">Hide</option>
+										<option value="1">Show</option>
+									</param>
+								</if>
+							</fieldset>
+							<fieldset name="for5" label="For...">
+								<param name="cbconditional_target_reg5" type="yesno" default="1" label="Registration" description="Enable or disable conditional usage on registration." />
+								<param name="cbconditional_target_edit5" type="yesno" default="1" label="Profile Edit" description="Enable or disable conditional usage on profile edit." />
+								<param name="cbconditional_target_view5" type="yesno" default="1" label="Profile View" description="Enable or disable conditional usage on profile view." />
+								<param name="cbconditional_target_search5" type="yesno" default="0" label="Userlists Search" description="Enable or disable conditional usage on userlists searching." />
+								<param name="cbconditional_target_list5" type="yesno" default="1" label="Userlists View" description="Enable or disable conditional usage on userlists view." />
+							</fieldset>
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldsparams>
+	<params>
+		<param name="cond_backend" type="yesno" default="0" label="Backend" description="Enable or disable usage of conditions in Backend." yes="Enable" no="Disable" />
+		<param name="cond_reset" type="yesno" default="1" label="Reset" description="Enable or disable reset of field values to blank if condition is not met." yes="Enable" no="Disable" />
+		<param name="cond_debug" type="yesno" default="0" label="Debug" description="Enable or disable condition debugging. Debugging will log jQuery condition results to the browser console while PHP side debugging will output directly their results." yes="Enable" no="Disable" />
+	</params>
+	<database>
+	</database>
+</cbinstall>

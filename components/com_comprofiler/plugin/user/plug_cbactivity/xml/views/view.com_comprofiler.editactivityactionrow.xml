@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editactivityaction" type="params" ui="admin" label="Action" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:activityactionrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="published" type="published" default="1" label="Publish" description="Select publish status of this action. Unpublished action will not display." />
+			<param name="value" type="text" label="Action" size="20" validate="required" description="Input the action. Action will determine the users status intent (e.g. Feeling, Playing, Eating, etc...)." />
+			<param name="title" type="text" label="Title" size="30" description="Optionally input the action title. The title is displayed as the status title prefixing the users status action message (e.g. feeling, playing, eating, played, etc...)." />
+			<param name="description" type="text" label="Description" size="40" description="Optionally input the action description. The description is displayed as the status action message input placeholder (e.g. How are you feeling?, What are you doing?, etc...)." />
+			<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+				<param name="" type="private" method="icon" label="Preview" />
+			</if>
+			<param name="icon" type="imagelist" directory="/images" hide_default="true" hide_none="true" label="Icon" blanktext="CSS Class" description="Optionally select the image file to be used as the icon source. The icon is displayed to the right of the action status message (e.g. Title Message Icon)." />
+			<if name="icon" type="showhide" operator="=" value="" valuetype="const:string">
+				<param name="class" type="text" label="CSS Class" size="20" description="Optionally input the CSS class to render an icon display." />
+			</if>
+			<param name="ordering" type="ordering" value="value" label="Ordering" description="Select the ordering of this action. Ordering determines what order the action displays in the dropdown." />
+		</view>
+	</views>
+</cbxml>

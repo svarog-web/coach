@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>CB Google Translate</name>
+	<author>Krileon</author>
+	<creationDate>2014-09-26</creationDate>
+	<copyright>(C) 2004-2014 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Google Translate integration to Community Builder.</description>
+	<version>2.0</version>
+	<release>3.0.0</release>
+	<files>
+		<filename plugin="cbgoogletranslate">cbgoogletranslate.php</filename>
+		<filename>index.html</filename>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<filename>admin.cbgoogletranslate.css</filename>
+		<filename>admin.cbgoogletranslate.html.php</filename>
+		<filename>admin.cbgoogletranslate.php</filename>
+		<filename>cbgoogletranslate.class.php</filename>
+		<filename>plugin.cbgoogletranslate.php</filename>
+		<filename>toolbar.cbgoogletranslate.html.php</filename>
+		<filename>toolbar.cbgoogletranslate.php</filename>
+		<foldername>images</foldername>
+		<foldername>language</foldername>
+	</delete>
+	<params>
+		<extend toxpathnode="/cbxml/types" fromxpathnode="types/type" />
+		<tabpane name="googletranslate">
+			<tabpanetab label="General">
+				<param name="customization_code" type="text" default="" size="30" label="Customization Code" description="Optionally input meta data customization code. This is supplied by Google when generating a translate button for your website." />
+				<param name="general_default" type="xml:gte_languages" default="en" label="Default Language" description="Select sites default language. Recommended to select default language of site. This will determine what language the site is translated from.">
+					<option value="auto">Detect Language</option>
+				</param>
+				<param name="general_languages" type="xml:gte_languages" multiple="true" size="10" blanktext="All" label="Languages" description="Select supported language translations. This will determine what language the site is translated to." />
+				<param name="general_auto" type="yesno" default="1" label="Auto Translate" description="Enable or disable display of the translation banner for the users speaking other languages than your default language." />
+				<param name="general_mixed" type="yesno" default="0" label="Mixed Content" description="Enable or disable if your site contains content with multiple languages on the same page." />
+				<param name="general_tracking" type="text" default="" size="20" label="Tracking" description="Optionally input google analytics id to tracking of translations (e.g. UA-12345-12)." />
+			</tabpanetab>
+			<tabpanetab label="Display">
+				<param name="mode_display" type="list" default="1" label="Mode" description="Select display mode of translation selection.">
+					<option value="1">Inline</option>
+					<option value="2">Tabbed</option>
+					<option value="3">Automatic</option>
+				</param>
+				<if name="mode_display" type="showhide" operator="=" value="1" valuetype="const:int">
+					<param name="mode_inline_layout" type="list" default="3" label="Inline Layout" description="Select inline mode layout of translation selection.">
+						<option value="1">Vertical</option>
+						<option value="2">Horizontal</option>
+						<option value="3">Dropdown</option>
+					</param>
+				</if>
+				<if name="mode_display" type="showhide" operator="=" value="2" valuetype="const:int">
+					<param name="mode_tabbed_layout" type="list" default="1" label="Tabbed Layout" description="Select tabbed mode layout of translation selection.">
+						<option value="1">Lower Right</option>
+						<option value="2">Lower Left</option>
+						<option value="3">Upper Right</option>
+						<option value="4">Upper Left</option>
+					</param>
+				</if>
+				<param name="general_tooltip" type="yesno" default="0" label="Tooltip" description="Enable or disable display of original text tooltip on mouseover of translated text." />
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database>
+	</database>
+</cbinstall>

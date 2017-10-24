@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Connect</name>
+	<author>Krileon</author>
+	<creationDate>2017-01-20</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Facebook, Twitter, LinkedIn, Windows Live, Google, Instagram, Foursquare, GitHub, VKontakte, Steam, Reddit, Twitch, Stack Exchange, Pinterest, Amazon, Yahoo, PayPal, Disqus, WordPress, and Meetup integration to Community Builder.</description>
+	<version>2.1.1</version>
+	<release>7.0.0+build.2017.01.20.13.01.37.e973ee637</release>
+	<files>
+		<filename plugin="cbconnect">cbconnect.php</filename>
+		<filename>component.cbconnect.php</filename>
+		<filename>endpoint.php</filename>
+		<filename>index.html</filename>
+		<foldername>css</foldername>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<filename>cbconnect.css</filename>
+		<filename>admin.cbconnect.css</filename>
+		<filename>admin.cbconnect.html.php</filename>
+		<filename>admin.cbconnect.php</filename>
+		<filename>cbconnect.class.php</filename>
+		<filename>field.cbconnect.php</filename>
+		<filename>plugin.cbconnect.php</filename>
+		<filename>toolbar.cbconnect.html.php</filename>
+		<filename>toolbar.cbconnect.php</filename>
+		<foldername>images</foldername>
+		<foldername>js</foldername>
+		<foldername>css</foldername>
+		<foldername>hybridauth</foldername>
+		<foldername>library/Hybridauth</foldername>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/Connect">
+			<files folder="library">
+				<foldername>Provider</foldername>
+				<filename>CBConnect.php</filename>
+				<filename>Connect.php</filename>
+				<filename>Profile.php</filename>
+				<filename>Provider.php</filename>
+				<filename>index.html</filename>
+			</files>
+		</library>
+	</libraries>
+	<fieldtypes>
+		<field type="socialid" label="Social ID" unique="true">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+						<column name="" nametype="namesuffix" type="sql:varchar(255)" null="true" />
+					</columns>
+				</table>
+			</database>
+			<params>
+				<showview view="fieldLayoutParams" mode="edit" type="view" />
+			</params>
+		</field>
+	</fieldtypes>
+	<params>
+		<tabpane name="connect">
+			<tabpanetab label="Facebook">
+				<tabpane name="facebook">
+					<tabpanetab label="Application">
+						<param name="facebook_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="facebook_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="facebook_application_id" type="text" default="" size="40" label="App ID" description="Input application id or application key." validate="required" />
+							<param name="facebook_application_secret" type="text" default="" size="40" label="App Secret" description="Input application secret." validate="required" />
+							<param name="facebook_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="facebook_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="facebook_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="facebook_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="facebook_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="facebook_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="facebook_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="facebook_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="facebook_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="facebook_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="facebook_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="facebook_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="facebook_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<param name="facebook_canvas_approve" type="xml:cbconnectApprove" default="2" label="Canvas Approval" description="Select canvas to require admin approval." />
+							<params name="facebook_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="facebook_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="facebook_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="facebook_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="facebook_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="facebook_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="facebook_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="facebook_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="facebook_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Twitter">
+				<tabpane name="twitter">
+					<tabpanetab label="Application">
+						<param name="twitter_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="twitter_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="twitter_consumer_key" type="text" default="" size="40" label="Consumer Key" description="Input application consumer key." validate="required" />
+							<param name="twitter_consumer_secret" type="text" default="" size="40" label="Consumer Secret" description="Input application consumer secret." validate="required" />
+							<param name="twitter_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="twitter_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="twitter_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="twitter_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="twitter_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="twitter_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="twitter_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="twitter_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="twitter_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="twitter_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="twitter_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="twitter_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<param name="twitter_canvas_approve" type="xml:cbconnectApprove" default="2" label="Canvas Approval" description="Select canvas to require admin approval." />
+							<params name="twitter_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="twitter_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="twitter_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="twitter_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="twitter_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="twitter_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="twitter_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="twitter_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="twitter_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Google">
+				<tabpane name="google">
+					<tabpanetab label="Application">
+						<param name="google_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="google_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="google_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="google_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="google_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="google_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="google_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="google_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="google_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="google_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="google_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="google_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="google_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="google_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="google_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="google_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="google_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<param name="google_canvas_approve" type="xml:cbconnectApprove" default="2" label="Canvas Approval" description="Select canvas to require admin approval." />
+							<params name="google_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="google_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="google_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="google_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="google_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="google_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="google_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="google_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="google_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="LinkedIn">
+				<tabpane name="linkedin">
+					<tabpanetab label="Application">
+						<param name="linkedin_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="linkedin_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="linkedin_api_key" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="linkedin_secret_key" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="linkedin_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="linkedin_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="linkedin_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="linkedin_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="linkedin_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="linkedin_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="linkedin_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="linkedin_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="linkedin_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="linkedin_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="linkedin_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="linkedin_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="linkedin_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="linkedin_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="linkedin_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="linkedin_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="linkedin_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="linkedin_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="linkedin_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="linkedin_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="linkedin_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="linkedin_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Windows Live">
+				<tabpane name="windowslive">
+					<tabpanetab label="Application">
+						<param name="windowslive_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="windowslive_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="windowslive_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="windowslive_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="windowslive_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="windowslive_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="windowslive_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="windowslive_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="windowslive_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="windowslive_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="windowslive_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="windowslive_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="windowslive_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="windowslive_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="windowslive_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="windowslive_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="windowslive_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="windowslive_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="windowslive_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="windowslive_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="windowslive_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="windowslive_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="windowslive_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="windowslive_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="windowslive_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="windowslive_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Instagram">
+				<tabpane name="instagram">
+					<tabpanetab label="Application">
+						<param name="instagram_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="instagram_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="instagram_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="instagram_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="instagram_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="instagram_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="instagram_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="instagram_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="instagram_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="instagram_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="instagram_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="instagram_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="instagram_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="instagram_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="instagram_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="instagram_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="instagram_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="instagram_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="instagram_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="instagram_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="instagram_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="instagram_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="instagram_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="instagram_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="instagram_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="instagram_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Foursquare">
+				<tabpane name="foursquare">
+					<tabpanetab label="Application">
+						<param name="foursquare_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="foursquare_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="foursquare_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="foursquare_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="foursquare_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="foursquare_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="foursquare_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="foursquare_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="foursquare_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="foursquare_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="foursquare_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="foursquare_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="foursquare_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="foursquare_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="foursquare_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="foursquare_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="foursquare_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="foursquare_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="foursquare_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="foursquare_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="foursquare_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="foursquare_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="foursquare_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="foursquare_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="foursquare_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="GitHub">
+				<tabpane name="github">
+					<tabpanetab label="Application">
+						<param name="github_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="github_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="github_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="github_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="github_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="github_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="github_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="github_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="github_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="github_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="github_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="github_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="github_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="github_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="github_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="github_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="github_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="github_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="github_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="github_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="github_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="github_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="github_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="github_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="github_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="github_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="VKontakte">
+				<tabpane name="vkontakte">
+					<tabpanetab label="Application">
+						<param name="vkontakte_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="vkontakte_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="vkontakte_application_id" type="text" default="" size="40" label="Application ID" description="Input application id." validate="required" />
+							<param name="vkontakte_secret_key" type="text" default="" size="40" label="Secret Key" description="Input application secret key." validate="required" />
+							<param name="vkontakte_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="vkontakte_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="vkontakte_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="vkontakte_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="vkontakte_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="vkontakte_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how this registration button is displayed." />
+							<param name="vkontakte_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="vkontakte_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="vkontakte_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="vkontakte_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="vkontakte_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="vkontakte_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="vkontakte_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="vkontakte_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="vkontakte_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="vkontakte_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="vkontakte_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="vkontakte_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="vkontakte_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="vkontakte_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="vkontakte_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="vkontakte_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Steam">
+				<tabpane name="steam">
+					<tabpanetab label="Application">
+						<param name="steam_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this. This allows quick enable or disable without having to clear parameters." />
+						<if name="steam_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="steam_api_key" type="text" default="" size="40" label="API Key" description="Input web api key." validate="required" />
+							<param name="steam_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="steam_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="steam_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="steam_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="steam_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how the registration button is displayed." />
+							<param name="steam_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="steam_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="steam_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="steam_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="steam_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="steam_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="steam_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="steam_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="steam_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="steam_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="steam_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="steam_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="steam_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="steam_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="steam_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="steam_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Reddit">
+				<tabpane name="reddit">
+					<tabpanetab label="Application">
+						<param name="reddit_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="reddit_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="reddit_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="reddit_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="reddit_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="reddit_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="reddit_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="reddit_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="reddit_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="reddit_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="reddit_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="reddit_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="reddit_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="reddit_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="reddit_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="reddit_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<params name="reddit_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="reddit_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="reddit_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="reddit_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="reddit_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="reddit_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="reddit_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="reddit_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="reddit_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Twitch">
+				<tabpane name="twitch">
+					<tabpanetab label="Application">
+						<param name="twitch_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="twitch_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="twitch_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="twitch_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="twitch_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="twitch_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="twitch_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="twitch_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="twitch_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="twitch_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="twitch_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="twitch_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="twitch_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="twitch_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="twitch_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="twitch_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="twitch_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="twitch_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="twitch_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="twitch_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="twitch_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="twitch_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="twitch_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="twitch_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="twitch_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="twitch_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Stack Exchange">
+				<tabpane name="stackexchange">
+					<tabpanetab label="Application">
+						<param name="stackexchange_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="stackexchange_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="stackexchange_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="stackexchange_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="stackexchange_key" type="text" default="" size="40" label="Key" description="Input application key." validate="required" />
+							<param name="stackexchange_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="stackexchange_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="stackexchange_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="stackexchange_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="stackexchange_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="stackexchange_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="stackexchange_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="stackexchange_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="stackexchange_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="stackexchange_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="stackexchange_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="stackexchange_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="stackexchange_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="stackexchange_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="stackexchange_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="stackexchange_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="stackexchange_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="stackexchange_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="stackexchange_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="stackexchange_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="stackexchange_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="stackexchange_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Pinterest">
+				<tabpane name="pinterest">
+					<tabpanetab label="Application">
+						<param name="pinterest_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="pinterest_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="pinterest_client_id" type="text" default="" size="40" label="App ID" description="Input application id or application key." validate="required" />
+							<param name="pinterest_client_secret" type="text" default="" size="40" label="App Secret" description="Input application secret." validate="required" />
+							<param name="pinterest_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="pinterest_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="pinterest_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="pinterest_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="pinterest_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="pinterest_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="pinterest_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="pinterest_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="pinterest_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="pinterest_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="pinterest_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="pinterest_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="pinterest_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="pinterest_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="pinterest_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="pinterest_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="pinterest_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="pinterest_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="pinterest_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="pinterest_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="pinterest_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="pinterest_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Amazon">
+				<tabpane name="amazon">
+					<tabpanetab label="Application">
+						<param name="amazon_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="amazon_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="amazon_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="amazon_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="amazon_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="amazon_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="amazon_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="amazon_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="amazon_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="amazon_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="amazon_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="amazon_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="amazon_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="amazon_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="amazon_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="amazon_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<params name="amazon_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="amazon_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="amazon_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="amazon_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="amazon_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="amazon_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="amazon_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="amazon_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="amazon_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Yahoo">
+				<tabpane name="yahoo">
+					<tabpanetab label="Application">
+						<param name="yahoo_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="yahoo_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="yahoo_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="yahoo_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="yahoo_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="yahoo_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="yahoo_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="yahoo_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="yahoo_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="yahoo_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="yahoo_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="yahoo_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="yahoo_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="yahoo_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="yahoo_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="yahoo_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="yahoo_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="yahoo_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="yahoo_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="yahoo_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="yahoo_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="yahoo_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="yahoo_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="yahoo_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="yahoo_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="PayPal">
+				<tabpane name="paypal">
+					<tabpanetab label="Application">
+						<param name="paypal_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="paypal_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="paypal_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="paypal_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="paypal_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="paypal_sandbox" type="yesno" default="0" label="Sandbox" description="Enable or disable sandbox usage. Sandbox URL endpoints are different from live. If testing with sandbox credentials this must be enabled." />
+							<param name="paypal_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="paypal_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="paypal_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="paypal_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="paypal_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="paypal_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="paypal_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="paypal_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="paypal_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="paypal_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="paypal_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="paypal_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="paypal_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="paypal_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="paypal_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="paypal_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="paypal_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="paypal_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="paypal_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="paypal_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="paypal_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Disqus">
+				<tabpane name="disqus">
+					<tabpanetab label="Application">
+						<param name="disqus_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="disqus_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="disqus_client_id" type="text" default="" size="40" label="API ID" description="Input application api key." validate="required" />
+							<param name="disqus_client_secret" type="text" default="" size="40" label="API Secret" description="Input application api secret." validate="required" />
+							<param name="disqus_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="disqus_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="disqus_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="disqus_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="disqus_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="disqus_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="disqus_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="disqus_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="disqus_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="disqus_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="disqus_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="disqus_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="disqus_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="disqus_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="disqus_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="disqus_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="disqus_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="disqus_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="disqus_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="disqus_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="disqus_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="disqus_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="WordPress">
+				<tabpane name="wordpress">
+					<tabpanetab label="Application">
+						<param name="wordpress_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="wordpress_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="wordpress_client_id" type="text" default="" size="40" label="Client ID" description="Input application client id." validate="required" />
+							<param name="wordpress_client_secret" type="text" default="" size="40" label="Client Secret" description="Input application client secret." validate="required" />
+							<param name="wordpress_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="wordpress_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="wordpress_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="wordpress_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="wordpress_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="wordpress_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="wordpress_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="wordpress_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="wordpress_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="wordpress_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="wordpress_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="wordpress_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="wordpress_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="wordpress_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="wordpress_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="wordpress_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="wordpress_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="wordpress_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="wordpress_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="wordpress_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="wordpress_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Meetup">
+				<tabpane name="meetup">
+					<tabpanetab label="Application">
+						<param name="meetup_enabled" type="yesno" default="0" label="Enabled" description="Enable or disable this provider. This allows quick enable or disable without having to clear parameters." />
+						<if name="meetup_enabled" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="meetup_client_id" type="text" default="" size="40" label="Consumer Key" description="Input application consumer key." validate="required" />
+							<param name="meetup_client_secret" type="text" default="" size="40" label="Consumer Secret" description="Input application consumer secret." validate="required" />
+							<param name="meetup_permissions" type="list" multiple="true" size="10" default="" blanktext="- Select Permissions -" label="Permissions" managegroups="false" description="Optionally select additional permissions to request. Note the necessary permissions for login and registration are already requested. Do not request additional permissions unless absolutely needed.">
+								<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderPermissions" />
+							</param>
+							<param name="meetup_callback" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderCallback" label="Callback URL" description="The provider callback url. This url should be supplied to the provider configuration as needed. This is sometimes also known as the redirect url. Note not all applications require this and may only require the domain." />
+							<param name="meetup_debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this provider. This will output a var_dump of provider http request responses (during authentication and API calls)." yes="Enable" no="Disable" />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Registration">
+						<param name="meetup_register" type="yesno" default="1" label="Register" description="Enable or disable account registration. Register allows for non-existing Community Builder users to register with their provider account credentials." />
+						<if name="meetup_register" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="meetup_reg_button_style" type="xml:cbconnectButtonStyle" default="0" label="Button Style" description="Select how registration button is displayed." />
+							<param name="meetup_mode" type="xml:cbconnectRegistration" default="1" label="Mode" description="Select if users should be registered immediately with Single Sign-on or if standard CB registration form should be pre-filled with their social site profile data. Note for pre-filled mode this provider field should be set to display on registration." />
+							<param name="meetup_username" type="text" default="" size="40" label="Username Format" description="Optionally input substitution supported username format override." />
+							<param name="meetup_username_substitutions" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderSubstitutions" label="Username Substitutions" description="The additional supported substitutions for username format." />
+							<param name="meetup_usergroup" type="usergroup" multiple="true" size="10" default="" label="Usergroups" managegroups="false" description="Optionally select registration usergroups of users." />
+							<param name="meetup_approve" type="xml:cbconnectApprove" default="0" label="Approval" description="Select registration to require admin approval." />
+							<param name="meetup_confirm" type="xml:cbconnectConfirm" default="0" label="Confirmation" description="Select registration to require email confirmation." />
+							<param name="meetup_avatar_approve" type="xml:cbconnectApprove" default="2" label="Avatar Approval" description="Select avatar to require admin approval." />
+							<params name="meetup_fields" type="params" repeat="true" label="Fields">
+								<param name="from" type="list" default="" blanktext="- Select Provider Field -" label="From Field" description="Select a field to synchronize from on registration. Note field value format is not guaranteed and may require additional permissions. Values are provided as is.">
+									<data name="" type="custom" class="\CB\Plugin\Connect\CBConnect" method="getProviderFields" />
+								</param>
+								<param name="to" type="field" key="name" storable="true" blanktext="- Select CB Field -" label="To Field" description="Select a field to synchronize to on registration. Note the core username, name, first name, middle name, last name, avatar, canvas, and email are already synchronized." />
+							</params>
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Link">
+						<param name="meetup_link" type="yesno" default="1" label="Linking" description="Enable or disable account linking. Linking allows existing Community Builder users while logged in to link their provider account to their existing Community Builder account." />
+						<if name="meetup_link" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="meetup_link_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the link button is displayed." />
+							<param name="meetup_link_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on link." />
+						</if>
+					</tabpanetab>
+					<tabpanetab label="Login">
+						<param name="meetup_button_style" type="xml:cbconnectButtonStyle" default="2" label="Button Style" description="Select how the login button is displayed." />
+						<param name="meetup_firstlogin" type="text" default="" size="60" label="First Redirect" description="Input optional first time login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="meetup_login" type="text" default="" size="60" label="Redirect" description="Input optional login redirect URL (e.g. index.php?option=com_comprofiler)." />
+						<param name="meetup_login_resynchronize" type="yesno" default="0" label="Resynchronize" description="Enable or disable resynchronizing of provider profile data on every successful login." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<tabs>
+		<tab type="existingSytemTab" class="getContactTab">
+			<fields>
+				<field type="socialid" title="Facebook ID" name="fb_userid" description="Your Facebook ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Twitter ID" name="twitter_userid" description="Your Twitter ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Google ID" name="google_userid" description="Your Google ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="LinkedIn ID" name="linkedin_userid" description="Your LinkedIn ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Windows Live ID" name="windowslive_userid" description="Your Windows Live ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Instagram ID" name="instagram_userid" description="Your Instagram ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Foursquare ID" name="foursquare_userid" description="Your Foursquare ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="GitHub ID" name="github_userid" description="Your GitHub ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="VKontakte ID" name="vkontakte_userid" description="Your VKontakte ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Steam ID" name="steam_userid" description="Your Steam ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Reddit ID" name="reddit_userid" description="Your Reddit ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Twitch ID" name="twitch_userid" description="Your Twitch ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Stack Exchange ID" name="stackexchange_userid" description="Your Stack Exchange ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Pinterest ID" name="pinterest_userid" description="Your Pinterest ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Amazon ID" name="amazon_userid" description="Your Amazon ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Yahoo ID" name="yahoo_userid" description="Your Yahoo ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="PayPal ID" name="paypal_userid" description="Your PayPal ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Disqus ID" name="disqus_userid" description="Your Disqus ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="WordPress ID" name="wordpress_userid" description="Your WordPress ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+				<field type="socialid" title="Meetup ID" name="meetup_userid" description="Your Meetup ID allowing API calls; if unauthorized only public calls will validate." registration="1" profile="1" edit="1" readonly="0" />
+			</fields>
+		</tab>
+	</tabs>
+	<database>
+	</database>
+</cbinstall>

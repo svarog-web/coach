@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editautoaction" type="params" ui="admin" label="Auto Action" icon="list-alt" viewformatting="div">
+			<if name="system" nametype="param:int" operator="=" value="0" valuetype="const:int" type="condition">
+				<toolbarmenu>
+					<menu name="apply" action="apply" task="act=apply" label="Save" />
+					<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+					<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+					<menu name="savecopy" action="custom" task="act=savecopy" label="Save as Copy" icon="save-copy" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:autoactions" label="Cancel" />
+					<menu name="help" action="help" href="http://www.joomlapolis.com/documentation/cb-auto-actions/help/auto-actions-new?pk_campaign=in-cb&amp;pk_kwd=help" label="Help" />
+				</toolbarmenu>
+			</if>
+			<if name="system" nametype="param:int" operator="&gt;" value="0" valuetype="const:int" type="condition">
+				<toolbarmenu>
+					<menu name="savecopy" action="custom" task="act=savecopy" label="Save as Copy" icon="save-copy" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:systemactions" label="Cancel" />
+					<menu name="help" action="help" href="http://www.joomlapolis.com/documentation/cb-auto-actions/help/auto-actions-new?pk_campaign=in-cb&amp;pk_kwd=help" label="Help" />
+				</toolbarmenu>
+			</if>
+			<param name="" type="group" label="" display="2lines">
+				<param name="title" type="text" label="Title %s" description="Optionally input title to display on action list in replace of Triggers list." size="80" />
+			</param>
+			<tabpane name="editpane">
+				<tabpanetab name="global" label="Global" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="trigger" type="xml:autoaction_triggers" label="Triggers" display="2lines" description="Input list of triggers or select trigger to append (e.g. onAfterLogin). To add a new trigger begin typing and select from the existing list or press Enter/Return to create a new entry. Leave empty for no trigger to allow manual execution of this action only." cssclass="input-block" />
+								<param name="description" type="textarea" rows="5" label="Description" display="2lines" description="Optionally input description to display on action list." cssclass="input-block" />
+								<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+									<param name="internal_action_url" type="private" method="getActionURL" label="Internal Action URL" display="2lines" description="Forces an action to execute immediately. This can be used for testing purposes or for manually processing an action. Please note direct action usage only functions if the Trigger is set to None." />
+								</if>
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="published" type="published" default="1" label="Publish" display="2lines" description="Select publish status of auto action. Unpublished auto action will not execute." />
+								<param name="type" type="xml:autoaction_type" default="field" translate-default="no" onchange="evaluate" label="Type" display="2lines" description="Select type of auto action. Type determines how an action executes." />
+								<param name="object" type="xml:autoaction_object" default="0" onchange="evaluate" label="User" display="2lines" description="Select if user object should be automatically obtained from trigger variables, if manually selected variable should be used (e.g. function login( $var1, $var2, $var3 ) {...), if user executing the trigger, or if specified user id should be used. User variable determines substitution target (e.g. [username] will output the User username). Regardless of User selection you can substitute in other variables using [var1], [var2], [var3], etc.. (for arrays/objects use [var1_VARIABLE]; example: [var2_username]). In addition to trigger variables you can access $_GET and $_POST substitutions as [post_VARIABLE] and [get_VARIABLE] (e.g. [get_task])." />
+								<if name="object" nametype="param:int" operator="=" value="1" valuetype="const:int" type="condition">
+									<param name="variable" type="xml:autoaction_variables" default="0" label="User Variable" display="2lines" description="Select the variable to be used (e.g. function login( $var1, $var2, $var3 ) {...) as the user object." />
+								</if>
+								<if name="object" nametype="param:int" operator="=" value="3" valuetype="const:int" type="condition">
+									<param name="variable" type="user" default="" label="User ID" display="2lines" description="Input the user id to be used as the user object." />
+								</if>
+								<param name="access" type="xml:autoaction_access" multiple="true" size="10" default="-1" blanktext="" label="Access" managegroups="false" display="2lines" description="Select access to auto action; only groups selected will have access. Parent groups such as Public Front-end will NOT fire for Registered users; exact groups must be selected." />
+								<param name="ordering" type="ordering" value="title" label="Ordering" display="2lines" description="Select the ordering of this action. Ordering determines what order the action will fire in.">
+									<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_autoactions" key="id">
+										<rows>
+											<field name="ordering" as="value" />
+											<field name="title">
+												<data name="text" type="sql:function" operator="IF">
+													<data name="" type="sql:operator" operator="!=">
+														<data name="title" type="sql:field" />
+														<data name="" type="const:string" />
+													</data>
+													<data name="title" type="sql:field" />
+													<data name="id" type="sql:field" />
+												</data>
+											</field>
+										</rows>
+										<where>
+											<column name="system" operator="&lt;=" value="0" type="sql:field" valuetype="const:int" />
+										</where>
+										<groupby>
+											<field name="id" />
+										</groupby>
+										<orderby>
+											<field name="ordering" ordering="ASC" />
+										</orderby>
+									</data>
+									<orderinggroups>
+										<ordering name="system" type="int" />
+									</orderinggroups>
+								</param>
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="conditions1" label="Conditions" description="">
+					<param name="actionconditions" type="group" label="" display="2lines" formatting="span">
+						<params name="conditions" type="params" repeat="true" label="" display="2lines">
+							<param name="field" type="text" label="" />
+							<param name="operator" type="list" label="" blanktext="- Select Operator -">
+								<option value="0">Equal To</option>
+								<option value="1">Not Equal To</option>
+								<option value="2">Greater Than</option>
+								<option value="3">Less Than</option>
+								<option value="4">Greater Than or Equal To</option>
+								<option value="5">Less Than or Equal To</option>
+								<option value="6">Empty</option>
+								<option value="7">Not Empty</option>
+								<option value="8">Does Contain</option>
+								<option value="9">Does Not Contain</option>
+								<option value="10">Is REGEX</option>
+								<option value="11">Is Not REGEX</option>
+							</param>
+							<if name="operator" nametype="param:string" operator="!in" value="6|*|7" valuetype="const:string" type="showhide">
+								<param name="value" type="text" label="" />
+							</if>
+							<param name="translate" type="yesno" default="0" label="" />
+							<param name="" type="text" mode="show" default="" label="" description="Optionally input substitution supported conditional from one value to another. If condition is not met then auto action will not be executed. At least one value (left or right side) and an operator must be specified for conditional to be valid. Values can be formatted using the supported format functions found below. Optionally disable translations for a conditional by adjusting the Yes/No toggle." />
+						</params>
+					</param>
+					<showview name="" view="actionFormatFunctions" mode="show" type="view" />
+				</tabpanetab>
+				<tabpanetab name="action" label="Action" description="">
+					<showview name="params" view="actiontype_{raw:type}" mandatory="false">
+						<data name="params" type="sql:string" default="" />
+					</showview>
+					<params name="params" type="params">
+						<if name="format" nametype="param:string" operator="=" value="1" valuetype="const:string" type="showhide">
+							<showview name="actionformatfunctions" view="actionFormatFunctions" mode="show" type="view" />
+						</if>
+					</params>
+				</tabpanetab>
+				<tabpanetab name="params" label="Parameters" description="">
+					<if name="object" nametype="param:string" operator="in" value="0|*|1" valuetype="const:string" type="condition">
+						<params name="params" type="params">
+							<param name="reload" type="yesno" default="0" label="Reload User" description="Enable or disable reloading of the user object. This is helpful if multiple actions that alter the user are chained." />
+						</params>
+					</if>
+					<params name="params" type="params">
+						<param name="exclude" type="text" default="" label="Exclude Users" description="Optionally input comma seperated list of user ids to be excluded from auto action (e.g. 62,39,21,8)." size="50" />
+						<param name="content_plugins" type="yesno" default="0" label="Content Plugins" description="Enable or disable usage of content plugins content.prepare on all locations supporting substitutions." />
+						<param name="format" type="yesno" default="0" label="Format Functions" description="Enable or disable usage of conditional format functions on all substitution supported parameters. Note this should be used only when absolutely needed." />
+						<param name="references" type="list" multiple="true" size="10" blanktext="- Select References -" label="References" description="Optionally select what variables should be treated as references. This should be used carefully as non-references passed by reference will error.">
+							<option value="1">Variable 1</option>
+							<option value="2">Variable 2</option>
+							<option value="3">Variable 3</option>
+							<option value="4">Variable 4</option>
+							<option value="5">Variable 5</option>
+							<option value="6">Variable 6</option>
+							<option value="7">Variable 7</option>
+							<option value="8">Variable 8</option>
+							<option value="9">Variable 9</option>
+							<option value="10">Variable 10</option>
+						</param>
+						<param name="debug" type="yesno" default="0" label="Debug" description="Enable or disable debugging of this action. Enabling debugging will result in variable dumps for various checks to ensure the action is being executed successfully. This can help with debugging access checks, conditional checks, exclude checks, and more." />
+					</params>
+				</tabpanetab>
+			</tabpane>
+		</view>
+		<view name="actionFormatFunctions" type="params" ui="admin">
+			<fieldset name="actionformatfunctions" label="Format Functions">
+				<param name="" type="text" label="Usage" default="[cb:parse function=&quot;FUNCTION&quot;PARAMETERS]CONTENT[/cb:parse]" />
+				<fieldset name="actionformatfunctionclean" label="clean">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;clean&quot; method=&quot;string&quot;]&lt;strong&gt;bold&lt;/strong&gt;[/cb:parse]" description="Sanitizes content to the supplied method." />
+					<param name="" type="text" label="method" default="cmd, numeric, unit, int, integer, bool, boolean, str, string, html, float, base64, tags" />
+				</fieldset>
+				<fieldset name="actionformatfunctionconvert" label="convert">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;convert&quot; method=&quot;uppercase&quot;]hello[/cb:parse]" description="Converts the display of the supplied content." />
+					<param name="" type="text" label="method" default="uppercase, uppercasewords, uppercasefirst, lowercase, lowercasefirst" />
+				</fieldset>
+				<fieldset name="actionformatfunctionmath" label="math">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;math&quot;]1 + 2 - 3 * 4 / 2[/cb:parse]" description="Forces math parsing on the supplied content. This can be used for complex or simple math calculations using addition (+), subtraction (-), division (/), multiplication (*), and modulus (%)." />
+				</fieldset>
+				<fieldset name="actionformatfunctiontime" label="time">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;time&quot; time=&quot;+1 DAY&quot;]2015-01-13 16:22:43[/cb:parse]" description="Converts the supplied string to a timestamp with optional time parameter." />
+					<param name="" type="text" label="time" default="Optional PHP strtotime time (e.g. +1 DAY, +1 YEAR). If excluded the content will be used as time." />
+				</fieldset>
+				<fieldset name="actionformatfunctiondate" label="date">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;date&quot; date-format=&quot;Y-m-d&quot; time-format=&quot; H:i:s&quot; offset=&quot;UTC&quot;]2015-01-13 16:22:43[/cb:parse]" description="Converts the supplied string to a date format with optional date format, time format, and offset parameters." />
+					<param name="" type="text" label="date-format" default="Optional PHP date format (e.g. Y-m-d). If excluded default CB date format will be used." />
+					<param name="" type="text" label="time-format" default="Optional PHP time format (e.g. H:i:s). If excluded default CB time format will be used." />
+					<param name="" type="text" label="offset" default="Optional supply offset (e.g. UTC) or set to true to use server offset. If excluded no offset will be applied." />
+				</fieldset>
+				<fieldset name="actionformatfunctionlength" label="length">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;length&quot;]hello[/cb:parse]" description="Replaces content with its string length." />
+				</fieldset>
+				<fieldset name="actionformatfunctionreplace" label="replace">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;replace&quot; search=&quot;test&quot; replace=&quot;123&quot;]test456[/cb:parse]" description="Searches and replaces all (or to the supplied count) occurrences of a string." />
+					<param name="" type="text" label="search" default="The string to search for and replace." />
+					<param name="" type="text" label="replace" default="The string replacing the searched value." />
+					<param name="" type="text" label="count" default="The maximum number of occurrences to replace." />
+				</fieldset>
+				<fieldset name="actionformatfunctionposition" label="position">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;position&quot; search=&quot;456&quot;]test456[/cb:parse]" description="Replaces content with the position of the search string." />
+					<param name="" type="text" label="search" default="The string to search for and location its position in the content." />
+					<param name="" type="text" label="occurrence" default="first or last. Determines whether to return the position of the first or last occurrence of the searched string. If excluded defaults to first." />
+				</fieldset>
+				<fieldset name="actionformatfunctionoccurrence" label="occurrence">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;occurrence&quot; search=&quot;123&quot;]test123456[/cb:parse]" description="Replaces content with the first occurrence of the search string and any following content." />
+					<param name="" type="text" label="search" default="The string to search for (e.g. 123 of test123456 returns 123456)." />
+				</fieldset>
+				<fieldset name="actionformatfunctionrepeat" label="repeat">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;repeat&quot; count=&quot;5&quot;]Hi![/cb:parse]" description="Repeats the content by count." />
+					<param name="" type="text" label="count" default="The number of times to repeat the content (e.g. 5 of Hi! returns Hi!Hi!Hi!Hi!Hi!)." />
+				</fieldset>
+				<fieldset name="actionformatfunctionextract" label="extract">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;extract&quot; start=&quot;2&quot;]Hi![/cb:parse]" description="Extracts a string from a given start position for a given optional length." />
+					<param name="" type="text" label="start" default="The start position of the extract (e.g. 2 of Hello returns llo)." />
+					<param name="" type="text" label="length" default="The optional length of characters from the start position to extract (e.g. 2 start with 2 length of Hello returns ll). If excluded everything after the start position will be extracted." />
+				</fieldset>
+				<fieldset name="actionformatfunctiontrim" label="trim">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;trim&quot;] Hi! [/cb:parse]" description="Trims characters from the left, right, or both sides of the content." />
+					<param name="" type="text" label="direction" default="left or right. Optional direction to trim characters. If excluded will trim from both left and right.." />
+					<param name="" type="text" label="characters" default="Optionally supply a list of characters according to PHP trim function usage. If excluded will trim whitespace." />
+				</fieldset>
+				<fieldset name="actionformatfunctionencode" label="encode">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;encode&quot; method=&quot;md5&quot;]Hello[/cb:parse]" description="Encodes a string by the supplied method." />
+					<param name="" type="text" label="method" default="cslashes, slashes, entity, html, url, base64, md5, sha1, password" />
+					<param name="" type="text" label="characters" default="The cslashes characters to escape. Does not apply to any other encode methods." />
+				</fieldset>
+				<fieldset name="actionformatfunctiondecode" label="decode">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;decode&quot; method=&quot;url&quot;]Hello[/cb:parse]" description="Decodes a string by the supplied method." />
+					<param name="" type="text" label="method" default="cslashes, slashes, entity, html, url, base64" />
+				</fieldset>
+				<fieldset name="actionformatfunctionfunction" label="function">
+					<param name="" type="text" label="Example" default="[cb:parse function=&quot;getTitle&quot; class=&quot;var1&quot; /]" description="Executes a custom method or class method." />
+					<param name="" type="text" label="function" default="The function to execute. This can be a function of a class by object (specify class) or by reference (class::function)." />
+					<param name="" type="text" label="class" default="Optionally supply a class to execute a function from (var1 to var10 also supported)." />
+					<param name="" type="text" label="method" default="Optionally supply a method to execute on the function object (note this only functions if the function returns an object)." />
+					<param name="" type="text" label="" default="Optionally additional variables can be added to be sent to the function as function variables." />
+				</fieldset>
+			</fieldset>
+		</view>
+	</views>
+</cbxml>

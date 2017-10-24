@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="folderrows" request="view action" action="editPlugin showfolders">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.gallery" mandatory="true" />
+			<showview view="showfolders" mode="show" />
+		</action>
+
+		<action name="itemrows" request="view action" action="editPlugin showitems">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.gallery" mandatory="true" />
+			<showview view="showitems" mode="show" />
+		</action>
+
+		<action name="folderrow" request="view table action" action="editPlugin folderbrowser editrow" requestparameters="folderid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.gallery" mandatory="true" />
+			<showview view="editfolder" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_gallery_folders" class="\CB\Plugin\Gallery\Table\FolderTable" key="id" value="folderid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="itemrow" request="view table action" action="editPlugin itembrowser editrow" requestparameters="mediaid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.gallery" mandatory="true" />
+			<showview view="edititem" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_gallery_items" class="\CB\Plugin\Gallery\Table\ItemTable" key="id" value="mediaid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="itemdownload" request="view table action format" action="editPlugin itembrowser downloadrow raw" requestparameters="mediaid">
+			<showview view="downloaditem" mode="show">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_gallery_items" class="\CB\Plugin\Gallery\Table\ItemTable" key="id" value="mediaid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="itempreview" request="view table action format" action="editPlugin itembrowser previewrow raw" requestparameters="mediaid">
+			<showview view="previewitem" mode="show">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_gallery_items" class="\CB\Plugin\Gallery\Table\ItemTable" key="id" value="mediaid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="itemthumbnail" request="view table action format" action="editPlugin itembrowser thumbnailrow raw" requestparameters="mediaid">
+			<showview view="thumbnailitem" mode="show">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_gallery_items" class="\CB\Plugin\Gallery\Table\ItemTable" key="id" value="mediaid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="plugin" request="view table" action="editrow pluginsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgallery/xml/models/model.gallery" mandatory="false" />
+		</action>
+
+		<action name="tab" request="view table" action="editrow tabsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgallery/xml/models/model.gallery" mandatory="false" />
+			<extend toxpathnode="/cbxml/views" fromxpathnode="/*/views/view" file="/components/com_comprofiler/plugin/user/plug_cbgallery/xml/views/view.com_comprofiler.override" mandatory="false" />
+		</action>
+
+		<action name="field" request="view table" action="editrow tabsbrowser" requestparameters="cid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgallery/xml/models/model.gallery" mandatory="false" />
+			<extend toxpathnode="/cbxml/views" fromxpathnode="/*/views/view" file="/components/com_comprofiler/plugin/user/plug_cbgallery/xml/views/view.com_comprofiler.override" mandatory="false" />
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="folders" type="button" default="Albums" buttonclass="default" buttonsize="xsmall" link="cb_action:folderrows" parameters="cid" paramvalues="id" label="" />
+			<param name="items" type="button" default="Media" buttonclass="default" buttonsize="xsmall" link="cb_action:itemrows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

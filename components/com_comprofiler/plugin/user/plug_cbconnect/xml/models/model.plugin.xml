@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="cbconnectRegistration" base="list" valuetype="string">
+			<option value="1">Single Sign-on</option>
+			<option value="2">Pre-fill</option>
+		</type>
+		<type name="cbconnectApprove" base="list" valuetype="string">
+			<option value="0">No (override CB)</option>
+			<option value="1">Yes (override CB)</option>
+			<option value="2">Default (CB setting)</option>
+		</type>
+		<type name="cbconnectConfirm" base="list" valuetype="string">
+			<option value="0">No (override CB)</option>
+			<option value="2">Default (CB setting)</option>
+		</type>
+		<type name="cbconnectButtonStyle" base="list" valuetype="string">
+			<option value="0">Disabled</option>
+			<option value="1">Icon Only</option>
+			<option value="2">Icon &amp; Text</option>
+			<option value="3">Text Only</option>
+		</type>
+	</types>
+</cbxml>

@@ -1,0 +1,44 @@
+.cb_template .gjGroupEventIcon {
+	width: 20px;
+}
+
+.cb_template .gjGroupEventNotice,
+.cb_template .gjGroupEventDate,
+.cb_template .gjGroupEventLocation {
+	margin-bottom: 5px;
+}
+
+.cb_template .gjGroupEventDescription {
+	background: transparent;
+}
+
+.cb_template .gjButtonAttend {
+	vertical-align: bottom;
+}
+
+.cb_template .gjEventEditAddress {
+	position: relative;
+}
+
+.cb_template .gjEventEditAddress .form-control {
+	padding-right: 44px;
+}
+
+.cb_template .gjEventEditAddress .gjButtonLocation {
+	position: absolute;
+	right: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.cb_template .gjGroupEventMenu .gjGroupPendingIcon {
+	vertical-align: bottom;
+}
+
+.cb_template .gjEventActivity {
+	padding: 10px;
+}
+
+.cb_template .gjEventActivity .panel {
+	margin: 0;
+}

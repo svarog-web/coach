@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="edithiddenactivity" type="params" ui="admin" label="Hidden" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:hiddenactivityrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input owner as single integer user_id." />
+			<param name="type" type="text" label="Type" size="25" validate="required" description="Input the hidden item type (e.g. activity or comment)." />
+			<param name="item" type="text" label="Item" size="5" validate="required" description="Input the hidden item id. Typically this is the activity id or comment id." />
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showwhitelists" type="params" ui="admin" label="Whitelists" icon="list" viewformatting="none">
+			<tablebrowser name="whitelistbrowser" table="#__comprofiler_plugin_antispam_whitelist" class="cbantispamWhitelistTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/whitelistid" label="Edit" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Whitelists..." size="30">
+					<field name="value" />
+					<field name="user">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="value" />
+					</field>
+					<field name="reason" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="type" valuetype="sql:string" type="xml:block_type" label="" blanktext="- Select Type -" />
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="id_asc" label="ID ascending" default="true" translate-default="no">
+						<field name="id" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="id_desc" label="ID descending">
+						<field name="id" ordering="DESC" />
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="value" type="group" link="cbo:rowedit" parameters="whitelistid" paramvalues="id" align="left" label="Value" allowordering="ascending,descending">
+							<if name="user" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+								<then>
+									<param name="user" type="string" label="" />
+								</then>
+								<else>
+									<param name="value" type="string" label="" />
+								</else>
+							</if>
+						</field>
+						<field name="reason" type="string" width="40%" align="left" label="Reason" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="type" type="xml:block_type" width="15%" align="center" label="Type" allowordering="ascending,descending" />
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+						<field name="user" type="hidden" label="User">
+							<data name="username" as="user" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="value" />
+						</field>
+					</rows>
+				</listfields>
+				<batchprocess>
+					<batch name="batch" view="batch" />
+					<view name="batch" type="params" viewformatting="div">
+						<param name="type" type="xml:block_type" label="Type" blanktext="- Select Type -" />
+						<param name="value" type="text" label="Value" size="40" />
+						<param name="reason" type="text" label="Reason" size="40" />
+					</view>
+				</batchprocess>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

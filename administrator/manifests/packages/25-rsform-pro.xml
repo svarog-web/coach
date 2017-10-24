@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="2.5">
+<name>RSForm!Pro English language pack</name>
+<packagename>RSForm!Pro English language pack</packagename>
+<version></version>
+<creationDate></creationDate>
+<packager>rsjoomla.com</packager>
+<packagerEmail></packagerEmail>
+<packagerurl>http://aleksius.com</packagerurl>
+<tag>en-GB</tag>
+<author></author>
+<authorEmail></authorEmail>
+<authorUrl></authorUrl>
+
+<description></description>
+<files>
+    <file type="language" client="site" id="en-GB">site25</file>
+    <file type="language" client="administrator" id="en-GB">admin25</file>
+</files>
+</extension>

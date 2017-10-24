@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="groupjive">CB GroupJive</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB GroupJive">
+				<option value="gj_onAdminMenu" translate="no">gj_onAdminMenu</option>
+				<option value="gj_onAfterCopyCategory" translate="no">gj_onAfterCopyCategory</option>
+				<option value="gj_onAfterCopyGroup" translate="no">gj_onAfterCopyGroup</option>
+				<option value="gj_onAfterCreateAttendance" translate="no">gj_onAfterCreateAttendance</option>
+				<option value="gj_onAfterCreateCategory" translate="no">gj_onAfterCreateCategory</option>
+				<option value="gj_onAfterCreateEvent" translate="no">gj_onAfterCreateEvent</option>
+				<option value="gj_onAfterCreateFile" translate="no">gj_onAfterCreateFile</option>
+				<option value="gj_onAfterCreateGroup" translate="no">gj_onAfterCreateGroup</option>
+				<option value="gj_onAfterCreateInvite" translate="no">gj_onAfterCreateInvite</option>
+				<option value="gj_onAfterCreateNotification" translate="no">gj_onAfterCreateNotification</option>
+				<option value="gj_onAfterCreatePhoto" translate="no">gj_onAfterCreatePhoto</option>
+				<option value="gj_onAfterCreateUser" translate="no">gj_onAfterCreateUser</option>
+				<option value="gj_onAfterCreateVideo" translate="no">gj_onAfterCreateVideo</option>
+				<option value="gj_onAfterCreateWall" translate="no">gj_onAfterCreateWall</option>
+				<option value="gj_onAfterDeleteAttendance" translate="no">gj_onAfterDeleteAttendance</option>
+				<option value="gj_onAfterDeleteCategory" translate="no">gj_onAfterDeleteCategory</option>
+				<option value="gj_onAfterDeleteEvent" translate="no">gj_onAfterDeleteEvent</option>
+				<option value="gj_onAfterDeleteFile" translate="no">gj_onAfterDeleteFile</option>
+				<option value="gj_onAfterDeleteGroup" translate="no">gj_onAfterDeleteGroup</option>
+				<option value="gj_onAfterDeleteInvite" translate="no">gj_onAfterDeleteInvite</option>
+				<option value="gj_onAfterDeleteNotification" translate="no">gj_onAfterDeleteNotification</option>
+				<option value="gj_onAfterDeletePhoto" translate="no">gj_onAfterDeletePhoto</option>
+				<option value="gj_onAfterDeleteUser" translate="no">gj_onAfterDeleteUser</option>
+				<option value="gj_onAfterDeleteVideo" translate="no">gj_onAfterDeleteVideo</option>
+				<option value="gj_onAfterDeleteWall" translate="no">gj_onAfterDeleteWall</option>
+				<option value="gj_onAfterDisplayAbout" translate="no">gj_onAfterDisplayAbout</option>
+				<option value="gj_onAfterDisplayAboutEdit" translate="no">gj_onAfterDisplayAboutEdit</option>
+				<option value="gj_onAfterDisplayAttending" translate="no">gj_onAfterDisplayAttending</option>
+				<option value="gj_onAfterDisplayCategories" translate="no">gj_onAfterDisplayCategories</option>
+				<option value="gj_onAfterDisplayCategory" translate="no">gj_onAfterDisplayCategory</option>
+				<option value="gj_onAfterDisplayEventEdit" translate="no">gj_onAfterDisplayEventEdit</option>
+				<option value="gj_onAfterDisplayEvents" translate="no">gj_onAfterDisplayEvents</option>
+				<option value="gj_onAfterDisplayFileEdit" translate="no">gj_onAfterDisplayFileEdit</option>
+				<option value="gj_onAfterDisplayFiles" translate="no">gj_onAfterDisplayFiles</option>
+				<option value="gj_onAfterDisplayForums" translate="no">gj_onAfterDisplayForums</option>
+				<option value="gj_onAfterDisplayGroup" translate="no">gj_onAfterDisplayGroup</option>
+				<option value="gj_onAfterDisplayGroupEdit" translate="no">gj_onAfterDisplayGroupEdit</option>
+				<option value="gj_onAfterDisplayGroups" translate="no">gj_onAfterDisplayGroups</option>
+				<option value="gj_onAfterDisplayInviteEdit" translate="no">gj_onAfterDisplayInviteEdit</option>
+				<option value="gj_onAfterDisplayInvites" translate="no">gj_onAfterDisplayInvites</option>
+				<option value="gj_onAfterDisplayMessage" translate="no">gj_onAfterDisplayMessage</option>
+				<option value="gj_onAfterDisplayNotifications" translate="no">gj_onAfterDisplayNotifications</option>
+				<option value="gj_onAfterDisplayPhotoEdit" translate="no">gj_onAfterDisplayPhotoEdit</option>
+				<option value="gj_onAfterDisplayPhotos" translate="no">gj_onAfterDisplayPhotos</option>
+				<option value="gj_onAfterDisplayTab" translate="no">gj_onAfterDisplayTab</option>
+				<option value="gj_onAfterDisplayUsers" translate="no">gj_onAfterDisplayUsers</option>
+				<option value="gj_onAfterDisplayVideoEdit" translate="no">gj_onAfterDisplayVideoEdit</option>
+				<option value="gj_onAfterDisplayVideos" translate="no">gj_onAfterDisplayVideos</option>
+				<option value="gj_onAfterDisplayWall" translate="no">gj_onAfterDisplayWall</option>
+				<option value="gj_onAfterDisplayWallEdit" translate="no">gj_onAfterDisplayWallEdit</option>
+				<option value="gj_onAfterJoinGroup" translate="no">gj_onAfterJoinGroup</option>
+				<option value="gj_onAfterLeaveGroup" translate="no">gj_onAfterLeaveGroup</option>
+				<option value="gj_onAfterUpdateAttendance" translate="no">gj_onAfterUpdateAttendance</option>
+				<option value="gj_onAfterUpdateCategory" translate="no">gj_onAfterUpdateCategory</option>
+				<option value="gj_onAfterUpdateEvent" translate="no">gj_onAfterUpdateEvent</option>
+				<option value="gj_onAfterUpdateFile" translate="no">gj_onAfterUpdateFile</option>
+				<option value="gj_onAfterUpdateGroup" translate="no">gj_onAfterUpdateGroup</option>
+				<option value="gj_onAfterUpdateInvite" translate="no">gj_onAfterUpdateInvite</option>
+				<option value="gj_onAfterUpdateNotification" translate="no">gj_onAfterUpdateNotification</option>
+				<option value="gj_onAfterUpdatePhoto" translate="no">gj_onAfterUpdatePhoto</option>
+				<option value="gj_onAfterUpdateUser" translate="no">gj_onAfterUpdateUser</option>
+				<option value="gj_onAfterUpdateVideo" translate="no">gj_onAfterUpdateVideo</option>
+				<option value="gj_onAfterUpdateWall" translate="no">gj_onAfterUpdateWall</option>
+				<option value="gj_onBeforeCopyCategory" translate="no">gj_onBeforeCopyCategory</option>
+				<option value="gj_onBeforeCopyGroup" translate="no">gj_onBeforeCopyGroup</option>
+				<option value="gj_onBeforeCreateAttendance" translate="no">gj_onBeforeCreateAttendance</option>
+				<option value="gj_onBeforeCreateCategory" translate="no">gj_onBeforeCreateCategory</option>
+				<option value="gj_onBeforeCreateEvent" translate="no">gj_onBeforeCreateEvent</option>
+				<option value="gj_onBeforeCreateFile" translate="no">gj_onBeforeCreateFile</option>
+				<option value="gj_onBeforeCreateGroup" translate="no">gj_onBeforeCreateGroup</option>
+				<option value="gj_onBeforeCreateInvite" translate="no">gj_onBeforeCreateInvite</option>
+				<option value="gj_onBeforeCreateNotification" translate="no">gj_onBeforeCreateNotification</option>
+				<option value="gj_onBeforeCreatePhoto" translate="no">gj_onBeforeCreatePhoto</option>
+				<option value="gj_onBeforeCreateUser" translate="no">gj_onBeforeCreateUser</option>
+				<option value="gj_onBeforeCreateVideo" translate="no">gj_onBeforeCreateVideo</option>
+				<option value="gj_onBeforeCreateWall" translate="no">gj_onBeforeCreateWall</option>
+				<option value="gj_onBeforeDeleteAttendance" translate="no">gj_onBeforeDeleteAttendance</option>
+				<option value="gj_onBeforeDeleteCategory" translate="no">gj_onBeforeDeleteCategory</option>
+				<option value="gj_onBeforeDeleteEvent" translate="no">gj_onBeforeDeleteEvent</option>
+				<option value="gj_onBeforeDeleteFile" translate="no">gj_onBeforeDeleteFile</option>
+				<option value="gj_onBeforeDeleteGroup" translate="no">gj_onBeforeDeleteGroup</option>
+				<option value="gj_onBeforeDeleteInvite" translate="no">gj_onBeforeDeleteInvite</option>
+				<option value="gj_onBeforeDeleteNotification" translate="no">gj_onBeforeDeleteNotification</option>
+				<option value="gj_onBeforeDeletePhoto" translate="no">gj_onBeforeDeletePhoto</option>
+				<option value="gj_onBeforeDeleteUser" translate="no">gj_onBeforeDeleteUser</option>
+				<option value="gj_onBeforeDeleteVideo" translate="no">gj_onBeforeDeleteVideo</option>
+				<option value="gj_onBeforeDeleteWall" translate="no">gj_onBeforeDeleteWall</option>
+				<option value="gj_onBeforeDisplayAbout" translate="no">gj_onBeforeDisplayAbout</option>
+				<option value="gj_onBeforeDisplayAboutEdit" translate="no">gj_onBeforeDisplayAboutEdit</option>
+				<option value="gj_onBeforeDisplayAttending" translate="no">gj_onBeforeDisplayAttending</option>
+				<option value="gj_onBeforeDisplayCategories" translate="no">gj_onBeforeDisplayCategories</option>
+				<option value="gj_onBeforeDisplayCategory" translate="no">gj_onBeforeDisplayCategory</option>
+				<option value="gj_onBeforeDisplayEventEdit" translate="no">gj_onBeforeDisplayEventEdit</option>
+				<option value="gj_onBeforeDisplayEvents" translate="no">gj_onBeforeDisplayEvents</option>
+				<option value="gj_onBeforeDisplayFileEdit" translate="no">gj_onBeforeDisplayFileEdit</option>
+				<option value="gj_onBeforeDisplayFiles" translate="no">gj_onBeforeDisplayFiles</option>
+				<option value="gj_onBeforeDisplayForums" translate="no">gj_onBeforeDisplayForums</option>
+				<option value="gj_onBeforeDisplayGroup" translate="no">gj_onBeforeDisplayGroup</option>
+				<option value="gj_onBeforeDisplayGroupEdit" translate="no">gj_onBeforeDisplayGroupEdit</option>
+				<option value="gj_onBeforeDisplayGroups" translate="no">gj_onBeforeDisplayGroups</option>
+				<option value="gj_onBeforeDisplayInviteEdit" translate="no">gj_onBeforeDisplayInviteEdit</option>
+				<option value="gj_onBeforeDisplayInvites" translate="no">gj_onBeforeDisplayInvites</option>
+				<option value="gj_onBeforeDisplayMessage" translate="no">gj_onBeforeDisplayMessage</option>
+				<option value="gj_onBeforeDisplayNotifications" translate="no">gj_onBeforeDisplayNotifications</option>
+				<option value="gj_onBeforeDisplayPhotoEdit" translate="no">gj_onBeforeDisplayPhotoEdit</option>
+				<option value="gj_onBeforeDisplayPhotos" translate="no">gj_onBeforeDisplayPhotos</option>
+				<option value="gj_onBeforeDisplayTab" translate="no">gj_onBeforeDisplayTab</option>
+				<option value="gj_onBeforeDisplayUsers" translate="no">gj_onBeforeDisplayUsers</option>
+				<option value="gj_onBeforeDisplayVideoEdit" translate="no">gj_onBeforeDisplayVideoEdit</option>
+				<option value="gj_onBeforeDisplayVideos" translate="no">gj_onBeforeDisplayVideos</option>
+				<option value="gj_onBeforeDisplayWall" translate="no">gj_onBeforeDisplayWall</option>
+				<option value="gj_onBeforeDisplayWallEdit" translate="no">gj_onBeforeDisplayWallEdit</option>
+				<option value="gj_onBeforeJoinGroup" translate="no">gj_onBeforeJoinGroup</option>
+				<option value="gj_onBeforeLeaveGroup" translate="no">gj_onBeforeLeaveGroup</option>
+				<option value="gj_onBeforeUpdateAttendance" translate="no">gj_onBeforeUpdateAttendance</option>
+				<option value="gj_onBeforeUpdateCategory" translate="no">gj_onBeforeUpdateCategory</option>
+				<option value="gj_onBeforeUpdateEvent" translate="no">gj_onBeforeUpdateEvent</option>
+				<option value="gj_onBeforeUpdateFile" translate="no">gj_onBeforeUpdateFile</option>
+				<option value="gj_onBeforeUpdateGroup" translate="no">gj_onBeforeUpdateGroup</option>
+				<option value="gj_onBeforeUpdateInvite" translate="no">gj_onBeforeUpdateInvite</option>
+				<option value="gj_onBeforeUpdateNotification" translate="no">gj_onBeforeUpdateNotification</option>
+				<option value="gj_onBeforeUpdatePhoto" translate="no">gj_onBeforeUpdatePhoto</option>
+				<option value="gj_onBeforeUpdateUser" translate="no">gj_onBeforeUpdateUser</option>
+				<option value="gj_onBeforeUpdateVideo" translate="no">gj_onBeforeUpdateVideo</option>
+				<option value="gj_onBeforeUpdateWall" translate="no">gj_onBeforeUpdateWall</option>
+				<option value="gj_onCanCreateGroup" translate="no">gj_onCanCreateGroup</option>
+				<option value="gj_onCanCreateGroupContent" translate="no">gj_onCanCreateGroupContent</option>
+				<option value="gj_onDisplayCategory" translate="no">gj_onDisplayCategory</option>
+				<option value="gj_onDisplayEvent" translate="no">gj_onDisplayEvent</option>
+				<option value="gj_onDisplayFile" translate="no">gj_onDisplayFile</option>
+				<option value="gj_onDisplayGroup" translate="no">gj_onDisplayGroup</option>
+				<option value="gj_onDisplayInvite" translate="no">gj_onDisplayInvite</option>
+				<option value="gj_onDisplayPhoto" translate="no">gj_onDisplayPhoto</option>
+				<option value="gj_onDisplayUser" translate="no">gj_onDisplayUser</option>
+				<option value="gj_onDisplayVideo" translate="no">gj_onDisplayVideo</option>
+				<option value="gj_onDisplayWall" translate="no">gj_onDisplayWall</option>
+				<option value="gj_onModuleDisplay" translate="no">gj_onModuleDisplay</option>
+				<option value="gj_onModuleMode" translate="no">gj_onModuleMode</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_groupjive" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Create GroupJive categories and groups." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionGroupJive" method="installed" />
+				</left>
+				<then>
+					<params name="groupjive" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="1" translate-default="no" label="Mode" description="Select what CB GroupJive action to perform.">
+							<option value="1">Join Groups</option>
+							<option value="4">Leave Groups</option>
+							<option value="2">New Group</option>
+							<option value="3">New Category</option>
+						</param>
+						<if name="mode" nametype="param:string" operator="in" value="1|*|4" valuetype="const:string" type="showhide">
+							<param name="groups" type="list" multiple="true" size="10" blanktext="" label="Groups" description="Select the groups to join or leave based off mode." validate="required">
+								<data name="" type="private" class="cbautoactionsActionGroupJive" method="groups" />
+							</param>
+						</if>
+						<if name="mode" nametype="param:string" operator="=" value="1" valuetype="const:string" type="showhide">
+							<param name="status" type="list" default="1" label="Status" description="Select status of the user for the specified groups.">
+								<option value="-1">Banned</option>
+								<option value="0">Inactive</option>
+								<option value="1">Active</option>
+								<option value="2">Moderator</option>
+								<option value="3">Admin</option>
+								<option value="4">Owner</option>
+							</param>
+						</if>
+						<if name="mode" nametype="param:string" operator="in" value="2|*|3" valuetype="const:string" type="showhide">
+							<param name="name" type="text" label="Name" description="Input substitution supported category or group name." size="50" validate="required" />
+							<if name="mode" nametype="param:string" operator="=" value="2" valuetype="const:string" type="showhide">
+								<param name="category" type="list" hideblanktext="always" label="Category" description="Select group category.">
+									<option value="-1">New Category</option>
+									<data name="" type="private" class="cbautoactionsActionGroupJive" method="categories" />
+								</param>
+								<if name="category" nametype="param:int" operator="=" value="-1" valuetype="const:int" type="showhide">
+									<param name="category_name" type="text" label="Category Name" description="Input substitution supported category name." size="50" validate="required" />
+									<param name="category_types" type="list" multiple="true" default="1|*|2|*|3" blanktext="" label="Category Types" description="Select available group types for this category. Types determine the way a groups is joined (e.g. Invite requires new users to be invited to join a group)." validate="required">
+										<option value="1">Open</option>
+										<option value="2">Approval</option>
+										<option value="3">Invite</option>
+									</param>
+									<param name="category_description" type="textarea" rows="10" label="Category Description" description="Optionally input substitution supported category description." cssclass="input-block" />
+								</if>
+								<param name="type" type="list" default="1" label="Type" description="Select group type. Type determines the way your group is joined (e.g. Invite requires new users to be invited to join your group).">
+									<option value="1">Open</option>
+									<option value="2">Approval</option>
+									<option value="3">Invite</option>
+								</param>
+							</if>
+							<if name="mode" nametype="param:string" operator="=" value="3" valuetype="const:string" type="showhide">
+								<param name="types" type="list" multiple="true" default="1|*|2|*|3" blanktext="" label="Types" description="Select available group types for this category. Types determine the way a groups is joined (e.g. Invite requires new users to be invited to join a group)." validate="required">
+									<option value="1">Open</option>
+									<option value="2">Approval</option>
+									<option value="3">Invite</option>
+								</param>
+							</if>
+							<param name="description" type="textarea" rows="10" label="Description" description="Optionally input substitution supported category or group description." cssclass="input-block" />
+							<param name="owner" type="text" label="Owner" description="Input substitution supported owner as single integer user_id. Leave blank to use trigger user as the owner." size="10" />
+							<if name="mode" nametype="param:string" operator="=" value="2" valuetype="const:string" type="showhide">
+								<param name="unique" type="yesno" default="1" label="Unique" description="Select if group should be unique to the owner. When checking if a group exists by name it will also check if exists by owner user id. If disabled only name is checked." />
+								<if name="unique" nametype="param:int" operator="=" value="0" valuetype="const:int" type="showhide">
+									<param name="autojoin" type="yesno" default="1" label="Auto Join" description="Select if group should be automatically joined if duplicate found." />
+									<if name="autojoin" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+										<param name="group_status" type="list" default="1" label="Group Status" description="Select status of the user when auto joining.">
+											<option value="-1">Banned</option>
+											<option value="0">Inactive</option>
+											<option value="1">Active</option>
+											<option value="2">Moderator</option>
+											<option value="3">Admin</option>
+											<option value="4">Owner</option>
+										</param>
+									</if>
+								</if>
+							</if>
+						</if>
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB GroupJive 3.x installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

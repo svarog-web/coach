@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>Content - Community Builder</name>
+	<creationDate>2016-06-08</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>4.0.1</version>
+	<description>This plugin allows tabs, fields, and more to be displayed within content items using Community Builder substitutions. Format: [substitution] (e.g. [username]). Optionally use [cb:ignore]STRING[/cb:ignore] to ignore parsing the specified string for substitutions.</description>
+	<files>
+		<filename plugin="cbcontentbot">cbcontentbot.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="user" type="list" default="0" label="User" description="Select the user to use for substitutions (e.g. [username]). Note this only applies to com_content.">
+					<option value="1">Author</option>
+					<option value="0">Viewer</option>
+				</field>
+				<field name="ignore_context" type="text" size="60" default="" label="Ignore Context" description="Optionally specify a comma separated list of contexts to ignore (e.g. com_content)." />
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="css" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="CSS" description="Optionally input substitution supported CSS to be added to page header (e.g. body { background-color: red; })." />
+				<field name="js" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="Javascript" description="Optionally input substitution supported Javascript to be added to page header (e.g. alert( 'Hello World!' );)" />
+				<field name="jquery" type="textarea" filter="raw" cols="60" rows="12" class="span10" default="" label="jQuery" description="Optionally input substitution supported jQuery to be added to page header (e.g. $( 'body' ).prepend( '&lt;div&gt;Hello World!&lt;/div&gt;' );)." />
+				<field name="jquery_plgs" type="text" size="40" default="" label="jQuery Plugins" description="Optionally input comma seperated list of CB jQuery plugins to load in header with jQuery (e.g. ui-all,validate)." />
+				<field name="load_tpl" type="radio" default="0" class="btn-group btn-group-yesno" label="Load Template" description="Enable or disable loading of CB template on content. This will load in CSS to allow styling to properly occur for CB substitutions.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_js" type="radio" default="0" class="btn-group btn-group-yesno" label="Load JavaScript" description="Enable or disable loading of CB javascript on content.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_tooltip" type="radio" default="0" class="btn-group btn-group-yesno" label="Load Tooltips" description="Enable or disable loading of CB tooltip javascript on content.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_lang" type="radio" default="1" class="btn-group btn-group-yesno" label="Load Lanugage" description="Enable or disable loading of CB language on content. This will allow proper translation of substitutions.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="load_plgs" type="radio" default="0" class="btn-group btn-group-yesno" label="Load Plugins" description="Enable or disable loading of CB plugins on content.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

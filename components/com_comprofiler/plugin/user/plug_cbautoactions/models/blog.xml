@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="blog">CB Blogs</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB Blogs">
+				<option value="cbblogs_onBeforeUpdateBlog" translate="no">cbblogs_onBeforeUpdateBlog</option>
+				<option value="cbblogs_onBeforeCreateBlog" translate="no">cbblogs_onBeforeCreateBlog</option>
+				<option value="cbblogs_onAfterUpdateBlog" translate="no">cbblogs_onAfterUpdateBlog</option>
+				<option value="cbblogs_onAfterCreateBlog" translate="no">cbblogs_onAfterCreateBlog</option>
+				<option value="cbblogs_onBeforeDeleteBlog" translate="no">cbblogs_onBeforeDeleteBlog</option>
+				<option value="cbblogs_onAfterDeleteBlog" translate="no">cbblogs_onAfterDeleteBlog</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_blog" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Creates blogs on a users behalf." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionBlog" method="installed" />
+				</left>
+				<then>
+					<params name="blog" type="params" repeat="true" label="" display="2lines">
+						<param name="published" type="yesno" default="1" label="Publish" description="Enable or disable published state of blog." />
+						<param name="access" type="viewaccesslevel" default="1" blanktext="" label="Access Level" managelevels="false" description="Select blog view access level." />
+						<param name="category" type="list" hideblanktext="always" label="Category" description="Select blog category.">
+							<data name="" type="private" class="cbautoactionsActionBlog" method="categories" />
+						</param>
+						<param name="title" type="text" label="Title" description="Input substitution supported blog title." size="50" />
+						<param name="intro" type="textarea" rows="10" label="Blog Intro" description="Input substitution supported blog intro contents." cssclass="input-block" />
+						<param name="full" type="textarea" rows="10" label="Blog Full" description="Input substitution supported blog intro contents." cssclass="input-block" />
+						<param name="owner" type="text" label="Owner" description="Input substitution supported owner of blog as single integer user_id. Leave blank to use trigger user as the owner." size="10" />
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB Blogs installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

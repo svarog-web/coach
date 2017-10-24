@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="request">
+		<fieldset name="request" label="">
+			<field name="action" type="list" required="true" default="allcategories" label="Action" description="">
+				<option value="groups">Group</option>
+				<option value="allgroups">All Groups</option>
+				<option value="mygroups">My Groups</option>
+				<option value="ownedgroups">Owned Groups</option>
+				<option value="joinedgroups">Joined Groups</option>
+				<option value="invitedgroups">Invited Groups</option>
+				<option value="groupsapproval">Groups Approval</option>
+				<option value="newgroup">New Group</option>
+				<option value="editgroup">Edit Group</option>
+				<option value="messagegroup">Message Group</option>
+				<option value="groupnotifications">Group Notifications</option>
+				<option value="categories">Category</option>
+				<option value="allcategories">All Categories</option>
+			</field>
+			<field name="id" type="text" required="false" default="" label="ID" description="Depending on the action this could be Category ID, Group ID, or not be needed at all." />
+		</fieldset>
+	</fields>
+</form>

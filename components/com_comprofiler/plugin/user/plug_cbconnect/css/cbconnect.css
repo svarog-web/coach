@@ -1,0 +1,33 @@
+.cbConnectButtons {
+	display: inline-block;
+	max-width: 100%;
+}
+
+.cbConnectButtons > .cbConnectButton {
+	text-align: left;
+}
+
+.cbConnectButtons > .cbConnectButton:not(.btn-block) {
+	margin-bottom: 5px;
+}
+
+.cbConnectButtons > .cbConnectButton > .cbConnectButtonPrefix {
+	display: inline-block;
+	width: 25px;
+}
+
+.cbConnectButtons > .cbConnectButtonIconOnly {
+	min-width: 45px;
+	text-align: center;
+}
+
+.cbConnectButton .fa-disqus:after {
+	content: " ";
+	display: inline-block;
+	background: url('images/disqus.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 100% 100%;
+	height: 16px;
+	width: 16px;
+}

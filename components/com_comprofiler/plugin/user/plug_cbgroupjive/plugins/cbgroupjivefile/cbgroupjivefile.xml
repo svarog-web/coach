@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user/plug_cbgroupjive/plugins">
+	<name>CB GroupJive File</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-29</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Provides groups with a File Gallery to easily and quickly share files between one another.</description>
+	<version>2.1.0</version>
+	<release>3.1.0</release>
+	<installfile>install.cbgroupjivefile.php</installfile>
+	<files>
+		<filename plugin="cbgroupjivefile">cbgroupjivefile.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgroupjivefile.php</filename>
+		<filename>install.cbgroupjivefile.php</filename>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<foldername>images</foldername>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/GroupJiveFile">
+			<files folder="library">
+				<filename>CBGroupJiveFile.php</filename>
+				<filename>index.html</filename>
+				<foldername>Table</foldername>
+				<foldername>Trigger</foldername>
+			</files>
+		</library>
+	</libraries>
+	<params>
+		<tabpane name="gjgroupsfile">
+			<tabpanetab label="General">
+				<param name="groups_file_create_limit" type="text" default="" size="5" label="Create Limit" description="Input number of files each individual user is limited to creating per group. If blank allow unlimited files. Moderators and group owners are exempt from this configuration." />
+				<param name="groups_file_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on group files. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Files">
+				<param name="groups_file_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum file size in KBs." />
+				<param name="groups_file_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum file size in KBs. Set to 0 for no limit." />
+				<param name="groups_file_extensions" type="text" default="zip,rar,doc,pdf,txt,xls" translate-default="no" size="40" label="File Types" description="Input the allowed file extensions as a comma separated list." />
+			</tabpanetab>
+			<tabpanetab label="Notifications">
+				<param name="notifications_default_file_new" type="yesno" default="0" label="Upload of new file" description="" yes="Notify" no="Don't Notify" />
+				<param name="notifications_default_file_approve" type="yesno" default="0" label="New file requires approval" description="" yes="Notify" no="Don't Notify" />
+			</tabpanetab>
+			<tabpanetab label="Paging">
+				<param name="groups_file_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+				<param name="groups_file_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+				<param name="groups_file_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+				<param name="groups_file_orderby" type="list" default="2" label="Order By" description="Select the row ordering.">
+					<option value="1">Date ASC</option>
+					<option value="2">Date DESC</option>
+					<option value="3">Filename ASC</option>
+					<option value="4">Filename DESC</option>
+				</param>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__groupjive_plugin_file" class="\CB\Plugin\GroupJiveFile\Table\FileTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="title" type="sql:varchar(255)" null="true" />
+				<column name="file" type="sql:varchar(255)" />
+				<column name="filename" type="sql:varchar(255)" null="true" />
+				<column name="description" type="sql:text" null="true" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:int(11)" default="1" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="group_user_id_published">
+					<column name="group" />
+					<column name="user_id" />
+					<column name="published" />
+				</index>
+			</indexes>
+		</table>
+	</database>
+</cbinstall>

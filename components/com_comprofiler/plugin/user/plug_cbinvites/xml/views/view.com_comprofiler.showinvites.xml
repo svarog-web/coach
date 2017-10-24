@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showinvites" type="params" ui="admin" label="Invites" icon="list" viewformatting="none">
+			<tablebrowser name="invitesbrowser" table="#__comprofiler_plugin_invites" class="cbinvitesInviteTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/inviteid" label="Edit" />
+					<menu name="resend" action="linkAction" task="upload" link="cbo:doaction/resend" label="Resend" class="self" method="send" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Invites..." size="30">
+					<field name="to" />
+					<field name="subject" />
+					<field name="body" />
+					<field name="touser">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user" />
+					</field>
+					<field name="username" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="accepted" type="list" valuetype="const:int" label="" blanktext="- Select Status -">
+						<option operator="&gt;" value="1">Accepted</option>
+						<option operator="=||ISNULL" value="0">Pending</option>
+					</filter>
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="sent_asc" label="Sent ascending">
+						<field name="sent" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="sent_desc" label="Sent descending" default="true" translate-default="no">
+						<field name="sent" ordering="DESC" />
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="to" type="group" link="cbo:rowedit" parameters="inviteid" paramvalues="id" align="left" label="To" allowordering="ascending,descending">
+							<if name="touser" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+								<then>
+									<param name="touser" type="string" label="" />
+								</then>
+								<else>
+									<param name="to" type="string" label="" />
+								</else>
+							</if>
+						</field>
+						<field name="username" type="string" width="15%" align="left" label="From" responsivehiddenon="xsmall" allowordering="ascending,descending">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+							<data name="username" as="touser" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user" />
+						</field>
+						<field name="code" type="string" width="15%" align="center" label="Code" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="sent" type="datetime" width="15%" align="center" label="Sent" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="accepted" type="datetime" width="15%" align="center" label="Accepted" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="accepted" type="group" width="5%" align="center" label="Status" allowordering="ascending,descending">
+							<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+								<left>
+									<param name="" type="private" class="self" method="isAccepted" />
+								</left>
+								<then>
+									<param name="" default="1" type="checkmark" title="Accepted" />
+								</then>
+								<else>
+									<param name="" default="0" type="checkmark" title="Pending" />
+								</else>
+							</if>
+						</field>
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+						<field name="user" type="hidden" label="User" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

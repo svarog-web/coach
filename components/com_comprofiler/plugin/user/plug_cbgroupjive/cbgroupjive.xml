@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB GroupJive</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-29</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>CB GroupJive; a powerful and featureful group integration to Community Builder.</description>
+	<version>2.1.0</version>
+	<release>3.1.0</release>
+	<installfile>install.cbgroupjive.php</installfile>
+	<files>
+		<filename plugin="cbgroupjive">cbgroupjive.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgroupjive.php</filename>
+		<filename>install.cbgroupjive.php</filename>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>plugins</foldername>
+		<foldername>templates</foldername>
+		<foldername>fields</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<delete>
+		<filename>admin.cbgroupjive.css</filename>
+		<filename>admin.cbgroupjive.html.php</filename>
+		<filename>admin.cbgroupjive.php</filename>
+		<filename>cbgroupjive.class.php</filename>
+		<filename>tab.cbgroupjive.php</filename>
+		<filename>plugin.cbgroupjive.php</filename>
+		<filename>toolbar.cbgroupjive.html.php</filename>
+		<filename>toolbar.cbgroupjive.php</filename>
+		<filename>templates/default/images/glyphicons-halflings-white.png</filename>
+		<filename>templates/default/images/glyphicons-halflings.png</filename>
+		<filename>templates/default/category_all.php</filename>
+		<filename>templates/default/category_approval.php</filename>
+		<filename>templates/default/category_edit.php</filename>
+		<filename>templates/default/category_groups.php</filename>
+		<filename>templates/default/category_main.php</filename>
+		<filename>templates/default/category_message.php</filename>
+		<filename>templates/default/category_nested.php</filename>
+		<filename>templates/default/category_panes.php</filename>
+		<filename>templates/default/group_all.php</filename>
+		<filename>templates/default/group_approval.php</filename>
+		<filename>templates/default/group_invites.php</filename>
+		<filename>templates/default/group_invites_list.php</filename>
+		<filename>templates/default/group_main.php</filename>
+		<filename>templates/default/group_message.php</filename>
+		<filename>templates/default/group_nested.php</filename>
+		<filename>templates/default/group_panes.php</filename>
+		<filename>templates/default/group_users.php</filename>
+		<filename>templates/default/jquery_inputlimit.php</filename>
+		<filename>templates/default/jquery_validation.php</filename>
+		<filename>templates/default/jquery_validation.php</filename>
+		<filename>templates/default/overview.php</filename>
+		<filename>templates/default/overview_main.php</filename>
+		<filename>templates/default/overview_message.php</filename>
+		<filename>templates/default/overview_panes.php</filename>
+		<filename>templates/default/panel.php</filename>
+		<filename>templates/default/panel_main.php</filename>
+		<filename>templates/default/panel_panes.php</filename>
+		<filename>templates/default/tab_categories.php</filename>
+		<filename>templates/default/tab_groups.php</filename>
+		<filename>templates/default/tab_invited.php</filename>
+		<foldername>images</foldername>
+	</delete>
+	<libraries>
+		<library name="CB/Plugin/GroupJive">
+			<files folder="library">
+				<filename>AddGroups.php</filename>
+				<filename>CBGroupJive.php</filename>
+				<filename>index.html</filename>
+				<foldername>Field</foldername>
+				<foldername>Table</foldername>
+				<foldername>Trigger</foldername>
+			</files>
+		</library>
+	</libraries>
+	<tabs>
+		<tab name="Groups" description="" class="cbgjTab" fields="0" position="cb_tabmain" displaytype="tab" ordering_register="1">
+			<params>
+				<param name="tab_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+				<param name="tab_limit" type="text" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+				<param name="tab_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+				<param name="tab_orderby" type="xml:groupjive_group_orderby" default="4" label="Order By" description="Select the row ordering." />
+			</params>
+		</tab>
+	</tabs>
+	<fieldtypes>
+		<field type="groupautojoin" label="Group Auto Join (Single Select)" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Groups">
+						<param name="autojoin_exclude_categories" type="list" multiple="true" size="10" default="" blanktext="- Select Categories -" label="Exclude Categories" description="Select categories to exclude from selection.">
+							<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+						</param>
+						<param name="autojoin_exclude_groups" type="list" multiple="true" size="10" default="" blanktext="- Select Groups -" label="Exclude Groups" description="Select groups to exclude from selection.">
+							<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+						</param>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="groupmultiautojoin" label="Group Auto Join (Multi-select)" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Groups">
+						<param name="autojoin_exclude_categories" type="list" multiple="true" size="10" default="" blanktext="- Select Categories -" label="Exclude Categories" description="Select categories to exclude from selection.">
+							<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getCategoryOptions" />
+						</param>
+						<param name="autojoin_exclude_groups" type="list" multiple="true" size="10" default="" blanktext="- Select Groups -" label="Exclude Groups" description="Select groups to exclude from selection.">
+							<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+						</param>
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="field_display_style" type="list" default="0" label="Display on profiles as" description="How to display the values of this multi-valued field">
+							<option value="0">Comma ","-separated line</option>
+							<option value="1">Unnumbered list "ul"</option>
+							<option value="2">Ordered list "ol"</option>
+						</param>
+						<if name="field_display_style" type="showhide" operator="&gt;" value="0" valuetype="const:int">
+							<param name="field_display_class" type="text" size="40" default="" label="CSS class of the list" description="Enter the name of the list class (optional) for OL or UL tag" />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<params>
+		<tabpane name="groupjive">
+			<tabpanetab label="General">
+				<param name="general_template" type="folderlist" default="default" label="Template" description="Select template to be used for all of CB GroupJive. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/" />
+				<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB GroupJive." />
+				<param name="general_delete" type="yesno" default="1" label="Auto Delete" description="Enable or disable automatic deletion of groups when a user is deleted." yes="Enable" no="Disable" />
+				<param name="general_menu" type="yesno" default="1" label="Admin Menu" description="Enable or disable usage of backend administrator menu." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Images">
+				<tabpane name="gjimages">
+					<tabpanetab label="Canvas">
+						<param name="canvas_resample" type="yesno" default="1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+						<param name="canvas_image_height" type="text" default="640" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to." />
+						<param name="canvas_image_width" type="text" default="1280" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to." />
+						<param name="canvas_thumbnail_height" type="text" default="320" label="Maximum Thumbnail Height" description="Input the maximum thumbnail height in pixels that the image will be resized to." />
+						<param name="canvas_thumbnail_width" type="text" default="640" label="Maximum Thumbnail Width" description="Input the maximum thumbnail width in pixels that the image will be resized to." />
+						<param name="canvas_maintain_aspect_ratio" type="xml:groupjive_aspect_ratio" default="1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+						<param name="canvas_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum image file size in KBs." />
+						<param name="canvas_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum image file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+					<tabpanetab label="Logos">
+						<param name="logo_resample" type="yesno" default="1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+						<param name="logo_image_height" type="text" default="640" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to." />
+						<param name="logo_image_width" type="text" default="1280" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to." />
+						<param name="logo_thumbnail_height" type="text" default="320" label="Maximum Thumbnail Height" description="Input the maximum thumbnail height in pixels that the image will be resized to." />
+						<param name="logo_thumbnail_width" type="text" default="640" label="Maximum Thumbnail Width" description="Input the maximum thumbnail width in pixels that the image will be resized to." />
+						<param name="logo_maintain_aspect_ratio" type="xml:groupjive_aspect_ratio" default="1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+						<param name="logo_min_size" type="int" default="0" size="5" label="Minimum File Size" description="Input the minimum image file size in KBs." />
+						<param name="logo_max_size" type="int" default="1024" size="5" label="Maximum File Size" description="Input the maximum image file size in KBs. Set to 0 for no limit." />
+					</tabpanetab>
+					<tabpanetab label="Defaults">
+						<param name="categories_canvas" type="imagelist" default="" blanktext="Default" hide_default="true" hide_none="true" label="Category Canvas" description="Choose the default category canvas image. Additional defaults can be uploaded to the images folder of your CB GroupJive template (e.g. /components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/default/images)." directory="/components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/{general_template}/images" />
+						<param name="categories_logo" type="imagelist" default="" blanktext="Default" hide_default="true" hide_none="true" label="Category Logo" description="Choose the default category logo image. Additional defaults can be uploaded to the images folder of your CB GroupJive template (e.g. /components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/default/images)." directory="/components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/{general_template}/images" />
+						<param name="groups_canvas" type="imagelist" default="" blanktext="Default" hide_default="true" hide_none="true" label="Group Canvas" description="Choose the default group canvas image. Additional defaults can be uploaded to the images folder of your CB GroupJive template (e.g. /components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/default/images)." directory="/components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/{general_template}/images" />
+						<param name="groups_logo" type="imagelist" default="" blanktext="Default" hide_default="true" hide_none="true" label="Group Logo" description="Choose the default group logo image. Additional defaults can be uploaded to the images folder of your CB GroupJive template (e.g. /components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/default/images)." directory="/components/com_comprofiler/plugin/user/plug_cbgroupjive/templates/{general_template}/images" />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Notifications">
+				<tabpane name="gjnotifications">
+					<tabpanetab label="General">
+						<param name="notifications" type="yesno" default="1" label="Notifications" description="Enable or disable sending and configuration of notifications. This will not disable some core notifications such as group join approval, group create approval, invites, and more." />
+						<param name="notifications_notifyby" type="list" default="1" label="Notify By" description="Select how notifications should be sent.">
+							<option value="1">Email</option>
+							<option value="2">Private Message</option>
+						</param>
+						<param name="notifications_from_name" type="text" default="" label="From Name" description="Optionally input the email from name. This will override the system from name." />
+						<param name="notifications_from_address" type="text" default="" label="From Email Address" description="Optionally input the email from address. This will override the system email address." />
+					</tabpanetab>
+					<tabpanetab label="Defaults">
+						<param name="notifications_default_user_join" type="yesno" default="0" label="Join of new user" description="" yes="Notify" no="Don't Notify" />
+						<param name="notifications_default_user_leave" type="yesno" default="0" label="Leave of existing user" description="" yes="Notify" no="Don't Notify" />
+						<param name="notifications_default_user_approve" type="yesno" default="0" label="New user requires approval" description="" yes="Notify" no="Don't Notify" />
+						<param name="notifications_default_user_cancel" type="yesno" default="0" label="New user join request cancelled" description="" yes="Notify" no="Don't Notify" />
+						<param name="notifications_default_invite_accept" type="yesno" default="0" label="My group invite requests accepted" description="" yes="Notify" no="Don't Notify" />
+						<param name="notifications_default_invite_reject" type="yesno" default="0" label="My group invite requests rejected" description="" yes="Notify" no="Don't Notify" />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Categories">
+				<tabpane name="gjcategories">
+					<tabpanetab label="Paging">
+						<param name="categories_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="categories_limit" type="text" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+						<param name="categories_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+						<param name="categories_orderby" type="xml:groupjive_category_orderby" default="1" label="Order By" description="Select the row ordering." />
+					</tabpanetab>
+					<tabpanetab label="Groups">
+						<param name="categories_groups_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="categories_groups_limit" type="text" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+						<param name="categories_groups_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+						<param name="categories_groups_orderby" type="xml:groupjive_group_orderby" default="4" label="Order By" description="Select the row ordering." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+			<tabpanetab label="Groups">
+				<tabpane name="gjgroups">
+					<tabpanetab label="General">
+						<param name="groups_uncategorized" type="yesno" default="1" label="Uncategorized" description="Enable or disable uncategorized groups." yes="Enable" no="Disable" />
+						<param name="groups_create_access" type="xml:groupjive_create_access" default="2" managelevels="false" blanktext="" label="Create Access" description="Select group create access. Access determines who can create groups. Moderators are exempt from this configuration." />
+						<param name="groups_create_limit" type="text" default="" size="5" label="Create Limit" description="Input number of groups each individual user is limited to creating. If blank allow unlimited groups. Moderators are exempt from this configuration." />
+						<param name="groups_create_approval" type="yesno" default="0" label="Approval" description="Enable or disable approval of new groups. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+						<param name="groups_create_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on groups. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+						<if name="groups_create_approval" type="showhide" operator="=" value="1" valuetype="const:int">
+							<param name="groups_create_approval_notify" type="yesno" default="1" label="Notify" description="Enable or disable moderator notifications for groups needing approval." yes="Enable" no="Disable" />
+						</if>
+						<param name="groups_delete" type="yesno" default="1" label="Auto Delete" description="Enable or disable automatic deletion of group contents when a group user is deleted." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="Message">
+						<param name="groups_message" type="yesno" default="0" label="Display" description="Enable or disable usage of group message. Group message allows the group owner and group administrators to send a notification to all active group users. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+						<param name="groups_message_type" type="list" default="2" label="Type" description="Select how group messages should be sent.">
+							<option value="1">Email</option>
+							<option value="2">Private Message</option>
+						</param>
+						<param name="groups_message_subject" type="yesno" default="0" label="Subject" description="Enable or disable usage of group message subject. This allows customizing the message subject. Note this only works with email message type." yes="Enable" no="Disable" />
+						<param name="groups_message_html" type="yesno" default="0" label="HTML" description="Enable or disable support for HTML in group messages." yes="Enable" no="Disable" />
+						<param name="groups_message_delay" type="text" default="60" size="5" label="Delay" description="Input the number of seconds between group messages. Leave empty for no delay. Moderators are exempt from this configuration." />
+						<param name="groups_message_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on group message. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+					</tabpanetab>
+					<tabpanetab label="GROUP_USERS" translated-label="Users">
+						<tabpane name="gjgroupsusers">
+							<tabpanetab label="General">
+								<param name="groups_users_owner" type="yesno" default="1" label="Display Owner" description="Enable or disable display of group owner. Note owner will not count towards total users if not displayed." yes="Enable" no="Disable" />
+							</tabpanetab>
+							<tabpanetab label="Paging">
+								<param name="groups_users_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+								<param name="groups_users_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+								<param name="groups_users_search" type="yesno" default="0" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+					<tabpanetab label="Invites">
+						<tabpane name="gjgroupsinvites">
+							<tabpanetab label="General">
+								<param name="groups_invites_display" type="yesno" default="1" label="Display" description="Enable or disable usage of group invites. Invite group types are exempt from this configuration. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+								<param name="groups_invites_by" type="list" multiple="true" default="1|*|2|*|3|*|4" blanktext="" validate="required" label="Invite By" description="Select how users may invite others to join groups.">
+									<option value="1">User ID</option>
+									<option value="2">Username</option>
+									<option value="3">Name</option>
+									<option value="4">Email Address</option>
+								</param>
+								<param name="groups_invites_create_limit" type="text" default="" size="5" label="Create Limit" description="Input number of pending group invites each individual user is limited to creating per group. If blank allow unlimited invites. Moderators and group owners are exempt from this configuration." />
+								<param name="groups_invites_resend" type="text" default="7" size="5" label="Resend Delay" description="Input the number of days between invite resending. Leave empty for no resending." />
+								<param name="groups_invites_list" type="yesno" default="0" label="Connections" description="Enable or disable display of connections dropdown for quick inviting." yes="Enable" no="Disable" />
+								<param name="groups_invites_accept" type="yesno" default="1" label="Auto Accept" description="Enable or disable auto accept of group invites during registration." yes="Enable" no="Disable" />
+								<param name="groups_invites_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on group invites. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+							</tabpanetab>
+							<tabpanetab label="Paging">
+								<param name="groups_invites_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+								<param name="groups_invites_limit" type="text" default="15" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+								<param name="groups_invites_search" type="yesno" default="0" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+								<param name="groups_invites_orderby" type="list" default="2" label="Order By" description="Select the row ordering.">
+									<option value="1">Invited ASC</option>
+									<option value="2">Invited DESC</option>
+									<option value="3">Accepted ASC</option>
+									<option value="4">Accepted DESC</option>
+								</param>
+							</tabpanetab>
+						</tabpane>
+					</tabpanetab>
+					<tabpanetab label="Paging">
+						<param name="groups_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging." yes="Enable" no="Disable" />
+						<param name="groups_limit" type="text" default="30" size="5" label="Page Limit" description="Input page limit. Page limit determines how many rows are displayed per page. If paging is disabled this can still be used to limit the number of rows displayed." />
+						<param name="groups_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on rows." yes="Enable" no="Disable" />
+						<param name="groups_orderby" type="xml:groupjive_group_orderby" default="4" label="Order By" description="Select the row ordering." />
+					</tabpanetab>
+				</tabpane>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__groupjive_categories" class="\CB\Plugin\GroupJive\Table\CategoryTable" strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+			<columns strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="name" type="sql:text" />
+				<column name="description" type="sql:text" null="true" />
+				<column name="canvas" type="sql:varchar(255)" null="true" />
+				<column name="logo" type="sql:varchar(255)" null="true" />
+				<column name="types" type="sql:varchar(255)" />
+				<column name="access" type="sql:int(11)" default="1" />
+				<column name="create_access" type="sql:int(11)" default="0" />
+				<column name="css" type="sql:text" null="true" />
+				<column name="published" type="sql:int(11)" default="1" />
+				<column name="ordering" type="sql:int(11)" default="99999" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="published_access">
+					<column name="published" />
+					<column name="access" />
+				</index>
+			</indexes>
+		</table>
+		<table name="#__groupjive_groups" class="\CB\Plugin\GroupJive\Table\GroupTable" strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+			<columns strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="category" type="sql:int(11)" />
+				<column name="name" type="sql:text" />
+				<column name="description" type="sql:text" null="true" />
+				<column name="canvas" type="sql:varchar(255)" null="true" />
+				<column name="logo" type="sql:varchar(255)" null="true" />
+				<column name="type" type="sql:int(11)" default="1" />
+				<column name="css" type="sql:text" null="true" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="published" type="sql:int(11)" default="1" />
+				<column name="ordering" type="sql:int(11)" default="1" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="category">
+					<column name="category" />
+				</index>
+			</indexes>
+		</table>
+		<table name="#__groupjive_users" class="\CB\Plugin\GroupJive\Table\UserTable" strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+			<columns strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="status" type="sql:int(11)" default="0" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id_group_status" type="unique">
+					<column name="user_id" />
+					<column name="group" />
+					<column name="status" />
+				</index>
+			</indexes>
+		</table>
+		<table name="#__groupjive_invites" class="\CB\Plugin\GroupJive\Table\InviteTable" strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+			<columns strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="message" type="sql:text" null="true" />
+				<column name="invited" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="accepted" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="code" type="sql:varchar(255)" null="true" />
+				<column name="email" type="sql:varchar(255)" null="true" />
+				<column name="user" type="sql:int(11)" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id_group">
+					<column name="user_id" />
+					<column name="group" />
+				</index>
+				<index name="group_accepted_email_user">
+					<column name="group" />
+					<column name="accepted" />
+					<column name="email" size="30" />
+					<column name="user" />
+				</index>
+			</indexes>
+		</table>
+		<table name="#__groupjive_notifications" class="\CB\Plugin\GroupJive\Table\NotificationTable" strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+			<columns strict="false" drop="never"> <!-- TODO: For B/C: change to strict -->
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="group" type="sql:int(11)" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id_group"> <!-- TODO: For B/C: change to unique -->
+					<column name="user_id" />
+					<column name="group" />
+				</index>
+			</indexes>
+		</table>
+	</database>
+</cbinstall>

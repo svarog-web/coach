@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="content">Content</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_content" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Inserts Joomla or K2 content articles." />
+			<params name="content" type="params" repeat="true" label="" display="2lines">
+				<param name="mode" type="list" default="1" label="Mode" description="Select content mode. Mode determines what type of content is created.">
+					<option value="1">Joomla</option>
+					<option value="2">K2</option>
+				</param>
+				<param name="published" type="yesno" default="1" label="Publish" description="Enable or disable published state of content." />
+				<param name="access" type="viewaccesslevel" default="1" blanktext="" label="Access Level" managelevels="false" description="Select content view access level." />
+				<if name="mode" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+					<param name="category_j" type="mos_category" blanktext="" label="Category" description="Select content category." validate="required" />
+				</if>
+				<if name="mode" nametype="param:int" operator="=" value="2" valuetype="const:int" type="showhide">
+					<param name="category_k" type="list" hideblanktext="always" label="Category" description="Select content category." validate="required">
+						<data name="" type="private" class="cbautoactionsActionContent" method="k2Categories" />
+					</param>
+				</if>
+				<param name="title" type="text" label="Title" description="Input substitution supported content title." size="50" validate="required" />
+				<param name="alias" type="text" label="Alias" description="Optionally input substitution supported content title. If left blank will default to Title. Note alias requires strict formatting and will auto format on action trigger." size="50" />
+				<param name="introtext" type="textarea" rows="10" label="Intro Text" description="Optionally input substitution supported content intro text." cssclass="input-block" />
+				<param name="fulltext" type="textarea" rows="10" label="Full Text" description="Optionally input substitution supported content full text." cssclass="input-block" />
+				<param name="metadesc" type="textarea" rows="5" label="Meta Description" description="Optionally input substitution supported content meta description." cssclass="input-block" />
+				<param name="metakey" type="textarea" rows="5" label="Meta Keywords" description="Optionally input substitution supported content meta keywords." cssclass="input-block" />
+				<param name="featured" type="yesno" default="0" label="Featured" description="Enable or disable featured state of content." />
+				<param name="language" type="list" default="*" hideblanktext="always" label="Language" description="Select content language.">
+					<option value="*">All</option>
+					<data name="" type="sql:multiplerows" table="#__languages" key="lang_id">
+						<rows>
+							<field name="lang_code" as="value" />
+							<field name="title" as="text" />
+						</rows>
+						<orderby>
+							<field name="ordering" ordering="ASC" />
+						</orderby>
+					</data>
+				</param>
+				<param name="owner" type="text" label="Created By" description="Input substitution supported owner of content as single integer user_id. Leave blank to use trigger user as the owner." size="10" />
+			</params>
+		</view>
+	</views>
+</cbxml>

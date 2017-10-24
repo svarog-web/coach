@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="captcha_mode" base="list" valuetype="string">
+			<option value="internal">Internal (Code)</option>
+			<option value="question">Internal (Question)</option>
+			<option value="recaptcha">reCaptcha</option>
+		</type>
+	</types>
+</cbxml>

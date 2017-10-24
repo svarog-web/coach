@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editblock" type="params" ui="admin" label="Block" icon="ban" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:blockrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="type" type="xml:block_type" default="user" translate-default="no" label="Type" validate="required" description="Select the block type. Type determines what value should be supplied." />
+			<param name="value" type="text" label="Value" size="40" validate="required" description="Input block value in relation to the type. User type use the users user_id (e.g. 42). IP Address type use a full valid IP Address (e.g. 192.168.0.1). Email type use a fill valid email address (e.g. invalid@cb.invalid). Email Domain type use a full email address domain after @ (e.g. example.com)." />
+			<param name="date" type="datetime" label="Date" validate="required" description="Select the date and time the block should go in affect. Note date and time always functions in UTC." />
+			<param name="_custom_duration" type="xml:block_duration" label="Duration" blanktext="Custom" description="Select the strtotime relative date. This duration will be added to the datetime specified above." />
+			<if name="_custom_duration" nametype="param:string" operator="=" value="" valuetype="const:string" type="showhide">
+				<param name="duration" type="text" default="+1 MONTH" translate-default="no" label="Custom Duration" size="40" description="Input the strtotime relative date (e.g. +1 Day). This duration will be added to the datetime specified above. Leave blank for a forever duration." />
+			</if>
+			<param name="reason" type="textarea" label="Reason" cols="40" rows="5" description="Optionally input block reason. If left blank will default to spam." />
+		</view>
+	</views>
+</cbxml>

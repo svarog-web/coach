@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Invites</name>
+	<author>Krileon</author>
+	<creationDate>2016-04-26</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Component plugin allowing users to invite others to join the site.</description>
+	<version>2.0.13</version>
+	<release>4.0.3+build.2016.04.26.00.10.54.5c305fca8</release>
+	<files>
+		<filename plugin="cbinvites">cbinvites.php</filename>
+		<filename>component.cbinvites.php</filename>
+		<filename>index.html</filename>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+	</files>
+	<delete>
+		<filename>templates/default/template.css</filename>
+		<filename>admin.cbinvites.css</filename>
+		<filename>admin.cbinvites.html.php</filename>
+		<filename>admin.cbinvites.php</filename>
+		<filename>cbinvites.class.php</filename>
+		<filename>field.cbinvites.php</filename>
+		<filename>plugin.cbinvites.php</filename>
+		<filename>tab.cbinvites.php</filename>
+		<filename>toolbar.cbinvites.html.php</filename>
+		<filename>toolbar.cbinvites.php</filename>
+		<foldername>images</foldername>
+		<foldername>templates/default/images</foldername>
+	</delete>
+	<fieldtypes>
+		<field type="invite_code" label="Invite Code" unique="true">
+			<data name="" nametype="namesuffix" type="sql:text||sql:varchar(50)" null="true" default="NULL" translate-default="no" />
+			<params>
+				<showview view="fieldLayoutParams" mode="edit" type="view" />
+			</params>
+		</field>
+	</fieldtypes>
+	<tabs>
+		<tab type="existingSytemTab" class="getContactTab">
+			<fields>
+				<field type="invite_code" title="Invite Code" name="invite_code" description="Your registration invite code." registration="1" readonly="1" profile="0" />
+			</fields>
+		</tab>
+		<tab name="Invites" description="" class="cbinvitesTab" fields="0" position="cb_tabmain" displaytype="tab" ordering_register="1">
+			<params>
+				<param name="tab_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging on tab invites." yes="Enable" no="Disable" />
+				<if name="tab_paging" type="showhide" operator="=" value="1" valuetype="const:int">
+					<param name="tab_limit" type="int" default="15" size="5" label="Page Limit" description="Input page limit on tab invites. Page limit determines how many invites are displayed per page." />
+				</if>
+				<param name="tab_search" type="yesno" default="1" label="Search" description="Enable or disable usage of search on tab invites." yes="Enable" no="Disable" />
+			</params>
+		</tab>
+	</tabs>
+	<params>
+		<tabpane name="invites">
+			<tabpanetab label="General">
+				<param name="general_template" type="folderlist" default="default" label="Template" description="Select template to be used for all of CB Invites. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbinvites/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbinvites/templates/" />
+				<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB Invites." />
+			</tabpanetab>
+			<tabpanetab label="Invites">
+				<param name="invite_create_access" type="viewaccesslevel" default="2" managelevels="false" blanktext="" label="Create Access" description="Select invite create access. Access determines who can send invites. The group selected as well as those above it will have access (e.g. Registered will also be accessible to Author). Moderators are exempt from this configuration." />
+				<param name="invite_limit" type="int" default="" size="5" label="Create Limit" description="Input number of invites each individual user is limited to have active at any given time (accepted invites do not count towards this limit). If blank allow unlimited invites. Moderators are exempt from this configuration." />
+				<param name="invite_resend" type="int" default="7" size="5" label="Resend Delay" description="Input number of days after invite sent to allow resending (accepted invites do not permit resending). If blank disable resending invites. Moderators are exempt from this configuration." />
+				<param name="invite_multiple" type="yesno" default="1" label="Multiple Invites" description="Select usage of multiple emails in a single invite using a comma seperated list (e.g. email1@domain.com, email2@domain.com, email3@domain.com). Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+				<param name="invite_duplicate" type="yesno" default="0" label="Duplicate Invites" description="Select usage of duplicate invites to the same address. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+				<param name="invite_connection" type="list" default="2" label="Connection" description="Select connection method from inviter to invitee.">
+					<option value="0">Disabled</option>
+					<option value="1">Pending Connection</option>
+					<option value="2">Auto Connection</option>
+				</param>
+				<param name="invite_editor" type="list" default="2" label="Editor" description="Select invite email body editor.">
+					<option value="1">Plain Text</option>
+					<option value="2">HTML Text</option>
+					<option value="3">WYSIWYG</option>
+				</param>
+				<param name="invite_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on invites. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+			</tabpanetab>
+			<tabpanetab label="Email">
+				<param name="invite_from_name" type="text" default="" size="30" label="From Name" description="Input a substitution supported from name to be sent with all invites (e.g. My Awesome CB Site!). If left blank will default to users name. If specified a replyto name will be added as the users name." />
+				<param name="invite_from_address" type="text" default="" size="30" label="From Address" description="Input a substitution supported from address to send all invites from (e.g. general@domain.com). If left blank will default to users email. If specified a replyto address will be added as the users email." />
+				<param name="invite_cc" type="text" default="" size="30" label="CC Address" description="Input a substitution supported CC address (e.g. [email]); multiple addresses supported with comma seperated list (e.g. email1@domain.com, email2@domain.com, email3@domain.com)." />
+				<param name="invite_bcc" type="text" default="" size="30" label="BCC Address" description="Input a substitution supported BCC address (e.g. [email]); multiple addresses supported with comma seperated list (e.g. email1@domain.com, email2@domain.com, email3@domain.com)." />
+				<param name="invite_prefix" type="text" default="[sitename] - " size="30" label="Subject Prefix" description="Input substitution supported prefix of invite email subject. Additional subsitutions supported: [site], [sitename], [path], [itemid], [register], [profile], [code], and [to]." />
+				<param name="invite_header" type="textarea" default="&lt;p&gt;You have been invited by [username] to join [sitename]!&lt;/p&gt;&lt;br&gt;" cols="40" rows="5" label="Body Header" description="Input substitution supported header of invite email body. Additional subsitutions supported: [site], [sitename], [path], [itemid], [register], [profile], [code], and [to]." />
+				<param name="invite_footer" type="textarea" default="&lt;br&gt;&lt;p&gt;Invite Code - [code]&lt;br&gt;[sitename] - [site]&lt;br&gt;Registration - [register]&lt;br&gt;[username] - [profile]&lt;/p&gt;" cols="40" rows="5" label="Body Footer" description="Input substitution supported footer of invite email body. Additional subsitutions supported: [site], [sitename], [path], [itemid], [register], [profile], [code], and [to]." />
+				<param name="invite_attachments" type="text" default="" size="30" label="Attachment" description="Input a substitution supported Attachment address (e.g. [cb_myfile]); multiple addresses supported with comma seperated list (e.g. /home/username/public_html/images/file1.zip,[path]/file2.zip, http://www.domain.com/file3.zip). Additional substitutions supported: [site], [sitename], [path], [itemid], [register], [profile], [code], and [to]." />
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__comprofiler_plugin_invites" class="cbinvitesInviteTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="to" type="sql:varchar(255)" />
+				<column name="subject" type="sql:varchar(255)" null="true" />
+				<column name="body" type="sql:text" null="true" />
+				<column name="code" type="sql:varchar(255)" null="true" />
+				<column name="sent" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="accepted" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="user" type="sql:int(11)" null="true" />
+			</columns>
+			<indexes strict="true" drop="never">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="user_id">
+					<column name="user_id" />
+				</index>
+				<index name="user">
+					<column name="user" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+	</database>
+</cbinstall>

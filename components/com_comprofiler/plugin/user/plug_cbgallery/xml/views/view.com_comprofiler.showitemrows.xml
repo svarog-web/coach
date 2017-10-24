@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showitems" type="params" ui="admin" label="Media" icon="list" viewformatting="none">
+			<tablebrowser name="itembrowser" table="#__comprofiler_plugin_gallery_items" class="\CB\Plugin\Gallery\Table\ItemTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/mediaid" label="Edit" />
+					<menu name="publish" action="linkAction" task="publish" link="cbo:publish/published" label="Publish" />
+					<menu name="unpublish" action="linkAction" task="unpublish" link="cbo:unpublish/published" label="Unpublish" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Media..." size="30">
+					<field name="owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</field>
+					<field name="value" />
+					<field name="file" />
+					<field name="title" />
+					<field name="description" />
+					<field name="asset" />
+					<field name="type" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="folder" valuetype="sql:string" type="data" label="" blanktext="- Select Album -">
+						<data name="folders" type="sql:multiplerows" table="#__comprofiler_plugin_gallery_folders" key="id">
+							<rows>
+								<field name="id" as="value" />
+								<field name="title" as="text" />
+							</rows>
+							<orderby>
+								<field name="date" ordering="DESC" />
+							</orderby>
+						</data>
+					</filter>
+					<filter name="user" value="username" valuetype="sql:string" type="string" label="" blanktext="User">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</filter>
+					<filter name="asset" valuetype="sql:string" type="string" label="" blanktext="Asset" />
+					<filter name="type" valuetype="sql:string" type="xml:gallery_item_types" label="" blanktext="- Select Type -" />
+					<filter name="published" valuetype="sql:int" type="xml:gallery_item_state" label="" blanktext="- Select Published -" />
+					<filter name="from" value="date" valuetype="sql:string" type="datetime" operator="&gt;=" view="fromto" />
+					<filter name="to" value="date" valuetype="sql:string" type="datetime" operator="&lt;=" view="fromto" />
+					<view name="fromto" type="params">
+						<fieldset name="daterange" label="Date">
+							<param name="filter_from" type="datetime" default="" label="From" />
+							<param name="filter_to" type="datetime" default="" label="To" />
+						</fieldset>
+					</view>
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="date_asc" label="Date ascending">
+						<field name="date" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="date_desc" label="Date descending" default="true" translate-default="no">
+						<field name="date" ordering="DESC" />
+					</ordergroup>
+					<ordergroup name="user_asc" label="User ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="user_desc" label="User descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="" type="checkmark" link="cb_action:itemdownload" parameters="mediaid" paramvalues="id" target="_blank" width="1%" align="center" label="">
+							<option value="" iconclass="download" textclass="primary">Click to Download</option>
+							<attributes>
+								<attribute name="link">
+									<if name="" nametype="data:string" operator="!=" value="" valuetype="const:string" type="condition">
+										<left>
+											<param name="" type="private" class="self" method="domain" />
+										</left>
+										<then>
+											<param name="value" type="string" />
+										</then>
+										<else>
+											<param name="" default="cb_action:itemdownload" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+								<attribute name="cssclasslink">
+									<if name="" nametype="data:string" operator="!=" value="" valuetype="const:string" type="condition">
+										<left>
+											<param name="" type="private" class="self" method="domain" />
+										</left>
+										<then>
+											<param name="" default="hidden" type="string" />
+										</then>
+									</if>
+								</attribute>
+							</attributes>
+						</field>
+						<field name="" type="checkmark" link="cb_action:itempreview" parameters="mediaid" paramvalues="id" target="_blank" width="1%" align="center" label="">
+							<option value="" iconclass="eye" textclass="primary">Click to Preview</option>
+							<attributes>
+								<attribute name="link">
+									<if name="" nametype="data:string" operator="!=" value="" valuetype="const:string" type="condition">
+										<left>
+											<param name="" type="private" class="self" method="domain" />
+										</left>
+										<then>
+											<param name="value" type="string" />
+										</then>
+										<else>
+											<param name="" default="cb_action:itempreview" translate-default="no" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</field>
+						<field name="title" type="group" link="cbo:rowedit" parameters="mediaid" paramvalues="id" align="left" label="Title" allowordering="ascending,descending">
+							<if name="title" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+								<then>
+									<param name="title" type="string" label="" />
+								</then>
+								<else>
+									<if name="file" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+										<then>
+											<param name="file" type="string" label="" />
+										</then>
+										<else>
+											<param name="value" type="string" label="" />
+										</else>
+									</if>
+								</else>
+							</if>
+						</field>
+						<field name="" type="group" width="5%" align="center" label="Extension">
+							<if name="" nametype="data:string" operator="regexp" value="youtube|youtu" valuetype="const:string" type="condition">
+								<left>
+									<param name="" type="private" class="self" method="domain" />
+								</left>
+								<then>
+									<param name="" default="" type="string" iconclass="youtube" iconsize="large" />
+								</then>
+								<else>
+									<param name="" type="private" class="self" method="extension" label="" cssclass="text-uppercase" />
+								</else>
+							</if>
+						</field>
+						<field name="" type="group" width="10%" align="center" label="Size">
+							<if name="" nametype="data:string" operator="regexp" value="youtube|youtu" valuetype="const:string" type="condition">
+								<left>
+									<param name="" type="private" class="self" method="domain" />
+								</left>
+								<then>
+									<param name="" default="" type="string" />
+								</then>
+								<else>
+									<param name="" type="private" class="self" method="size" label="" />
+								</else>
+							</if>
+						</field>
+						<field name="folder" type="group" link="cb_action:folderrows" parameters="folderbrowser[filter_id]" paramvalues="folder" width="10%" align="center" label="Album" responsivehiddenon="xsmall" allowordering="ascending,descending">
+							<if name="foldertitle" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+								<then>
+									<param name="foldertitle" type="string" label="" />
+								</then>
+								<else>
+									<if name="folder" nametype="param:string" operator="&gt;" value="0" valuetype="const:string" type="condition">
+										<then>
+											<param name="folder" type="string" label="" />
+										</then>
+										<else>
+											<param name="" type="string" default="" label="" />
+										</else>
+									</if>
+								</else>
+							</if>
+							<attributes>
+								<attribute name="link">
+									<if name="folder" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+										<then>
+											<param name="" default="cb_action:folderrows" translate-default="no" type="string" />
+										</then>
+										<else>
+											<param name="" default="" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</field>
+						<field name="user" type="string" width="15%" align="center" label="User" responsivehiddenon="xsmall" allowordering="ascending,descending">
+							<data name="username" as="user" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+						<field name="asset" type="string" width="10%" align="center" label="Asset" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="type" type="xml:gallery_item_type" width="5%" align="center" label="Type" allowordering="ascending,descending" />
+						<field name="date" type="datetime" timezone="RAW" width="15%" align="center" label="Date" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="published" type="xml:gallery_item_state" width="5%" align="center" label="Published" onclick="toggle" allowordering="ascending,descending" />
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+						<field name="value" type="hidden" label="Value" allowordering="ascending,descending" />
+						<field name="file" type="hidden" label="File" allowordering="ascending,descending" />
+						<field name="foldertitle" type="hidden">
+							<data name="title" as="foldertitle" type="sql:field" table="#__comprofiler_plugin_gallery_folders" class="\CB\Plugin\Gallery\Table\FolderTable" key="id" value="folder" />
+						</field>
+						<field name="user_id" type="hidden" />
+					</rows>
+				</listfields>
+				<batchprocess>
+					<batch name="folder" valuetype="sql:string" type="data" label="" blanktext="- Select Album -">
+						<data name="folders" type="sql:multiplerows" table="#__comprofiler_plugin_gallery_folders" key="id">
+							<rows>
+								<field name="id" as="value" />
+								<field name="title" as="text" />
+							</rows>
+							<orderby>
+								<field name="date" ordering="DESC" />
+							</orderby>
+						</data>
+					</batch>
+					<batch name="user_id" type="text" label="" blanktext="User" />
+					<batch name="asset" type="text" label="" blanktext="Asset" />
+				</batchprocess>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cbinstall version="1.0" type="plugin" group="language" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../validation/ahawow.xsd">
+	<name>CB Paid Subscriptions - nl-NL</name>
+	<author>CB Team</author>
+	<creationDate>2016-08-28</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>cbteam@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com</authorUrl>
+	<version>2.0.15</version>
+	<release>4.1.0.1.0.0</release>
+	<description>
+		<![CDATA[
+		<p>
+		Provides the <strong>Dutch (Netherlands)</strong> language
+		for CB Paid Subsciptions 4.1.0.
+		<br />
+		For updates and translation projects please visit our
+		<a href="http://www.joomlapolis.com/cb-solutions/languages" target=""_blank">Joomlapolis Languages</a> page.
+		</p>
+		<hr />
+		<h5>
+		Translation Credits
+		</h5>
+		<p>
+		This translation was accomplished by the efforts of the various Dutch (Netherlands)
+		<a href="https://www.transifex.com/organization/joomlapolis" title=""
+		target="_blank">Joomlapolis Transifex Project</a> teams.
+		</p>
+		<h5>
+		Completion Level
+		</h5>
+		<p>
+		Please consider
+		<a href="https://www.transifex.com/signin/" title="" target="_blank">getting a free account on Transifex</a> and
+		helping improve the quality and completeness of this translation effort.
+		</p>
+		<p>
+		The following Dutch (Netherlands) projects (name is click-able) and resources were accessed to generate
+		this CBSubs Language plugin:
+		</p>
+		<table border="1" style="width:100%">
+			<tr>
+				<th>Project</th>
+				<th>Resource</th>
+				<th>Completeness</th>
+				<th>Last Update</th>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbsubs/" title="" target="_blank">CB Paid Subscriptions Membership</a></td>
+				<td>admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="2" min="0" max="100"></meter>
+					2%
+					<br />
+					T:116 / U:4434
+				</td>
+				<td>2016-05-25 23:12:03 / nant</td>
+			</tr>
+			<tr>
+				<td>language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="13" min="0" max="100"></meter>
+					13%
+					<br />
+					T:116 / U:991
+				</td>
+				<td>2016-05-25 23:12:03 / nant</td>
+			</tr>
+		</table>
+		]]>
+	</description>
+	<files>
+		<filename plugin="cbpaidsubscriptions_language">language.php</filename>
+		<filename>index.html</filename>
+		<filename>admin_language.php</filename>
+	</files>
+	<params>
+	</params>
+	<database>
+	</database>
+</cbinstall>
+

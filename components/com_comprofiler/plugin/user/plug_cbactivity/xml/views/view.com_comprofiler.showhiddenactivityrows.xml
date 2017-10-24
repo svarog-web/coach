@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showhiddenactivity" type="params" ui="admin" label="Hidden" icon="list" viewformatting="none">
+			<tablebrowser name="hiddenactivitybrowser" table="#__comprofiler_plugin_activity_hidden" class="\CB\Plugin\Activity\Table\HiddenTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/hiddenid" label="Edit" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Hidden..." size="30">
+					<field name="owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</field>
+					<field name="type" />
+					<field name="item" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="owner" value="username" valuetype="sql:string" type="string" label="" blanktext="Owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</filter>
+					<filter name="type" valuetype="sql:string" type="data" label="" blanktext="- Select Type -">
+						<data name="type" type="sql:multiplerows" table="#__comprofiler_plugin_activity_hidden" key="id">
+							<rows>
+								<field name="type" as="value" />
+								<field name="type" as="text" />
+							</rows>
+							<where>
+								<column name="type" operator="!=" value="" type="sql:field" valuetype="const:string" />
+							</where>
+							<orderby>
+								<field name="type" ordering="ASC" />
+							</orderby>
+						</data>
+					</filter>
+					<filter name="item" valuetype="sql:string" type="string" label="" blanktext="Item" />
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="id_asc" label="ID ascending" default="true" translate-default="no">
+						<field name="id" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="id_desc" label="ID descending">
+						<field name="id" ordering="DESC" />
+					</ordergroup>
+					<ordergroup name="owner_asc" label="Owner ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="owner_desc" label="Owner descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="owner" type="string" link="cbo:rowedit" parameters="hiddenid" paramvalues="id" align="left" label="Owner" allowordering="ascending,descending">
+							<data name="user_id" type="sql:field" />
+							<data name="username" as="owner" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+						<field name="type" type="string" width="15%" align="center" label="Type" allowordering="ascending,descending" />
+						<field name="item" type="string" paramvalues="item" width="20%" align="center" label="Item" allowordering="ascending,descending">
+							<attributes>
+								<attribute name="link">
+									<if name="type" nametype="param:string" operator="=" value="activity" valuetype="const:string" type="condition">
+										<then>
+											<param name="" default="cb_action:activityrows" translate-default="no" type="string" />
+										</then>
+										<else>
+											<if name="type" nametype="param:string" operator="=" value="comment" valuetype="const:string" type="condition">
+												<then>
+													<param name="" default="cb_action:activitycommentrows" translate-default="no" type="string" />
+												</then>
+												<else>
+													<param name="" default="" type="string" />
+												</else>
+											</if>
+										</else>
+									</if>
+								</attribute>
+								<attribute name="parameters">
+									<if name="type" nametype="param:string" operator="=" value="activity" valuetype="const:string" type="condition">
+										<then>
+											<param name="" default="activitybrowser[filter_id]" translate-default="no" type="string" />
+										</then>
+										<else>
+											<if name="type" nametype="param:string" operator="=" value="comment" valuetype="const:string" type="condition">
+												<then>
+													<param name="" default="activitycommentsbrowser[filter_id]" translate-default="no" type="string" />
+												</then>
+												<else>
+													<param name="" default="" type="string" />
+												</else>
+											</if>
+										</else>
+									</if>
+								</attribute>
+							</attributes>
+						</field>
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

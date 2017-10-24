@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade" version="2.5.0">
+	<name>Community Builder Library</name>
+	<libraryname>CBLib</libraryname>
+	<author>CB Team</author>
+	<creationDate>2017-01-28</creationDate>
+	<copyright>(C) 2004-2017 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>cbteam@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>2.1.2+build.2017.01.28.02.24.35.b65a69f75</version>
+	<description>Community Builder Library</description>
+	<files>
+		<file>CBLib.xml</file>
+		<folder>CB</folder>
+		<folder>CBLib</folder>
+		<folder>CBPHPMailer</folder>
+		<folder>GuzzleHttp</folder>
+		<folder>Imagine</folder>
+		<folder>Psr</folder>
+	</files>
+</extension>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Gravatar Field</name>
+	<author>Krileon</author>
+	<creationDate>2016-09-12</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>A cb fields plugin to add a gravatar field type to available cb field types.</description>
+	<version>2.0.15</version>
+	<release>2.1.0</release>
+	<files>
+		<filename plugin="cbgravatarfield">cbgravatarfield.php</filename>
+		<filename>index.html</filename>
+		<foldername>language</foldername>
+	</files>
+	<fieldtypes>
+		<field type="gravatar" label="Gravatar">
+			<data name="" nametype="namesuffix" type="sql:text||sql:varchar(255)" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="gravatar_primary_email" type="yesno" default="0" label="Use Primary Email Address" description="Select if the primary email address should be used for the gravatar email address or if the user can provide a separate email address for gravatar." />
+						<param name="imageStyle" type="list" default="roundedbordered" translate-default="no" label="Style" description="Select the styling applied to the image. Note for best results use squared images. Circles can display as ovals if the image is not squared.">
+							<option value="">None</option>
+							<option value="rounded">Rounded</option>
+							<option value="roundedbordered">Rounded Bordered</option>
+							<option value="circle">Circle</option>
+							<option value="circlebordered">Circle Bordered</option>
+						</param>
+						<param name="gravatar_default" type="list" default="gravatar_logo" label="Default Image" description="Select what default image should be displayed if email specified is invalid or missing.">
+							<optgroup label="Gravatar">
+								<option value="gravatar_logo">Logo</option>
+								<option value="gravatar_blank">Blank</option>
+								<option value="gravatar_mm">MM</option>
+								<option value="gravatar_identicon">Identicon</option>
+								<option value="gravatar_monsterid">Monsterid</option>
+								<option value="gravatar_wavatar">Wavatar</option>
+								<option value="gravatar_retro">Retro</option>
+							</optgroup>
+							<optgroup label="CB">
+								<data name="" type="custom" class="CBfield_image" method="loadDefaultImages" />
+							</optgroup>
+						</param>
+						<if name="gravatar_default" operator="!regexp" value="^gravatar_" valuetype="const:string" type="showhide">
+							<param name="gravatar_default_external" type="yesno" default="1" label="Send Default to Gravatar" description="Select if the default image from CB should be sent to gravatar. This allows the CB default image to be displayed if an email address is supplied, but does not have a gravatar image. Note this requires the CB default image to be externally accessible." />
+						</if>
+						<param name="gravatar_full" type="text" default="200" size="5" label="Image Size" description="Input the size in pixels from 1 to 512 the width of the gravatar image (all images are squared)." />
+						<param name="gravatar_thumb" type="text" default="60" size="5" label="Thumbnail Size" description="Input the size in pixels from 1 to 512 the width of the gravatar thumbnail image (all images are squared)." />
+						<param name="gravatar_rating" type="list" default="g" label="Image Rating" description="Select the content rating of gravatar images. The rating includes it self and up to it self (e.g. PG includes also G images).">
+							<option value="g">G</option>
+							<option value="pg">PG</option>
+							<option value="r">R</option>
+							<option value="x">X</option>
+						</param>
+						<param name="altText" type="list" default="" label="Alt" description="Optionally change the display of image Alt text.">
+							<option value="">Normal CB Default</option>
+							<option value="1">None</option>
+							<option value="2">Custom</option>
+						</param>
+						<if name="altText" type="showhide" operator="=" value="2" valuetype="const:int">
+							<param name="altTextCustom" type="text" default="" label="Alt Text" description="Optionally supply substitution supported image Alt text." />
+						</if>
+						<param name="titleText" type="list" default="" label="Title" description="Optionally change the display of image Title text.">
+							<option value="">Normal CB Default</option>
+							<option value="1">None</option>
+							<option value="2">Custom</option>
+						</param>
+						<if name="titleText" type="showhide" operator="=" value="2" valuetype="const:int">
+							<param name="titleTextCustom" type="text" default="" label="Title Text" description="Optionally supply substitution supported image Title text." />
+						</if>
+						<param name="fieldPlaceholder" type="text" default="" label="Placeholder Value" description="Optionally input substitution supported html placeholder attribute value." />
+					</tabpanetab>
+					<tabpanetab label="Validation">
+						<param name="field_check_email" type="list" default="0" label="Enable Email checker" description="Choose if email address validity should be checked. This will check formatting, existing MX DNS records when possible, and that the corresponding email servers accept incomming emails to this address by SMTP when possible. Advanced checking will also check for email address availability, which could be a privacy concern as allows for email address guessing. For SMTP checking to function you must have a static ip address, the sites email address must be valid, and this server be listed in its authorized originators (SPF record). For DNS checking this server must be able to send DNS and SMTP packets (review firewall settings if enabled).">
+							<option value="0">No</option>
+							<option value="1">Yes, Simple</option>
+							<option value="2">Yes, Advanced</option>
+						</param>
+						<showview view="fieldStringValidateParams" mode="edit" type="view" />
+						<param name="fieldVerifyInput" type="yesno" default="0" label="Verify field input" description="Enable or disable additional verify input." yes="Enable" no="Disable" />
+						<if name="fieldVerifyInput" type="showhide" operator="=" value="1" valuetype="const:int">
+							<param name="verifyEmailTitle" type="text" default="_UE_VERIFY_SOMETHING" translated-default="Verify %s" label="Label for the verify email field" description="The default is _UE_VERIFY_SOMETHING (Verify %s) where %s is replaced by translated field title." />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<params>
+	</params>
+	<database>
+	</database>
+</cbinstall>

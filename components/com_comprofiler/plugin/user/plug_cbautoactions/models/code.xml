@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="code">Code</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_code" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Executes HTML, PHP, JS, jQuery, CSS, or Header code." />
+			<params name="code" type="params" repeat="true" label="" display="2lines">
+				<attributes>
+					<attribute name="mode">
+						<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+							<then>
+								<param name="" default="edit" translate-default="no" type="string" />
+							</then>
+							<else>
+								<param name="" default="show" translate-default="no" type="string" />
+							</else>
+						</if>
+					</attribute>
+				</attributes>
+				<param name="method" type="list" default="HTML" translate-default="no" label="Method" description="Select code execution method.">
+					<option value="HTML">HTML</option>
+					<option value="PHP">PHP</option>
+					<option value="JS">JS (Inline)</option>
+					<option value="JS_URL">JS (URL)</option>
+					<option value="JQUERY">jQuery</option>
+					<option value="CSS">CSS (Inline)</option>
+					<option value="CSS_URL">CSS (URL)</option>
+					<option value="HEADER">Header</option>
+					<option value="TITLE">Page Title</option>
+					<option value="PATHWAY">Pathway (Breadcrumb)</option>
+					<option value="MESSAGE">Message (Message Queue)</option>
+				</param>
+				<if name="method" nametype="param:string" operator="!in" value="JS_URL|*|CSS_URL" valuetype="const:string" type="showhide">
+					<param name="code" type="textarea" rows="20" label="Code" description="Input appropriate substitution supported code snippet based off method." cssclass="input-block" />
+				</if>
+				<if name="method" nametype="param:string" operator="=" value="JQUERY" valuetype="const:string" type="showhide">
+					<param name="pluginurls" type="textarea" rows="5" label="Plugin URLs" description="Optionally input substitution supported jQuery plugin urls to prepare (e.g. http://www.example.com/js/jquery.myplugin.js). Separate multiple jQuery plugin URLs with a linebreak. Filename will be used as the jQuery plugins name to avoid duplicate loading." cssclass="input-block" />
+					<param name="plugins" type="text" label="Plugins" description="Optionally input comma separate list of CB jQuery plugins to load (e.g. ui-all). Note plugins prepared by Plugin URLs are auto loaded and do not need to be specified here." size="50" />
+				</if>
+				<if name="method" nametype="param:string" operator="in" value="JS_URL|*|CSS_URL|*|PATHWAY" valuetype="const:string" type="showhide">
+					<param name="url" type="text" label="URL" description="Input appropriate substitution supported URL based off method." size="80" />
+				</if>
+				<if name="method" nametype="param:string" operator="=" value="MESSAGE" valuetype="const:string" type="showhide">
+					<param name="message_type" type="list" default="message" translate-default="no" label="Type" description="Select message display type. Type will determine the messages formatting.">
+						<option value="custom">Custom</option>
+						<option value="message">Message</option>
+						<option value="notice">Notice</option>
+						<option value="note">Note</option>
+						<option value="attention">Attention</option>
+						<option value="alert">Alert</option>
+						<option value="error">Error</option>
+						<option value="info">Info</option>
+						<option value="warning">Warning</option>
+						<option value="success">Success</option>
+					</param>
+					<if name="message_type" nametype="param:string" operator="=" value="custom" valuetype="const:string" type="showhide">
+						<param name="message_type_custom" type="text" label="Custom Type" description="Input substitution supported custom message type." />
+					</if>
+				</if>
+				<if name="method" nametype="param:string" operator="in" value="HTML|*|PHP1|*|PHP2|*|PHP" valuetype="const:string" type="showhide">
+					<param name="return" type="list" default="ECHO" translate-default="no" label="Return" description="Select how code execution results are displayed. If silent then code will execute, but will not display its results. Please note some triggers will not allow a display.">
+						<option value="SILENT">Silent</option>
+						<option value="RETURN">return</option>
+						<option value="ECHO">echo</option>
+						<option value="DUMP">var_dump</option>
+						<option value="PRINT">print</option>
+					</param>
+				</if>
+			</params>
+		</view>
+	</views>
+</cbxml>

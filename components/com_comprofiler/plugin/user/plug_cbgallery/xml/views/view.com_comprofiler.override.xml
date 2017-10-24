@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="galleryParams" type="params" ui="admin">
+			<tabpane name="gallery_override">
+				<tabpanetab label="Albums">
+					<param name="gallery_folders" type="xml:gallery_yesno" default="-1" label="Albums" description="Enable or disable display of albums." />
+					<tabpane name="gallery_override_albums">
+						<tabpanetab label="Display">
+							<param name="gallery_folders_width" type="int" default="" size="5" label="Box Width" description="Input the item box width in pixels. Leave blank for same as global (default: 200). Note you can have a minimum box width of 100." />
+						</tabpanetab>
+						<tabpanetab label="Create">
+							<param name="gallery_folders_create" type="xml:gallery_yesno" default="-1" label="Create" description="Enable or disable creation of albums." />
+							<param name="gallery_folders_create_access" type="viewaccesslevel" default="-1" managelevels="false" blanktext="Same as Global" label="Access" description="Select album create access. Access determines who can create albums. Moderators are exempt from this configuration." />
+							<param name="gallery_folders_create_limit" type="field" key="name" default="-1" blanktext="Same as Global" label="Limit" description="Select the field to use for album create limit. Moderators are exempt from this configuration.">
+								<option value="custom">Custom</option>
+							</param>
+							<if name="gallery_folders_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+								<param name="gallery_folders_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of albums each individual user is limited to creating. Leave blank for same as global (default: unlimited)." />
+							</if>
+							<param name="gallery_folders_create_approval" type="xml:gallery_yesno" default="-1" label="Approval" description="Enable or disable approval of albums. Approval requires a moderator to publish a album before it is made visible. Moderators are exempt from this configuration." />
+							<param name="gallery_folders_create_approval_notify" type="xml:gallery_yesno" default="-1" label="Notify" description="Enable or disable moderator notifications for albums needing approval." />
+							<param name="gallery_folders_create_captcha" type="xml:gallery_yesno" default="-1" label="Captcha" description="Enable or disable usage of captcha on albums. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." />
+						</tabpanetab>
+						<tabpanetab label="Paging">
+							<param name="gallery_folders_paging" type="xml:gallery_yesno" default="-1" label="Paging" description="Enable or disable usage of paging." />
+							<param name="gallery_folders_paging_limit" type="int" default="" size="5" label="Limit" description="Input page limit. Page limit determines how many albums are displayed per page. If paging is disabled this can still be used to limit the number of albums displayed. Leave blank for same as global (default: 15)." />
+							<param name="gallery_folders_search" type="xml:gallery_yesno" default="-1" label="Search" description="Enable or disable usage of search on albums." />
+							<param name="gallery_folders_orderby" type="xml:gallery_folder_orderby" default="-1" blanktext="Same as Global" label="Order By" description="Select how to order the albums." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+				<tabpanetab label="Media">
+					<tabpane name="gallery_override_media">
+						<tabpanetab label="Display">
+							<param name="gallery_items_width" type="int" default="" size="5" label="Box Width" description="Input the media box width in pixels. Leave blank for same as global (default: 200). Note you can have a minimum box width of 100." />
+						</tabpanetab>
+						<tabpanetab label="Create">
+							<param name="gallery_items_create" type="xml:gallery_yesno" default="-1" label="Create" description="Enable or disable creation of media." />
+							<param name="gallery_items_create_captcha" type="xml:gallery_yesno" default="-1" label="Captcha" description="Enable or disable usage of captcha on media. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration. Note has no affect on multi-upload pages." />
+							<param name="gallery_items_create_approval_notify" type="xml:gallery_yesno" default="-1" label="Notify" description="Enable or disable moderator notifications for media needing approval." />
+						</tabpanetab>
+						<tabpanetab label="Paging">
+							<param name="gallery_items_paging" type="xml:gallery_yesno" default="-1" label="Paging" description="Enable or disable usage of paging." />
+							<param name="gallery_items_paging_limit" type="int" default="" size="5" label="Limit" description="Input page limit. Page limit determines how many media are displayed per page. If paging is disabled this can still be used to limit the number of media displayed. Leave blank for same as global (default: 15)." />
+							<param name="gallery_items_search" type="xml:gallery_yesno" default="-1" label="Search" description="Enable or disable usage of search on media." />
+							<param name="gallery_items_orderby" type="xml:gallery_item_orderby" default="-1" blanktext="Same as Global" label="Order By" description="Select how to order the media." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+				<tabpanetab label="Photos">
+					<param name="gallery_photos" type="xml:gallery_yesno" default="-1" label="Photos" description="Enable or disable display of photos." />
+					<tabpane name="gallery_override_photos">
+						<tabpanetab label="Display">
+							<param name="photos_download" type="xml:gallery_yesno" default="-1" label="Download" description="Enable or disable downloading of photos." yes="Enable" no="Disable" />
+						</tabpanetab>
+						<tabpanetab label="Create">
+							<param name="gallery_photos_create" type="xml:gallery_yesno" default="-1" label="Create" description="Enable or disable creation of photos." />
+							<param name="gallery_photos_create_access" type="viewaccesslevel" default="-1" managelevels="false" blanktext="Same as Global" label="Access" description="Select photo create access. Access determines who can create photos. Moderators are exempt from this configuration." />
+							<param name="gallery_photos_create_limit" type="field" key="name" default="-1" blanktext="Same as Global" label="Limit" description="Select the field to use for photo create limit. Moderators are exempt from this configuration.">
+								<option value="custom">Custom</option>
+							</param>
+							<if name="gallery_photos_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+								<param name="gallery_photos_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of photos each individual user is limited to creating. Leave blank for same as global (default: unlimited)." />
+							</if>
+							<param name="gallery_photos_upload" type="xml:gallery_yesno" default="-1" label="Upload" description="Enable or disable uploading of photos." />
+							<param name="gallery_photos_link" type="xml:gallery_yesno" default="-1" label="Link" description="Enable or disable linking of photos. Linking allows photos to be displayed in the gallery from external sources." />
+							<param name="gallery_photos_create_approval" type="xml:gallery_yesno" default="-1" label="Approval" description="Enable or disable approval of photos. Approval requires a moderator to publish a photo before it is made visible. Moderators are exempt from this configuration." />
+						</tabpanetab>
+						<tabpanetab label="Validation">
+							<param name="gallery_photos_resample" type="xml:gallery_yesno" default="-1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+							<param name="gallery_photos_image_height" type="text" default="" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to. Leave blank for same as global (default: 640)." />
+							<param name="gallery_photos_image_width" type="text" default="" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to. Leave blank for same as global (default: 1280)." />
+							<param name="gallery_photos_thumbnail_height" type="text" default="" label="Maximum Thumbnail Height" description="Input the maximum thumbnail height in pixels that the image will be resized to. Leave blank for same as global (default: 320)." />
+							<param name="gallery_photos_thumbnail_width" type="text" default="" label="Maximum Thumbnail Width" description="Input the maximum thumbnail width in pixels that the image will be resized to. Leave blank for same as global (default: 640)." />
+							<param name="gallery_photos_maintain_aspect_ratio" type="xml:gallery_item_aspectratio" default="-1" blanktext="Same as Global" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+							<param name="gallery_photos_min_size" type="int" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+							<param name="gallery_photos_max_size" type="int" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+				<tabpanetab label="Videos">
+					<param name="gallery_videos" type="xml:gallery_yesno" default="-1" label="Videos" description="Enable or disable display of videos." />
+					<tabpane name="gallery_override_videos">
+						<tabpanetab label="Display">
+							<param name="videos_download" type="xml:gallery_yesno" default="-1" label="Download" description="Enable or disable downloading of videos." yes="Enable" no="Disable" />
+						</tabpanetab>
+						<tabpanetab label="Create">
+							<param name="gallery_videos_create" type="xml:gallery_yesno" default="-1" label="Create" description="Enable or disable creation of videos." />
+							<param name="gallery_videos_create_access" type="viewaccesslevel" default="-1" managelevels="false" blanktext="Same as Global" label="Access" description="Select video create access. Access determines who can create videos. Moderators are exempt from this configuration." />
+							<param name="gallery_videos_create_limit" type="field" key="name" default="-1" blanktext="Same as Global" label="Limit" description="Select the field to use for video create limit. Moderators are exempt from this configuration.">
+								<option value="custom">Custom</option>
+							</param>
+							<if name="gallery_videos_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+								<param name="gallery_videos_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of videos each individual user is limited to creating. Leave blank for same as global (default: unlimited)." />
+							</if>
+							<param name="gallery_videos_upload" type="xml:gallery_yesno" default="-1" label="Upload" description="Enable or disable uploading of videos." />
+							<param name="gallery_videos_link" type="xml:gallery_yesno" default="-1" label="Link" description="Enable or disable linking of videos. Linking allows videos to be displayed in the gallery from external sources." />
+							<param name="gallery_videos_create_approval" type="xml:gallery_yesno" default="-1" label="Approval" description="Enable or disable approval of videos. Approval requires a moderator to publish a video before it is made visible. Moderators are exempt from this configuration." />
+						</tabpanetab>
+						<tabpanetab label="Validation">
+							<param name="gallery_videos_min_size" type="int" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+							<param name="gallery_videos_max_size" type="int" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+				<tabpanetab label="Files">
+					<param name="gallery_files" type="xml:gallery_yesno" default="-1" label="Files" description="Enable or disable display of files." />
+					<tabpane name="gallery_override_files">
+						<tabpanetab label="Create">
+							<param name="gallery_files_create" type="xml:gallery_yesno" default="-1" label="Create" description="Enable or disable creation of files." />
+							<param name="gallery_files_create_access" type="viewaccesslevel" default="-1" managelevels="false" blanktext="Same as Global" label="Access" description="Select file create access. Access determines who can create files. Moderators are exempt from this configuration." />
+							<param name="gallery_files_create_limit" type="field" key="name" default="-1" blanktext="Same as Global" label="Limit" description="Select the field to use for file create limit. Moderators are exempt from this configuration.">
+								<option value="custom">Custom</option>
+							</param>
+							<if name="gallery_files_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+								<param name="gallery_files_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of files each individual user is limited to creating. Leave blank for same as global (default: unlimited)." />
+							</if>
+							<param name="gallery_files_upload" type="xml:gallery_yesno" default="-1" label="Upload" description="Enable or disable uploading of files." />
+							<param name="gallery_files_link" type="xml:gallery_yesno" default="-1" label="Link" description="Enable or disable linking of files. Linking allows files to be displayed in the gallery from external sources." />
+							<param name="gallery_files_create_approval" type="xml:gallery_yesno" default="-1" label="Approval" description="Enable or disable approval of files. Approval requires a moderator to publish a file before it is made visible. Moderators are exempt from this configuration." />
+						</tabpanetab>
+						<tabpanetab label="Validation">
+							<param name="gallery_files_extensions" type="text" default="" size="40" label="File Extensions" description="Input the allowed file extensions as a comma separated list. Leave blank for same as global (default: zip,rar,doc,pdf,txt,xls)." />
+							<param name="gallery_files_min_size" type="int" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+							<param name="gallery_files_max_size" type="int" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+				<tabpanetab label="Music">
+					<param name="gallery_music" type="xml:gallery_yesno" default="-1" label="Music" description="Enable or disable display of music." />
+					<tabpane name="gallery_override_music">
+						<tabpanetab label="Display">
+							<param name="music_download" type="xml:gallery_yesno" default="-1" label="Download" description="Enable or disable downloading of music." yes="Enable" no="Disable" />
+						</tabpanetab>
+						<tabpanetab label="Create">
+							<param name="gallery_music_create" type="xml:gallery_yesno" default="-1" label="Create" description="Enable or disable creation of music." />
+							<param name="gallery_music_create_access" type="viewaccesslevel" default="-1" managelevels="false" blanktext="Same as Global" label="Access" description="Select music create access. Access determines who can create music. Moderators are exempt from this configuration." />
+							<param name="gallery_music_create_limit" type="field" key="name" default="-1" blanktext="Same as Global" label="Limit" description="Select the field to use for music create limit. Moderators are exempt from this configuration.">
+								<option value="custom">Custom</option>
+							</param>
+							<if name="gallery_music_create_limit" operator="=" value="custom" valuetype="const:string" type="showhide">
+								<param name="gallery_music_create_limit_custom" type="int" default="" size="5" label="Custom Limit" description="Input number of music each individual user is limited to creating. Leave blank for same as global (default: unlimited)." />
+							</if>
+							<param name="gallery_music_upload" type="xml:gallery_yesno" default="-1" label="Upload" description="Enable or disable uploading of music." />
+							<param name="gallery_music_link" type="xml:gallery_yesno" default="-1" label="Link" description="Enable or disable linking of music. Linking allows music to be displayed in the gallery from external sources." />
+							<param name="gallery_music_create_approval" type="xml:gallery_yesno" default="-1" label="Approval" description="Enable or disable approval of music. Approval requires a moderator to publish a music before it is made visible. Moderators are exempt from this configuration." />
+						</tabpanetab>
+						<tabpanetab label="Validation">
+							<param name="gallery_music_min_size" type="int" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+							<param name="gallery_music_max_size" type="int" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+				<tabpanetab label="Thumbnails">
+					<param name="thumbnails" type="xml:gallery_yesno" default="-1" label="Thumbnails" description="Enable or disable display of custom thumbnails for videos, music, and files." yes="Enable" no="Disable" />
+					<tabpane name="gallery_thumbnails">
+						<tabpanetab label="Create">
+							<param name="thumbnails_upload" type="xml:gallery_yesno" default="-1" label="Upload" description="Enable or disable uploading of thumbnails." yes="Enable" no="Disable" />
+							<param name="thumbnails_link" type="xml:gallery_yesno" default="-1" label="Link" description="Enable or disable linking of thumbnails. Linking allows thumbnails to be displayed in the gallery from external sources." yes="Enable" no="Disable" />
+						</tabpanetab>
+						<tabpanetab label="Validation">
+							<param name="thumbnails_resample" type="xml:gallery_yesno" default="-1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick." />
+							<param name="thumbnails_image_height" type="text" default="" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to. Leave blank for same as global (default: 640)." />
+							<param name="thumbnails_image_width" type="text" default="" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to. Leave blank for same as global (default: 1280)." />
+							<param name="thumbnails_maintain_aspect_ratio" type="xml:gallery_item_aspectratio" default="-1" blanktext="Same as Global" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images." />
+							<param name="thumbnails_min_size" type="int" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+							<param name="thumbnails_max_size" type="int" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+			</tabpane>
+		</view>
+	</views>
+</cbxml>

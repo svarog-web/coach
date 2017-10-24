@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="reconfirmemails" request="view action" action="editPlugin showreconfirmemails" permission="core.admin">
+			<showview view="showreconfirmemails" mode="show" />
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="reconfirmemails" type="button" default="Emails" buttonclass="default" buttonsize="xsmall" link="cb_action:reconfirmemails" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editwhitelist" type="params" ui="admin" label="Whitelist" icon="shield" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:whitelistrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="type" type="xml:block_type" default="user" translate-default="no" label="Type" validate="required" description="Select the whitelist type. Type determines what value should be supplied." />
+			<param name="value" type="text" label="Value" size="40" validate="required" description="Input whitelist value in relation to the type. User type use the users user_id (e.g. 42). IP Address type use a full valid IP Address (e.g. 192.168.0.1). Email type use a fill valid email address (e.g. invalid@cb.invalid). Email Domain type use a full email address domain after @ (e.g. example.com)." />
+			<param name="reason" type="text" label="Reason" size="40" description="Optionally input whitelist reason. Note this is for administrative purposes only." />
+		</view>
+	</views>
+</cbxml>

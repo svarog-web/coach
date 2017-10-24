@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="reconfirmemails_status" base="checkmark" valuetype="string">
+			<option value="X" iconclass="times" textclass="danger">Cancelled</option>
+			<option value="P" iconclass="clock-o" textclass="warning">Pending</option>
+			<option value="A" iconclass="check" textclass="success">Active</option>
+		</type>
+	</types>
+</cbxml>

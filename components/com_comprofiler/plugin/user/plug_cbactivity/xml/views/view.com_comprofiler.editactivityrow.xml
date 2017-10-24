@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editactivity" type="params" ui="admin" label="Activity" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:activityrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="" type="group" label="" display="2lines">
+				<param name="title" type="text" label="Title %s" description="Optionally input the substitution supported title. Title is displayed to the right of the users name." size="80" />
+			</param>
+			<tabpane name="editpane">
+				<tabpanetab name="global" label="Global" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="message" type="textarea" rows="10" label="Message" display="2lines" description="Optionally input the substitution supported message. Message is displayed below the activity header." cssclass="input-block" />
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="type" type="text" onchange="evaluate" label="Type" display="2lines" size="25" validate="required" description="Input the type of activity." />
+								<param name="subtype" type="text" onchange="evaluate" label="Sub-Type" display="2lines" size="25" description="Optionally input the activity subtype." />
+								<param name="item" type="text" label="Item" display="2lines" size="5" description="Optionally input the activity item id." />
+								<param name="parent" type="text" label="Parent" display="2lines" size="5" description="Optionally input the activity parent id." />
+								<param name="user_id" type="user" label="Owner" display="2lines" size="5" validate="required" description="Input owner as single integer user_id." />
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="params" label="Parameters" description="">
+					<tabpane name="editactivityparams">
+						<tabpanetab name="activitycomments" label="Comments" description="">
+							<params name="params" type="params">
+								<params name="comments" type="params">
+									<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of comments for this activity entry. Note a stream that has comments disabled will not display comments regardless of this setting." yes="Enable" no="Disable" />
+									<if name="display" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+										<param name="source" type="xml:activity_source" default="1" label="Source" hideblanktext="always" description="Select the comments source. Source determines what the comments will be linked to. This allows comments to carry over from activity to activity or outside of activity it self. Object source can only be used if an Item is specified." />
+									</if>
+								</params>
+							</params>
+						</tabpanetab>
+						<if name="type" nametype="param:string" operator="=" value="status" valuetype="const:string" type="condition">
+							<then>
+								<tabpanetab name="activitytags" label="Tags" description="">
+									<params name="params" type="params">
+										<params name="tags" type="params">
+											<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of tags for this activity entry. Note a stream that has tags disabled will not display tags regardless of this setting." yes="Enable" no="Disable" />
+											<if name="display" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+												<param name="source" type="xml:activity_source" default="1" label="Source" hideblanktext="always" description="Select the tags source. Source determines what the tags will be linked to. This allows tags to carry over from activity to activity or outside of activity it self. Object source can only be used if an Item is specified." />
+											</if>
+										</params>
+									</params>
+								</tabpanetab>
+								<showview name="params" view="activityparamsaction" mandatory="false" formatting="tab">
+									<data name="params" type="sql:string" default="" />
+								</showview>
+								<showview name="params" view="activityparamslocation" mandatory="false" formatting="tab">
+									<data name="params" type="sql:string" default="" />
+								</showview>
+								<showview name="params" view="activityparamsstatus" mandatory="false" formatting="tab">
+									<data name="params" type="sql:string" default="" />
+								</showview>
+								<showview name="params" path="views/view[@name=&quot;activityparamsstatus&quot;]" action="activity" type="plugins" formatting="tab">
+									<data name="params" type="sql:string" default="" />
+								</showview>
+							</then>
+							<else>
+								<if name="subtype" nametype="param:string" operator="=" value="status" valuetype="const:string" type="condition">
+									<then>
+										<tabpanetab name="activitytags" label="Tags" description="">
+											<params name="params" type="params">
+												<params name="tags" type="params">
+													<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of tags for this activity entry. Note a stream that has tags disabled will not display tags regardless of this setting." yes="Enable" no="Disable" />
+													<if name="display" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+														<param name="source" type="xml:activity_source" default="1" label="Source" hideblanktext="always" description="Select the tags source. Source determines what the tags will be linked to. This allows tags to carry over from activity to activity or outside of activity it self. Object source can only be used if an Item is specified." />
+													</if>
+												</params>
+											</params>
+										</tabpanetab>
+										<showview name="params" view="activityparamsaction" mandatory="false" formatting="tab">
+											<data name="params" type="sql:string" default="" />
+										</showview>
+										<showview name="params" view="activityparamslocation" mandatory="false" formatting="tab">
+											<data name="params" type="sql:string" default="" />
+										</showview>
+										<showview name="params" view="activityparamsstatus" mandatory="false" formatting="tab">
+											<data name="params" type="sql:string" default="" />
+										</showview>
+										<showview name="params" path="views/view[@name=&quot;activityparamsstatus&quot;]" action="activity" type="plugins" formatting="tab">
+											<data name="params" type="sql:string" default="" />
+										</showview>
+									</then>
+									<else>
+										<showview name="params" view="activityparams{raw:type}" mandatory="false" formatting="tab">
+											<data name="params" type="sql:string" default="" />
+										</showview>
+										<showview name="params" path="views/view[@name=&quot;activityparams{raw:type}&quot;]" action="activity" type="plugins" formatting="tab">
+											<data name="params" type="sql:string" default="" />
+										</showview>
+									</else>
+								</if>
+							</else>
+						</if>
+						<tabpanetab name="activitylinks" label="Links" description="">
+							<params name="params" type="params">
+								<params name="links" type="params" repeat="true" repeatordering="false" label="" display="2lines">
+									<param name="type" type="xml:activity_link_type" label="Type" blanktext="- Select Type -" description="Select the type of this link. Type determines how the link will display." />
+									<if name="type" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+										<param name="url" type="text" label="URL" size="60" validate="required" description="Input the link URL for this link." />
+										<if name="url" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+											<param name="internal" type="yesno" default="0" label="Internal" description="Enable or disable internal link. Internal links will suppress the display of the URL." yes="Enable" no="Disable" />
+											<if name="internal" nametype="param:int" operator="!=" value="1" valuetype="const:int" type="showhide">
+												<param name="text" type="text" label="Text" size="60" description="Optionally input text for this link. This will be displayed instead of the URL." />
+											</if>
+											<param name="title" type="text" label="Title" size="60" description="Optionally input a title for this link." />
+											<param name="description" type="textarea" label="Description" rows="3" cols="65" description="Optionally input a description for this link." />
+											<if name="type" nametype="param:string" operator="=" value="url" valuetype="const:string" type="showhide">
+												<param name="thumbnail" type="yesno" default="1" label="Thumbnail" description="Enable or disable display of URL thumbnail." yes="Enable" no="Disable" />
+											</if>
+											<if name="type" nametype="param:string" operator="=" value="custom" valuetype="const:string" type="showhide">
+												<fieldset name="mediadata1" label="Media">
+													<params name="media" type="params">
+														<param name="custom" type="textarea" label="Custom" rows="3" cols="65" description="Optionally input a custom media display." />
+													</params>
+												</fieldset>
+											</if>
+											<if name="type" nametype="param:string" operator="!=" value="custom" valuetype="const:string" type="showhide">
+												<fieldset name="mediadata2" label="Media">
+													<params name="media" type="params">
+														<param name="url" type="text" label="URL" size="60" description="Input the media URL (e.g. URL to an image, video, or audio file)" />
+														<if name="url" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+															<param name="mimetype" type="text" label="MimeType" size="30" description="Input the media mimetype (e.g. image/jpeg, video/youtube). This is necessary for video and audio media." />
+															<param name="extension" type="text" label="Extension" size="30" description="Input the media extension (e.g. jpg)." />
+														</if>
+													</params>
+												</fieldset>
+											</if>
+										</if>
+									</if>
+								</params>
+							</params>
+						</tabpanetab>
+						<showview name="params" view="activityparams" mandatory="false" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+						<showview name="params" path="views/view[@name=&quot;activityparams&quot;]" action="activity" type="plugins" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+					</tabpane>
+				</tabpanetab>
+			</tabpane>
+		</view>
+		<view name="activityparamsaction" type="params" ui="admin" label="Action">
+			<params name="action" type="params">
+				<param name="id" type="list" label="Action" blanktext="- Select Action -" description="Optionally select an action for this status.">
+					<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_activity_actions" key="id">
+						<rows>
+							<field name="id" as="value" />
+							<field name="value" as="text" />
+						</rows>
+						<orderby>
+							<field name="ordering" ordering="ASC" />
+						</orderby>
+					</data>
+				</param>
+				<if name="id" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+					<param name="message" type="text" label="Message" size="60" validate="required" description="Input a message for this action." />
+					<param name="emote" type="list" label="Emote" blanktext="- Select Emote -" description="Optionally select the emote for this action.">
+						<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_activity_emotes" key="id">
+							<rows>
+								<field name="id" as="value" />
+								<field name="value" as="text" />
+							</rows>
+							<orderby>
+								<field name="ordering" ordering="ASC" />
+							</orderby>
+						</data>
+					</param>
+				</if>
+			</params>
+		</view>
+		<view name="activityparamslocation" type="params" ui="admin" label="Location">
+			<params name="location" type="params">
+				<param name="id" type="list" label="Location" blanktext="- Select Location -" description="Optionally select a location for this status.">
+					<data name="" type="sql:multiplerows" table="#__comprofiler_plugin_activity_locations" key="id">
+						<rows>
+							<field name="id" as="value" />
+							<field name="value" as="text" />
+						</rows>
+						<orderby>
+							<field name="ordering" ordering="ASC" />
+						</orderby>
+					</data>
+				</param>
+				<if name="id" nametype="param:string" operator="!=" value="" valuetype="const:string" type="showhide">
+					<param name="place" type="text" label="Place" size="60" validate="required" description="Input the place for this location." />
+					<param name="address" type="text" label="Address" size="60" description="Optionally input the address for this location." />
+				</if>
+			</params>
+		</view>
+	</views>
+</cbxml>

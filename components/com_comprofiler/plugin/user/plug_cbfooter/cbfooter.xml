@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="2.0" type="plugin" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../validation/ahawow.xsd">
+	<name>CB Footer</name>
+	<author>CB Team</author>
+	<creationDate>2014-10-08</creationDate>
+	<copyright>(C) 2004-2014 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>cbteam@joomlapolis.com</authorEmail>
+	<description>Thank you for supporting Community Builder free open-source development! This plugin allows you to adjust setting for the CB Footer in Community Builder Configuration - Integrations tab</description>
+	<version>2.0</version>
+	<release>1.0.0</release>
+	<files>
+		<filename plugin="cbfooter">cbfooter.php</filename>
+		<filename>index.html</filename>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+	</files>
+	<params>
+		<!-- For language files pick-up: Those language strings must be identical in CB in administrator/components/com_comprofiler/xmlcb/views/view.com_comprofiler.editconfig.xml -->
+		<param name="" type="spacer" default="SETTING_LOCATED_IN_CB_CONFIG_INTEGRATION_TAB" translated-default="The setting is located in Community Builder Configuration, Integrations tab" label="SETTINGS" translated-label="Settings" />
+	</params>
+	<database version="1" />
+</cbinstall>

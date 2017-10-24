@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showviews" type="params" ui="admin" label="Views" icon="list" viewformatting="none">
+			<tablebrowser name="viewsbrowser" table="#__comprofiler_views" class="\CB\Database\Table\UserViewTable">
+				<toolbarmenu>
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Views..." size="30">
+					<field name="user">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="profile_id" />
+					</field>
+					<field name="viewer">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="viewer_id" />
+					</field>
+					<field name="lastip" valuetype="const:string" />
+					<field name="profile_id" valuetype="const:int" />
+					<field name="viewer_id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="user" value="username" valuetype="sql:string" type="string" label="" blanktext="User">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="profile_id" />
+					</filter>
+					<filter name="viewer" value="username" valuetype="sql:string" type="string" label="" blanktext="Viewer">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="viewer_id" />
+					</filter>
+					<filter name="lastip" valuetype="sql:string" type="string" label="" blanktext="IP Address" />
+					<filter name="from" value="lastview" valuetype="sql:string" type="datetime" operator="&gt;=" view="fromto" />
+					<filter name="to" value="lastview" valuetype="sql:string" type="datetime" operator="&lt;=" view="fromto" />
+					<view name="fromto" type="params">
+						<fieldset name="viewedrange" label="Viewed">
+							<param name="filter_from" type="datetime" default="" label="From" />
+							<param name="filter_to" type="datetime" default="" label="To" />
+						</fieldset>
+					</view>
+				</filters>
+				<orderby>
+					<ordergroup name="lastview_asc" label="Viewed ascending">
+						<field name="lastview" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="lastview_desc" label="Viewed descending" default="true" translate-default="no">
+						<field name="lastview" ordering="DESC" />
+					</ordergroup>
+					<ordergroup name="user_asc" label="User ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="profile_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="user_desc" label="User descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="profile_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="viewer_asc" label="Viewer ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="viewer_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="viewer_desc" label="Viewer descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="viewer_id" />
+						</field>
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="user" type="string" align="left" label="User" allowordering="ascending,descending">
+							<data name="profile_id" type="sql:field" />
+							<data name="username" as="user" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="profile_id" />
+						</field>
+						<field name="viewer" type="string" align="left" label="Viewer" allowordering="ascending,descending">
+							<data name="viewer_id" type="sql:field" />
+							<data name="username" as="viewer" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="viewer_id" />
+						</field>
+						<field name="lastip" type="string" width="15%" align="center" label="IP Address" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="lastview" type="datetime" width="15%" align="center" label="Viewed" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="viewscount" type="int" width="10%" align="center" label="Views" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="k2">K2</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_k2" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Synchronize user accounts to K2." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionK2" method="installed" />
+				</left>
+				<then>
+					<params name="k2" type="params" label="" display="2lines">
+						<param name="mode" type="list" default="1" label="Mode" description="Select k2 mode. Mode determines what type of action is performed automatically.">
+							<option value="0">Delete</option>
+							<option value="1">Synchronize</option>
+						</param>
+						<if name="mode" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="group" type="list" hideblanktext="always" label="User Group" description="Select user group to synchronize user to.">
+								<data name="" type="sql:multiplerows" table="#__k2_user_groups" key="id">
+									<rows>
+										<field name="id" as="value" />
+										<field name="name" as="text" />
+									</rows>
+								</data>
+							</param>
+							<param name="gender" type="text" label="Gender" description="Optionally input substitution supported gender. Supported values are Male = m and Female = f." size="15" />
+							<param name="description" type="textarea" rows="5" label="Description" description="Optionally input substitution and HTML supported description." cssclass="input-block" />
+							<param name="url" type="text" label="URL" description="Optionally input substitution supported url." size="50" />
+							<param name="notes" type="textarea" rows="5" label="Notes" description="Optionally input substitution supported notes." cssclass="input-block" />
+						</if>
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="K2 installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

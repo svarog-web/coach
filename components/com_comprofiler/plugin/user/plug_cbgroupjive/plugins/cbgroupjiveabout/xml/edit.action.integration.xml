@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjgroupintegrations" type="params" ui="admin" label="About">
+			<param name="about_content" type="htmlarea" width="100%" height="400px" label="Content" description="Optionally input a detailed description about this group." />
+		</view>
+	</views>
+</cbxml>

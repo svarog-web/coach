@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>CB Query Field</name>
+	<author>Krileon</author>
+	<creationDate>2016-06-07</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>A cb fields plugin to add an Query, Query Multi-Checkbox, Query Select, Query Multi-Select, and Query Radio field type to available cb field types in addition to Query Validation for all fieldtypes.</description>
+	<version>2.0.13</version>
+	<release>5.0.4+build.2016.06.07.01.36.22.f15cd6cb1</release>
+	<files>
+		<filename plugin="cbqueryfield">cbqueryfield.php</filename>
+		<filename>index.html</filename>
+		<foldername>js</foldername>
+		<foldername>language</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<fieldsparams>
+		<field type="other_types" label="Field query validation preferences">
+			<params>
+				<param name="qry_validate" type="list" default="0" label="Query Validation" description="Enable or disable query validation.">
+					<option value="0">Disabled</option>
+					<option value="1">Enabled</option>
+				</param>
+				<if name="qry_validate" type="showhide" operator="=" value="1" valuetype="const:int">
+					<param name="qry_validate_query" type="textarea" rows="10" default="" label="Query" description="Input substitution supported Query. Supply [value] substitution for user input field value." cssclass="input-block">
+						<attributes>
+							<attribute name="mode">
+								<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+									<then>
+										<param name="" default="edit" translate-default="no" type="string" />
+									</then>
+									<else>
+										<param name="" default="show" translate-default="no" type="string" />
+									</else>
+								</if>
+							</attribute>
+						</attributes>
+					</param>
+					<param name="qry_validate_mode" type="list" default="0" label="Mode" description="Select mode of query. The mode will determine what database the query is performed on." >
+						<option value="0">Internal</option>
+						<option value="1">External</option>
+					</param>
+					<if name="qry_validate_mode" type="showhide" operator="=" value="1" valuetype="const:int">
+						<param name="qry_validate_host" type="text" default="" label="Host" description="" />
+						<param name="qry_validate_username" type="text" default="" label="Username" description="" />
+						<param name="qry_validate_password" type="text" default="" label="Password" description="" />
+						<param name="qry_validate_database" type="text" default="" label="Database" description="" />
+						<param name="qry_validate_charset" type="text" default="" label="Charset" description="" />
+						<param name="qry_validate_prefix" type="text" default="" label="Table Prefix" description="" />
+					</if>
+					<param name="qry_validate_on" type="list" default="0" label="Validate On" description="Select if field should validate on empty query results (a result of 0 rows) or on successful query results (a result of at least 1 row). If the query returns only 1 result then the value of the result will be used." >
+						<option value="0">Empty Results</option>
+						<option value="1">Successful Results</option>
+					</param>
+					<param name="qry_validate_success" type="text" default="" label="Success Message" description="Input message to display on successful validation. Supports [value] and [title] substitutions only." />
+					<param name="qry_validate_error" type="text" default="Not a valid input." label="Error Message" description="Input message to display on failed validation. Supports [value] and [title] substitutions only." />
+					<param name="qry_validate_ajax" type="list" default="0" label="Ajax Validation" description="Enable or disable ajax query validation." >
+						<option value="0">Disabled</option>
+						<option value="1">Enabled</option>
+					</param>
+				</if>
+			</params>
+		</field>
+	</fieldsparams>
+	<fieldtypes>
+		<field type="query" label="Query" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Query">
+						<showview view="fieldQueryParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="qry_output" type="list" default="0" label="Output" description="Select how the query results are output. This is useful if you want to display multiple results. Template output will send the raw query results to a PHP template that can be used to custom parse and output the query results." >
+							<option value="0">Single Row</option>
+							<option value="1">Multiple Rows</option>
+							<option value="2">Template</option>
+						</param>
+						<if name="qry_output" type="showhide" operator="=" value="0" valuetype="const:int">
+							<param name="qry_columns" type="list" default="0" label="Columns" description="Select if only a single SELECT column should be displayed (often first) or if multiple should be displayed." >
+								<option value="0">Single Column</option>
+								<option value="1">Multiple Columns</option>
+							</param>
+							<if name="qry_columns" type="showhide" operator="=" value="1" valuetype="const:int">
+								<param name="qry_display" type="list" default="0" label="Display" description="Select how column values should be displayed." >
+									<option value="0">Delimiter</option>
+									<option value="1">Custom</option>
+								</param>
+								<if name="qry_display" type="showhide" operator="=" value="0" valuetype="const:int">
+									<param name="qry_delimiter" type="list" default="0" label="Delimiter" description="Select delimiter to seperate column values" >
+										<option value="0">Comma</option>
+										<option value="1">Dash</option>
+										<option value="2">Space</option>
+										<option value="3">Linebreak</option>
+										<option value="4">Bulletin List</option>
+										<option value="5">Numbered List</option>
+										<option value="6">Div</option>
+										<option value="7">Span</option>
+										<option value="8">Paragraph</option>
+									</param>
+								</if>
+								<if name="qry_display" type="showhide" operator="=" value="1" valuetype="const:int">
+									<param name="qry_custom" type="textarea" rows="10" default="" label="Custom" description="Input substitution supported row display. Query SELECT columns can be used as substitutions (e.g. [column_username])." cssclass="input-block" />
+								</if>
+							</if>
+						</if>
+						<if name="qry_output" type="showhide" operator="=" value="1" valuetype="const:int">
+							<param name="qry_header" type="textarea" rows="5" default="" label="Header" description="Input substitution supported header for results display. This can be used to add surrounding tags such as table or a div to the rows." cssclass="input-block" />
+							<param name="qry_row" type="textarea" rows="5" default="" label="Row" description="Input substitution supported row display. Query SELECT columns can be used as substitutions (e.g. [column_username])." cssclass="input-block" />
+							<param name="qry_footer" type="textarea" rows="5" default="" label="Footer" description="Input substitution supported footer for results display. This can be used to close surrounding tags such as table or a div to the rows." cssclass="input-block" />
+						</if>
+						<if name="qry_output" type="showhide" operator="=" value="2" valuetype="const:int">
+							<param name="qry_template" type="folderlist" default="default" label="Template" description="Select template to be used for this query display. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbqueryfield/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbqueryfield/templates/" />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="querymulticheckbox" label="Query Check Box (Multiple)" unique="false">
+			<data name="" nametype="namesuffix" type="sql:mediumtext||sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Query">
+						<showview view="fieldQueryParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Options">
+						<showview view="fieldQueryOptionParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="field_display_style" type="list" default="0" label="Display on profiles as" description="How to display the values of this multi-valued field">
+							<option value="0">Comma ","-separated line</option>
+							<option value="1">Unnumbered list "ul"</option>
+							<option value="2">Ordered list "ol"</option>
+						</param>
+						<if name="field_display_style" type="showhide" operator="&gt;" value="0" valuetype="const:int">
+							<param name="field_display_class" type="text" size="40" default="" label="CSS class of the list" description="Enter the name of the list class (optional) for OL or UL tag" />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="querymultiselect" label="Query Drop Down (Multi-select)" unique="false">
+			<data name="" nametype="namesuffix" type="sql:mediumtext||sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Query">
+						<showview view="fieldQueryParams" mode="edit" type="view" />
+						<param name="qry_update" type="field" multiple="true" size="10" default="" label="Update On" blanktext="- Select Fields -" description="Optionally select fields to trigger the options for this field to update." />
+					</tabpanetab>
+					<tabpanetab label="Options">
+						<showview view="fieldQueryOptionParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="field_display_style" type="list" default="0" label="Display on profiles as" description="How to display the values of this multi-valued field">
+							<option value="0">Comma ","-separated line</option>
+							<option value="1">Unnumbered list "ul"</option>
+							<option value="2">Ordered list "ol"</option>
+						</param>
+						<if name="field_display_style" type="showhide" operator="&gt;" value="0" valuetype="const:int">
+							<param name="field_display_class" type="text" size="40" default="" label="CSS class of the list" description="Enter the name of the list class (optional) for OL or UL tag" />
+						</if>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="queryselect" label="Query Drop Down (Single Select)" unique="false">
+			<data name="" nametype="namesuffix" type="sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Query">
+						<showview view="fieldQueryParams" mode="edit" type="view" />
+						<param name="qry_update" type="field" multiple="true" size="10" default="" label="Update On" blanktext="- Select Fields -" description="Optionally select fields to trigger the options for this field to update." />
+					</tabpanetab>
+					<tabpanetab label="Options">
+						<showview view="fieldQueryOptionParams" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="queryradio" label="Query Radio Buttons" unique="false">
+			<data name="" nametype="namesuffix" type="sql:text" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Query">
+						<showview view="fieldQueryParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Options">
+						<showview view="fieldQueryOptionParams" mode="edit" type="view" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<params>
+	</params>
+	<database>
+	</database>
+</cbinstall>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="redirect">Redirect</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_redirect" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Perform page redirects with or without messages." />
+			<params name="redirect" type="params" label="" display="2lines">
+				<param name="url" type="text" label="URL" description="Input substitution supported URL (e.g. index.php?option=com_comprofiler). Optionally specify return to send the user back to the page the trigger executed on. Optionally specify goback to perform a browser history back and optionally include a positive digit after goback to attempt to navigate back that number of pages (e.g. goback3). Optionally specify reload to perform a browser page refresh. Note going back or reloading uses Javascript, which requires the trigger to have HTML output in order to function." size="80" validate="required" />
+				<if name="url" nametype="param:string" operator="!regexp" value="^(goback\d*|reload)$" valuetype="const:string" type="showhide">
+					<param name="message" type="textarea" rows="5" label="Message" description="Input substitution supported message to be included with redirect followed by selecting message type (e.g. Welcome [username]!). Message type determines display of message; format is template dependant and not guaranteed." cssclass="input-block" />
+					<param name="type" type="list" default="message" translate-default="no" label="Type" description="Select message display type. Type will determine the messages formatting.">
+						<option value="custom">Custom</option>
+						<option value="message">Message</option>
+						<option value="notice">Notice</option>
+						<option value="note">Note</option>
+						<option value="attention">Attention</option>
+						<option value="alert">Alert</option>
+						<option value="error">Error</option>
+						<option value="info">Info</option>
+						<option value="warning">Warning</option>
+						<option value="success">Success</option>
+					</param>
+					<if name="type" nametype="param:string" operator="=" value="custom" valuetype="const:string" type="showhide">
+						<param name="custom_type" type="text" label="Custom Type" description="Input substitution supported custom redirect type." />
+					</if>
+				</if>
+			</params>
+		</view>
+	</views>
+</cbxml>

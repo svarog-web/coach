@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="email">Email</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_email" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Sends customized emails." />
+			<params name="email" type="params" repeat="true" label="" display="2lines">
+				<param name="to" type="text" label="To" description="Input substitution supported to address or user_id (e.g. [email], [user_id]). Separate multiple addresses or user_ids with a comma (e.g. [email],bob@example.com). Additionally use [cb_moderators] to add all CB Moderators as recipients that are configured to receive moderator emails. Leave blank to use trigger user for the to email address." size="80" />
+				<param name="subject" type="text" label="Subject" description="Input substitution supported subject (e.g. [name])." size="80" validate="required" />
+				<param name="body" type="textarea" rows="20" label="Body" description="Input substitution supported body." cssclass="input-block" validate="required" />
+				<param name="mode" type="list" default="1" label="Mode" description="Select email mode. Mode determines how email body is processed.">
+					<option value="0">Text</option>
+					<option value="1">HTML</option>
+				</param>
+				<param name="cc" type="text" label="CC" description="Optionally input substitution supported cc address or user_id (e.g. [email], [user_id]). Separate multiple addresses or user_ids with a comma (e.g. [email],bob@example.com)." size="80" />
+				<param name="bcc" type="text" label="BCC" description="Optionally input substitution supported bcc address or user_id (e.g. [email], [user_id]). Separate multiple addresses or user_ids with a comma (e.g. [email],bob@example.com)." size="80" />
+				<param name="attachment" type="text" label="Attachment" description="Optionally input substitution supported attachment absolute URL (e.g. /home/user/www/images/logo.png). Separate multiple attachments with a comma (e.g. /home/user/www/images/logo.png,/home/user/www/license.pdf). Note you must supply the path from hosting root." size="80" />
+				<param name="replyto_address" type="text" label="Reply To Address" description="Optionally input substitution supported reply to address (e.g. bob@example.com). Separate multiple addresses with a comma (e.g. [email],bob@example.com)." size="50" />
+				<param name="replyto_name" type="text" label="Reply To Name" description="Optionally input substitution supported reply to name (e.g. bob). Separate multiple names with a comma (e.g. [name],bob)." size="50" />
+				<param name="from_address" type="text" label="From Address" description="Optionally input substitution supported from address (e.g. bob@example.com)." size="50" />
+				<param name="from_name" type="text" label="From Name" description="Optionally input substitution supported from name (e.g. bob)." size="50" />
+				<param name="mailer" type="list" default="" label="Mailer" description="Optionally select a different mailer to send the email.">
+					<option value="">Default CB</option>
+					<option value="mail">PHP Mail</option>
+					<option value="sendmail">Sendmail</option>
+					<option value="smtp">SMTP</option>
+				</param>
+				<if name="mailer" nametype="param:string" operator="=" value="sendmail" valuetype="const:string" type="showhide">
+					<param name="mailer_sendmail" type="text" label="Sendmail Path" description="Enter the path to the sendmail program directory on the host server." size="80" />
+				</if>
+				<if name="mailer" nametype="param:string" operator="=" value="smtp" valuetype="const:string" type="showhide">
+					<param name="mailer_smtpauth" type="yesno" label="SMTP Authentication" description="Select Yes if your SMTP Host requires SMTP Authentication." />
+					<param name="mailer_smtpsecure" type="list" default="none" translate-default="no" label="SMTP Security" description="Select the security model that your SMTP server uses.">
+						<option value="none">None</option>
+						<option value="ssl">SSL</option>
+						<option value="tls">TLS</option>
+					</param>
+					<param name="mailer_smtpuser" type="text" label="SMTP Username" description="Enter the username for access to the SMTP host." />
+					<param name="mailer_smtppass" type="text" label="SMTP Password" description="Enter the password for the SMTP host." />
+					<param name="mailer_smtphost" type="text" label="SMTP Host" description="Enter the name of the SMTP host." />
+					<param name="mailer_smtpport" type="text" label="SMTP Port" description="Enter the port number of your SMTP server. Use 25 for most unsecure servers and 465 for most secure servers." size="15" />
+				</if>
+			</params>
+		</view>
+	</views>
+</cbxml>

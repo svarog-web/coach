@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="cbAntiSpamTabBlocks" type="params" ui="admin">
+			<param name="tab_block_user" type="yesno" default="1" label="Block User" description="Enable or disable blocks tab button to quick block a User. Moderators can not be blocked." yes="Enable" no="Disable" />
+			<param name="tab_block_ip" type="yesno" default="1" label="Block IP Address" description="Enable or disable blocks tab button to quick block a users IP Address. Moderators can not be blocked." yes="Enable" no="Disable" />
+			<param name="tab_block_email" type="yesno" default="0" label="Block Email Address" description="Enable or disable blocks tab button to quick block a users Email Address. Moderators can not be blocked." yes="Enable" no="Disable" />
+			<param name="tab_block_domain" type="yesno" default="0" label="Block Email Domain" description="Enable or disable blocks tab button to quick block a users Email Domain. Moderators can not be blocked." yes="Enable" no="Disable" />
+		</view>
+		<view name="cbAntiSpamTabWhitelists" type="params" ui="admin">
+			<param name="tab_whitelist_user" type="yesno" default="1" label="Whitelist User" description="Enable or disable whitelists tab button to quick whitelist a User." yes="Enable" no="Disable" />
+			<param name="tab_whitelist_ip" type="yesno" default="1" label="Whitelist IP Address" description="Enable or disable whitelists tab button to quick whitelist a users IP Address." yes="Enable" no="Disable" />
+			<param name="tab_whitelist_email" type="yesno" default="0" label="Whitelist Email Address" description="Enable or disable whitelists tab button to quick whitelist a users Email Address." yes="Enable" no="Disable" />
+			<param name="tab_whitelist_domain" type="yesno" default="0" label="Whitelist Email Domain" description="Enable or disable whitelists tab button to quick whitelist a users Email Domain." yes="Enable" no="Disable" />
+		</view>
+		<view name="cbAntiSpamTabPaging" type="params" ui="admin">
+			<param name="tab_paging" type="yesno" default="1" label="Paging" description="Enable or disable usage of paging on tab blocks." yes="Enable" no="Disable" />
+			<if name="tab_paging" type="showhide" operator="=" value="1" valuetype="const:int">
+				<param name="tab_limit" type="int" default="15" size="5" label="Page Limit" description="Input page limit on tab blocks. Page limit determines how many blocks are displayed per page." />
+			</if>
+		</view>
+	</views>
+</cbxml>

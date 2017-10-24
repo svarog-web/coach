@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjwall" type="params" ui="admin" label="Post" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjwallrows" label="Cancel" />
+			</toolbarmenu>
+			<grid fluid="true">
+				<gridcol size="9">
+					<gridrow>
+						<param name="post" type="textarea" rows="15" label="Post" display="2lines" validate="required" description="Input the post to share." cssclass="input-block" />
+					</gridrow>
+				</gridcol>
+				<gridcol size="3">
+					<gridrow>
+						<param name="published" type="xml:groupjive_published" default="1" label="Publish" display="2lines" description="Select publish state of this post. Unpublished posts will not be visible to the public." />
+						<param name="group" type="list" label="Group" blanktext="" display="2lines" description="Select group the post is for.">
+							<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getGroupOptions" />
+						</param>
+						<param name="reply" type="list" label="Parent" blanktext="None" display="2lines" description="Select reply the post is for.">
+							<data name="reply" type="sql:multiplerows" table="#__groupjive_plugin_wall" key="id">
+								<rows>
+									<field name="id" as="value" />
+									<field name="post" as="text" type="firstwords" />
+								</rows>
+								<where>
+									<column name="reply" operator="=" value="0" type="sql:field" valuetype="const:int" />
+								</where>
+								<orderby>
+									<field name="date" ordering="DESC" />
+								</orderby>
+							</data>
+						</param>
+						<param name="user_id" type="user" label="Owner" size="5" validate="required" display="2lines" description="Input the post owner id. Post owner determines the creator of the post specified as User ID." />
+					</gridrow>
+				</gridcol>
+			</grid>
+		</view>
+	</views>
+</cbxml>

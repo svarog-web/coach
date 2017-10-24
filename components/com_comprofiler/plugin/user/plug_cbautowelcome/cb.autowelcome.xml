@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.3" type="plugin" group="user">
+	<name>CB Auto Welcome</name>
+	<author>Nick A. (aka nant)</author>
+	<creationDate>2016-03-17</creationDate>
+	<copyright>(C) 2006-2016 joomlapolis.com</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>nant@joomlapolis.com</authorEmail>
+	<version>2.0.13</version>
+	<release>2.0.2</release>
+	<description>
+		Sends each newly registered and approved user personalized welcome message(s) via CB supported PMS component and/or Email.
+		Can also automatically create a connection request to or from one or more pre-specified key users.
+	</description>
+	<files>
+		<filename plugin="cb.autowelcome">cb.autowelcome.php</filename>
+		<filename>index.html</filename>
+		<foldername>language</foldername>
+	</files>
+	<params>
+		<param name="awAutoMessageEnable" type="yesno" default="1" label="Automatic Welcome Message" description="Specify Yes to automatically send a welcome message each new member.">
+			        <option value="0">No</option>
+			        <option value="1">Yes</option>
+		</param>
+		<param name="awMessageMethod" type="radio" default="0" label="Notification Method" description="Select the appropriate notification method to use.">
+			        <option value="0">PMS only</option>
+			        <option value="1">Email only</option>
+			        <option value="2">PMS and Email</option>
+		</param>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="awPMSMessageSubject" 
+			type="text" 
+			default="Welcome Aboard [Name]!" 
+			label="PMS Welcome Subject" 
+			description="Welcome message subject to use in the PMS delivery. You can use [cbfieldnames] and substitutions just like in CB."/>
+		<param name="awPMSMessageBody" 
+			type="textarea" 
+			cols="30" 
+			rows="5" 
+			default="Hello [NAME], Welcome to our site!" 
+			label="PMS Welcome Body" 
+			description="Body of Welcome PMS message to send. You can use [cbfieldnames] and substitutions just like in CB."/>
+		<param name="awPMSFromUserId" 
+			type="text" 
+			default="62" 
+			label="PMS Sender Id" 
+			description="The userid of the sender to be used in case of PM systems (default 62 for admin user)."/>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="awEMAILMessageSubject" 
+			type="text" 
+			default="Welcome Aboard [NAME]!" 
+			label="EMAIL Welcome Subject" 
+			description="Welcome message subject to use in auto-welcome email. You can use [cbfieldnames] and substitutions just like in CB."/>
+		<param name="awEMAILMessageBody" 
+			type="textarea" 
+			cols="30" 
+			rows="5" 
+			default="Hello [NAME], Welcome to our site!" 
+			label="EMAIL Welcome Body" 
+			description="Body of auto-welcome email message. You can use [cbfieldnames] and substitutions just like in CB."/>
+		<param name="awEMAILFromUserId" 
+			type="text" 
+			default="62" 
+			label="EMAIL Sender Id" 
+			description="The userid of the sender - to be used as the sender (default 62 for admin - use 0 for system message)"/>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="awAutoConnectEnable" 
+			type="yesno"
+			default="0" 
+			label="Automatic Connection to key user" 
+			description="Specify Yes to connect new users to key user.">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+		</param>
+		<param name="awAutoConnectDirection" 
+			type="radio"
+			default="0" 
+			label="Direction of Connection request" 
+			description="Specify direction of automatic connection request.">
+				<option value="0">New user requests</option>
+				<option value="1">Key user requests</option>
+		</param>
+		<param name="awConnectMessage" 
+			type="textarea" 
+			cols="30" 
+			rows="5" 
+			default="Automatic Connection Request!" 
+			label="Connection Request Message" 
+			description="Message to send new user (or key user-s) when requesting automatic connection."/>
+		<param name="awKeyUserId" 
+			type="text" 
+			default="62" 
+			label="Key User Ids" 
+			description="The userids to connect with the new user (default 62 for admin, multiple userids comma separated)."/>
+	</params>
+	<tabs>
+	</tabs>
+	<install>
+	</install>
+	    	<queries>
+    		</queries>	
+	<uninstall>
+	    	<queries>
+    		</queries>
+	</uninstall>
+	<database>
+	</database>
+
+</cbinstall>

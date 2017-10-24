@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjnotifications" type="params" ui="admin">
+			<param name="video_new" type="yesno" default="0" label="Publish of new video" description="" yes="Notify" no="Don't Notify" />
+			<param name="video_approve" type="yesno" default="0" label="New video requires approval" description="" yes="Notify" no="Don't Notify" />
+		</view>
+	</views>
+</cbxml>

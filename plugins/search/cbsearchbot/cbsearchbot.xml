@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="plugin" group="search" method="upgrade">
+	<name>Search - Community Builder</name>
+	<creationDate>2014-11-10</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2014 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>2.0.2</version>
+	<description>This plugin allows searching for Community Builder users with Joomla search.</description>
+	<files>
+		<filename plugin="cbsearchbot">cbsearchbot.php</filename>
+		<filename>index.html</filename>
+		<folder>fields</folder>
+	</files>
+	<config>
+		<fields name="params" addfieldpath="/plugins/search/cbsearchbot/fields">
+			<fieldset name="search" label="Search">
+				<field name="search_area" type="text" size="20" default="Users" label="Area" description="Input Community Builder search area. Area lets users check a checkbox to search only that location." />
+				<field name="search_fields" type="cbfields" multiple="multiple" size="8" default="41|*|42|*|46|*|47|*|48|*|50" label="Fields" description="Select the fields to search on." />
+				<field name="search_blocked" type="radio" default="0" class="btn-group btn-group-yesno" label="Blocked" description="Select if blocked users should also be searched. Note only moderators can access these users profile. Default is no.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="search_banned" type="radio" default="1" class="btn-group btn-group-yesno" label="Banned" description="Select if banned users should also be searched. Note only moderators can access these users profile. Default is yes.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="search_unapproved" type="radio" default="0" class="btn-group btn-group-yesno" label="Unapproved" description="Select if unapproved users should also be searched. Note only moderators can access these users profile. Default is no.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="search_unconfirmed" type="radio" default="0" class="btn-group btn-group-yesno" label="Unconfirmed" description="Select if unconfirmed users should also be searched. Note only moderators can access these users profile. Default is no.">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+				<field name="search_exclude" type="text" size="20" default="" label="Exclude" description="Optionally input comma separated list of user ids to exclude from searching (e.g. 62,43,91)." />
+			</fieldset>
+			<fieldset name="results" label="Results">
+				<field name="result_title" type="text" size="40" default="[formatname]" label="Title" description="Input substitution supported result title." />
+				<field name="result_link" type="list" default="0" label="Title Link" description="Select how title links open.">
+					<option value="0">Same window</option>
+					<option value="1">New window</option>
+				</field>
+				<field name="result_text" type="textarea" filter="raw" cols="45" rows="8" default="[formatname]'s profile page" label="Text" description="Input substitution supported result text." />
+				<field name="result_limit" type="text" size="5" default="50" label="Limit" description="Input results limit to reduce query size. If left blank no limit is applied." />
+			</fieldset>
+			<fieldset name="ordering" label="Ordering">
+				<field name="ordering_alpha" type="list" default="name" label="Alphabetical" description="Select what to order by if ordering Alphabetical.">
+					<option value="name">Name</option>
+					<option value="username">Username</option>
+					<option value="email">Email</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

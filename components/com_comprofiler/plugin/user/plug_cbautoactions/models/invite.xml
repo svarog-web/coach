@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="invite">CB Invites</option>
+		</type>
+		<type name="autoaction_triggers" base="xml:autoaction_triggers">
+			<optgroup label="CB Invites">
+				<option value="invites_onBeforeUpdateInvite" translate="no">invites_onBeforeUpdateInvite</option>
+				<option value="invites_onBeforeCreateInvite" translate="no">invites_onBeforeCreateInvite</option>
+				<option value="invites_onBeforeDeleteInvite" translate="no">invites_onBeforeDeleteInvite</option>
+				<option value="invites_onAfterDeleteInvite" translate="no">invites_onAfterDeleteInvite</option>
+				<option value="invites_onBeforeSendInvite" translate="no">invites_onBeforeSendInvite</option>
+				<option value="invites_onAfterSendInvite" translate="no">invites_onAfterSendInvite</option>
+				<option value="invites_onBeforeAcceptInvite" translate="no">invites_onBeforeAcceptInvite</option>
+				<option value="invites_onAfterAcceptInvite" translate="no">invites_onAfterAcceptInvite</option>
+				<option value="invites_onBeforeInvite" translate="no">invites_onBeforeInvite</option>
+				<option value="invites_onAfterInvite" translate="no">invites_onAfterInvite</option>
+			</optgroup>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_invite" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Sends, accepts, or deletes invites on a users behalf." />
+			<if name="" nametype="data:int" operator="=" value="1" valuetype="const:int" type="condition">
+				<left>
+					<param name="" type="private" class="cbautoactionsActionInvite" method="installed" />
+				</left>
+				<then>
+					<params name="invite" type="params" repeat="true" label="" display="2lines">
+						<param name="mode" type="list" default="1" label="Mode" description="Select what invite action to perform.">
+							<option value="1">Send Invite</option>
+							<option value="2">Accept Invites</option>
+							<option value="3">Delete Invites</option>
+						</param>
+						<if name="mode" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+							<param name="to" type="text" label="To" description="Input invite email to address. Separate multiple email addresses with a comma." size="50" validate="required" />
+							<param name="subject" type="text" label="Subject" description="Optionally input invite email subject; if left blank a subject will be applied." size="50" />
+							<param name="body" type="textarea" rows="10" label="Body" description="Optionally input private message to include with invite email." cssclass="input-block" />
+						</if>
+						<param name="owner" type="text" label="Owner" description="Input substitution supported owner of invite as single integer user_id. Leave blank to use trigger user as the owner." size="10" />
+					</params>
+				</then>
+				<else>
+					<param name="" type="spacer" display="2lines" label="" default="CB Invites installation not found!" />
+				</else>
+			</if>
+		</view>
+	</views>
+</cbxml>

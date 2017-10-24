@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editactivitytag" type="params" ui="admin" label="Tag" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:activitytagrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input owner as single integer user_id." />
+			<param name="user" type="text" label="User" size="25" validate="required" description="Input the tag user as a single integer user_id or a name" />
+			<param name="type" type="text" label="Type" size="25" validate="required" description="Input the tag item type (e.g. activity or comment)." />
+			<param name="subtype" type="text" label="Sub-Type" size="25" description="Optionally input the tag item subtype." />
+			<param name="item" type="text" label="Item" size="5" validate="required" description="Input the tag item id. Typically this is the activity id or comment id." />
+			<param name="parent" type="text" label="Parent" size="5" description="Optionally input the tag parent id." />
+		</view>
+	</views>
+</cbxml>

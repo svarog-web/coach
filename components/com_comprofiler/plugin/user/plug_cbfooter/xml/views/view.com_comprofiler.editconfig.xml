@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editconfig" type="params" ui="admin" label="Configuration" icon="gears" description="" viewformatting="div">
+			<params name="params" type="params">
+				<tabpane name="config">
+					<tabpanetab name="integrations" label="Integrations" description="">
+						<!-- For language files pick-up: Those language strings must be identical in CB in administrator/components/com_comprofiler/xmlcb/views/view.com_comprofiler.editconfig.xml -->
+						<param name="poweredBy" type="yesno" default="1" label="SHOW_FOOTER_SETTING_LABEL" translated-label="Show Footer" description="SHOW_FOOTER_SETTING_DESCRIPTION" translated-description="Shows or hides the &quot;Powered by Community Builder&quot; software copyright backlink footer on frontend pages." />
+						<param name="footerplugin" type="hidden" default="1" />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</view>
+	</views>
+</cbxml>

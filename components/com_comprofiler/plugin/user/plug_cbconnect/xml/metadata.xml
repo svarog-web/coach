@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="request">
+		<fieldset name="request" label="">
+			<field name="provider" type="list" required="true" default="facebook" label="Provider" description="">
+				<option value="facebook">Facebook</option>
+				<option value="twitter">Twitter</option>
+				<option value="google">Google</option>
+				<option value="linkedin">LinkedIn</option>
+				<option value="windowslive">Windows Live</option>
+				<option value="instagram">Instagram</option>
+				<option value="foursquare">Foursquare</option>
+				<option value="github">GitHub</option>
+				<option value="vkontakte">VKontakte</option>
+				<option value="steam">Steam</option>
+				<option value="reddit">Reddit</option>
+				<option value="twitch">Twitch</option>
+				<option value="stackexchange">Stack Exchange</option>
+				<option value="pinterest">Pinterest</option>
+				<option value="amazon">Amazon</option>
+				<option value="yahoo">Yahoo</option>
+				<option value="paypal">PayPal</option>
+				<option value="disqus">Disqus</option>
+				<option value="wordpress">WordPress</option>
+				<option value="meetup">Meetup</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

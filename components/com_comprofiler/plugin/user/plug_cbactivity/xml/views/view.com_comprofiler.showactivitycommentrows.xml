@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="showactivitycomments" type="params" ui="admin" label="Comments" icon="list" viewformatting="none">
+			<tablebrowser name="activitycommentsbrowser" table="#__comprofiler_plugin_activity_comments" class="\CB\Plugin\Activity\Table\CommentTable">
+				<toolbarmenu>
+					<menu name="new" action="linkAction" task="new" link="cbo:newrow" label="New" />
+					<menu name="edit" action="linkAction" task="edit" link="cbo:editrows/commentid" label="Edit" />
+					<menu name="delete" action="linkAction" task="delete" link="cbo:deleterows" label="Delete" />
+					<menu name="cancel" action="linkAction" task="cancel" link="cb_action:plugins" label="Close" />
+				</toolbarmenu>
+				<quicksearchfields placeholder="Search Comments..." size="30">
+					<field name="owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</field>
+					<field name="message" />
+					<field name="type" />
+					<field name="subtype" />
+					<field name="item" />
+					<field name="parent" />
+					<field name="id" valuetype="const:int" />
+				</quicksearchfields>
+				<filters>
+					<filter name="owner" value="username" valuetype="sql:string" type="string" label="" blanktext="Owner">
+						<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+					</filter>
+					<filter name="type" valuetype="sql:string" type="data" label="" blanktext="- Select Type -">
+						<data name="type" type="sql:multiplerows" table="#__comprofiler_plugin_activity_comments" key="id">
+							<rows>
+								<field name="type" as="value" />
+								<field name="type" as="text" />
+							</rows>
+							<where>
+								<column name="type" operator="!=" value="" type="sql:field" valuetype="const:string" />
+							</where>
+							<orderby>
+								<field name="type" ordering="ASC" />
+							</orderby>
+						</data>
+					</filter>
+					<filter name="subtype" valuetype="sql:string" type="data" label="" blanktext="- Select Sub-Type -">
+						<data name="type" type="sql:multiplerows" table="#__comprofiler_plugin_activity_comments" key="id">
+							<rows>
+								<field name="subtype" as="value" />
+								<field name="subtype" as="text" />
+							</rows>
+							<where>
+								<column name="subtype" operator="!=" value="" type="sql:field" valuetype="const:string" />
+							</where>
+							<orderby>
+								<field name="subtype" ordering="ASC" />
+							</orderby>
+						</data>
+					</filter>
+					<filter name="item" valuetype="sql:string" type="string" label="" blanktext="Item" />
+					<filter name="parent" valuetype="sql:string" type="string" label="" blanktext="Parent" />
+					<filter name="datefrom" value="date" valuetype="sql:string" type="datetime" operator="&gt;=" view="datefromto" />
+					<filter name="dateto" value="date" valuetype="sql:string" type="datetime" operator="&lt;=" view="datefromto" />
+					<view name="datefromto" type="params">
+						<fieldset name="daterange" label="Date">
+							<param name="filter_datefrom" type="datetime" default="" label="From" />
+							<param name="filter_dateto" type="datetime" default="" label="To" />
+						</fieldset>
+					</view>
+					<filter name="id" type="field_show_only_if_selected" base="int" default="" label="" blanktext="- Select ID -" />
+				</filters>
+				<orderby>
+					<ordergroup name="date_asc" label="Date ascending">
+						<field name="date" ordering="ASC" />
+					</ordergroup>
+					<ordergroup name="date_desc" label="Date descending" default="true" translate-default="no">
+						<field name="date" ordering="DESC" />
+					</ordergroup>
+					<ordergroup name="owner_asc" label="Owner ascending">
+						<field name="user_comment" type="sql:string" ordering="ASC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+					<ordergroup name="owner_desc" label="Owner descending">
+						<field name="user_comment" type="sql:string" ordering="DESC">
+							<data name="username" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+					</ordergroup>
+				</orderby>
+				<listfields>
+					<header type="standard" />
+					<rows type="standard" height="auto">
+						<field name="" type="rownumber" width="1%" align="center" label="#" responsivehiddenon="xsmall" />
+						<field name="id" type="primarycheckbox" width="1%" align="center" />
+						<field name="owner" type="string" link="cbo:rowedit" parameters="commentid" paramvalues="id" align="left" label="Owner" allowordering="ascending,descending">
+							<data name="user_id" type="sql:field" />
+							<data name="username" as="owner" type="sql:field" table="#__users" class="\CB\Database\Table\UserTable" key="id" value="user_id" />
+						</field>
+						<field name="type" type="string" width="15%" align="center" label="Type" allowordering="ascending,descending" />
+						<field name="subtype" type="string" width="15%" align="center" label="Sub-Type" allowordering="ascending,descending" />
+						<field name="item" type="string" width="10%" align="center" label="Item" allowordering="ascending,descending" />
+						<field name="parent" type="string" width="10%" align="center" label="Parent" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="date" type="datetime" timezone="RAW" width="15%" align="center" label="Date" responsivehiddenon="xsmall" allowordering="ascending,descending" />
+						<field name="id" type="int" width="5%" align="center" label="ID" allowordering="ascending,descending" />
+					</rows>
+				</listfields>
+			</tablebrowser>
+		</view>
+	</views>
+</cbxml>

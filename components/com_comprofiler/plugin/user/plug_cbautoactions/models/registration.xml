@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="registration">Registration</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_registration" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Registers a new user." />
+			<params name="registration" type="params" label="" display="2lines">
+				<param name="approve" type="list" default="0" label="Approval" description="Select registration to require admin approval.">
+					<option value="0">No (override CB)</option>
+					<option value="1">Yes (override CB)</option>
+					<option value="2">Default (CB setting)</option>
+				</param>
+				<param name="confirm" type="list" default="0" label="Confirmation" description="Select registration to require admin confirmation.">
+					<option value="0">No (override CB)</option>
+					<option value="2">Default (CB setting)</option>
+				</param>
+				<param name="username" type="text" label="Username" description="Input substitution supported username for the user." size="30" validate="required" />
+				<param name="password" type="text" label="Password" description="Optionally input substitution supported password for user. Note if left blank a password will be randomly generated for the user." size="30" />
+				<param name="email" type="text" label="Email" description="Input substitution supported email address for the user." size="50" validate="required" />
+				<param name="usergroup" type="usergroup" multiple="true" default="2" blanktext="" size="10" label="Groups" description="Select registration usergroups for the user." managegroups="false" validate="required" />
+				<param name="firstname" type="text" label="First Name" description="Input substitution supported first name for the user." size="30" validate="required" />
+				<param name="middlename" type="text" label="Middle Name" description="Input substitution supported middle name for the user." size="30" />
+				<param name="lastname" type="text" label="Last Name" description="Input substitution supported last name for the user." size="30" />
+				<params name="fields" type="params" repeat="true" label="Fields">
+					<param name="field" type="field" key="name" label="Field" description="Select field to set a value for." />
+					<param name="value" type="text" label="Value" description="Optionally input substitution supported field value (e.g. [user_id])." size="50" />
+					<param name="translate" type="yesno" default="0" label="Translate Value" description="Optionally disable translations for the value." />
+				</params>
+				<param name="supress" type="yesno" default="1" label="Suppress Emails" description="Enable or disable suppression of registration emails." />
+			</params>
+		</view>
+	</views>
+</cbxml>

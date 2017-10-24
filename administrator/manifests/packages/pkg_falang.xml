@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.0" method="upgrade">
+	<name>FaLang Package</name>
+	<author>Stéphane Bouey</author>
+	<creationDate>December 2016</creationDate>
+ 	<packagename>falang</packagename>
+	 <version>2.9.1</version>
+	 <url>http://www.faboba.com</url>
+	 <variant>pro</variant>
+	 <packager>Stéphane Bouey</packager>
+	 <packagerurl>http://www.faboba.com</packagerurl>
+	 <description>FaLang! Installer Package.</description>
+	 
+	 <!-- List of extensions to install -->
+	 <files folder="packages">
+	     <!-- Modules -->
+		 <file type="module" id="mod_falang" client="site">mod_falang_291.zip</file>
+		 
+		  <!-- Plugins -->
+		 <file type="plugin" id="falangdriver" group="system">plg_falangdriver_291.zip</file>
+		 <file type="plugin" id="falangquickjump" group="system">plg_falangquickjump_291.zip</file>
+		 
+		 <!-- Component -->
+		 <file type="component" id="com_falang" >com_falang_291.zip</file>
+	 </files>
+
+	 <!-- Update servers -->
+    <updateservers>
+        <server type="extension" priority="1" name="Falang Community">http://www.faboba.com/update/falang/pkgfalangcom.xml</server>
+    </updateservers>	 
+	 
+</extension>

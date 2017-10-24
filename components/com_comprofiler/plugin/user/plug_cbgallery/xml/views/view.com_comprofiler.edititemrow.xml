@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="edititem" type="params" ui="admin" label="Media" icon="file-o" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:itemrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="" type="group" label="" display="2lines">
+				<param name="title" type="text" label="Title %s" size="80" description="Optionally input a title. If no title is provided the date will be displayed as the title." />
+			</param>
+			<tabpane name="editpane">
+				<tabpanetab name="global" label="Global" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="description" type="textarea" rows="10" label="Description" display="2lines" description="Optionally input a description." cssclass="input-block" />
+								<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+									<field name="" type="text" label="File" display="2lines" mode="show" link="cb_action:itemdownload" parameters="mediaid" paramvalues="id" target="_blank">
+										<attributes>
+											<attribute name="link">
+												<if name="" nametype="data:string" operator="!=" value="" valuetype="const:string" type="condition">
+													<left>
+														<param name="" type="private" method="domain" />
+													</left>
+													<then>
+														<param name="value" type="string" />
+													</then>
+													<else>
+														<param name="" default="cb_action:itemdownload" translate-default="no" type="string" />
+													</else>
+												</if>
+											</attribute>
+											<attribute name="default">
+												<if name="file" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+													<then>
+														<param name="file" type="string" label="" />
+													</then>
+													<else>
+														<param name="value" type="string" label="" />
+													</else>
+												</if>
+											</attribute>
+										</attributes>
+									</field>
+								</if>
+								<param name="method" type="list" default="0" label="" display="2lines">
+									<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+										<option value="0">No Change</option>
+									</if>
+									<option value="1">Upload</option>
+									<option value="2">Link</option>
+									<attributes>
+										<attribute name="label">
+											<if name="id" nametype="param:int" operator="=" value="0" valuetype="const:int" type="condition">
+												<param name="" default="File" type="string" />
+											</if>
+										</attribute>
+									</attributes>
+								</param>
+								<if name="method" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+									<param name="file" type="uploadfile" label="" display="2lines" validate="required" description="Select the file to upload." />
+								</if>
+								<if name="method" nametype="param:int" operator="=" value="2" valuetype="const:int" type="showhide">
+									<param name="value" type="text" label="" display="2lines" size="40" validate="required" description="Input the URL to the file to link." />
+								</if>
+								<if name="type" nametype="param:string" operator="!=" value="photos" valuetype="const:string" type="condition">
+									<if name="thumbnail" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+										<field name="thumbnail" type="text" label="Thumbnail" display="2lines" mode="show" link="cb_action:itemthumbnail" parameters="mediaid" paramvalues="id" target="_blank">
+											<attributes>
+												<attribute name="link">
+													<if name="" nametype="data:string" operator="!=" value="" valuetype="const:string" type="condition">
+														<left>
+															<param name="" type="private" default="1" method="domain" />
+														</left>
+														<then>
+															<param name="thumbnail" type="string" />
+														</then>
+														<else>
+															<param name="" default="cb_action:itemthumbnail" translate-default="no" type="string" />
+														</else>
+													</if>
+												</attribute>
+											</attributes>
+										</field>
+									</if>
+									<param name="thumbnail_method" type="list" default="0" label="" display="2lines">
+										<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+											<option value="0">No Change</option>
+										</if>
+										<option value="1">Upload</option>
+										<option value="2">Link</option>
+										<if name="thumbnail" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+											<option value="3">Delete</option>
+										</if>
+										<attributes>
+											<attribute name="label">
+												<if name="thumbnail" nametype="param:string" operator="=" value="" valuetype="const:string" type="condition">
+													<param name="" default="Thumbnail" type="string" />
+												</if>
+											</attribute>
+										</attributes>
+									</param>
+									<if name="thumbnail_method" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+										<param name="thumbnail_upload" type="uploadfile" label="" display="2lines" description="Optionally select the thumbnail file to upload." />
+									</if>
+									<if name="thumbnail_method" nametype="param:int" operator="=" value="2" valuetype="const:int" type="showhide">
+										<param name="thumbnail" type="text" label="" display="2lines" size="40" description="Optionally input the URL to the thumbnail file to link." />
+									</if>
+								</if>
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="published" type="published" label="Published" display="2lines" description="Select publish status of the item. If unpublished the item will not be visible to the public." />
+								<param name="folder" type="list" default="0" label="Album" display="2lines" description="Select the album for this item. User albums can be selected after save.">
+									<option value="0">None</option>
+									<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+										<data name="folders" type="sql:multiplerows" table="#__comprofiler_plugin_gallery_folders" key="id">
+											<rows>
+												<field name="id" as="value" />
+												<field name="title" as="text" />
+											</rows>
+											<where>
+												<column name="user_id" operator="=" value="user_id" type="sql:field" valuetype="ext:int:modelofdata" />
+											</where>
+											<orderby>
+												<field name="date" ordering="DESC" />
+											</orderby>
+										</data>
+									</if>
+								</param>
+								<param name="user_id" type="user" label="Owner" display="2lines" size="5" validate="required" description="Input owner as single integer user_id." />
+								<param name="asset" type="text" label="Asset" display="2lines" size="20" description="Input the asset path for this item. Asset helps determine the location of this item. Leave blank to automatically set to profile.user_id." />
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="details" label="Details" description="">
+					<tabpane name="detailspane">
+						<tabpanetab name="normal" label="Normal" description="">
+							<param name="" type="yesno" label="Exists" mode="show">
+								<attributes>
+									<attribute name="default">
+										<param name="" type="private" method="exists" default="0" />
+									</attribute>
+								</attributes>
+							</param>
+							<param name="" type="private" method="name" default="0" label="Filename" />
+							<param name="" type="private" method="path" default="0" label="Path" />
+							<param name="" type="private" method="domain" default="0" label="Domain" />
+							<param name="" type="private" method="extension" default="0" label="Extension" />
+							<param name="" type="private" method="mimetype" default="0" label="MimeType" />
+							<param name="" type="datetime" timezone="UTC" label="Modified Date" mode="show">
+								<attributes>
+									<attribute name="default">
+										<param name="" type="private" method="modified" default="0" />
+									</attribute>
+								</attributes>
+							</param>
+							<param name="" type="private" method="size" default="0" label="File Size" />
+							<param name="" type="private" method="height" default="0" label="Height" />
+							<param name="" type="private" method="width" default="0" label="Width" />
+						</tabpanetab>
+						<tabpanetab name="thumbnail" label="Thumbnail" description="">
+							<param name="" type="yesno" label="Exists" mode="show">
+								<attributes>
+									<attribute name="default">
+										<param name="" type="private" method="exists" default="1" />
+									</attribute>
+								</attributes>
+							</param>
+							<param name="" type="private" method="name" default="1" label="Filename" />
+							<param name="" type="private" method="path" default="1" label="Path" />
+							<param name="" type="private" method="domain" default="1" label="Domain" />
+							<param name="" type="private" method="extension" default="1" label="Extension" />
+							<param name="" type="private" method="mimetype" default="1" label="MimeType" />
+							<param name="" type="datetime" timezone="UTC" label="Modified Date" mode="show">
+								<attributes>
+									<attribute name="default">
+										<param name="" type="private" method="modified" default="1" />
+									</attribute>
+								</attributes>
+							</param>
+							<param name="" type="private" method="size" default="1" label="File Size" />
+							<param name="" type="private" method="height" default="1" label="Height" />
+							<param name="" type="private" method="width" default="1" label="Width" />
+						</tabpanetab>
+						<tabpanetab name="cached" label="Cached" description="">
+							<params name="params" type="params">
+								<tabpane name="cachedpane">
+									<tabpanetab name="normal" label="Normal" description="">
+										<param name="name" type="text" label="Filename" mode="show" />
+										<param name="extension" type="text" label="Extension" mode="show" />
+										<param name="mimetype" type="text" label="MimeType" mode="show" />
+										<param name="modified" type="text" label="Modified Date" mode="show" />
+										<param name="filesize" type="text" label="File Size" mode="show" />
+										<param name="height" type="text" label="Height" mode="show" />
+										<param name="width" type="text" label="Width" mode="show" />
+									</tabpanetab>
+									<tabpanetab name="thumbnail" label="Thumbnail" description="">
+										<param name="name_thumbnail" type="text" label="Filename" mode="show" />
+										<param name="extension_thumbnail" type="text" label="Extension" mode="show" />
+										<param name="mimetype_thumbnail" type="text" label="MimeType" mode="show" />
+										<param name="modified_thumbnail" type="text" label="Modified Date" mode="show" />
+										<param name="filesize_thumbnail" type="text" label="File Size" mode="show" />
+										<param name="height_thumbnail" type="text" label="Height" mode="show" />
+										<param name="width_thumbnail" type="text" label="Width" mode="show" />
+									</tabpanetab>
+								</tabpane>
+							</params>
+						</tabpanetab>
+					</tabpane>
+				</tabpanetab>
+			</tabpane>
+		</view>
+	</views>
+</cbxml>

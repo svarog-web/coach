@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="module" client="site" method="upgrade">
+	<name>CB GroupJive</name>
+	<creationDate>2016-12-29</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>3.1.0</version>
+	<description>Multi-purpose module displaying various GroupJive content.</description>
+	<files>
+		<filename module="mod_cbgroupjive">mod_cbgroupjive.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params" addfieldpath="/components/com_comprofiler/plugin/user/plug_cbgroupjive/fields">
+			<fieldset name="basic" label="Basic">
+				<field name="groupjive_mode" type="gjmodes" default="latest_groups" label="Mode" description="Select module display mode. Will determine what content is rendered inside the module.">
+					<option value="categories_asc">Categories Ascending</option>
+					<option value="categories_desc">Categories Descending</option>
+					<option value="popular_categories">Popular Categories</option>
+					<option value="latest_groups">Latest Groups</option>
+					<option value="oldest_groups">Oldest Groups</option>
+					<option value="popular_groups">Popular Groups</option>
+				</field>
+				<field name="groupjive_limit" type="text" size="5" default="10" label="Limit" description="Input the number of items to display. If left blank no limit is applied." />
+				<field name="groupjive_exclude_categories" type="gjcategories" multiple="multiple" size="8" default="" label="Exclude Categories" description="Select the categories to exclude from display. Note all groups in the selected categories will also be excluded." />
+				<field name="groupjive_exclude_groups" type="gjgroups" multiple="multiple" size="8" default="" label="Exclude Groups" description="Select the groups to exclude from display." />
+			</fieldset>
+			<fieldset name="advanced" label="Advanced">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="cache" type="list" default="0" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

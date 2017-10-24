@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="gjeventrows" request="view action" action="editPlugin showgjevents">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="showgjevents" mode="show" />
+		</action>
+
+		<action name="gjattendancerows" request="view action" action="editPlugin showgjattendance">
+			<showview view="showgjattendance" mode="show" />
+		</action>
+
+		<action name="gjeventrow" request="view table action" action="editPlugin gjeventsbrowser editrow" requestparameters="eventid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbgroupjive/xml/models/model.groupjive" mandatory="false" />
+			<showview view="editgjevent" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_plugin_events" class="\CB\Plugin\GroupJiveEvents\Table\EventTable" key="id" value="eventid" valuetype="request:int" />
+			</showview>
+		</action>
+
+		<action name="gjattendancerow" request="view table action" action="editPlugin gjattendancebrowser editrow" requestparameters="attendanceid">
+			<showview view="editgjattendance" mode="edit">
+				<data name="" type="sql:row" table="#__groupjive_plugin_events_attendance" class="\CB\Plugin\GroupJiveEvents\Table\AttendanceTable" key="id" value="attendanceid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="events" type="button" default="Events" buttonclass="default" buttonsize="xsmall" link="cb_action:gjeventrows" parameters="cid" paramvalues="id" label="" />
+			<param name="attendance" type="button" default="Attendance" buttonclass="default" buttonsize="xsmall" link="cb_action:gjattendancerows" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

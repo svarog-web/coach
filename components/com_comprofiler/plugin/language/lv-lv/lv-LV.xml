@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cbinstall version="1.0" type="plugin" group="language" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../validation/ahawow.xsd">
+	<name>lv-LV</name>
+	<author>CB Team</author>
+	<creationDate>2017-01-23</creationDate>
+	<copyright>(C) 2004-2017 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>cbteam@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com</authorUrl>
+	<version>2.1.2</version>
+	<release>2.1.2.1.0.0</release>
+	<description>
+		<![CDATA[
+		<p>
+		Provides the <strong>Latvian (Latvia)</strong> language
+		for Community Builder 2.1.2 and its plugins.
+		<br />
+		For updates and translation projects please visit our
+		<a href="http://www.joomlapolis.com/cb-solutions/languages" target=""_blank">Joomlapolis Languages</a> page.
+		</p>
+		<hr />
+		<h5>
+		Translation Credits
+		</h5>
+		<p>
+		This translation was accomplished by the efforts of the various Latvian (Latvia)
+		<a href="https://www.transifex.com/organization/joomlapolis" title=""
+		target="_blank">Joomlapolis Transifex Project</a> teams.
+		</p>
+		<h5>
+		Completion Level
+		</h5>
+		<p>
+		Please consider
+		<a href="https://www.transifex.com/signin/" title="" target="_blank">getting a free account on Transifex</a> and
+		helping improve the quality and completeness of this translation effort.
+		</p>
+		<p>
+		The following Latvian (Latvia) projects (name is click-able) and resources were accessed to generate
+		this CB Language plugin:
+		</p>
+		<table border="1" style="width:100%">
+			<tr>
+				<th>Project</th>
+				<th>Resource</th>
+				<th>Completeness</th>
+				<th>Last Update</th>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cb/" title="" target="_blank">Community Builder</a></td>
+				<td>admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="27" min="0" max="100"></meter>
+					27%
+					<br />
+					T:329 / U:878
+				</td>
+				<td>2016-12-18 15:16:18 / nant</td>
+			</tr>
+			<tr>
+				<td>language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="65" min="0" max="100"></meter>
+					65%
+					<br />
+					T:329 / U:555
+				</td>
+				<td>2016-12-18 15:16:18 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbactivity/" title="" target="_blank">CB Activity</a></td>
+				<td>cbactivity-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="6" min="0" max="100"></meter>
+					6%
+					<br />
+					T:8 / U:108
+				</td>
+				<td>2016-01-06 10:41:32 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbantispam/" title="" target="_blank">CB Antispam</a></td>
+				<td>cbantispam-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="1" min="0" max="100"></meter>
+					1%
+					<br />
+					T:1 / U:93
+				</td>
+				<td>2016-10-13 00:36:50 / nant</td>
+			</tr>
+			<tr>
+				<td>cbantispam-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:1 / U:324
+				</td>
+				<td>2016-10-13 00:37:55 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbautoactions/" title="" target="_blank">CB Auto Actions</a></td>
+				<td>cbautoactions-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:632
+				</td>
+				<td>2015-12-26 13:57:49 / nant</td>
+			</tr>
+			<tr>
+				<td>cbautoactions-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:194
+				</td>
+				<td>2016-02-01 23:17:02 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbautowelcome/" title="" target="_blank">CB Auto Welcome</a></td>
+				<td>cb.autowelcome-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="27" min="0" max="100"></meter>
+					27%
+					<br />
+					T:5 / U:13
+				</td>
+				<td>2015-12-27 22:24:10 / ecilveks</td>
+			</tr>
+			<tr>
+				<td>cb.autowelcome-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="36" min="0" max="100"></meter>
+					36%
+					<br />
+					T:7 / U:12
+				</td>
+				<td>2015-12-27 22:28:14 / ecilveks</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbcodefield/" title="" target="_blank">CB Code Field</a></td>
+				<td>cbcodefield-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:5
+				</td>
+				<td>2016-02-05 22:19:41 / nant</td>
+			</tr>
+			<tr>
+				<td>cbcodefield-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:17
+				</td>
+				<td>2016-02-05 22:19:41 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbconditional/" title="" target="_blank">CB Conditional</a></td>
+				<td>cbconditional-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:66
+				</td>
+				<td>2015-12-26 14:01:33 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbconnect/" title="" target="_blank">CB Connect</a></td>
+				<td>cbconnect-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="20" min="0" max="100"></meter>
+					20%
+					<br />
+					T:2 / U:8
+				</td>
+				<td>2016-03-01 15:20:01 / nant</td>
+			</tr>
+			<tr>
+				<td>cbconnect-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:159
+				</td>
+				<td>2016-03-01 15:18:35 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbcorefieldsajax/" title="" target="_blank">CB Core Fields Ajax</a></td>
+				<td>cbcorefieldsajax-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:18
+				</td>
+				<td>2015-12-28 20:31:04 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgallery/" title="" target="_blank">CB Gallery</a></td>
+				<td>cbgallery-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="1" min="0" max="100"></meter>
+					1%
+					<br />
+					T:1 / U:54
+				</td>
+				<td>2016-10-10 23:13:34 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgallery-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="2" min="0" max="100"></meter>
+					2%
+					<br />
+					T:5 / U:208
+					</td>
+				<td>2016-10-10 23:09:08 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgoogletranslate/" title="" target="_blank">CB Google Translate</a></td>
+				<td>cbgoogletranslate-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:54
+					</td>
+				<td>2015-12-26 14:04:53 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgoogletranslate-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:32
+				</td>
+				<td>2015-12-26 14:04:53 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbgravatarfield/language/" title="" target="_blank">CB Gravatar Field</a></td>
+				<td>cbgravatarfield-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:12
+				</td>
+				<td>2015-12-26 14:05:18 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgroupjive/" title="" target="_blank">CB GroupJive</a></td>
+				<td>cbgroupjive-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:64
+				</td>
+				<td>2017-01-03 02:44:28 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgroupjive-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:2 / U:323
+				</td>
+				<td>2017-01-03 02:46:02 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbgroupjiveabout/" title="" target="_blank">CB GroupJive About</a></td>
+				<td>cbgroupjiveabout-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:12
+				</td>
+				<td>2017-01-03 02:46:47 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgroupjiveevents/" title="" target="_blank">CB GroupJive Events</a></td>
+				<td>cbgroupjiveevents-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:16
+				</td>
+				<td>2017-01-03 02:51:36 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgroupjiveevents-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:137
+				</td>
+				<td>2017-01-03 02:52:16 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgroupjivefile/language/" title="" target="_blank">CB GroupJive File</a></td>
+				<td>cbgroupjivefile-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:6
+				</td>
+				<td>2017-01-03 02:53:07 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgroupjivefile-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="4" min="0" max="100"></meter>
+					4%
+					<br />
+					T:4 / U:78
+				</td>
+				<td>2017-01-03 02:54:11 / nant</td>
+			</tr>
+						<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbgroupjiveforums/" title="" target="_blank">CB GroupJive Forums</a></td>
+				<td>cbgroupjiveforums-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="4" min="0" max="100"></meter>
+					4%
+					<br />
+					T:1 / U:22
+				</td>
+				<td>2017-01-03 02:54:34 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgroupjivephoto/" title="" target="_blank">CB GroupJive Photo</a></td>
+				<td>cbgroupjivephoto-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:7
+				</td>
+				<td>2017-01-03 02:56:58 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgroupjivephoto-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="3" min="0" max="100"></meter>
+					3%
+					<br />
+					T:3 / U:79
+				</td>
+				<td>2017-01-03 02:57:26 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgroupjivevideo/" title="" target="_blank">CB GroupJive Video</a></td>
+				<td>cbgroupjivevideo-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:6
+				</td>
+				<td>2017-01-03 02:58:06 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgroupjivevideo-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="2" min="0" max="100"></meter>
+					2%
+					<br />
+					T:2 / U:65
+				</td>
+				<td>2017-01-03 02:58:38 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbgroupjivewall/" title="" target="_blank">CB GroupJive Wall</a></td>
+				<td>cbgroupjivewall-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:10
+				</td>
+				<td>2017-01-03 02:59:24 / nant</td>
+			</tr>
+			<tr>
+				<td>cbgroupjivewall-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="3" min="0" max="100"></meter>
+					3%
+					<br />
+					T:2 / U:64
+				</td>
+				<td>2017-01-03 03:00:09 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbinvites/" title="" target="_blank">CB Invites</a></td>
+				<td>cbinvites-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="14" min="0" max="100"></meter>
+					14%
+					<br />
+					T:1 / U:6
+				</td>
+				<td>2016-03-07 17:07:08 / nant</td>
+			</tr>
+			<tr>
+				<td>cbinvites-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="1" min="0" max="100"></meter>
+					1%
+					<br />
+					T:1 / U:90
+				</td>
+				<td>2016-03-07 17:08:09 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cblastviewstab/" title="" target="_blank">CB Lastviews Tab</a></td>
+				<td>cb.lastviews-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:8
+				</td>
+				<td>2015-12-26 14:08:29 / nant</td>
+			</tr>
+			<tr>
+				<td>cb.lastviews-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:24
+				</td>
+				<td>2015-12-26 14:08:29 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbprivacy/" title="" target="_blank">CB Privacy</a></td>
+				<td>cbprivacy-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:22
+				</td>
+				<td>2015-12-26 14:08:45 / nant</td>
+			</tr>
+			<tr>
+				<td>cbprivacy-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:77
+				</td>
+				<td>2015-12-26 14:08:45 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbprofilebook/" title="" target="_blank">CB Profile Book</a></td>
+				<td>cb.profilebook-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:1
+				</td>
+				<td>2015-12-26 14:09:07 / nant</td>
+			</tr>
+			<tr>
+				<td>cb.profilebook-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:170
+				</td>
+				<td>2015-12-26 14:09:07 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbpulog/" title="" target="_blank">CB Profile Update Logger</a></td>
+				<td>cb.pulog-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:42
+				</td>
+				<td>2016-01-17 14:12:36 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbprogressfield/" title="" target="_blank">CB Progress Field</a></td>
+				<td>cbprogressfield-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:24
+				</td>
+				<td>2015-12-26 14:10:40 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbqueryfield/" title="" target="_blank">CB Query Field</a></td>
+				<td>cbqueryfield-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:13
+				</td>
+				<td>2016-02-05 23:32:14 / nant</td>
+			</tr>
+			<tr>
+				<td>cbqueryfield-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:51
+				</td>
+				<td>2016-02-05 23:33:18 / nant</td>
+			</tr>
+			<tr>
+				<td rowspan="2"><a href="https://www.transifex.com/projects/p/cbreconfirmemail/" title="" target="_blank">CB Reconfirm Email</a></td>
+				<td>cbreconfirmemail-admin_language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:5
+				</td>
+				<td>2015-12-26 14:11:42 / nant</td>
+			</tr>
+			<tr>
+				<td>cbreconfirmemail-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:35
+				</td>
+				<td>2015-12-26 14:11:42 / nant</td>
+			</tr>
+			<tr>
+				<td><a href="https://www.transifex.com/projects/p/cbtemplatechanger/" title="" target="_blank">CB Template Changer</a></td>
+				<td>cbtemplatechanger-language.php</td>
+				<td>
+					<meter style="width:100px; border:1px solid #ccc; border-radius: 3px;" value="0" min="0" max="100"></meter>
+					0%
+					<br />
+					T:0 / U:8
+				</td>
+				<td>2015-12-26 14:13:02 / nant</td>
+			</tr>
+		</table>
+		]]>
+	</description>
+	<files>
+		<filename plugin="lv-LV">language.php</filename>
+		<filename>index.html</filename>
+		<filename>admin_language.php</filename>
+		<foldername>cbplugin</foldername>
+	</files>
+	<params>
+	</params>
+	<database>
+	</database>
+</cbinstall>
+

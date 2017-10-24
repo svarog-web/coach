@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editgjgroup" type="params" ui="admin" label="Group" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="savecopy" action="custom" task="act=savecopy" label="Save as Copy" icon="save-copy" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:gjgrouprows" label="Cancel" />
+			</toolbarmenu>
+			<param name="" type="group" label="" display="2lines">
+				<param name="name" type="text" label="Name %s" description="Input the group name. This is the name that will distinguish this group from others. Suggested to input something unique and intuitive." size="80" />
+			</param>
+			<tabpane name="editpane">
+				<tabpanetab name="group" label="Group" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="description" type="textarea" rows="5" label="Description" display="2lines" description="Optionally input the group description. The group description should be short and to the point; describing what your group is all about." cssclass="input-block" />
+								<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+									<then>
+										<if name="canvas" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+											<then>
+												<param name="" type="private" method="canvas" label="Canvas" display="2lines" />
+												<param name="canvas_method" type="list" default="0" label="" display="2lines">
+													<option value="0">No Change</option>
+													<option value="1">Upload</option>
+													<option value="2">Delete</option>
+												</param>
+												<if name="canvas_method" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+													<param name="canvas" type="uploadfile" label="" display="2lines" description="Optionally select the group canvas. A canvas should represent the topic of your group; please be respectful and tasteful when selecting a canvas." />
+												</if>
+											</then>
+											<else>
+												<param name="canvas" type="uploadfile" label="Canvas" display="2lines" description="Optionally select the group canvas. A canvas should represent the topic of your group; please be respectful and tasteful when selecting a canvas." />
+											</else>
+										</if>
+									</then>
+									<else>
+										<param name="canvas" type="uploadfile" label="Canvas" display="2lines" description="Optionally select the group canvas. A canvas should represent the topic of your group; please be respectful and tasteful when selecting a canvas." />
+									</else>
+								</if>
+								<if name="id" nametype="param:int" operator="!=" value="0" valuetype="const:int" type="condition">
+									<then>
+										<if name="logo" nametype="param:string" operator="!=" value="" valuetype="const:string" type="condition">
+											<then>
+												<param name="" type="private" method="logo" label="Logo" display="2lines" />
+												<param name="logo_method" type="list" default="0" label="" display="2lines">
+													<option value="0">No Change</option>
+													<option value="1">Upload</option>
+													<option value="2">Delete</option>
+												</param>
+												<if name="logo_method" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+													<param name="logo" type="uploadfile" label="" display="2lines" description="Optionally select the group logo. A logo should represent the topic of your group; please be respectful and tasteful when selecting a logo." />
+												</if>
+											</then>
+											<else>
+												<param name="logo" type="uploadfile" label="Logo" display="2lines" description="Optionally select the group logo. A logo should represent the topic of your group; please be respectful and tasteful when selecting a logo." />
+											</else>
+										</if>
+									</then>
+									<else>
+										<param name="logo" type="uploadfile" label="Logo" display="2lines" description="Optionally select the group logo. A logo should represent the topic of your group; please be respectful and tasteful when selecting a logo." />
+									</else>
+								</if>
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="published" type="xml:groupjive_published" default="1" label="Publish" display="2lines" description="Select publish state of this group. Unpublished groups will not be visible to the public." />
+								<param name="category" type="list" label="Category" default="0" blanktext="" onchange="evaluate" display="2lines" description="Select the group category. This is the category a group will belong to and decide its navigation path.">
+									<data name="" type="private" class="\CB\Plugin\GroupJive\CBGroupJive" method="getCategoryOptions" />
+								</param>
+								<param name="type" type="xml:groupjive_type" label="Type" default="1" blanktext="" display="2lines" description="Select the group type. Type determines the way your group is joined (e.g. Invite requires new users to be invited to join your group)." />
+								<param name="user_id" type="user" label="Owner" size="5" validate="required" display="2lines" description="Input the group owner id. Group owner determines the creator of the group specified as User ID." />
+								<param name="css" type="text" label="CSS Class" display="2lines" description="Optionally input custom csses class added to display containers for this group. Separate multiple classes with a space." />
+								<param name="ordering" type="ordering" value="name" label="Ordering" display="2lines" description="Select the ordering of this group.">
+									<orderinggroups>
+										<ordering name="category" type="int" />
+									</orderinggroups>
+								</param>
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="params" label="Invites" description="">
+					<params name="params" type="params">
+						<param name="invites" type="yesno" default="1" label="Display" description="Optionally enable or disable usage of invites. Invites allow group users to invite other users to join the group. Group owner and group administrators are exempt from this configuration and can always invite users. Note existing invites will still be accessible." yes="Enable" no="Disable" />
+					</params>
+				</tabpanetab>
+				<tabpanetab name="integrations" label="Integrations" description="">
+					<tabpane name="integrationtabs">
+						<showview name="params" view="gjgroupintegrations" mandatory="false" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+						<showview name="params" path="views/view[@name=&quot;gjgroupintegrations&quot;]" action="integration" type="plugins" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+					</tabpane>
+				</tabpanetab>
+			</tabpane>
+		</view>
+	</views>
+</cbxml>

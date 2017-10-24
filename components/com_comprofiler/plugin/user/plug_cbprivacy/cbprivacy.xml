@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Privacy</name>
+	<author>Krileon</author>
+	<creationDate>2017-01-06</creationDate>
+	<copyright>(C) 2004-2015 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Allows user controlled profile, tab, and field privacy settings.</description>
+	<version>2.0.7</version>
+	<release>4.0.3+build.2017.01.06.13.46.28.e0504a969</release>
+	<files>
+		<filename plugin="cbprivacy">cbprivacy.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbprivacy.php</filename>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+		<foldername>language</foldername>
+	</files>
+	<delete>
+		<filename>cbprivacy.css</filename>
+		<filename>admin.cbprivacy.css</filename>
+		<filename>admin.cbprivacy.html.php</filename>
+		<filename>admin.cbprivacy.php</filename>
+		<filename>cbprivacy.class.php</filename>
+		<filename>tab.cbprivacy.php</filename>
+		<filename>field.cbprivacy.php</filename>
+		<filename>plugin.cbprivacy.php</filename>
+		<filename>toolbar.cbprivacy.html.php</filename>
+		<filename>toolbar.cbprivacy.php</filename>
+		<filename>install.cbprivacy.php</filename>
+		<foldername>images</foldername>
+		<foldername>js</foldername>
+		<foldername>templates/default/images</foldername>
+	</delete>
+	<fieldtypes>
+		<field type="privacy_profile" label="Profile Privacy" unique="true">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Privacy">
+						<param name="cbprivacy_profile_default" type="list" multiple="true" default="0" blanktext="" size="10" label="Default" description="Select default privacy for profiles.">
+							<data name="" type="private" class="cbprivacyClass" method="getPrivacyOptions" />
+						</param>
+						<param name="cbprivacy_profile_fields" type="field" multiple="true" default="" size="10" label="Include Fields" description="Select the fields to also protect in addition to protecting profile access. This will cause fields rendered outside of profile to respect profile privacy settings." />
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+		<field type="privacy_disable_me" label="Disable Me" unique="true">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<showview view="fieldLayoutParams" mode="edit" type="view" />
+			</params>
+		</field>
+		<field type="privacy_delete_me" label="Delete Me" unique="true">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<showview view="fieldLayoutParams" mode="edit" type="view" />
+			</params>
+		</field>
+	</fieldtypes>
+	<tabsparams>
+		<tab type="other_types" label="Tab privacy preferences">
+			<params>
+				<param name="cbprivacy_display" type="list" default="0" label="Display" description="Select privacy display for this tab. Does not affect backend. Moderators are exempt from display privacy settings and can always see tabs.">
+					<option value="0">Normal CB settings</option>
+					<option value="1">User can control privacy</option>
+					<option value="2">Moderators can control privacy</option>
+					<option value="3">Forced privacy control</option>
+				</param>
+				<if name="cbprivacy_display" type="showhide" operator=">" value="0" valuetype="const:int">
+					<param name="cbprivacy_display_reg" type="yesno" default="0" label="Registration" description="Enable or disable privacy selection on registration." yes="Enable" no="Disable" />
+					<param name="cbprivacy_default" type="list" multiple="true" default="0" blanktext="" size="10" label="Default" description="Select default privacy for this tab.">
+						<data name="" type="private" class="cbprivacyClass" method="getPrivacyOptions" />
+					</param>
+				</if>
+				<param name="cbprivacy_edit" type="list" default="0" label="Edit Display" description="Select edit display for this tab. Does not affect backend.">
+					<option value="0">Normal CB settings</option>
+					<option value="1">No edit display at all</option>
+					<option value="2">Moderators only edit display</option>
+					<option value="3">Custom view access level</option>
+				</param>
+				<if name="cbprivacy_edit" type="showhide" operator="=" value="3" valuetype="const:int">
+					<param name="cbprivacy_edit_access" type="viewaccesslevel" default="1" label="Edit Access" description="Select edit display view access level for this tab. Does not affect backend." version="false" />
+				</if>
+			</params>
+		</tab>
+	</tabsparams>
+	<fieldsparams>
+		<field type="other_types" label="Field privacy preferences">
+			<params>
+				<param name="cbprivacy_display" type="list" default="0" label="Display" description="Select privacy display for this field. Does not affect backend. Moderators are exempt from display privacy settings and can always see fields.">
+					<option value="0">Normal CB settings</option>
+					<option value="1">User can control privacy</option>
+					<option value="2">Moderators can control privacy</option>
+					<option value="3">Forced privacy control</option>
+				</param>
+				<if name="cbprivacy_display" type="showhide" operator=">" value="0" valuetype="const:int">
+					<param name="cbprivacy_display_reg" type="yesno" default="1" label="Registration" description="Enable or disable privacy selection on registration." yes="Enable" no="Disable" />
+					<param name="cbprivacy_default" type="list" multiple="true" default="0" blanktext="" size="10" label="Default" description="Select default privacy for this field.">
+						<data name="" type="private" class="cbprivacyClass" method="getPrivacyOptions" />
+					</param>
+				</if>
+				<param name="cbprivacy_edit" type="list" default="0" label="Edit Display" description="Select edit display for this field. Does not affect backend.">
+					<option value="0">Normal CB settings</option>
+					<option value="1">No edit display at all</option>
+					<option value="2">Moderators only edit display</option>
+					<option value="3">Custom view access level</option>
+				</param>
+				<if name="cbprivacy_edit" type="showhide" operator="=" value="3" valuetype="const:int">
+					<param name="cbprivacy_edit_access" type="viewaccesslevel" default="1" label="Edit Access" description="Select edit display view access level for this field. Does not affect backend." version="false" />
+				</if>
+			</params>
+		</field>
+	</fieldsparams>
+	<tabs>
+		<tab type="existingSytemTab" class="getContactTab">
+			<fields>
+				<field type="privacy_profile" title="Profile Privacy" name="privacy_profile" description="Select your profile privacy. Profile privacy determines who can see your profile and its related information." registration="0" readonly="0" profile="0" published="0" />
+				<field type="privacy_disable_me" title="Disable My Account" name="privacy_disable_me" description="This will disable your account and hide all profile information associated with it." registration="0" readonly="0" profile="0" published="0" />
+				<field type="privacy_delete_me" title="Delete My Account" name="privacy_delete_me" description="This will delete your account and all profile information associated with it." registration="0" readonly="0" profile="0" published="0" />
+			</fields>
+		</tab>
+	</tabs>
+	<params>
+		<tabpane name="privacy">
+			<tabpanetab label="General">
+				<param name="general_template" type="folderlist" default="default" label="Template" description="Select template to be used for all of CB Privacy. If template is incomplete then missing files will be used from the default template. Template files can be located at the following location: components/com_comprofiler/plugin/user/plug_cbprivacy/templates/." directory="/components/com_comprofiler/plugin/user/plug_cbprivacy/templates/" />
+				<param name="general_class" type="text" default="" size="20" label="Class" description="Optionally add a class suffix to surrounding DIV encasing all of CB Privacy." />
+			</tabpanetab>
+			<tabpanetab label="Privacy">
+				<param name="privacy_options_visible" type="yesno" default="1" label="Public" description="Enable or disable Public privacy option." yes="Enable" no="Disable" />
+				<if name="profile_viewaccesslevel" nametype="cbconfig:int" type="condition" operator="=" value="1" valuetype="const:int">
+					<param name="privacy_options_users" type="yesno" default="1" label="Users" description="Enable or disable Users privacy option." yes="Enable" no="Disable" />
+				</if>
+				<param name="privacy_options_invisible" type="yesno" default="1" label="Private" description="Enable or disable Private privacy option." yes="Enable" no="Disable" />
+				<if name="allowConnections" nametype="cbconfig:int" type="condition" operator="=" value="1" valuetype="const:int">
+					<param name="privacy_options_conn" type="yesno" default="1" label="Connections" description="Enable or disable Connections privacy option." yes="Enable" no="Disable" />
+					<param name="privacy_options_connofconn" type="yesno" default="1" label="Connections of Connections" description="Enable or disable Connections of Connections privacy option." yes="Enable" no="Disable" />
+					<param name="privacy_options_conntypes" type="list" multiple="true" default="0" blanktext="" size="6" label="Connection Types" description="Enable or disable Connection Types privacy option. Select the connetion types available for privacy control.">
+						<option value="">Disable</option>
+						<option value="0">All Connection Types</option>
+						<data name="" type="private" class="cbprivacyClass" method="getConnectionTypes" />
+					</param>
+				</if>
+				<param name="privacy_options_viewaccesslevels" type="viewaccesslevel" multiple="true" default="" blanktext="" size="6" label="View Access Levels" description="Enable or disable View Access Levels privacy option. Select the view access levels available for privacy control." managelevels="false">
+					<option value="">Disable</option>
+					<option value="0">All View Access Levels</option>
+				</param>
+				<param name="privacy_options_usergroups" type="usergroup" multiple="true" default="" blanktext="" size="6" label="Usergroups" description="Enable or disable Usergroups privacy option. Select the usergroups available for privacy control." managegroups="false">
+					<option value="">Disable</option>
+					<option value="0">All Usergroups</option>
+				</param>
+			</tabpanetab>
+		</tabpane>
+	</params>
+	<database version="1">
+		<table name="#__comprofiler_plugin_privacy" class="cbprivacyPrivacyTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="type" type="sql:varchar(50)" />
+				<column name="subtype" type="sql:varchar(50)" null="true" />
+				<column name="item" type="sql:varchar(50)" null="true" />
+				<column name="rule" type="sql:varchar(255)" null="true" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+				<index name="privacy_rows">
+					<column name="user_id" />
+					<column name="type" />
+					<column name="subtype" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+		<table name="#__comprofiler_plugin_privacy_closed" class="cbprivacyClosedTable" strict="true" drop="never">
+			<columns strict="true" drop="never">
+				<column name="id" type="sql:int(11)" unsigned="true" auto_increment="1" strict="true" />
+				<column name="user_id" type="sql:int(11)" />
+				<column name="username" type="sql:varchar(255)" />
+				<column name="name" type="sql:varchar(255)" />
+				<column name="email" type="sql:varchar(255)" />
+				<column name="type" type="sql:varchar(50)" />
+				<column name="date" type="sql:datetime" default="0000-00-00 00:00:00" />
+				<column name="reason" type="sql:text" null="true" />
+				<column name="params" type="sql:text" null="true" />
+			</columns>
+			<indexes strict="true" drop="always">
+				<index name="PRIMARY" type="primary">
+					<column name="id" />
+				</index>
+			</indexes>
+			<engine type="InnoDB" sameastable="#__comprofiler" strict="updatewithtable" />
+		</table>
+	</database>
+</cbinstall>

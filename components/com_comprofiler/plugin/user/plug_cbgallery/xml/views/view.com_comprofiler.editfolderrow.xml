@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editfolder" type="params" ui="admin" label="Album" icon="folder-o" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:folderrows" label="Cancel" />
+			</toolbarmenu>
+			<param name="published" type="published" label="Published" description="Select publish status of the album. If unpublished the album will not be visible to the public." />
+			<param name="title" type="text" label="Title" size="25" description="Optionally input a title. If no title is provided the date will be displayed as the title." />
+			<param name="description" type="textarea" label="Description" cols="40" rows="5" description="Optionally input a description." />
+			<param name="user_id" type="user" label="Owner" size="5" validate="required" description="Input owner as single integer user_id." />
+			<param name="asset" type="text" label="Asset" size="20" description="Input the asset path for this album. Asset helps determine the location of this album. Leave blank to automatically set to profile.user_id." />
+		</view>
+	</views>
+</cbxml>

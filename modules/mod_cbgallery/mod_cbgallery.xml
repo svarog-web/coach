@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="2.5" type="module" client="site" method="upgrade">
+	<name>CB Gallery</name>
+	<author>Krileon</author>
+	<creationDate>2016-08-31</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>2.0.0</version>
+	<description>Displays CB Gallery as a module.</description>
+	<files>
+		<filename module="mod_cbgallery">mod_cbgallery.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="gallery" label="Gallery">
+				<field name="gallery_asset" type="text" default="" label="Asset" description="Input the asset for this gallery. Asset determines gallery location (e.g. global.cars, profile.[user_id], profile.%). Leave blank for profile galley based off the viewing user (e.g. profile.[user_id]). Additionally substitutions are supported (e.g. profile.[user_id].cars)." />
+				<field name="gallery_folder" type="text" default="" size="5" label="Album" description="Optionally input a album id to filter the gallery to. Note this album should exist in the gallery being displayed." />
+			</fieldset>
+
+			<fieldset name="galleryalbums" label="Albums">
+				<field name="gallery_folders" type="list" default="-1" label="Albums" description="Enable or disable display of albums.">
+					<option value="-1">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field type="spacer" name="galleryalbumsdisplay" label="&lt;hr/&gt;Display&lt;hr/&gt;" />
+					<field name="gallery_folders_width" type="number" default="" size="5" label="Box Width" description="Input the item box width in pixels. Leave blank for same as global (default: 200). Note you can have a minimum box width of 100." />
+				<field type="spacer" name="galleryalbumscreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_folders_create" type="list" default="0" label="Create" description="Enable or disable creation of albums.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_folders_create_access" type="accesslevel" default="-1" label="Access" description="Select album create access. Access determines who can create albums. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+					</field>
+					<field name="gallery_folders_create_limit" type="sql" query="SELECT f.`name` AS value, f.`name` AS text FROM `#__comprofiler_fields` AS f LEFT JOIN `#__comprofiler_tabs` AS t  ON t.`tabid` = f.`tabid` WHERE f.`published` = 1 AND f.`name` != &apos;NA&apos; ORDER BY t.`position`, t.`ordering`, f.`ordering`" key_field="value" value_field="text" default="-1" label="Limit" description="Select the field to use for album create limit. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="custom">Custom</option>
+					</field>
+					<field name="gallery_folders_create_limit_custom" type="number" default="" size="5" label="Custom Limit" description="Input number of albums each individual user is limited to creating. Leave blank for same as global (default: unlimited). Note this only applies if Limit is set to Custom." />
+					<field name="gallery_folders_create_approval" type="list" default="-1" label="Approval" description="Enable or disable approval of albums. Approval requires a moderator to publish a album before it is made visible. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_folders_create_approval_notify" type="list" default="-1" label="Notify" description="Enable or disable moderator notifications for albums needing approval.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_folders_create_captcha" type="list" default="-1" label="Captcha" description="Enable or disable usage of captcha on albums. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="galleryalbumspaging" label="&lt;hr/&gt;Paging&lt;hr/&gt;" />
+					<field name="gallery_folders_paging" type="list" default="0" label="Paging" description="Enable or disable usage of paging.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_folders_paging_limit" type="number" default="5" size="5" label="Limit" description="Input page limit. Page limit determines how many albums are displayed per page. If paging is disabled this can still be used to limit the number of albums displayed. Leave blank for same as global (default: 15)." />
+					<field name="gallery_folders_search" type="list" default="0" label="Search" description="Enable or disable usage of search on albums.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_folders_orderby" type="list" default="-1" label="Order By" description="Select how to order the albums.">
+						<option value="-1">Same as Global</option>
+						<option value="random">Random</option>
+						<option value="title_asc">Title ASC</option>
+						<option value="title_desc">Title DESC</option>
+						<option value="description_asc">Description ASC</option>
+						<option value="description_desc">Descriptin DESC</option>
+						<option value="date_asc">Date ASC</option>
+						<option value="date_desc">Date DESC</option>
+					</field>
+			</fieldset>
+
+			<fieldset name="gallerymedia" label="Media">
+				<field type="spacer" name="gallerymediadisplay" label="Display&lt;hr/&gt;" />
+					<field name="gallery_items_width" type="number" default="" size="5" label="Box Width" description="Input the media box width in pixels. Leave blank for same as global (default: 200). Note you can have a minimum box width of 100." />
+				<field type="spacer" name="gallerymediacreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_items_create" type="list" default="0" label="Create" description="Enable or disable creation of media.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_items_create_captcha" type="list" default="-1" label="Captcha" description="Enable or disable usage of captcha on media. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration. Note has no affect on multi-upload pages.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_items_create_approval_notify" type="list" default="-1" label="Notify" description="Enable or disable moderator notifications for media needing approval.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="gallerymediapaging" label="&lt;hr/&gt;Paging&lt;hr/&gt;" />
+					<field name="gallery_items_paging" type="list" default="0" label="Paging" description="Enable or disable usage of paging.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_items_paging_limit" type="number" default="5" size="5" label="Limit" description="Input page limit. Page limit determines how many media are displayed per page. If paging is disabled this can still be used to limit the number of media displayed. Leave blank for same as global (default: 15)." />
+					<field name="gallery_items_search" type="list" default="0" label="Search" description="Enable or disable usage of search on media.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_items_orderby" type="list" default="-1" label="Order By" description="Select how to order the media.">
+						<option value="-1">Same as Global</option>
+						<option value="random">Random</option>
+						<option value="value_asc">Value ASC</option>
+						<option value="value_desc">Value DESC</option>
+						<option value="title_asc">Title ASC</option>
+						<option value="title_desc">Title DESC</option>
+						<option value="description_asc">Description ASC</option>
+						<option value="description_desc">Descriptin DESC</option>
+						<option value="date_asc">Date ASC</option>
+						<option value="date_desc">Date DESC</option>
+					</field>
+			</fieldset>
+
+			<fieldset name="galleryphotos" label="Photos">
+				<field name="gallery_photos" type="list" default="-1" label="Photos" description="Enable or disable display of photos.">
+					<option value="-1">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field type="spacer" name="galleryphotosdisplay" label="&lt;hr/&gt;Display&lt;hr/&gt;" />
+					<field name="gallery_photos_download" type="list" default="-1" label="Download" description="Enable or disable downloading of photos.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="galleryphotoscreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_photos_create" type="list" default="0" label="Create" description="Enable or disable creation of photos.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_photos_create_access" type="accesslevel" default="-1" label="Access" description="Select photo create access. Access determines who can create photos. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+					</field>
+					<field name="gallery_photos_create_limit" type="sql" query="SELECT f.`name` AS value, f.`name` AS text FROM `#__comprofiler_fields` AS f LEFT JOIN `#__comprofiler_tabs` AS t  ON t.`tabid` = f.`tabid` WHERE f.`published` = 1 AND f.`name` != &apos;NA&apos; ORDER BY t.`position`, t.`ordering`, f.`ordering`" key_field="value" value_field="text" default="-1" label="Limit" description="Select the field to use for photo create limit. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="custom">Custom</option>
+					</field>
+					<field name="gallery_photos_create_limit_custom" type="number" default="" size="5" label="Custom Limit" description="Input number of photos each individual user is limited to creating. Leave blank for same as global (default: unlimited). Note this only applies if Limit is set to Custom." />
+					<field name="gallery_photos_upload" type="list" default="-1" label="Upload" description="Enable or disable uploading of photos.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_photos_link" type="list" default="-1" label="Link" description="Enable or disable linking of photos. Linking allows photos to be displayed in the gallery from external sources.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_photos_create_approval" type="list" default="-1" label="Approval" description="Enable or disable approval of photos. Approval requires a moderator to publish a photo before it is made visible. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="galleryphotosvalidation" label="&lt;hr/&gt;Validation&lt;hr/&gt;" />
+					<field name="gallery_photos_resample" type="list" default="-1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_photos_image_height" type="text" default="" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to. Leave blank for same as global (default: 640)." />
+					<field name="gallery_photos_image_width" type="text" default="" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to. Leave blank for same as global (default: 1280)." />
+					<field name="gallery_photos_thumbnail_height" type="text" default="" label="Maximum Thumbnail Height" description="Input the maximum thumbnail height in pixels that the image will be resized to. Leave blank for same as global (default: 320)." />
+					<field name="gallery_photos_thumbnail_width" type="text" default="" label="Maximum Thumbnail Width" description="Input the maximum thumbnail width in pixels that the image will be resized to. Leave blank for same as global (default: 640)." />
+					<field name="gallery_photos_maintain_aspect_ratio" type="list" default="-1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Yes</option>
+						<option value="2">Yes, with Cropping</option>
+						<option value="0">No</option>
+					</field>
+					<field name="gallery_photos_min_size" type="number" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+					<field name="gallery_photos_max_size" type="number" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+			</fieldset>
+
+			<fieldset name="galleryvideos" label="Videos">
+				<field name="gallery_videos" type="list" default="-1" label="Videos" description="Enable or disable display of videos.">
+					<option value="-1">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field type="spacer" name="galleryvideosdisplay" label="&lt;hr/&gt;Display&lt;hr/&gt;" />
+					<field name="gallery_videos_download" type="list" default="-1" label="Download" description="Enable or disable downloading of videos.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="galleryvideoscreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_videos_create" type="list" default="0" label="Create" description="Enable or disable creation of videos.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_videos_create_access" type="accesslevel" default="-1" label="Access" description="Select video create access. Access determines who can create videos. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+					</field>
+					<field name="gallery_videos_create_limit" type="sql" query="SELECT f.`name` AS value, f.`name` AS text FROM `#__comprofiler_fields` AS f LEFT JOIN `#__comprofiler_tabs` AS t  ON t.`tabid` = f.`tabid` WHERE f.`published` = 1 AND f.`name` != &apos;NA&apos; ORDER BY t.`position`, t.`ordering`, f.`ordering`" key_field="value" value_field="text" default="-1" label="Limit" description="Select the field to use for video create limit. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="custom">Custom</option>
+					</field>
+					<field name="gallery_videos_create_limit_custom" type="number" default="" size="5" label="Custom Limit" description="Input number of videos each individual user is limited to creating. Leave blank for same as global (default: unlimited). Note this only applies if Limit is set to Custom." />
+					<field name="gallery_videos_upload" type="list" default="-1" label="Upload" description="Enable or disable uploading of videos.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_videos_link" type="list" default="-1" label="Link" description="Enable or disable linking of videos. Linking allows videos to be displayed in the gallery from external sources.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_videos_create_approval" type="list" default="-1" label="Approval" description="Enable or disable approval of videos. Approval requires a moderator to publish a video before it is made visible. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="galleryvideosvalidation" label="&lt;hr/&gt;Validation&lt;hr/&gt;" />
+					<field name="gallery_videos_min_size" type="number" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+					<field name="gallery_videos_max_size" type="number" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+			</fieldset>
+
+			<fieldset name="galleryfiles" label="Files">
+				<field name="gallery_files" type="list" default="-1" label="Files" description="Enable or disable display of files.">
+					<option value="-1">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field type="spacer" name="galleryfilescreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_files_create" type="list" default="0" label="Create" description="Enable or disable creation of files.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_files_create_access" type="accesslevel" default="-1" label="Access" description="Select file create access. Access determines who can create files. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+					</field>
+					<field name="gallery_files_create_limit" type="sql" query="SELECT f.`name` AS value, f.`name` AS text FROM `#__comprofiler_fields` AS f LEFT JOIN `#__comprofiler_tabs` AS t  ON t.`tabid` = f.`tabid` WHERE f.`published` = 1 AND f.`name` != &apos;NA&apos; ORDER BY t.`position`, t.`ordering`, f.`ordering`" key_field="value" value_field="text" default="-1" label="Limit" description="Select the field to use for file create limit. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="custom">Custom</option>
+					</field>
+					<field name="gallery_files_create_limit_custom" type="number" default="" size="5" label="Custom Limit" description="Input number of files each individual user is limited to creating. Leave blank for same as global (default: unlimited). Note this only applies if Limit is set to Custom." />
+					<field name="gallery_files_upload" type="list" default="-1" label="Upload" description="Enable or disable uploading of files.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_files_link" type="list" default="-1" label="Link" description="Enable or disable linking of files. Linking allows files to be displayed in the gallery from external sources.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_files_create_approval" type="list" default="-1" label="Approval" description="Enable or disable approval of files. Approval requires a moderator to publish a file before it is made visible. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="galleryfilesvalidation" label="&lt;hr/&gt;Validation&lt;hr/&gt;" />
+					<field name="gallery_files_extensions" type="text" default="" size="40" label="File Extensions" description="Input the allowed file extensions as a comma separated list. Leave blank for same as global (default: zip,rar,doc,pdf,txt,xls)." />
+					<field name="gallery_files_min_size" type="number" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+					<field name="gallery_files_max_size" type="number" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+			</fieldset>
+
+			<fieldset name="gallerymusic" label="Music">
+				<field name="gallery_music" type="list" default="-1" label="Music" description="Enable or disable display of music.">
+					<option value="-1">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field type="spacer" name="gallerymusicdisplay" label="&lt;hr/&gt;Display&lt;hr/&gt;" />
+					<field name="gallery_music_download" type="list" default="-1" label="Download" description="Enable or disable downloading of music.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="gallerymusiccreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_music_create" type="list" default="0" label="Create" description="Enable or disable creation of music.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_music_create_access" type="accesslevel" default="-1" label="Access" description="Select music create access. Access determines who can create music. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+					</field>
+					<field name="gallery_music_create_limit" type="sql" query="SELECT f.`name` AS value, f.`name` AS text FROM `#__comprofiler_fields` AS f LEFT JOIN `#__comprofiler_tabs` AS t  ON t.`tabid` = f.`tabid` WHERE f.`published` = 1 AND f.`name` != &apos;NA&apos; ORDER BY t.`position`, t.`ordering`, f.`ordering`" key_field="value" value_field="text" default="-1" label="Limit" description="Select the field to use for music create limit. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="custom">Custom</option>
+					</field>
+					<field name="gallery_music_create_limit_custom" type="number" default="" size="5" label="Custom Limit" description="Input number of music each individual user is limited to creating. Leave blank for same as global (default: unlimited). Note this only applies if Limit is set to Custom." />
+					<field name="gallery_music_upload" type="list" default="-1" label="Upload" description="Enable or disable uploading of music.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_music_link" type="list" default="-1" label="Link" description="Enable or disable linking of music. Linking allows music to be displayed in the gallery from external sources.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_music_create_approval" type="list" default="-1" label="Approval" description="Enable or disable approval of music. Approval requires a moderator to publish a music before it is made visible. Moderators are exempt from this configuration.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="gallerymusicvalidation" label="&lt;hr/&gt;Validation&lt;hr/&gt;" />
+					<field name="gallery_music_min_size" type="number" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+					<field name="gallery_music_max_size" type="number" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+			</fieldset>
+
+			<fieldset name="gallerythumbnails" label="Thumbnails">
+				<field name="gallery_thumbnails" type="list" default="-1" label="Thumbnails" description="Enable or disable display of custom thumbnails for videos, music, and files.">
+					<option value="-1">Same as Global</option>
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field type="spacer" name="gallerythumbnailscreate" label="&lt;hr/&gt;Create&lt;hr/&gt;" />
+					<field name="gallery_thumbnails_upload" type="list" default="-1" label="Upload" description="Enable or disable uploading of thumbnails.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_thumbnails_link" type="list" default="-1" label="Link" description="Enable or disable linking of thumbnails. Linking allows thumbnails to be displayed in the gallery from external sources.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+				<field type="spacer" name="gallerythumbnailsvalidation" label="&lt;hr/&gt;Validation&lt;hr/&gt;" />
+					<field name="gallery_thumbnails_resample" type="list" default="-1" label="Always Resample" description="Choose if images uploaded should always be resampled. Resampling adds additional security, but animations will only be kept when using ImageMagick.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</field>
+					<field name="gallery_thumbnails_image_height" type="text" default="" label="Maximum Image Height" description="Input the maximum height in pixels that the image will be resized to. Leave blank for same as global (default: 640)." />
+					<field name="gallery_thumbnails_image_width" type="text" default="" label="Maximum Image Width" description="Input the maximum width in pixels that the image will be resized to. Leave blank for same as global (default: 1280)." />
+					<field name="gallery_thumbnails_maintain_aspect_ratio" type="list" default="-1" label="Maintain Aspect Ratio" description="Choose if images uploaded should maintain their aspect ratio when resizing. If set to No the image will always be resized to the specified maximum width and height. If set to Yes the aspect ratio will be maintained as much as possible within the maximum width and height. If set to Yes with Cropping the image will always resize to the specified maximum width and height within the aspect ratio and crop any overflow; this is useful for maintain squared images.">
+						<option value="-1">Same as Global</option>
+						<option value="1">Yes</option>
+						<option value="2">Yes, with Cropping</option>
+						<option value="0">No</option>
+					</field>
+					<field name="gallery_thumbnails_min_size" type="number" default="" size="5" label="Minimum File Size" description="Input the minimum item file size in KBs. Leave blank for same as global (default: 0)." />
+					<field name="gallery_thumbnails_max_size" type="number" default="" size="5" label="Maximum File Size" description="Input the maximum item file size in KBs. Set to 0 for no limit. Leave blank for same as global (default: 1024)." />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

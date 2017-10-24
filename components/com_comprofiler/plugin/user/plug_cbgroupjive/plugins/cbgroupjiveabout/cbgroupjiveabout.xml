@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user/plug_cbgroupjive/plugins">
+	<name>CB GroupJive About</name>
+	<author>Krileon</author>
+	<creationDate>2016-12-29</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Provides groups with a About tab to display detailed group information.</description>
+	<version>2.1.0</version>
+	<release>3.1.0</release>
+	<installfile>install.cbgroupjiveabout.php</installfile>
+	<files>
+		<filename plugin="cbgroupjiveabout">cbgroupjiveabout.php</filename>
+		<filename>index.html</filename>
+		<filename>component.cbgroupjiveabout.php</filename>
+		<filename>install.cbgroupjiveabout.php</filename>
+		<foldername>language</foldername>
+		<foldername>library</foldername>
+		<foldername>templates</foldername>
+		<foldername>xml</foldername>
+	</files>
+	<libraries>
+		<library name="CB/Plugin/GroupJiveAbout">
+			<files folder="library">
+				<filename>AboutTrigger.php</filename>
+				<filename>RouterTrigger.php</filename>
+				<filename>index.html</filename>
+			</files>
+		</library>
+	</libraries>
+	<params>
+		<param name="groups_about_substitutions" type="yesno" default="0" label="Substitutions" description="Enable or disable usage of substitutions on group about." yes="Enable" no="Disable" />
+		<param name="groups_about_content_plugins" type="yesno" default="0" label="Content Plugins" description="Enable or disable usage of content plugins content.prepare on group about." yes="Enable" no="Disable" />
+		<param name="groups_about_captcha" type="yesno" default="0" label="Captcha" description="Enable or disable usage of captcha on group about. Requires latest CB AntiSpam to be installed and published. Moderators are exempt from this configuration." yes="Enable" no="Disable" />
+	</params>
+	<database>
+	</database>
+</cbinstall>

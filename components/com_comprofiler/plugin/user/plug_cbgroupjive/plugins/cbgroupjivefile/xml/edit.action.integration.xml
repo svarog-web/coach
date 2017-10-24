@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjgroupintegrations" type="params" ui="admin" label="Files">
+			<param name="file" type="xml:groupjive_enable_approval" default="1" label="Display" description="Optionally enable or disable usage of files. Group owner and group administrators are exempt from this configuration and can always upload files. Note existing files will still be accessible." />
+		</view>
+	</views>
+</cbxml>

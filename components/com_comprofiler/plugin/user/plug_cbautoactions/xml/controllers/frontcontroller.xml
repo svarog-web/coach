@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types />
+	<actions ui="admin" permission="core.manage" permissionasset="com_comprofiler">
+		<action name="autoactions" request="view action" action="editPlugin showautoactions">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbautoactions/models/*" mandatory="false" mode="extend" keyattribute="name" />
+			<showview view="showautoactions" mode="show" />
+		</action>
+
+		<action name="systemactions" request="view action" action="editPlugin showsystemactions">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.autoactions" mandatory="true" />
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbautoactions/models/*" mandatory="false" mode="extend" keyattribute="name" />
+			<showview view="showsystemactions" mode="show" />
+		</action>
+
+		<action name="autoaction" request="view table action" action="editPlugin autoactionsbrowser editrow" requestparameters="autoactionid">
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="xml/models/model.autoactions" mandatory="true" />
+			<extend toxpathnode="/cbxml/types" fromxpathnode="/*/types/type" file="/components/com_comprofiler/plugin/user/plug_cbautoactions/models/*" mandatory="false" mode="extend" keyattribute="name" />
+			<extend toxpathnode="/cbxml/views" fromxpathnode="/*/views/view" file="/components/com_comprofiler/plugin/user/plug_cbautoactions/models/*" mandatory="false" />
+			<showview view="editautoaction" mode="edit">
+				<data name="" type="sql:row" table="#__comprofiler_plugin_autoactions" class="cbautoactionsActionTable" key="id" value="autoactionid" valuetype="request:int" />
+			</showview>
+		</action>
+	</actions>
+	<views>
+		<view name="pluginmenu" type="params" ui="admin" label="" viewformatting="none">
+			<param name="autoactions" type="button" default="Auto Actions" buttonclass="default" buttonsize="xsmall" link="cb_action:autoactions" parameters="cid" paramvalues="id" label="" />
+			<param name="systemactions" type="button" default="System Actions" buttonclass="default" buttonsize="xsmall" link="cb_action:systemactions" parameters="cid" paramvalues="id" label="" />
+		</view>
+	</views>
+</cbxml>

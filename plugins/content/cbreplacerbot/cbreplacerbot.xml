@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="3.4" type="plugin" group="content" method="upgrade">
+	<name>Content - Community Builder Replacer</name>
+	<creationDate>2016-04-30</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>1.2.0</version>
+	<description>This plugin allows customized replacers to replace a string to a different string. Optionally supports REGEXP replacers, translations, substitutions, and case sensitive replacements.</description>
+	<files>
+		<filename plugin="cbreplacerbot">cbreplacerbot.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="replacers" type="repeatable" filter="raw" icon="list" select="List" label="Replacers" default="">
+					<fieldset hidden="true" name="replacers_modal" repeat="true">
+						<field name="from" type="textarea" filter="raw" cols="60" rows="3" label="From" description="Supply the string that should be replaced. Note if using REGEXP this must be a valid regular expression." class="span5" />
+						<field name="to" type="textarea" filter="raw" cols="60" rows="3" label="To" description="Supply what the string should be replaced by. Leave blank to simply remove a string." class="span5" />
+						<field name="regexp" type="checkbox" label="REGEXP" description="From and To" />
+						<field name="translate" type="checkbox" label="Translate" description="From and To" />
+						<field name="substitutions" type="checkbox" label="Substitutions" description="To Only" />
+						<field name="casesensitive" type="checkbox" label="Case Sensitive" description="Non-REGEXP Only" />
+					</fieldset>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

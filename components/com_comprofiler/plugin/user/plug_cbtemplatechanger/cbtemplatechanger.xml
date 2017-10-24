@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0.0" type="plugin" group="user">
+	<name>CB Template Changer</name>
+	<author>Krileon</author>
+	<creationDate>2014-09-25</creationDate>
+	<copyright>(C) 2004-2014 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>A cb fields plugin to add a profile template field to profile edit.</description>
+	<version>2.0</version>
+	<release>3.0.0</release>
+	<files>
+		<filename plugin="cbtemplatechanger">cbtemplatechanger.php</filename>
+		<filename>index.html</filename>
+		<foldername>language</foldername>
+	</files>
+	<fieldtypes>
+		<field type="templatechanger_cb" label="CB Template Changer" unique="true">
+			<data name="" nametype="namesuffix" type="sql:text||sql:varchar(255)" null="true" default="NULL" />
+			<params>
+				<tabpane name="field">
+					<tabpanetab label="Layout">
+						<showview view="fieldLayoutParams" mode="edit" type="view" />
+					</tabpanetab>
+					<tabpanetab label="Display">
+						<param name="templatechanger_cb_exclude" type="list" multiple="true" default="" hideblanktext="true" label="Exclude" description="Optionally select Community Builder templates to exclude from selection.">
+							<data name="type" type="sql:multiplerows" table="#__comprofiler_plugin" key="id">
+								<rows>
+									<field name="folder" as="value" />
+									<field name="name" as="text" />
+								</rows>
+								<where>
+									<column name="type" operator="=" value="templates" type="sql:field" valuetype="const:string" />
+									<column name="published" operator="=" value="1" type="sql:field" valuetype="const:int" />
+								</where>
+								<orderby>
+									<field name="ordering" ordering="ASC" />
+								</orderby>
+							</data>
+						</param>
+					</tabpanetab>
+				</tabpane>
+			</params>
+		</field>
+	</fieldtypes>
+	<tabs>
+		<tab type="existingSytemTab" class="getContactTab">
+			<fields>
+				<field type="templatechanger_cb" title="Profile Template" name="template_profile" description="" registration="0" readonly="0" profile="0" />
+			</fields>
+		</tab>
+	</tabs>
+	<params>
+		<param name="templatechanger_user" type="list" default="0" label="User" description="Select what user to use for profile template display. This determines whos template selection will be used." >
+			<option value="0">Displayed</option>
+			<option value="1">Viewer</option>
+		</param>
+	</params>
+	<database>
+	</database>
+</cbinstall>

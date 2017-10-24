@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjnotifications" type="params" ui="admin">
+			<param name="photo_new" type="yesno" default="0" label="Upload of new photo" description="" yes="Notify" no="Don't Notify" />
+			<param name="photo_approve" type="yesno" default="0" label="New photo requires approval" description="" yes="Notify" no="Don't Notify" />
+		</view>
+	</views>
+</cbxml>

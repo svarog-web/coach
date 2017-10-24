@@ -1,0 +1,11 @@
+.cb_template .gjGroupFileItem {
+	word-break: break-all;
+}
+
+.cb_template .gjFileActivity {
+	padding: 10px;
+}
+
+.cb_template .gjFileActivity .table {
+	margin: 0;
+}

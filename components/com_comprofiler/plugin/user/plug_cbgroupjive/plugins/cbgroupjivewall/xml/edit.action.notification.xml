@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="gjnotifications" type="params" ui="admin">
+			<param name="wall_new" type="yesno" default="0" label="Create of new post" description="" yes="Notify" no="Don't Notify" />
+			<param name="wall_approve" type="yesno" default="0" label="New post requires approval" description="" yes="Notify" no="Don't Notify" />
+			<param name="wall_reply" type="yesno" default="0" label="User reply to my existing posts" description="" yes="Notify" no="Don't Notify" />
+		</view>
+	</views>
+</cbxml>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editactivitycomment" type="params" ui="admin" label="Comment" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:activitycommentrows" label="Cancel" />
+			</toolbarmenu>
+			<tabpane name="editpane">
+				<tabpanetab name="global" label="Global" description="">
+					<grid fluid="true">
+						<gridcol size="9">
+							<gridrow>
+								<param name="message" type="textarea" rows="10" label="Message" display="2lines" validate="required" description="Input the comment message." cssclass="input-block" />
+							</gridrow>
+						</gridcol>
+						<gridcol size="3">
+							<gridrow>
+								<param name="type" type="text" onchange="evaluate" label="Type" display="2lines" size="25" validate="required" description="Input the type of comment." />
+								<param name="subtype" type="text" onchange="evaluate" label="Sub-Type" display="2lines" size="25" description="Optionally input the comment subtype." />
+								<param name="item" type="text" label="Item" display="2lines" size="5" description="Optionally input the comment item id." />
+								<param name="parent" type="text" label="Parent" display="2lines" size="5" description="Optionally input the comment parent id." />
+								<param name="user_id" type="user" label="Owner" display="2lines" size="5" validate="required" description="Input owner as single integer user_id." />
+							</gridrow>
+						</gridcol>
+					</grid>
+				</tabpanetab>
+				<tabpanetab name="params" label="Parameters" description="">
+					<tabpane name="editcommentparams">
+						<tabpanetab name="commentreplies" label="Replies" description="">
+							<params name="params" type="params">
+								<params name="replies" type="params">
+									<param name="display" type="yesno" default="1" label="Display" description="Enable or disable display of replies for this comment entry. Note a stream that has replies disabled will not display replies regardless of this setting." yes="Enable" no="Disable" />
+								</params>
+							</params>
+						</tabpanetab>
+						<showview name="params" view="commentparams{raw:type}" mandatory="false" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+						<showview name="params" path="views/view[@name=&quot;commentparams{raw:type}&quot;]" action="comment" type="plugins" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+						<showview name="params" view="commentparams" mandatory="false" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+						<showview name="params" path="views/view[@name=&quot;commentparams&quot;]" action="comment" type="plugins" formatting="tab">
+							<data name="params" type="sql:string" default="" />
+						</showview>
+					</tabpane>
+				</tabpanetab>
+			</tabpane>
+		</view>
+	</views>
+</cbxml>

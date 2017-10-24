@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>CB Progress Field</name>
+	<author>Krileon</author>
+	<creationDate>2016-06-23</creationDate>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<description>Display a users profile progress with a field.</description>
+	<version>2.0.14</version>
+	<release>3.0.5+build.2016.06.23.02.07.22.947624ae9</release>
+	<files>
+		<filename plugin="cbprogressfield">cbprogressfield.php</filename>
+		<filename>index.html</filename>
+		<foldername>language</foldername>
+	</files>
+	<delete>
+		<filename>admin.cbprogressfield.css</filename>
+		<filename>admin.cbprogressfield.html.php</filename>
+		<filename>admin.cbprogressfield.php</filename>
+		<filename>cbprogressfield.class.php</filename>
+		<filename>field.cbprogressfield.css</filename>
+		<filename>field.cbprogressfield.php</filename>
+		<filename>plugin.cbprogressfield.php</filename>
+		<filename>toolbar.cbprogressfield.html.php</filename>
+		<filename>toolbar.cbprogressfield.php</filename>
+		<foldername>images</foldername>
+	</delete>
+	<fieldtypes>
+		<field type="progress" label="Progress" unique="false">
+			<database version="1">
+				<table name="#__comprofiler" class="moscomprofiler" maintable="true" strict="false" drop="never" shared="true">
+					<columns>
+					</columns>
+				</table>
+			</database>
+			<params>
+				<param name="prg_fields" type="field" multiple="true" size="10" default="" label="Fields" description="Select the fields to be used in progress calculation. All fields progress is calculated automatically from a scale of 100 percent." />
+				<param name="prg_bar" type="list" default="1" label="Bar" description="Select the color of the bar or disable bar display.">
+					<option value="0">Disable</option>
+					<option value="1">Default</option>
+					<option value="blue">Blue</option>
+					<option value="red">Red</option>
+					<option value="green">Green</option>
+					<option value="orange">Orange</option>
+				</param>
+				<if name="prg_bar" type="showhide" operator="!=" value="0" valuetype="const:int">
+					<param name="prg_completeness" type="list" default="0" label="Completeness" description="Enable or disable display of profile completeness inside the progress bar.">
+						<option value="0">Disable</option>
+						<option value="1">Enable</option>
+					</param>
+				</if>
+				<param name="prg_checklist" type="list" default="0" label="Checklist" description="Display checklist of fields which contribute towards profile completeness.">
+					<option value="0">Disable</option>
+					<option value="1">Complete</option>
+					<option value="2">InComplete</option>
+					<option value="3">Complete &amp; InComplete</option>
+				</param>
+				<param name="prg_hide" type="list" default="0" label="Hide on Complete" description="Enable or disable hiding of progress field when profile is completed.">
+					<option value="0">Disable</option>
+					<option value="1">Enable</option>
+				</param>
+				<param name="prg_private" type="list" default="1" label="Private Display" description="Enable or disable display of progress field to users self only. Moderators are exempt and can always see progress.">
+					<option value="0">Disable</option>
+					<option value="1">Enable</option>
+				</param>
+			</params>
+		</field>
+	</fieldtypes>
+	<params>
+	</params>
+	<database>
+	</database>
+</cbinstall>

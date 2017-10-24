@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<views>
+		<view name="editactivityemote" type="params" ui="admin" label="Emote" icon="list-alt" viewformatting="div">
+			<toolbarmenu>
+				<menu name="apply" action="apply" task="act=apply" label="Save" />
+				<menu name="save" action="save" task="act=save" label="Save &amp; Close" />
+				<menu name="savenew" action="custom" task="act=savenew" label="Save &amp; New" icon="save-new" />
+				<menu name="cancel" action="linkAction" task="cancel" link="cb_action:activityemoterows" label="Cancel" />
+			</toolbarmenu>
+			<param name="published" type="published" default="1" label="Publish" description="Select publish status of this emote. Unpublished emote will not display." />
+			<param name="value" type="text" label="Emote" size="20" validate="required" description="Input the emote. Emote is the emoji code used to render the emote (e.g. sad is used as :sad:)." />
+			<if name="id" nametype="param:string" operator="!=" value="" valuetype="const:int" type="condition">
+				<param name="" type="private" method="icon" label="Preview" />
+			</if>
+			<param name="icon" type="imagelist" directory="/images" hide_default="true" hide_none="true" label="Icon" blanktext="CSS Class" description="Select the image file to be used as the emote icon source." />
+			<if name="icon" type="showhide" operator="=" value="" valuetype="const:string">
+				<param name="class" type="text" label="CSS Class" size="20" validate="required" description="Input the CSS class to render an icon display." />
+			</if>
+			<param name="ordering" type="ordering" value="value" label="Ordering" description="Select the ordering of this emote. Ordering determines what order the emote displays in the dropdown." />
+		</view>
+	</views>
+</cbxml>

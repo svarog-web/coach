@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension version="3.4" type="plugin" group="system" method="upgrade">
+	<name>System - Community Builder Redirect</name>
+	<creationDate>2016-07-13</creationDate>
+	<author>Krileon</author>
+	<copyright>(C) 2004-2016 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved2 License</copyright>
+	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2. All copyright statements must be kept and derivative work must prominently duly acknowledge original work on web interface and on website where downloaded.</license>
+	<authorEmail>krileon@joomlapolis.com</authorEmail>
+	<authorUrl>http://www.joomlapolis.com/</authorUrl>
+	<version>1.1.0</version>
+	<description>This plugin implements 404 redirect replacements with support for REGEXP replacements.</description>
+	<files>
+		<filename plugin="cbredirectbot">cbredirectbot.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<config>
+		<fields name="params" addfieldpath="/administrator/components/com_redirect/models/fields">
+			<fieldset name="basic">
+				<field name="redirects" type="repeatable" filter="raw" icon="list" select="List" label="Redirects" default="">
+					<fieldset hidden="true" name="redirects_modal" repeat="true">
+						<field name="from" type="textarea" filter="raw" cols="60" rows="3" label="From" description="Supply the string to search in a URL." class="span5" />
+						<field name="to" type="textarea" filter="raw" cols="60" rows="3" label="To" description="Supply the string to replace in a URL." class="span5" />
+						<field name="regexp" type="checkbox" default="1" label="REGEXP" description="Use REGEXP for From and To" />
+					</fieldset>
+				</field>
+				<field name="header" type="redirect" default="301" label="Header" description="Select the header to send with the redirect." />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

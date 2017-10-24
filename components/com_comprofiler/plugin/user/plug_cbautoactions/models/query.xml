@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbxml version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../../../validation/ahawow.xsd">
+	<types>
+		<type name="autoaction_type" base="xml:autoaction_type">
+			<option value="query">Query</option>
+		</type>
+	</types>
+	<views>
+		<view name="actiontype_query" type="params" ui="admin">
+			<param name="" type="spacer" display="2lines" label="" default="Execute internal or external database queries." />
+			<params name="query" type="params" repeat="true" label="" display="2lines">
+				<attributes>
+					<attribute name="mode">
+						<if name="" type="permission" permission="core.admin" permissionasset="com_comprofiler" operator="" value="" valuetype="">
+							<then>
+								<param name="" default="edit" translate-default="no" type="string" />
+							</then>
+							<else>
+								<param name="" default="show" translate-default="no" type="string" />
+							</else>
+						</if>
+					</attribute>
+				</attributes>
+				<param name="sql" type="textarea" rows="20" label="Query" description="Input substitution supported query. Separate multiple queries with a ; followed by a linebreak (return/enter)." cssclass="input-block" validate="required" />
+				<param name="mode" type="yesno" default="0" label="Mode" description="Optionally disable translations for the value." yes="External" no="Internal" />
+				<if name="mode" nametype="param:int" operator="=" value="1" valuetype="const:int" type="showhide">
+					<param name="host" type="text" label="Host" description="Input external database host (e.g. localhost)." validate="required" />
+					<param name="username" type="text" label="Username" description="Input external database root username (e.g. root)." validate="required" />
+					<param name="password" type="text" label="Password" description="Input external database root password (e.g. root)." validate="required" />
+					<param name="database" type="text" label="Database" description="Input external database name (e.g. joomla)." validate="required" />
+					<param name="charset" type="text" label="Charset" description="Optionally input external database charset (e.g. utf-8)." />
+					<param name="prefix" type="text" label="Table Prefix" description="Optionally input external database table prefix (e.g. jos_). Prefix is used to replace #__ within queries. If left blank will default to Joomla database table prefix." />
+				</if>
+			</params>
+		</view>
+	</views>
+</cbxml>
