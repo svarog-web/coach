@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    
+    <link type="text/css" rel="stylesheet" href="css/open.css">
+
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/stopExecutionOnTimeout.js"></script>
+    
+    <script>
+    $(document).ready(function () {
+        var pages = $('.page').length, scrolling = false, curPage = 1;
+        function pagination(page, movingUp) {
+            scrolling = true;
+            var diff = curPage - page, oldPage = curPage;
+            curPage = page;
+            $('.page').removeClass('active small previous');
+            $('.page-' + page).addClass('active');
+            $('.nav-btn').removeClass('active');
+            $('.nav-page' + page).addClass('active');
+            if (page > 1) {
+                $('.page-' + (page - 1)).addClass('previous');
+                if (movingUp) {
+                    $('.page-' + (page - 1)).hide();
+                    var hackPage = page;
+                    setTimeout(function () {
+                        $('.page-' + (hackPage - 1)).show();
+                    }, 600);
+                }
+                while (--page) {
+                    if (window.CP.shouldStopExecution(1)) {
+                        break;
+                    }
+                    $('.page-' + page).addClass('small');
+                }
+                window.CP.exitedLoop(1);
+            }
+            console.log(diff);
+            if (diff > 1) {
+                for (var j = page + 1; j < oldPage; j++) {
+                    if (window.CP.shouldStopExecution(2)) {
+                        break;
+                    }
+                    $('.page-' + j + ' .half').css('transition', 'transform .7s ease-out');
+                }
+                window.CP.exitedLoop(2);
+            }
+            setTimeout(function () {
+                scrolling = false;
+                $('.page .half').attr('style', '');
+                $('.page');
+            }, 700);
+        }
+        function navigateUp() {
+            if (curPage > 1) {
+                curPage--;
+                pagination(curPage, true);
+            }
+        }
+        function navigateDown() {
+            if (curPage < pages) {
+                curPage++;
+                pagination(curPage);
+            }
+        }
+        $(document).on('mousewheel DOMMouseScroll', function (e) {
+            if (!scrolling) {
+                if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+                    navigateUp();
+                } else {
+                    navigateDown();
+                }
+            }
+        });
+        $(document).on('click', '.scroll-btn', function () {
+            if (scrolling)
+                return;
+            if ($(this).hasClass('up')) {
+                navigateUp();
+            } else {
+                navigateDown();
+            }
+        });
+        $(document).on('keydown', function (e) {
+            if (scrolling)
+                return;
+            if (e.which === 38) {
+                navigateUp();
+            } else if (e.which === 40) {
+                navigateDown();
+            }
+        });
+        $(document).on('click', '.nav-btn:not(.active)', function () {
+            if (scrolling)
+                return;
+            pagination(+$(this).attr('data-target'));
+        });
+    });
+    </script>
+</head>
+
+
+
+<body>
+
+    <div class="scene">
+    
+    	<div class="page page-1 active">
+            <div class="half left"></div>
+            <div class="half right withText">
+              <h2 class="heading">Page 1</h2>
+            </div>
+		</div>
+      
+		<div class="page page-2">
+			<div class="half left withText">
+				<h2 class="heading">Page 2</h2>
+			</div>
+            <div class="half right"></div>
+		</div>
+      
+		<div class="page page-3">
+			<div class="half left"></div>
+			<div class="half right withText">
+				<h2 class="heading">Page 3</h2>
+			</div>
+		</div>
+      
+		<div class="page page-4">
+			<div class="half left withText">
+				<h2 class="heading">Page 4</h2>
+			</div>
+			<div class="half right"></div>
+		</div>
+        
+        
+		<div class="page page-5">
+			<div class="half left"></div>
+			<div class="half right withText">
+				<h2 class="heading">Page 5</h2>
+			</div>
+		</div>
+      
+    </div>
+    
+    
+	<div class="nav-panel">
+		<div class="scroll-btn up"></div>
+		<div class="scroll-btn down"></div>
+		
+        <nav>
+			<ul>
+				<li data-target="1" class="nav-btn nav-page1 active"></li>
+				<li data-target="2" class="nav-btn nav-page2"></li>
+				<li data-target="3" class="nav-btn nav-page3"></li>
+				<li data-target="4" class="nav-btn nav-page4"></li>
+                <li data-target="5" class="nav-btn nav-page5"></li>
+			</ul>
+		</nav>
+	</div>
+
+
+
+</body>
+</html>
